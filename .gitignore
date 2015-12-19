@@ -2,3 +2,5 @@
 .env.*.php
 .env.php
 .env
+vendor
+composer.lock
