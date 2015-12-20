@@ -1,5 +1,7 @@
 <?php namespace MathParser\Lexing;
 
+use MathParser\Lexing\TokenType;
+
 class Token
 {
     private $value;
@@ -26,6 +28,11 @@ class Token
         return $this->type;
     }
 
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
     public function getPrecedence()
     {
         return $this->precedence;
@@ -33,6 +40,25 @@ class Token
 
     public function getAssociativity()
     {
+        return $this->associativity;
+    }
 
+    public function getArity()
+    {
+        switch($this->type) {
+            case TokenType::UnaryMinus:
+                return 1;
+            case TokenType::PosInt;
+            case TokenType::Constant:
+            case TokenType::Identifier:
+                return 0;
+            default:
+                return 2;
+        }
+    }
+
+    public function __toString()
+    {
+        return "Token: [$this->value, $this->type]";
     }
 }

@@ -61,7 +61,7 @@ class Interpreter implements Visitor
         return $node->getValue();
     }
 
-    public function visitContantNode(ConstantNode $node)
+    public function visitConstantNode(ConstantNode $node)
     {
         switch($node->getValue()) {
             case 'pi':

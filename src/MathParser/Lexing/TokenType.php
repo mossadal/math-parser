@@ -10,6 +10,7 @@ final class TokenType
     const OpenParenthesis = 3;
     const CloseParenthesis = 4;
 
+    const UnaryMinus = 99;
     const AdditionOperator = 100;
     const SubtractionOperator = 101;
     const MultiplicationOperator = 102;
@@ -36,4 +37,6 @@ final class TokenType
 
     const Terminator = 998;
     const Whitespace = 999;
+
+    const Sentinel = 1000;
 }

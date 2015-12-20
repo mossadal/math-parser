@@ -24,150 +24,174 @@ class Parser
      * @Token[]
      */
     private $tokens;
+    private $operatorStack;
+    private $operandStack;
 
     public function parse(array $tokens)
     {
         $tokens = $this->filterTokens($tokens);
         $this->tokens = $tokens;
 
-        return $this->ShuntingYard($tokens);
+        try {
+            return $this->ShuntingYard($tokens);
+        } catch (\Exception $e) {
+            echo "Exception caught! $e\n";
+
+            echo "Operands ";
+            $this->showOperandStack();
+
+            echo "Operators ";
+            print_r($this->operatorStack);
+            die();
+        }
     }
 
     private function ShuntingYard(array $tokens)
     {
-        $Sentinel = new Token('%%END%%', -1, TokenPrecedence::Sentinel);
-        $operatorStack = new Stack();
-        $operatorStack->push($Sentinel);
+        $Sentinel = new Token('%%END%%', TokenType::Sentinel, TokenPrecedence::Sentinel);
+        $this->operatorStack = new Stack();
+        $this->operatorStack->push($Sentinel);
 
-        $operandStack = new Stack();
-        $endToken = new Token('', TokenType::Terminator, -2);
-
-        // array_push($tokens, $endToken);
+        $this->operandStack = new Stack();
 
         foreach($tokens as $token)
         {
-            //echo "operandStack:";
-            //$this->showOperandStack($operandStack);
-            //echo "operatorStack:"; var_dump($operatorStack->data);
+            echo "$token\n";
 
             $node = Node::factory($token);
 
             if ($node instanceof NumberNode || $node instanceof VariableNode || $node instanceof ConstantNode) {
-
                 $val = $token->getValue();
-                echo "Pushing terminal $val\n";
-
-                $operandStack->push($node);
+                $this->operandStack->push($node);
             } elseif ($token->getType() == TokenType::FunctionName) {
                 $val = $token->getValue();
-                echo "Pushing $val\n";
-
-                $operatorStack->push($token);
+                $this->operatorStack->push($token);
             } elseif ($token->getType() == TokenType::OpenParenthesis) {
                 $val = $token->getValue();
-                echo "Pushing $val\n";
-
-                $operatorStack->push($token);
+                $this->operatorStack->push($token);
             } elseif ($token->getType() == TokenType::CloseParenthesis) {
                 $clean = false;
 
-                while($popped = $operatorStack->pop()) {
+                while($popped = $this->operatorStack->pop()) {
                     if($popped->getType() == TokenType::OpenParenthesis) {
                         $clean = true;
                         break;
                     } else {
-                        $right = $operandStack->pop();
-                        $left = $operandStack->pop();
-                        $node = new ExpressionNode($left, $popped->getValue(), $right);
 
-                        // var_dump($node);
-                        $operandStack->push($node);
+                        $node = $this->handleExpression($popped);
+
+                        $this->operandStack->push($node);
                     }
                 }
                 if (!$clean) throw new \Exception("Parenthesis mismatch");
 
-                $current = $operatorStack->peek();
+                $current = $this->operatorStack->peek();
                 if ($current->getType() == TokenType::FunctionName) {
-                    $tok = $operatorStack->pop();
-                    $op = $operandStack->pop();
+                    $tok = $this->operatorStack->pop();
+                    $op = $this->operandStack->pop();
                     $node = new FunctionNode($tok->getValue(), $op);
-                    $operandStack->push($node);
+                    $this->operandStack->push($node);
                 }
             } else {
+                // Unary minus and unary plus?
 
-                // Build tree of all operators on the stack with lower precedence
-                while (
-                    $token->getPrecedence() < $operatorStack->peek()->getPrecedence() ||
-                    ($token->getPrecedence() == $operatorStack->peek()->getPrecedence() && $token->getAssociativity() == TokenAssociativity::Right)
-                ) {
-                    $right = $operandStack->pop();
-                    $left = $operandStack->pop();
+                $unary = false;
 
-                    if ($left === null || $right === null) {
-                        // echo "operandStack:"; $this->showOperandStack($operandStack);
-                        // echo "operatorStack:"; $this->showOperatorStack($operatorStack);
-                        // echo "left:"; var_dump($left);
-                        // echo "right:"; var_dump($right);
-                        // echo "token:"; var_dump($token);
-                        throw new \Exception("Syntax error");
+                if ($token->getType() == TokenType::AdditionOperator || $token->getType() == TokenType::SubtractionOperator) {
+
+                    // Unary if it is the first token or if the previous token was '('
+
+                    $currentOperator = $this->operatorStack->peek();
+                    if (($currentOperator->getType() == TokenType::Sentinel && $this->operandStack->count() == 0)
+                        || $currentOperator->getType() == TokenType::OpenParenthesis
+                        || $currentOperator->getType() == TokenType::UnaryMinus) {
+
+                            $unary = true;
+
+                            switch($token->getType()) {
+                                // Unary +, just ignore it
+                                case TokenType::AdditionOperator:
+                                    $token = null;
+                                    break;
+                                case TokenType::SubtractionOperator:
+                                    $token->setType(TokenType::UnaryMinus);
+                                    break;
+                            }
                     }
 
-                    $popped = $operatorStack->pop();
-
-                    // Throw exception if $popped is not an operator
-                    if ($popped->getType() == TokenType::FunctionName)
-                        throw new Exception("Misplaced function name");
-
-                    $node = new ExpressionNode($left, $popped->getValue(), $right);
-                    $operandStack->push($node);
-
-                    // echo "Forming tree\n";
                 }
-                $val = $token->getValue();
-                echo "Pushing operator $val\n";
 
-                $operatorStack->push($token);
+                // Build tree of all operators on the stack with lower precedence
+                if (!$unary) {
+                    while (
+                        $token->getPrecedence() < $this->operatorStack->peek()->getPrecedence() ||
+                        ($token->getPrecedence() == $this->operatorStack->peek()->getPrecedence() && $token->getAssociativity() == TokenAssociativity::Right)
+                    ) {
+
+                        $popped = $this->operatorStack->pop();
+                        echo "Popping $popped off the operator stack\n";
+
+                        // Throw exception if $popped is not an operator
+                        if ($popped->getType() == TokenType::FunctionName)
+                            throw new \Exception("Misplaced function name");
+
+                        $node = $this->handleExpression($popped);
+                        $this->operandStack->push($node);
+                    }
+                }
+
+                if ($token) $this->operatorStack->push($token);
+
             }
         }
 
         // Pop remaining operators
 
-        //echo "Out of tokens\n";
-        //var_dump($operatorStack->data);
-        //$this->showOperandStack($operandStack);
-        //echo "\n";
+        echo "Handling dangling data:\n";
+        $this->showOperandStack();
+        print_r($this->operatorStack);
 
-        while($operatorStack->count() > 1){
-            $token = $operatorStack->pop();
+        while($this->operatorStack->count() > 1) {
 
-            echo "Popping ";
-            var_dump($token->getValue());
-
-            $right = $operandStack->pop();
-            $left = $operandStack->pop();
-
-            if ($left === null || $right === null) throw new \Exception("Syntax error");
-
-            // Throw exception if $popped is not an operator
-            if ($token->getType() == TokenType::FunctionName)
-                throw new \Exception("Misplaced function name");
-
-            $node = new ExpressionNode($left, $token->getValue(), $right);
-
-            $operandStack->push($node);
+            $token = $this->operatorStack->pop();
+            $node = $this->handleExpression($token);
+            $this->operandStack->push($node);
         }
 
-        if ($operandStack->count() > 1) throw new \Exception("Syntax error (stack not empty)");
+        if ($this->operandStack->count() > 1) throw new \Exception("Syntax error (stack not empty)");
 
-        return $operandStack->pop();
+        return $this->operandStack->pop();
     }
 
-    private function showOperandStack($stack)
+    private function handleExpression($token)
     {
-        var_dump($stack->data);
+        echo "handleExpression($token)\n";
+
+        $arity = $token->getArity();
+
+        if ($arity == 1) {
+            $left = $this->operandStack->pop();
+            if ($left === null) throw new \Exception("Syntax error");
+
+            return new ExpressionNode($right, $token->getValue());
+        }
+        if ($arity == 2) {
+            $right = $this->operandStack->pop();
+            $left = $this->operandStack->pop();
+            if ($right === null || $left === null) throw new \Exception("Syntax error");
+            return new ExpressionNode($left, $token->getValue(), $right);
+        }
+
+        throw new \Exception("Unexpected operator (incorrect arity)");
+    }
+
+
+    private function showOperandStack()
+    {
+        var_dump($this->operandStack->data);
         $printer = new PrettyPrinter();
 
-        foreach($stack->data as $tree)
+        foreach($this->operandStack->data as $tree)
         {
             var_dump($tree->accept($printer));
         }

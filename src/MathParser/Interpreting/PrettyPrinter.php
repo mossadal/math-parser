@@ -19,15 +19,21 @@ class PrettyPrinter implements Visitor
         if (!$operator)
             return "$leftValue";
 
-        $rightValue = $node->getRight()->accept($this);
+        $right = $node->getRight();
 
-        return "($operator, $leftValue, $rightValue)";
+        if ($right) {
+            $rightValue = $node->getRight()->accept($this);
+            return "($operator, $leftValue, $rightValue)";
+        } else {
+            return "($operator, $leftValue)";
+        }
 
     }
 
     public function visitNumberNode(NumberNode $node)
     {
-        return $node->getValue();
+        $val = $node->getValue();
+        return "$val";
     }
 
     public function visitVariableNode(VariableNode $node)

@@ -6,6 +6,7 @@ use MathParser\Lexing\TokenType;
 use MathParser\Parsing\Parser;
 use MathParser\Interpreting\Interpreter;
 use MathParser\Interpreting\PrettyPrinter;
+use MathParser\Interpreting\Differentiator;
 use MathParser\MathParser;
 
 include 'vendor/autoload.php';
@@ -19,11 +20,17 @@ $tokens = $parser->getTokenList();
 
 $tree = $parser->getTree();
 
-
 // $interpreter = new Interpreter();
 // $result = $tree->accept($interpreter);
 
+echo "Input: ";
 $printer = new PrettyPrinter();
 var_dump($tree->accept($printer));
 
-//var_dump($result);
+
+echo "Derivative: ";
+
+$differentiator = new Differentiator('x');
+$derivative = $tree->accept($differentiator);
+
+var_dump($derivative->accept($printer));
