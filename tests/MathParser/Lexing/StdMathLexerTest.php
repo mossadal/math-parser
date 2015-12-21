@@ -1,0 +1,129 @@
+<?php
+
+use MathParser\Lexing\StdMathLexer;
+use MathParser\Lexing\TokenDefinition;
+use MathParser\Lexing\TokenType;
+use MathParser\Lexing\TokenPrecedence;
+use MathParser\Lexing\Token;
+use MathParser\Lexing\Exceptions\UnknownTokenException;
+
+class StdMathLexerTest extends PHPUnit_Framework_TestCase
+{
+    private $lexer;
+
+    public function setUp()
+    {
+        $lexer = new StdMathLexer();
+        $this->lexer = $lexer;
+    }
+
+    public function testCanTokenizeNumber()
+    {
+        $tokens = $this->lexer->tokenize('325');
+
+        $this->assertTokenEquals('325', TokenType::PosInt, $tokens[0]);
+    }
+
+    public function testCanTokenizeOperator()
+    {
+        $tokens = $this->lexer->tokenize('+');
+
+        $t = $tokens[0];
+        $this->assertTokenEquals('+', TokenType::AdditionOperator, $t);
+    }
+
+    public function testCanTokenizeNumbersAndOperators()
+    {
+        $tokens = $this->lexer->tokenize('3+5');
+
+        $this->assertCount(3, $tokens);
+
+        $this->assertTokenEquals('3', TokenType::PosInt, $tokens[0]);
+        $this->assertTokenEquals('+', TokenType::AdditionOperator, $tokens[1]);
+        $this->assertTokenEquals('5', TokenType::PosInt, $tokens[2]);
+    }
+
+    public function testExceptionIsThrownOnUnknownToken()
+    {
+        $this->setExpectedException(UnknownTokenException::class);
+
+        $this->lexer->tokenize('@');
+    }
+
+    private function assertTokenEquals($value, $type, Token $token)
+    {
+        $this->assertEquals($value, $token->getValue());
+        $this->assertEquals($type, $token->getType());
+    }
+
+    public function testIdentifierTokens()
+    {
+        $tokens = $this->lexer->tokenize('xy');
+
+        $this->assertEquals(count($tokens), 2);
+        $this->assertTokenEquals('x', TokenType::Identifier, $tokens[0]);
+        $this->assertTokenEquals('y', TokenType::Identifier, $tokens[1]);
+
+        $tokens = $this->lexer->tokenize('xsinx');
+
+        $this->assertEquals(count($tokens), 3);
+        $this->assertTokenEquals('x', TokenType::Identifier, $tokens[0]);
+        $this->assertTokenEquals('sin', TokenType::FunctionName, $tokens[1]);
+        $this->assertTokenEquals('x', TokenType::Identifier, $tokens[2]);
+
+        $tokens = $this->lexer->tokenize('xsix');
+
+        $this->assertEquals(count($tokens), 4);
+        $this->assertTokenEquals('x', TokenType::Identifier, $tokens[0]);
+        $this->assertTokenEquals('s', TokenType::Identifier, $tokens[1]);
+        $this->assertTokenEquals('i', TokenType::Identifier, $tokens[2]);
+        $this->assertTokenEquals('x', TokenType::Identifier, $tokens[3]);
+
+        $tokens = $this->lexer->tokenize('asin');
+
+        $this->assertEquals(count($tokens), 1);
+        $this->assertTokenEquals('arcsin', TokenType::FunctionName, $tokens[0]);
+
+        $tokens = $this->lexer->tokenize('a sin');
+
+        $this->assertEquals(count($tokens), 3);
+        $this->assertTokenEquals('a', TokenType::Identifier, $tokens[0]);
+        $this->assertTokenEquals(' ', TokenType::Whitespace, $tokens[1]);
+        $this->assertTokenEquals('sin', TokenType::FunctionName, $tokens[2]);
+
+    }
+
+    public function testParenthesisTokens()
+    {
+        $tokens = $this->lexer->tokenize('(()');
+
+        $this->assertEquals(count($tokens), 3);
+        $this->assertTokenEquals('(', TokenType::OpenParenthesis, $tokens[0]);
+        $this->assertTokenEquals('(', TokenType::OpenParenthesis, $tokens[1]);
+        $this->assertTokenEquals(')', TokenType::CloseParenthesis, $tokens[2]);
+
+
+        $tokens = $this->lexer->tokenize('(x+1)');
+        $this->assertEquals(count($tokens), 5);
+        $this->assertTokenEquals('(', TokenType::OpenParenthesis, $tokens[0]);
+        $this->assertTokenEquals('x', TokenType::Identifier, $tokens[1]);
+        $this->assertTokenEquals('+', TokenType::AdditionOperator, $tokens[2]);
+        $this->assertTokenEquals('1', TokenType::PosInt, $tokens[3]);
+        $this->assertTokenEquals(')', TokenType::CloseParenthesis, $tokens[4]);
+
+    }
+
+    public function testWhitepsace()
+    {
+        $tokens = $this->lexer->tokenize("  x\t+\n ");
+
+        $this->assertEquals(count($tokens), 6);
+        $this->assertTokenEquals('  ', TokenType::Whitespace, $tokens[0]);
+        $this->assertTokenEquals('x', TokenType::Identifier, $tokens[1]);
+        $this->assertTokenEquals("\t", TokenType::Whitespace, $tokens[2]);
+        $this->assertTokenEquals("+", TokenType::AdditionOperator, $tokens[3]);
+        $this->assertTokenEquals("\n", TokenType::Terminator, $tokens[4]);
+        $this->assertTokenEquals(' ', TokenType::Whitespace, $tokens[5]);
+
+    }
+}

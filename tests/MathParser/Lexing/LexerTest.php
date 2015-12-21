@@ -3,6 +3,7 @@
 use MathParser\Lexing\Lexer;
 use MathParser\Lexing\TokenDefinition;
 use MathParser\Lexing\TokenType;
+use MathParser\Lexing\TokenPrecedence;
 use MathParser\Lexing\Token;
 use MathParser\Lexing\Exceptions\UnknownTokenException;
 
@@ -14,8 +15,8 @@ class LexerTest extends PHPUnit_Framework_TestCase
     {
         $lexer = new Lexer();
 
-        $lexer->add(new TokenDefinition('/\d+/', TokenType::Number));
-        $lexer->add(new TokenDefinition('/\+/', TokenType::Operator));
+        $lexer->add(new TokenDefinition('/\d+/', TokenType::PosInt));
+        $lexer->add(new TokenDefinition('/\+/', TokenType::AdditionOperator));
 
         $this->lexer = $lexer;
     }
@@ -24,7 +25,7 @@ class LexerTest extends PHPUnit_Framework_TestCase
     {
         $tokens = $this->lexer->tokenize('325');
 
-        $this->assertTokenEquals('325', TokenType::Number, $tokens[0]);
+        $this->assertTokenEquals('325', TokenType::PosInt, $tokens[0]);
     }
 
     public function testCanTokenizeOperator()
@@ -32,7 +33,7 @@ class LexerTest extends PHPUnit_Framework_TestCase
         $tokens = $this->lexer->tokenize('+');
 
         $t = $tokens[0];
-        $this->assertTokenEquals('+', TokenType::Operator, $t);
+        $this->assertTokenEquals('+', TokenType::AdditionOperator, $t);
     }
 
     public function testCanTokenizeNumbersAndOperators()
@@ -41,16 +42,16 @@ class LexerTest extends PHPUnit_Framework_TestCase
 
         $this->assertCount(3, $tokens);
 
-        $this->assertTokenEquals('3', TokenType::Number, $tokens[0]);
-        $this->assertTokenEquals('+', TokenType::Operator, $tokens[1]);
-        $this->assertTokenEquals('5', TokenType::Number, $tokens[2]);
+        $this->assertTokenEquals('3', TokenType::PosInt, $tokens[0]);
+        $this->assertTokenEquals('+', TokenType::AdditionOperator, $tokens[1]);
+        $this->assertTokenEquals('5', TokenType::PosInt, $tokens[2]);
     }
 
     public function testExceptionIsThrownOnUnknownToken()
     {
         $this->setExpectedException(UnknownTokenException::class);
 
-        $this->lexer->tokenize('abc');
+        $this->lexer->tokenize('@');
     }
 
     private function assertTokenEquals($value, $type, Token $token)

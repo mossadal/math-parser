@@ -2,20 +2,29 @@
 
 use MathParser\Lexing\Token;
 use MathParser\Lexing\TokenType;
+use MathParser\Lexing\TokenPrecedence;
 use MathParser\Parsing\Parser;
 
 class ParserTest extends PHPUnit_Framework_TestCase
 {
-    public function testCanParseSingleNumberExpression()
+    private function createNumberToken($x)
     {
-        $tokens = [
-            new Token('3', TokenType::Number)
-        ];
+        return new Token("$x", TokenType::PosInt);
+    }
 
-        $node = $this->parse($tokens);
+    private function createVariableToken($x)
+    {
+        return new Token("$x", TokenType::Identifier);
+    }
 
-        $this->assertInstanceOf('MathParser\Parsing\Nodes\ExpressionNode', $node);
-        $this->assertNumberNode($node->getLeft(), 3);
+    private function createAdditionToken()
+    {
+        return new Token('+', TokenType::AdditionOperator);
+    }
+
+    private function createMultiplcationToken()
+    {
+        return new Token('*', TokenType::MultiplicationOperator);
     }
 
     private function parse($tokens)
@@ -30,12 +39,30 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($value, $node->getValue());
     }
 
+    private function assertVariableNode($node, $value)
+    {
+        $this->assertInstanceOf('MathParser\Parsing\Nodes\VariableNode', $node);
+        $this->assertEquals($value, $node->getName());
+    }
+
+    public function testCanParseSingleNumberExpression()
+    {
+        $tokens = [
+            $this->createNumberToken(3)
+        ];
+
+        $node = $this->parse($tokens);
+
+        $this->assertNumberNode($node, 3);
+    }
+
+
     public function testCanParseBinaryExpression()
     {
         $tokens = [
-            new Token('3', TokenType::Number),
-            new Token('+', TokenType::Operator),
-            new Token('5', TokenType::Number)
+            $this->createNumberToken(3),
+            $this->createAdditionToken(),
+            $this->createNumberToken(5)
         ];
 
         $node = $this->parse($tokens);
@@ -50,11 +77,11 @@ class ParserTest extends PHPUnit_Framework_TestCase
     public function testCanParseWithCorrectPrecedence()
     {
         $tokens = [
-            new Token('3', TokenType::Number),
-            new Token('+', TokenType::Operator),
-            new Token('5', TokenType::Number),
-            new Token('*', TokenType::Operator),
-            new Token('7', TokenType::Number)
+            $this->createNumberToken(3),
+            $this->createAdditionToken(),
+            $this->createNumberToken(5),
+            $this->createMultiplcationToken(),
+            $this->createNumberToken(7)
         ];
 
         $node = $this->parse($tokens);
@@ -67,18 +94,18 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $factors = $node->getRight();
         $this->assertInstanceOf('MathParser\Parsing\Nodes\ExpressionNode', $factors);
         $this->assertNumberNode($factors->getLeft(), 5);
-        $this->assertEquals('*', $node->getOperator());
+        $this->assertEquals('*', $factors->getOperator());
         $this->assertNumberNode($factors->getRight(), 7);
     }
 
     public function testCanParseWithCorrectPrecedence2()
     {
         $tokens = [
-            new Token('3', TokenType::Number),
-            new Token('*', TokenType::Operator),
-            new Token('5', TokenType::Number),
-            new Token('+', TokenType::Operator),
-            new Token('7', TokenType::Number)
+            $this->createNumberToken(3),
+            $this->createMultiplcationToken(),
+            $this->createNumberToken(5),
+            $this->createAdditionToken(),
+            $this->createNumberToken(7)
         ];
 
         $node = $this->parse($tokens);
@@ -91,9 +118,40 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $factors = $node->getLeft();
         $this->assertInstanceOf('MathParser\Parsing\Nodes\ExpressionNode', $factors);
         $this->assertNumberNode($factors->getLeft(), 3);
-        $this->assertEquals('*', $node->getOperator());
+        $this->assertEquals('*', $factors->getOperator());
         $this->assertNumberNode($factors->getRight(), 5);
 
     }
 
+    public function testImplicitMultiplicationWithNumbers()
+    {
+        $tokens = [
+            $this->createNumberToken('3'),
+            $this->createNumberToken('5')
+        ];
+
+        $node = $this->parse($tokens);
+
+        $this->assertInstanceOf('\MathParser\Parsing\Nodes\ExpressionNode', $node);
+
+        $this->assertEquals('*', $node->getOperator());
+        $this->assertNumberNode($node->getLeft(), 3);
+        $this->assertNumberNode($node->getRight(), 5);
+    }
+
+    public function testImplicitMultiplicationWithVariables()
+    {
+        $tokens = [
+            $this->createVariableToken('x'),
+            $this->createVariableToken('y')
+        ];
+
+        $node = $this->parse($tokens);
+
+        $this->assertInstanceOf('\MathParser\Parsing\Nodes\ExpressionNode', $node);
+
+        $this->assertEquals('*', $node->getOperator());
+        $this->assertVariableNode($node->getLeft(), 'x');
+        $this->assertVariableNode($node->getRight(), 'y');
+    }
 }

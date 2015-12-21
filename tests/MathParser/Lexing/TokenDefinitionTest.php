@@ -2,6 +2,7 @@
 
 use MathParser\Lexing\TokenDefinition;
 use MathParser\Lexing\TokenType;
+use MathParser\Lexing\TokenPrecedence;
 
 class TokenDefinitionTest extends PHPUnit_Framework_TestCase
 {
@@ -9,7 +10,7 @@ class TokenDefinitionTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->tokenDefinition = new TokenDefinition('/\d+/', TokenType::Number);
+        $this->tokenDefinition = new TokenDefinition('/\d+/', TokenType::PosInt);
     }
 
     public function testMatchReturnsTokenObjectIfMatchedInput()
@@ -19,16 +20,16 @@ class TokenDefinitionTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('MathParser\Lexing\Token', $token);
 
         $this->assertEquals('123', $token->getValue());
-        $this->assertEquals(TokenType::Number, $token->getType());
+        $this->assertEquals(TokenType::PosInt, $token->getType());
     }
 
     public function testNoMatchReturnsNull()
     {
-        $this->assertNull($this->tokenDefinition->match('abc'));
+        $this->assertNull($this->tokenDefinition->match('@'));
     }
 
     public function testMatchReturnsNullIfOffsetNotZero()
     {
-        $this->assertNull($this->tokenDefinition->match('abc123'));
+        $this->assertNull($this->tokenDefinition->match('@123'));
     }
 }

@@ -7,12 +7,14 @@ use MathParser\Parsing\Parser;
 use MathParser\Interpreting\Interpreter;
 use MathParser\Interpreting\PrettyPrinter;
 use MathParser\Interpreting\Differentiator;
-use MathParser\MathParser;
+use MathParser\StdMathParser;
 
 include 'vendor/autoload.php';
 
 
-$parser = new MathParser($argv[1]);
+$parser = new StdMathParser(true);
+
+$parser->parse($argv[1]);
 
 $tokens = $parser->getTokenList();
 //var_dump($tokens);

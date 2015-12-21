@@ -17,6 +17,58 @@ class Differentiator implements Visitor
         $this->variable = $variable;
     }
 
+    private function createAdditionNode($x, $y)
+    {
+        if ($x instanceof NumberNode && $y instanceof NumberNode)
+            return new NumberNode($x->getValue() + $y->getValue());
+
+        if ($x instanceof NumberNode && $x->getValue() == 0) return $y;
+        if ($y instanceof NumberNode && $y->getValue() == 0) return $x;
+
+        return new ExpressionNode($x, '+', $y);
+    }
+
+    // Perhaps we should return a unary minus node for "0-y"?
+    private function createSubtractionNode($x, $y)
+    {
+        if ($x instanceof NumberNode && $y instanceof NumberNode)
+            return new NumberNode($x->getValue() + $y->getValue());
+
+        if ($y instanceof NumberNode && $y->getValue() == 0) return $x;
+
+        return new ExpressionNode($x, '-', $y);
+    }
+
+    private function createMultiplicationNode($x, $y)
+    {
+        if ($x instanceof NumberNode && $y instanceof NumberNode)
+            return new NumberNode($x->getValue() * $y->getValue());
+
+        if ($x instanceof NumberNode && $x->getValue() == 1) return $y;
+        if ($x instanceof NumberNode && $x->getValue() == 0) return new NumberNode(0);
+
+        if ($y instanceof NumberNode && $y->getValue() == 1) return $x;
+        if ($y instanceof NumberNode && $y->getValue() == 0) return new NumberNode(0);
+
+        return new ExpressionNode($x, '*', $y);
+    }
+
+    private function createDivisionNode($x, $y)
+    {
+        // Return rational number?
+        // if ($x instanceof NumberNode && $y instanceof NumberNode)
+        //    return new NumberNode($x->getValue() / $y->getValue());
+
+        if ($y instanceof NumberNode && $y->getValue() == 0)
+            throw new \Exception("Division by zero error.");
+
+        if ($y instanceof NumberNode && $y->getValue() == 1) return $x;
+
+        if ($x instanceof NumberNode && $x->getValue() == 0) return $y;
+
+        return new ExpressionNode($x, '/', $y);
+    }
+
     public function visitExpressionNode(ExpressionNode $node)
     {
         $operator = $node->getOperator();
@@ -32,36 +84,16 @@ class Differentiator implements Visitor
         // Perform the right operation based on the operator
         switch ($operator) {
             case '+':
-                if ($leftValue instanceof NumberNode && $leftValue->getValue() == 0) return $rightValue;
-                if ($rightValue instanceof NumberNode && $rightValue->getValue() == 0) return $leftValue;
-                if ($leftValue instanceof NumberNode && $rightValue instanceof NumberNode)
-                    return new NumberNode($leftValue->getValue() + $rightValue->getValue());
-
-                return new ExpressionNode($leftValue, '+', $rightValue);
-
+                return $this->createAdditionNode($leftValue, $rightValue);
             case '-':
-                if ($leftValue instanceof NumberNode && $leftValue->getValue() == 0) return $rightValue;
-                if ($rightValue instanceof NumberNode && $rightValue->getValue() == 0) return $leftValue;
-                if ($leftValue instanceof NumberNode && $rightValue instanceof NumberNode)
-                    return new NumberNode($leftValue->getValue() - $rightValue->getValue());
+                return $this->createSubtractionNode($leftValue, $rightValue);
 
-                return new ExpressionNode($leftValue, '-', $rightValue);
-
-            // Product rule
+            // Product rule (fg)' = fg' + f'g
             case '*':
-                if ($leftValue instanceof NumberNode && $leftValue->getValue() == 1) $term1 = $node->getRight();
-                elseif ($leftValue instanceof NumberNode && $leftValue->getValue() == 0) $term1 = null;
-                else $term1 = new ExpressionNode($leftValue, '*', $node->getRight());
-
-                if ($rightValue instanceof NumberNode && $rightValue->getValue() == 1) $term2 = $node->getLeft();
-                elseif ($rightValue instanceof NumberNode && $rightValue->getValue() == 0) $term2 = null;
-                else $term2 = new ExpressionNode($node->getLeft(), '*', $rightValue);
-
-                if ($term1 === null && $term2 === null) return new NumberNode(0);
-                if ($term1 === null) return $term2;
-                if ($term2 === null) return $term1;
-
-                return new ExpressionNode($term1, '+', $term2);
+                return $this->createAdditionNode(
+                    $this->createMultiplicationNode($node->getLeft(), $rightValue),
+                    $this->createMultiplicationNode($leftValue, $node->getRight())
+                );
 
             // Quotient rule (f/g)' = (f'g - fg')/g^2
             case '/':
@@ -81,22 +113,22 @@ class Differentiator implements Visitor
 
                     switch($power) {
                         case 1:
-                            return $inner;
+                            return $leftValue;
                         case 2:
-                            return new ExpressionNode(new NumberNode($power), '*', new ExpressionNode($leftValue, '*', $base));
+                            return $this->createMultiplicationNode(new NumberNode($power), $this->createMultiplicationNode($leftValue, $base));
                         default:
                             // (f^n)' = n f^(n-1) f'
                             $fpow = new ExpressionNode($base, '^', new NumberNode($power-1));
 
-                            return new ExpressionNode(new NumberNode($power), '*', new ExpressionNode($fpow, '*', $leftValue));
+                            return $this->createMultiplicationNode(new NumberNode($power), $this->createMultiplicationNode($fpow, $leftValue));
                     }
 
                 } else {
-                    $term1 = new ExpressionNode($rightValue, '*', new FunctionNode('log', $node->getLeft()));
+                    $term1 = $this->createMultiplicationNode($rightValue, new FunctionNode('log', $node->getLeft()));
                     $term2 = new ExpressionNode($node->getRight(), '/', $node->getLeft());
-                    $factor2 = new ExpressionNode($term1, '+', $term2);
+                    $factor2 = $this->createAdditionNode($term1, $term2);
 
-                    return new ExpressionNode($node, '*', $factor2);
+                    return $this->createMultiplicationNode($node, $factor2);
                 }
 
             default:
@@ -132,6 +164,11 @@ class Differentiator implements Visitor
                 $tansquare = new ExpressionNode($node, '^', new NumberNode(2));
                 $df = new ExpressionNode(new NumberNode(1), '+', $tansquare);
                 break;
+            case 'cot':
+                $cotsquare = New ExpressionNode($node, '^', new NumberNode(2));
+                $df = createAdditionNode(new NumberNode(-1), $cotsqure);
+                break;
+
             case 'exp':
                 $df = new FunctionNode('exp', $node->getOperand());
                 break;
@@ -140,13 +177,7 @@ class Differentiator implements Visitor
 
         }
 
-        // Simplification: 1 * df = df
-        if ($inner instanceof NumberNode && $inner->getValue() == 1) return $df;
-
-        // Simplification: 0 * df = 0
-        if ($inner instanceof NumberNode && $inner->getValue() == 0) return new NumberNode(0);
-
-        return new ExpressionNode($inner, '*', $df);
+        return $this->createMultiplicationNode($inner, $df);
     }
 
     public function visitConstantNode(ConstantNode $node)

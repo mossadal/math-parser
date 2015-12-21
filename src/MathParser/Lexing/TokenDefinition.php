@@ -5,14 +5,14 @@ use MathParser\Lexing\TokenAssociativity;
 class TokenDefinition
 {
     private $pattern;
+    private $value;
     private $tokenType;
-    private $tokenPrecedence;
 
-    public function __construct($pattern, $tokenType, $tokenPrecedence, $tokenAssociativity = TokenAssociativity::Right)
+    public function __construct($pattern, $tokenType, $value=null)
     {
         $this->pattern = $pattern;
+        $this->value = $value;
         $this->tokenType = $tokenType;
-        $this->tokenPrecedence = $tokenPrecedence;
     }
 
     public function match($input)
@@ -41,7 +41,9 @@ class TokenDefinition
         if ($offset !== 0)
             return null;
 
-        return new Token($value, $this->tokenType, $this->tokenPrecedence);
+        if ($this->value) $value = $this->value;
+
+        return new Token($value, $this->tokenType);
     }
 
 }
