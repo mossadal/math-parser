@@ -22,41 +22,11 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
     }
 
 
-    private function compareNodes($node1, $node2)
-    {
-            if ($node1 === null && $node2 === null) return true;
-            if ($node1 === null || $node2 === null) return false;
-
-            if ($node1 instanceof ConstantNode) {
-                if (!($node2 instanceof ConstantNode)) return false;
-                return $node1->getValue() == $node2->getValue();
-            }
-            if ($node1 instanceof ExpressionNode) {
-                if (!($node2 instanceof ExpressionNode)) return false;
-                return $this->compareNodes($node1->getRight(), $node2->getRight()) && $this->compareNodes($node1->getLeft(), $node2->getLeft());
-            }
-            if ($node1 instanceof FunctionNode) {
-                if (!($node2 instanceof FunctionNode)) return false;
-                return $this->compareNodes($node1->getOperand(), $node2->getOperand());
-            }
-            if ($node1 instanceof NumberNode) {
-                if (!($node2 instanceof NumberNode)) return false;
-                return $node1->getValue() == $node2->getValue();
-            }
-            if ($node1 instanceof VariableNode) {
-                if (!($node2 instanceof VariableNode)) return false;
-                return $node1->getName() == $node2->getName();
-            }
-
-
-            throw new \Exception("Unknown node type");
-    }
-
     private function assertNodesEqual($node1, $node2)
     {
         $message = "Node1: ".var_export($node1,true)."\nNode 2: ".var_export($node2, true)."\n";
 
-        $this->assertTrue($this->compareNodes($node1, $node2), $message);
+        $this->assertTrue(Node::compareNodes($node1, $node2), $message);
     }
 
     private function assertNumberNode($node, $value)

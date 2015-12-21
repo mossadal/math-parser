@@ -43,7 +43,7 @@ class TokenDefinition
 
         if ($this->value) $value = $this->value;
 
-        return new Token($value, $this->tokenType);
+        return new Token($value, $this->tokenType, $match[0]);
     }
 
 }

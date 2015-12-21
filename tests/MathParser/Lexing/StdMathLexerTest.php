@@ -126,4 +126,44 @@ class StdMathLexerTest extends PHPUnit_Framework_TestCase
         $this->assertTokenEquals(' ', TokenType::Whitespace, $tokens[5]);
 
     }
+
+    public function testArcsin()
+    {
+        $tokens = $this->lexer->tokenize("asin");
+        $this->assertTokenEquals('arcsin', TokenType::FunctionName, $tokens[0]);
+
+        $tokens = $this->lexer->tokenize("arcsin");
+        $this->assertTokenEquals('arcsin', TokenType::FunctionName, $tokens[0]);
+
+        $tokens = $this->lexer->tokenize("asin(x)");
+        $this->assertTokenEquals('arcsin', TokenType::FunctionName, $tokens[0]);
+        $this->assertTokenEquals('(', TokenType::OpenParenthesis, $tokens[1]);
+        $this->assertTokenEquals('x', TokenType::Identifier, $tokens[2]);
+        $this->assertTokenEquals(')', TokenType::CloseParenthesis, $tokens[3]);
+
+
+        $tokens = $this->lexer->tokenize("arcsin(x)");
+        $this->assertTokenEquals('arcsin', TokenType::FunctionName, $tokens[0]);
+        $this->assertTokenEquals('(', TokenType::OpenParenthesis, $tokens[1]);
+        $this->assertTokenEquals('x', TokenType::Identifier, $tokens[2]);
+        $this->assertTokenEquals(')', TokenType::CloseParenthesis, $tokens[3]);
+    }
+
+    public function testArccos()
+    {
+        $tokens = $this->lexer->tokenize("acos");
+        $this->assertTokenEquals('arccos', TokenType::FunctionName, $tokens[0]);
+
+        $tokens = $this->lexer->tokenize("arccos");
+        $this->assertTokenEquals('arccos', TokenType::FunctionName, $tokens[0]);
+    }
+
+    public function testArctan()
+    {
+        $tokens = $this->lexer->tokenize("atan");
+        $this->assertTokenEquals('arctan', TokenType::FunctionName, $tokens[0]);
+
+        $tokens = $this->lexer->tokenize("arctan");
+        $this->assertTokenEquals('arctan', TokenType::FunctionName, $tokens[0]);
+    }
 }

@@ -33,7 +33,7 @@ class Lexer
 
             // Increment the string index by the lenght of the matched token,
             // so we can now process the rest of the string.
-            $currentIndex += strlen($token->getValue());
+            $currentIndex += $token->length();
         }
 
         return $tokens;

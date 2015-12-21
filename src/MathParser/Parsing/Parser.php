@@ -58,6 +58,10 @@ class Parser
 
         $lastToken = $Sentinel;
 
+        if ($this->debug) {
+            foreach($tokens as $token) echo "$token\n";
+        }
+        
         for ($index = 0; $index < count($tokens); $index++)
         {
             $token = $tokens[$index];

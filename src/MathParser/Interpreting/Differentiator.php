@@ -39,6 +39,13 @@ class Differentiator implements Visitor
         return new ExpressionNode($x, '-', $y);
     }
 
+    private function createUnaryMinusNode($x)
+    {
+        if ($x instanceof NumberNode) return new NumberNode(-$x->getValue());
+
+        return new ExpressionNode($x, '-', null);
+    }
+
     private function createMultiplicationNode($x, $y)
     {
         if ($x instanceof NumberNode && $y instanceof NumberNode)
@@ -64,9 +71,17 @@ class Differentiator implements Visitor
 
         if ($y instanceof NumberNode && $y->getValue() == 1) return $x;
 
-        if ($x instanceof NumberNode && $x->getValue() == 0) return $y;
+        if ($x instanceof NumberNode && $x->getValue() == 0) return new NumberNode(0);
 
         return new ExpressionNode($x, '/', $y);
+    }
+
+    private function createExponentiationNode($x, $y)
+    {
+        if ($y instanceof NumberNode && $y->getValue() == 0) return new NumberNode(1);
+        if ($y instanceof NumberNode && $y->getValue() == 1) return $x;
+
+        return new ExpressionNode($x, '^', $y);
     }
 
     public function visitExpressionNode(ExpressionNode $node)
@@ -97,11 +112,11 @@ class Differentiator implements Visitor
 
             // Quotient rule (f/g)' = (f'g - fg')/g^2
             case '/':
-                $term1 = new ExpressionNode($leftValue, '*', $node->getRight());
-                $term2 = new ExpressionNode($node->getLeft(), '*', $rightValue);
-                $numerator = new ExpressionNode($term1, '-', $term2);
-                $denominator = new ExpressionNode($node->getRight(), '^', new NumberNode(2));
-                return new ExpressionNode($numerator, '/', $denominator);
+                $term1 = $this->createMultiplicationNode($leftValue, $node->getRight());
+                $term2 = $this->createMultiplicationNode($node->getLeft(), $rightValue);
+                $numerator = $this->createSubtractionNode($term1, $term2);
+                $denominator = $this->createExponentiationNode($node->getRight(), new NumberNode(2));
+                return $this->createDivisionNode($numerator, $denominator);
 
             // f^g = exp(g log(f)), so (f^g)' = f^g (g'log(f) + g/f)
             case '^':
@@ -166,7 +181,29 @@ class Differentiator implements Visitor
                 break;
             case 'cot':
                 $cotsquare = New ExpressionNode($node, '^', new NumberNode(2));
-                $df = createAdditionNode(new NumberNode(-1), $cotsqure);
+                $df = $this->createAdditionNode(new ExpressionNode(new NumberNode(1), '-'), $cotsquare);
+                break;
+
+            case 'arcsin':
+                $denom = new FunctionNode('sqrt',
+                    $this->createSubtractionNode(new NumberNode(1), $this->createExponentiationNode($node->getOperand(), new NumberNode(2))));
+                $df = $this->createDivisionNode(new NumberNode(1), $denom);
+                break;
+
+            case 'arccos':
+                $denom = new FunctionNode('sqrt',
+                    $this->createSubtractionNode(new NumberNode(1), $this->createExponentiationNode($node->getOperand(), new NumberNode(2))));
+                $df = $this->createDivisionNode(new ExpressionNode(new NumberNode(1), '-'), $denom);
+                break;
+
+            case 'arctan':
+                $denom = $this->createAdditionNode(new NumberNode(1), $this->createExponentiationNode($node->getOperand(),  new NumberNode(2)));
+                $df = $this->createDivisionNode(new NumberNode(1), $denom);
+                break;
+
+            case 'arccot':
+                $denom = $this->createAdditionNode(new NumberNode(1), $this->createExponentiationNode($node->getOperand(),  new NumberNode(2)));
+                $df = new ExpressionNode($this->createDivisionNode(new NumberNode(1), $denom), '-');
                 break;
 
             case 'exp':
@@ -174,6 +211,14 @@ class Differentiator implements Visitor
                 break;
             case 'log':
                 return new ExpressionNode($inner, '/', $node->getOperand());
+
+            case 'sqrt':
+                $denom = $this->createMultiplicationNode(new NumberNode(2), $node);
+                $df = $this->createDivisionNode(new NumberNode(1), $denom);
+                break;
+
+            default:
+                throw new \Exception("Differentiator encountered unknown function: ". $node->getName());
 
         }
 

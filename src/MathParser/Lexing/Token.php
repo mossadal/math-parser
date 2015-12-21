@@ -10,15 +10,23 @@ class Token
     private $type;
     private $precedence;
     private $associativity;
+    private $match;
 
-    public function __construct($value, $type)
+    public function __construct($value, $type, $match=null)
     {
         $this->value = $value;
         $this->type = $type;
         $this->precedence = TokenPrecedence::get($type);
         $this->associativity = TokenAssociativity::get($type);
+        $this->match = $match ? $match : $value;
+
     }
 
+    public function length()
+    {
+        return strlen($this->match);
+    }
+    
     public function getValue()
     {
         return $this->value;
