@@ -4,10 +4,10 @@ class StdMathLexer extends Lexer
 {
     public function __construct()
     {
-        $this->add(new TokenDefinition('/\d+/', TokenType::PosInt));
+        $this->add(new TokenDefinition('/\~?\d+/', TokenType::PosInt));
 
         $this->add(new TokenDefinition('/sqrt/', TokenType::FunctionName));
-        
+
         $this->add(new TokenDefinition('/sin/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/cos/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/tan/', TokenType::FunctionName));
@@ -19,8 +19,8 @@ class StdMathLexer extends Lexer
         $this->add(new TokenDefinition('/arccot|acot/', TokenType::FunctionName, 'arccot'));
 
         $this->add(new TokenDefinition('/exp/', TokenType::FunctionName));
+        $this->add(new TokenDefinition('/log10|lg/', TokenType::FunctionName, 'lg'));
         $this->add(new TokenDefinition('/log|ln/', TokenType::FunctionName, 'log'));
-        $this->add(new TokenDefinition('/lg/', TokenType::FunctionName));
 
         $this->add(new TokenDefinition('/\(/', TokenType::OpenParenthesis));
         $this->add(new TokenDefinition('/\)/', TokenType::CloseParenthesis));

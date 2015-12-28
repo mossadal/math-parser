@@ -4,3 +4,5 @@
 .env
 vendor
 composer.lock
+tests/log
+.DS_Store

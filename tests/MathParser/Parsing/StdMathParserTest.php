@@ -12,6 +12,10 @@ use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\VariableNode;
 
+use MathParser\Exceptions\SyntaxErrorException;
+use MathParser\Exceptions\UnexpectedOperatorException;
+use MathParser\Exceptions\ParenthesisMismatchException;
+
 class StdMathParserTest extends PHPUnit_Framework_TestCase
 {
     private $parser;
@@ -20,7 +24,6 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
     {
         $this->parser = new StdMathParser();
     }
-
 
     private function assertNodesEqual($node1, $node2)
     {
@@ -57,6 +60,30 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
         $this->assertCompareNodes("sin(x)");
         $this->assertCompareNodes("(x)");
         $this->assertCompareNodes("1+2+3");
+    }
+
+    private function assertTokenEquals($value, $type, Token $token)
+    {
+        $this->assertEquals($value, $token->getValue());
+        $this->assertEquals($type, $token->getType());
+    }
+
+    public function testCanGetTokenList()
+    {
+        $node = $this->parser->parse("1+2");
+        $tokens = $this->parser->getTokenList();
+
+        $this->assertTokenEquals("1", TokenType::PosInt, $tokens[0]);
+        $this->assertTokenEquals("+", TokenType::AdditionOperator, $tokens[1]);
+        $this->assertTokenEquals("2", TokenType::PosInt, $tokens[2]);
+
+    }
+
+    public function testCanGetTree()
+    {
+        $node = $this->parser->parse("1+x");
+        $tree = $this->parser->getTree();
+        $this->assertNodesEqual($node, $tree);
     }
 
     public function testCanParseSingleNumberExpression()
@@ -273,5 +300,24 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
         );
         $this->assertNodesEqual($node, $shouldBe);
 
+    }
+
+
+    public function testSyntaxErrorException()
+    {
+        $this->setExpectedException(SyntaxErrorException::class);
+        $this->parser->parse('1+');
+
+        $this->setExpectedException(SyntaxErrorException::class);
+        $this->parser->parse('**3');
+    }
+
+    public function testParenthesisMismatchException()
+    {
+        $this->setExpectedException(ParenthesisMismatchException::class);
+        $this->parser->parse('1+1)');
+
+        $this->setExpectedException(ParenthesisMismatchException::class);
+        $this->parser->parse('(1+1');
     }
 }

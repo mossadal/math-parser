@@ -1,4 +1,4 @@
-<?php namespace MathParser\Lexing\Exceptions;
+<?php namespace MathParser\Exceptions;
 
 class UnknownTokenException extends \Exception
 {

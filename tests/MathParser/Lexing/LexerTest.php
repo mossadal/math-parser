@@ -5,7 +5,7 @@ use MathParser\Lexing\TokenDefinition;
 use MathParser\Lexing\TokenType;
 use MathParser\Lexing\TokenPrecedence;
 use MathParser\Lexing\Token;
-use MathParser\Lexing\Exceptions\UnknownTokenException;
+use MathParser\Exceptions\UnknownTokenException;
 
 class LexerTest extends PHPUnit_Framework_TestCase
 {

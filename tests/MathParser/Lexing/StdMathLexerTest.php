@@ -5,7 +5,7 @@ use MathParser\Lexing\TokenDefinition;
 use MathParser\Lexing\TokenType;
 use MathParser\Lexing\TokenPrecedence;
 use MathParser\Lexing\Token;
-use MathParser\Lexing\Exceptions\UnknownTokenException;
+use MathParser\Exceptions\UnknownTokenException;
 
 class StdMathLexerTest extends PHPUnit_Framework_TestCase
 {
@@ -165,5 +165,13 @@ class StdMathLexerTest extends PHPUnit_Framework_TestCase
 
         $tokens = $this->lexer->tokenize("arctan");
         $this->assertTokenEquals('arctan', TokenType::FunctionName, $tokens[0]);
+    }
+
+    public function testIsOperator()
+    {
+        $tokens = $this->lexer->tokenize('+0');
+        $this->assertTrue($tokens[0]->isOperator());
+        $this->assertFalse($tokens[1]->isOperator());
+
     }
 }

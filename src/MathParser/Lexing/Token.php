@@ -26,7 +26,7 @@ class Token
     {
         return strlen($this->match);
     }
-    
+
     public function getValue()
     {
         return $this->value;
@@ -56,6 +56,7 @@ class Token
     {
         switch($this->type) {
             case TokenType::UnaryMinus:
+            case TokenType::FunctionName:
                 return 1;
             case TokenType::PosInt;
             case TokenType::Constant:

@@ -1,6 +1,7 @@
 <?php namespace MathParser\Lexing;
 
 use MathParser\Lexing\TokenType;
+use MathParser\Exceptions\UnknownTokenException;
 
 final class TokenPrecedence
 {
@@ -53,7 +54,7 @@ final class TokenPrecedence
             return self::Sentinel;
 
         default:
-            throw new \Exception("Unknown token type.");
+            throw new UnknownTokenException($type);
         }
     }
 }

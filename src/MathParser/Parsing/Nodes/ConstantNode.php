@@ -14,7 +14,7 @@ class ConstantNode extends Node
     /**
      * @return mixed
      */
-    public function getValue()
+    public function getName()
     {
         return $this->value;
     }

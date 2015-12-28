@@ -14,7 +14,8 @@ use MathParser\Parsing\Nodes\ConstantNode;
 
 use MathParser\Parsing\Stack;
 
-use MathParser\Lexing\Exceptions\UnexpectedTokenException;
+use MathParser\Exceptions\SyntaxErrorException;
+use MathParser\Exceptions\ParenthesisMismatchException;
 
 use MathParser\Interpreting\PrettyPrinter;
 
@@ -26,27 +27,14 @@ class Parser
     private $tokens;
     private $operatorStack;
     private $operandStack;
-    public $debug = false;
 
     public function parse(array $tokens)
     {
-        try {
-            $tokens = $this->filterTokens($tokens);
-            $this->tokens = $tokens;
+        $tokens = $this->filterTokens($tokens);
+        $this->tokens = $tokens;
 
-            return $this->ShuntingYard($tokens);
-        } catch( \Exception $e) {
-            echo "Caught exception $e\n";
-
-            echo "Operator stack: ";
-            print_r($this->operatorStack);
-
-            echo "Operand stack:";
-            var_dump($this->operandStack);
-
-            die();
-        }
-   }
+        return $this->ShuntingYard($tokens);
+    }
 
     private function ShuntingYard(array $tokens)
     {
@@ -58,16 +46,9 @@ class Parser
 
         $lastToken = $Sentinel;
 
-        if ($this->debug) {
-            foreach($tokens as $token) echo "$token\n";
-        }
-        
         for ($index = 0; $index < count($tokens); $index++)
         {
             $token = $tokens[$index];
-            if ($this->debug) {
-                echo "token[$index] = $token\n";
-            }
 
             // Check for implicit multiplication
             if (Token::canFactorsInImplicitMultiplication($lastToken, $token)) {
@@ -77,8 +58,6 @@ class Parser
                     // expressions such as "x^2x" will be parsed as "x^2*x".
                     $index = $index-1;
                     $token = new Token('*', TokenType::MultiplicationOperator, TokenPrecedence::BinaryMultiplication);
-
-                    if ($this->debug) echo "Implicit multiplication detected\n";
             }
 
             $node = Node::factory($token);
@@ -87,36 +66,35 @@ class Parser
                 $val = $token->getValue();
                 $this->operandStack->push($node);
 
-                if ($this->debug) echo "Pushing terminal operand\n";
             } elseif ($token->getType() == TokenType::FunctionName) {
                 $val = $token->getValue();
                 $this->operatorStack->push($token);
 
-                if ($this->debug) echo "Pushing FunctionNode operator\n";
             } elseif ($token->getType() == TokenType::OpenParenthesis) {
                 $val = $token->getValue();
                 $this->operatorStack->push($token);
 
-                if ($this->debug) echo "Pushing OpenParanthesis operator\n";
-
             } elseif ($token->getType() == TokenType::CloseParenthesis) {
                 $clean = false;
 
-                if ($this->debug) echo "Handing CloseParenthesis\n";
                 while($popped = $this->operatorStack->pop()) {
-                    if ($this->debug) echo "  Popping and handling $popped\n";
+                    if ($popped->getType() == TokenType::Sentinel) {
+                        break;
+                    }
 
                     if($popped->getType() == TokenType::OpenParenthesis) {
                         $clean = true;
                         break;
+
                     } else {
 
                         $node = $this->handleExpression($popped);
-
                         $this->operandStack->push($node);
                     }
                 }
-                if (!$clean) throw new \Exception("Parenthesis mismatch");
+                if (!$clean) {
+                    throw new ParenthesisMismatchException();
+                }
 
                 $current = $this->operatorStack->peek();
                 if ($current->getType() == TokenType::FunctionName) {
@@ -125,10 +103,10 @@ class Parser
                     $node = new FunctionNode($tok->getValue(), $op);
                     $this->operandStack->push($node);
                 }
-            } else {
-                if ($this->debug) echo "Handling operator\n";
-                // Unary minus and unary plus?
 
+            } else {
+
+                // Unary minus and unary plus?
                 $unary = false;
 
                 if ($token->getType() == TokenType::AdditionOperator || $token->getType() == TokenType::SubtractionOperator) {
@@ -137,14 +115,10 @@ class Parser
 
                     $currentOperator = $this->operatorStack->peek();
 
-                    if ($this->debug) {
-                        echo "Looking for unary operator: lastToken=$lastToken, currentOperator = $currentOperator\n";
-                    }
                     if (($currentOperator->getType() == TokenType::Sentinel && $this->operandStack->count() == 0)
                         || $lastToken->getType() == TokenType::OpenParenthesis
                         || $lastToken->getType() == TokenType::UnaryMinus) {
 
-                            if ($this->debug) echo "Unary ".$token->getValue()." detected.\n";
                             $unary = true;
 
                             switch($token->getType()) {
@@ -168,11 +142,6 @@ class Parser
                     ) {
                         $popped = $this->operatorStack->pop();
 
-                        if ($this->debug) echo " Popping and handling $popped\n";
-
-                        // Throw exception if $popped is not an operator
-                        if ($popped->getType() == TokenType::FunctionName)
-                            throw new \Exception("Misplaced function name");
 
                         $node = $this->handleExpression($popped);
                         $this->operandStack->push($node);
@@ -189,16 +158,16 @@ class Parser
 
         // Pop remaining operators
 
-        if ($this->debug) echo "Token list exhausted. Popping remaining operators.\n";
-
         while($this->operatorStack->count() > 1) {
             $token = $this->operatorStack->pop();
-            if ($this->debug) echo "  Popping $token\n";
             $node = $this->handleExpression($token);
             $this->operandStack->push($node);
         }
 
-        if ($this->operandStack->count() > 1) throw new \Exception("Syntax error (stack not empty)");
+        // Stack should be empty here
+        if ($this->operandStack->count() > 1) {
+            throw new SyntaxErrorException();
+        }
 
         return $this->operandStack->pop();
     }
@@ -209,30 +178,24 @@ class Parser
 
         if ($arity == 1) {
             $left = $this->operandStack->pop();
-            if ($left === null) throw new \Exception("Syntax error");
+            if ($left === null) {
+                throw new SyntaxErrorException();
+            }
 
             return new ExpressionNode($left, $token->getValue());
         }
         if ($arity == 2) {
             $right = $this->operandStack->pop();
             $left = $this->operandStack->pop();
-            if ($right === null || $left === null) throw new \Exception("Syntax error: $token");
+            if ($right === null || $left === null) {
+                throw new SyntaxErrorException();
+            }
+
             return new ExpressionNode($left, $token->getValue(), $right);
         }
 
-        throw new \Exception("Unexpected operator (incorrect arity)");
-    }
+        throw new SyntaxErrorException();
 
-
-    private function showOperandStack()
-    {
-        var_dump($this->operandStack->data);
-        $printer = new PrettyPrinter();
-
-        foreach($this->operandStack->data as $tree)
-        {
-            var_dump($tree->accept($printer));
-        }
     }
 
 

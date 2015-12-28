@@ -8,7 +8,7 @@ use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\ConstantNode;
 
 
-class PrettyPrinter implements Visitor
+class TreePrinter implements Visitor
 {
     public function visitExpressionNode(ExpressionNode $node)
     {
@@ -51,6 +51,6 @@ class PrettyPrinter implements Visitor
 
     public function visitConstantNode(ConstantNode $node)
     {
-        return $node->getValue();
+        return $node->getName();
     }
 }
