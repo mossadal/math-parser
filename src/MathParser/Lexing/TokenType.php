@@ -13,9 +13,12 @@ namespace MathParser\Lexing;
 final class TokenType
 {
     const PosInt = 1;
-    const Identifier = 2;
-    const OpenParenthesis = 3;
-    const CloseParenthesis = 4;
+    const Integer = 2;
+    const RealNumber = 3;
+
+    const Identifier = 20;
+    const OpenParenthesis = 31;
+    const CloseParenthesis = 32;
 
     const UnaryMinus = 99;
     const AdditionOperator = 100;

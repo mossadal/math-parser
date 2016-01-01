@@ -20,8 +20,20 @@ class StdMathLexerTest extends PHPUnit_Framework_TestCase
     public function testCanTokenizeNumber()
     {
         $tokens = $this->lexer->tokenize('325');
-
         $this->assertTokenEquals('325', TokenType::PosInt, $tokens[0]);
+
+        $tokens = $this->lexer->tokenize('-5');
+        $this->assertCount(2, $tokens);
+        $this->assertTokenEquals('-', TokenType::SubtractionOperator, $tokens[0]);
+        $this->assertTokenEquals('5', TokenType::PosInt, $tokens[1]);
+
+        $tokens = $this->lexer->tokenize('2.3');
+        $this->assertTokenEquals('2.3', TokenType::RealNumber, $tokens[0]);
+
+        $tokens = $this->lexer->tokenize('-2.3');
+        $this->assertCount(2, $tokens);
+        $this->assertTokenEquals('-', TokenType::SubtractionOperator, $tokens[0]);
+        $this->assertTokenEquals('2.3', TokenType::RealNumber, $tokens[1]);
     }
 
     public function testCanTokenizeOperator()

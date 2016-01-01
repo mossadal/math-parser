@@ -11,13 +11,13 @@ use MathParser\StdMathParser;
 
 include 'vendor/autoload.php';
 
-
 $parser = new StdMathParser(true);
 
 $parser->parse($argv[1]);
 
-$tokens = $parser->getTokenList();
+//$tokens = $parser->getTokenList();
 //var_dump($tokens);
+
 
 
 $tree = $parser->getTree();

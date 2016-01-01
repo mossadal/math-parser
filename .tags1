@@ -4,7 +4,44 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-evaluation	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/StdMathLexer.php	/^ * * `\/\\(\/` matching opening parenthesis (both as delimiter and function evaluation)$/;"	function	line:44
-evaluation	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/StdMathLexer.php	/^ * * `\/\\)\/` matching closing parenthesisis (both as delimiter and function evaluation)$/;"	function	line:45
-StdMathLexer	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/StdMathLexer.php	/^ class StdMathLexer extends Lexer$/;"	class	line:58
-__construct	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/StdMathLexer.php	/^    public function __construct()$/;"	function	line:60
+Parser	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^class Parser$/;"	class	line:32
+tokens	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private $tokens;$/;"	variable	line:37
+operatorStack	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private $operatorStack;$/;"	variable	line:38
+operandStack	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private $operandStack;$/;"	variable	line:39
+parse	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    public function parse(array $tokens)$/;"	function	line:41
+tokens	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $tokens = $this->filterTokens($tokens);$/;"	variable	line:43
+tokens	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $this->tokens = $tokens;$/;"	variable	line:44
+ShuntingYard	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private function ShuntingYard(array $tokens)$/;"	function	line:49
+Sentinel	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $Sentinel = new Token('%%END%%', TokenType::Sentinel, TokenPrecedence::Sentinel);$/;"	variable	line:51
+operatorStack	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $this->operatorStack = new Stack();$/;"	variable	line:52
+operandStack	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $this->operandStack = new Stack();$/;"	variable	line:55
+lastToken	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $lastToken = $Sentinel;$/;"	variable	line:57
+token	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $token = $tokens[$index];$/;"	variable	line:61
+index	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $index = $index-1;$/;"	variable	line:69
+token	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $token = new Token('*', TokenType::MultiplicationOperator, TokenPrecedence::BinaryMultiplication);$/;"	variable	line:70
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $node = Node::factory($token);$/;"	variable	line:73
+clean	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                $clean = false;$/;"	variable	line:85
+clean	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                        $clean = true;$/;"	variable	line:93
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                        $node = $this->handleExpression($popped);$/;"	variable	line:98
+current	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                $current = $this->operatorStack->peek();$/;"	variable	line:106
+tok	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $tok = $this->operatorStack->pop();$/;"	variable	line:108
+op	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $op = $this->operandStack->pop();$/;"	variable	line:109
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $node = new FunctionNode($tok->getValue(), $op);$/;"	variable	line:110
+unary	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                $unary = false;$/;"	variable	line:117
+currentOperator	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $currentOperator = $this->operatorStack->peek();$/;"	variable	line:123
+unary	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                            $unary = true;$/;"	variable	line:129
+token	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                                    $token = null;$/;"	variable	line:134
+token	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                                    $token = new Token('-', TokenType::UnaryMinus);$/;"	variable	line:137
+popped	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                        $popped = $this->operatorStack->pop();$/;"	variable	line:150
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                        $node = $this->handleExpression($popped);$/;"	variable	line:153
+lastToken	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            if ($token) $lastToken = $token;$/;"	variable	line:162
+token	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $token = $this->operatorStack->pop();$/;"	variable	line:169
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $node = $this->handleExpression($token);$/;"	variable	line:170
+handleExpression	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private function handleExpression($token)$/;"	function	line:182
+arity	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $arity = $token->getArity();$/;"	variable	line:184
+left	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $left = $this->operandStack->pop();$/;"	variable	line:187
+right	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $right = $this->operandStack->pop();$/;"	variable	line:199
+left	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $left = $this->operandStack->pop();$/;"	variable	line:200
+left	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            if ($right === null || $left === null) {$/;"	variable	line:201
+filterTokens	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private function filterTokens(array $tokens)$/;"	function	line:213
+filteredTokens	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $filteredTokens = array_filter($tokens, function (Token $t) {$/;"	variable	line:215

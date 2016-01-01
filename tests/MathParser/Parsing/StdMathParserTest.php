@@ -285,7 +285,7 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
         $this->assertNodesEqual($node, $shouldBe);
 
         $node = $this->parser->parse("-x*y");
-        $shouldBe = $this->parser->parse("-(x*y)");
+        $shouldBe = $this->parser->parse("(-x)*y");
         $this->assertNodesEqual($node, $shouldBe);
 
         $node = $this->parser->parse("-x^y");

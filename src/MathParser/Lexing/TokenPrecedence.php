@@ -20,7 +20,7 @@ final class TokenPrecedence
     const FunctionEvaluation = 1;
     const BinaryAddition = 10;
     const BinarySubtraction = 10;
-    const UnaryMinus = 20;
+    const UnaryMinus = 35;
     const BinaryMultiplication = 30;
     const BinaryDivision = 30;
     const BinaryExponentiation = 40;
@@ -31,6 +31,8 @@ final class TokenPrecedence
     {
         switch($type) {
         case TokenType::PosInt:
+        case TokenType::Integer:
+        case TokenType::RealNumber:
         case TokenType::Identifier:
         case TokenType::Constant:
             return self::Terminal;

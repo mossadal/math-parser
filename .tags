@@ -35,9 +35,6 @@ for	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitor
 visitFunctionNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitor.php	/^    function visitFunctionNode(FunctionNode $node);$/;"	function	line:58
 for	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitor.php	/^     * Interface function for visiting ConstantNode$/;"	function	line:61
 visitConstantNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitor.php	/^    function visitConstantNode(ConstantNode $node);$/;"	function	line:65
-TokenType	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenType.php	/^final class TokenType$/;"	class	line:13
-TokenPrecedence	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenPrecedence.php	/^final class TokenPrecedence$/;"	class	line:16
-get	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenPrecedence.php	/^    public static function get($type)$/;"	function	line:30
 TokenDefinition	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenDefinition.php	/^class TokenDefinition$/;"	class	line:15
 pattern	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenDefinition.php	/^    private $pattern;$/;"	variable	line:17
 value	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenDefinition.php	/^    private $value;$/;"	variable	line:18
@@ -55,44 +52,12 @@ offset	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenDefinition.php
 value	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenDefinition.php	/^        if ($this->value) $value = $this->value;$/;"	variable	line:54
 TokenAssociativity	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenAssociativity.php	/^final class TokenAssociativity$/;"	class	line:15
 get	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenAssociativity.php	/^    public static function get($type)$/;"	function	line:21
-Token	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^class Token$/;"	class	line:17
-value	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    private $value;$/;"	variable	line:19
-type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    private $type;$/;"	variable	line:20
-precedence	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    private $precedence;$/;"	variable	line:21
-associativity	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    private $associativity;$/;"	variable	line:22
-match	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    private $match;$/;"	variable	line:23
-__construct	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function __construct($value, $type, $match=null)$/;"	function	line:25
-match	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function __construct($value, $type, $match=null)$/;"	variable	line:25
-value	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $this->value = $value;$/;"	variable	line:27
-type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $this->type = $type;$/;"	variable	line:28
-precedence	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $this->precedence = TokenPrecedence::get($type);$/;"	variable	line:29
-associativity	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $this->associativity = TokenAssociativity::get($type);$/;"	variable	line:30
-match	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $this->match = $match ? $match : $value;$/;"	variable	line:31
-length	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function length()$/;"	function	line:35
-getValue	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function getValue()$/;"	function	line:40
-getType	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function getType()$/;"	function	line:45
-setType	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function setType($type)$/;"	function	line:50
-type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $this->type = $type;$/;"	variable	line:52
-getPrecedence	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function getPrecedence()$/;"	function	line:55
-getAssociativity	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function getAssociativity()$/;"	function	line:60
-getArity	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function getArity()$/;"	function	line:65
-isOperator	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function isOperator()$/;"	function	line:80
-type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^            $this->type == TokenType::FunctionName ||$/;"	variable	line:83
-type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^            $this->type == TokenType::PosInt ||$/;"	variable	line:84
-type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^            $this->type == TokenType::Constant ||$/;"	variable	line:85
-type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^            $this->type == TokenType::Identifier$/;"	variable	line:86
-__toString	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function __toString()$/;"	function	line:92
-canFactorsInImplicitMultiplication	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public static function canFactorsInImplicitMultiplication($token1, $token2)$/;"	function	line:97
-check1	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $check1 = ($/;"	variable	line:99
-check2	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $check2 = ($/;"	variable	line:109
 DivisionByZeroException	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/DivisionByZeroException.php	/^class DivisionByZeroException extends \\Exception$/;"	class	line:12
 __construct	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/DivisionByZeroException.php	/^    public function __construct()$/;"	function	line:14
 ParenthesisMismatchException	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/ParenthesisMismatchException.php	/^class ParenthesisMismatchException extends \\Exception$/;"	class	line:12
 __construct	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/ParenthesisMismatchException.php	/^    public function __construct()$/;"	function	line:14
 UnknownVariableException	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownVariableException.php	/^class UnknownVariableException extends \\Exception$/;"	class	line:12
 __construct	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownVariableException.php	/^    public function __construct($variable)$/;"	function	line:14
-UnknownTokenException	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownTokenException.php	/^class UnknownTokenException extends \\Exception$/;"	class	line:12
-__construct	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownTokenException.php	/^    public function __construct($line, $column)$/;"	function	line:14
 UnknownOperatorException	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownOperatorException.php	/^class UnknownOperatorException extends \\Exception$/;"	class	line:12
 __construct	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownOperatorException.php	/^    public function __construct($operator)$/;"	function	line:14
 UnknownNodeException	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownNodeException.php	/^class UnknownNodeException extends \\Exception$/;"	class	line:11
@@ -121,69 +86,6 @@ __construct	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/NumberN
 value	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/NumberNode.php	/^        $this->value = $value;$/;"	variable	line:20
 getValue	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/NumberNode.php	/^    public function getValue()$/;"	function	line:26
 accept	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/NumberNode.php	/^    public function accept(Visitor $visitor)$/;"	function	line:31
-Node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^abstract class Node implements Visitable$/;"	class	line:20
-factory	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^    public static function factory(Token $token)$/;"	function	line:22
-x	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^                $x = intval(str_replace("~", "-", $token->getValue()));$/;"	variable	line:26
-node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^                $node = new NumberNode($x);$/;"	variable	line:27
-node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^                $node = new VariableNode($token->getValue());$/;"	variable	line:30
-node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^                $node = new ConstantNode($token->getValue());$/;"	variable	line:33
-node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^                $node = null;$/;"	variable	line:36
-compareNodes	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^    public static function compareNodes($node1, $node2)$/;"	function	line:43
-node2	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^            if ($node1 === null && $node2 === null) return true;$/;"	variable	line:45
-node2	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^            if ($node1 === null || $node2 === null) return false;$/;"	variable	line:46
-for	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^     * Convenience function for evaluating a tree, using$/;"	function	line:74
-parser	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^     * $parser = new StdMathParser();$/;"	variable	line:78
-node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^     * $node = $parser->parse('sin(x)cos(y)');$/;"	variable	line:79
-functionValue	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^     * $functionValue = $node->evaluate( array( 'x' => 1.3, 'y' => 1.4 ) );$/;"	variable	line:80
-evaluate	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^    public function evaluate($variables)$/;"	function	line:85
-evaluator	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^        $evaluator = new Evaluator($variables);$/;"	variable	line:87
-complexity	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^    public function complexity()$/;"	function	line:92
-operator	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^            $operator = $this->getOperator();$/;"	variable	line:99
-left	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^            $left = $this->getLeft();$/;"	variable	line:100
-right	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^            $right = $this->getRight();$/;"	variable	line:101
-Parser	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^class Parser$/;"	class	line:32
-tokens	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private $tokens;$/;"	variable	line:37
-operatorStack	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private $operatorStack;$/;"	variable	line:38
-operandStack	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private $operandStack;$/;"	variable	line:39
-parse	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    public function parse(array $tokens)$/;"	function	line:41
-tokens	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $tokens = $this->filterTokens($tokens);$/;"	variable	line:43
-tokens	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $this->tokens = $tokens;$/;"	variable	line:44
-ShuntingYard	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private function ShuntingYard(array $tokens)$/;"	function	line:49
-Sentinel	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $Sentinel = new Token('%%END%%', TokenType::Sentinel, TokenPrecedence::Sentinel);$/;"	variable	line:51
-operatorStack	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $this->operatorStack = new Stack();$/;"	variable	line:52
-operandStack	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $this->operandStack = new Stack();$/;"	variable	line:55
-lastToken	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $lastToken = $Sentinel;$/;"	variable	line:57
-token	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $token = $tokens[$index];$/;"	variable	line:61
-index	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $index = $index-1;$/;"	variable	line:69
-token	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $token = new Token('*', TokenType::MultiplicationOperator, TokenPrecedence::BinaryMultiplication);$/;"	variable	line:70
-node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $node = Node::factory($token);$/;"	variable	line:73
-val	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                $val = $token->getValue();$/;"	variable	line:76
-val	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                $val = $token->getValue();$/;"	variable	line:80
-val	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                $val = $token->getValue();$/;"	variable	line:84
-clean	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                $clean = false;$/;"	variable	line:88
-clean	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                        $clean = true;$/;"	variable	line:96
-node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                        $node = $this->handleExpression($popped);$/;"	variable	line:101
-current	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                $current = $this->operatorStack->peek();$/;"	variable	line:109
-tok	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $tok = $this->operatorStack->pop();$/;"	variable	line:111
-op	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $op = $this->operandStack->pop();$/;"	variable	line:112
-node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $node = new FunctionNode($tok->getValue(), $op);$/;"	variable	line:113
-unary	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                $unary = false;$/;"	variable	line:120
-currentOperator	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $currentOperator = $this->operatorStack->peek();$/;"	variable	line:126
-unary	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                            $unary = true;$/;"	variable	line:132
-token	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                                    $token = null;$/;"	variable	line:137
-popped	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                        $popped = $this->operatorStack->pop();$/;"	variable	line:153
-node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                        $node = $this->handleExpression($popped);$/;"	variable	line:156
-lastToken	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            if ($token) $lastToken = $token;$/;"	variable	line:165
-token	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $token = $this->operatorStack->pop();$/;"	variable	line:172
-node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $node = $this->handleExpression($token);$/;"	variable	line:173
-handleExpression	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private function handleExpression($token)$/;"	function	line:185
-arity	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $arity = $token->getArity();$/;"	variable	line:187
-left	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $left = $this->operandStack->pop();$/;"	variable	line:190
-right	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $right = $this->operandStack->pop();$/;"	variable	line:198
-left	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $left = $this->operandStack->pop();$/;"	variable	line:199
-left	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            if ($right === null || $left === null) {$/;"	variable	line:200
-filterTokens	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private function filterTokens(array $tokens)$/;"	function	line:212
-filteredTokens	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $filteredTokens = array_filter($tokens, function (Token $t) {$/;"	variable	line:214
 Stack	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Stack.php	/^class Stack {$/;"	class	line:14
 data	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Stack.php	/^    public $data = array();$/;"	variable	line:15
 data	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Stack.php	/^    public $data = array();$/;"	variable	line:15
@@ -399,7 +301,298 @@ temp	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.
 temp	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $temp = $this->createSubtractionNode($this->createExponentiationNode($arg, 2), 1);$/;"	variable	line:533
 denominator	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $denominator = $this->createSubtractionNode(1, $this->createExponentiationNode($arg, 2));$/;"	variable	line:538
 visitConstantNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^    public function visitConstantNode(ConstantNode $node)$/;"	function	line:557
+UnknownTokenException	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownTokenException.php	/^class UnknownTokenException extends \\Exception$/;"	class	line:12
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownTokenException.php	/^    public function __construct($name)$/;"	function	line:14
+TokenType	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenType.php	/^final class TokenType$/;"	class	line:13
+Node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^abstract class Node implements Visitable$/;"	class	line:20
+factory	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^    public static function factory(Token $token)$/;"	function	line:22
+x	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^                $x = intval($token->getValue());$/;"	variable	line:27
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^                $node = new NumberNode($x);$/;"	variable	line:28
+x	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^                $x = floatval($token->getValue());$/;"	variable	line:31
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^                $node = new NumberNode($x);$/;"	variable	line:32
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^                $node = new VariableNode($token->getValue());$/;"	variable	line:35
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^                $node = new ConstantNode($token->getValue());$/;"	variable	line:38
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^                $node = null;$/;"	variable	line:41
+compareNodes	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^    public static function compareNodes($node1, $node2)$/;"	function	line:48
+node2	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^            if ($node1 === null && $node2 === null) return true;$/;"	variable	line:50
+node2	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^            if ($node1 === null || $node2 === null) return false;$/;"	variable	line:51
+for	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^     * Convenience function for evaluating a tree, using$/;"	function	line:79
+parser	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^     * $parser = new StdMathParser();$/;"	variable	line:83
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^     * $node = $parser->parse('sin(x)cos(y)');$/;"	variable	line:84
+functionValue	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^     * $functionValue = $node->evaluate( array( 'x' => 1.3, 'y' => 1.4 ) );$/;"	variable	line:85
+evaluate	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^    public function evaluate($variables)$/;"	function	line:90
+evaluator	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^        $evaluator = new Evaluator($variables);$/;"	variable	line:92
+complexity	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^    public function complexity()$/;"	function	line:97
+operator	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^            $operator = $this->getOperator();$/;"	variable	line:104
+left	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^            $left = $this->getLeft();$/;"	variable	line:105
+right	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^            $right = $this->getRight();$/;"	variable	line:106
+DifferentiatorTest	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^class DifferentiatorTest extends PHPUnit_Framework_TestCase$/;"	class	line:17
+parser	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    private $parser;$/;"	variable	line:19
+differentiator	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    private $differentiator;$/;"	variable	line:20
+setUp	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function setUp()$/;"	function	line:22
+parser	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^        $this->parser = new StdMathParser();$/;"	variable	line:24
+differentiator	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^        $this->differentiator = new Differentiator('x');$/;"	variable	line:25
+diff	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function diff($node)$/;"	function	line:28
+derivative	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^        $derivative = $node->accept($this->differentiator);$/;"	variable	line:30
+assertNodesEqual	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    private function assertNodesEqual($node1, $node2)$/;"	function	line:35
+message	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^        $message = "Node1: ".var_export($node1,true)."\\nNode 2: ".var_export($node2, true)."\\n";$/;"	variable	line:37
+assertResult	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    private function assertResult($f, $df)$/;"	function	line:42
+fnc	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^        $fnc = $this->parser->parse($f);$/;"	variable	line:44
+derivative	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^        $derivative = $this->parser->parse($df);$/;"	variable	line:45
+testCanDifferentiateVariable	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateVariable()$/;"	function	line:50
+testCanDifferentiateConstant	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateConstant()$/;"	function	line:56
+testCanDifferentiateExp	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateExp()$/;"	function	line:68
+testCanDifferentiateLog	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateLog()$/;"	function	line:74
+testCanDifferentiateLog10	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateLog10()$/;"	function	line:79
+testCanDifferentiateSin	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateSin()$/;"	function	line:84
+testCanDifferentiateCos	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateCos()$/;"	function	line:89
+testCanDifferentiateTan	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateTan()$/;"	function	line:94
+testCanDifferentiateCot	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateCot()$/;"	function	line:99
+testCanDifferentiateArcsin	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateArcsin()$/;"	function	line:105
+testCanDifferentiateArccos	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateArccos()$/;"	function	line:110
+testCanDifferentiateArctan	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateArctan()$/;"	function	line:115
+testCanDifferentiateArccot	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateArccot()$/;"	function	line:121
+testCanDifferentiateSqrt	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateSqrt()$/;"	function	line:126
+testCanDifferentiateSum	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateSum()$/;"	function	line:131
+testCanDifferentiateDifference	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateDifference()$/;"	function	line:138
+testCanDifferentiateProduct	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateProduct()$/;"	function	line:145
+testCanDifferentiateExponent	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateExponent()$/;"	function	line:150
+testCanDifferentiateQuotient	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateQuotient()$/;"	function	line:158
+f	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^        $f = $this->parser->parse('x\/0');$/;"	variable	line:164
+testCanDifferentiateComposite	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateComposite()$/;"	function	line:169
+testCanDifferentiateUnaryMinus	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateUnaryMinus()$/;"	function	line:175
+testCannotDifferentiateUnknownFunction	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCannotDifferentiateUnknownFunction()$/;"	function	line:180
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^        $node = new FunctionNode('erf', new VariableNode('x'));$/;"	variable	line:182
+testCannotDifferentiateUnknownOperator	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCannotDifferentiateUnknownOperator()$/;"	function	line:189
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^        $node = new ExpressionNode(new NumberNode(1), '%', new VariableNode('x'));$/;"	variable	line:191
+testCanDifferentiateHyperbolicFunctions	/Users/frankw/Sites/math-parser/tests/MathParser/Interpreting/DifferentiatorTest.php	/^    public function testCanDifferentiateHyperbolicFunctions()$/;"	function	line:198
 evaluation	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/StdMathLexer.php	/^ * * `\/\\(\/` matching opening parenthesis (both as delimiter and function evaluation)$/;"	function	line:44
 evaluation	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/StdMathLexer.php	/^ * * `\/\\)\/` matching closing parenthesisis (both as delimiter and function evaluation)$/;"	function	line:45
 StdMathLexer	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/StdMathLexer.php	/^ class StdMathLexer extends Lexer$/;"	class	line:58
 __construct	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/StdMathLexer.php	/^    public function __construct()$/;"	function	line:60
+TokenPrecedence	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenPrecedence.php	/^final class TokenPrecedence$/;"	class	line:16
+get	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenPrecedence.php	/^    public static function get($type)$/;"	function	line:30
+StdMathParserTest	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^class StdMathParserTest extends PHPUnit_Framework_TestCase$/;"	class	line:19
+parser	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    private $parser;$/;"	variable	line:21
+setUp	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    public function setUp()$/;"	function	line:23
+parser	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $this->parser = new StdMathParser();$/;"	variable	line:25
+assertNodesEqual	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    private function assertNodesEqual($node1, $node2)$/;"	function	line:28
+message	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $message = "Node1: ".var_export($node1,true)."\\nNode 2: ".var_export($node2, true)."\\n";$/;"	variable	line:30
+assertNumberNode	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    private function assertNumberNode($node, $value)$/;"	function	line:35
+assertVariableNode	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    private function assertVariableNode($node, $value)$/;"	function	line:41
+assertCompareNodes	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    private function assertCompareNodes($text)$/;"	function	line:47
+node1	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node1 = $this->parser->parse($text);$/;"	variable	line:49
+node2	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node2 = $this->parser->parse($text);$/;"	variable	line:50
+testCanCompareNodes	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    public function testCanCompareNodes()$/;"	function	line:55
+assertTokenEquals	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    private function assertTokenEquals($value, $type, Token $token)$/;"	function	line:65
+testCanGetTokenList	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    public function testCanGetTokenList()$/;"	function	line:71
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("1+2");$/;"	variable	line:73
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $tokens = $this->parser->getTokenList();$/;"	variable	line:74
+testCanGetTree	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    public function testCanGetTree()$/;"	function	line:82
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("1+x");$/;"	variable	line:84
+tree	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $tree = $this->parser->getTree();$/;"	variable	line:85
+testCanParseSingleNumberExpression	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    public function testCanParseSingleNumberExpression()$/;"	function	line:89
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("3");$/;"	variable	line:91
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new NumberNode(3);$/;"	variable	line:93
+testCanParseSingleVariable	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    public function testCanParseSingleVariable()$/;"	function	line:98
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse('x');$/;"	variable	line:100
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new VariableNode('x');$/;"	variable	line:101
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse('(x)');$/;"	variable	line:105
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse('((x))');$/;"	variable	line:108
+testCanParseSingleConstant	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    public function testCanParseSingleConstant()$/;"	function	line:112
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse('pi');$/;"	variable	line:114
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new ConstantNode('pi');$/;"	variable	line:115
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse('(pi)');$/;"	variable	line:119
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse('((pi))');$/;"	variable	line:122
+testCanParseBinaryExpression	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    public function testCanParseBinaryExpression()$/;"	function	line:126
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("3+5");$/;"	variable	line:128
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new ExpressionNode(new NumberNode(3), '+', new NumberNode(5));$/;"	variable	line:129
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("3-5");$/;"	variable	line:133
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new ExpressionNode(new NumberNode(3), '-', new NumberNode(5));$/;"	variable	line:134
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("3*5");$/;"	variable	line:138
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new ExpressionNode(new NumberNode(3), '*', new NumberNode(5));$/;"	variable	line:139
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("3\/5");$/;"	variable	line:143
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new ExpressionNode(new NumberNode(3), '\/', new NumberNode(5));$/;"	variable	line:144
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("3^5");$/;"	variable	line:148
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new ExpressionNode(new NumberNode(3), '^', new NumberNode(5));$/;"	variable	line:149
+testCanParseWithCorrectAssociativity	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    public function testCanParseWithCorrectAssociativity()$/;"	function	line:154
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("1+2+3");$/;"	variable	line:156
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new ExpressionNode($/;"	variable	line:157
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("1-2-3");$/;"	variable	line:164
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new ExpressionNode($/;"	variable	line:165
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("1*2*3");$/;"	variable	line:172
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new ExpressionNode($/;"	variable	line:173
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("1\/2\/3");$/;"	variable	line:180
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new ExpressionNode($/;"	variable	line:181
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("1^2^3");$/;"	variable	line:188
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new ExpressionNode($/;"	variable	line:189
+testCanParseWithCorrectPrecedence	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    public function testCanParseWithCorrectPrecedence()$/;"	function	line:198
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("3+5*7");$/;"	variable	line:200
+factors	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $factors = new ExpressionNode(new NumberNode(5), '*', new NumberNode(7));$/;"	variable	line:202
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new ExpressionNode(new NumberNode(3), '+', $factors);$/;"	variable	line:203
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("3*5+7");$/;"	variable	line:207
+factors	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $factors = new ExpressionNode(new NumberNode(3), '*', new NumberNode(5));$/;"	variable	line:208
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new ExpressionNode($factors, '+', new NumberNode(7));$/;"	variable	line:209
+testCanParseParentheses	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    public function testCanParseParentheses()$/;"	function	line:214
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("(x)");$/;"	variable	line:216
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new VariableNode('x');$/;"	variable	line:217
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("((x))");$/;"	variable	line:220
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new VariableNode('x');$/;"	variable	line:221
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("(x+1)");$/;"	variable	line:224
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = $this->parser->parse("x+1");$/;"	variable	line:225
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("(x*1)");$/;"	variable	line:228
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = $this->parser->parse("x*1");$/;"	variable	line:229
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("(x^1)");$/;"	variable	line:232
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = $this->parser->parse("x^1");$/;"	variable	line:233
+testImplicitMultiplication	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    public function testImplicitMultiplication()$/;"	function	line:237
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("2x");$/;"	variable	line:239
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = $this->parser->parse("2*x");$/;"	variable	line:240
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("2xy");$/;"	variable	line:243
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = $this->parser->parse("2*x*y");$/;"	variable	line:244
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("2x^2");$/;"	variable	line:247
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = $this->parser->parse("2*x^2");$/;"	variable	line:248
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("2x^2y");$/;"	variable	line:251
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = $this->parser->parse("2*x^2*y");$/;"	variable	line:252
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("(-x)2");$/;"	variable	line:255
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = $this->parser->parse("(-x)*2");$/;"	variable	line:256
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("x^2y^2");$/;"	variable	line:259
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = $this->parser->parse("x^2*y^2");$/;"	variable	line:260
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("(x+1)(x-1)");$/;"	variable	line:263
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = $this->parser->parse("(x+1)*(x-1)");$/;"	variable	line:264
+testCanParseUnaryOperators	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    public function testCanParseUnaryOperators()$/;"	function	line:269
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("-x");$/;"	variable	line:271
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new ExpressionNode(new VariableNode('x'), '-', null);$/;"	variable	line:272
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("+x");$/;"	variable	line:275
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new VariableNode('x');$/;"	variable	line:276
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("-x+y");$/;"	variable	line:279
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new ExpressionNode($/;"	variable	line:280
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("-x*y");$/;"	variable	line:287
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = $this->parser->parse("(-x)*y");$/;"	variable	line:288
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("-x^y");$/;"	variable	line:291
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = $this->parser->parse("-(x^y)");$/;"	variable	line:292
+node	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $node = $this->parser->parse("(-x)^y");$/;"	variable	line:295
+shouldBe	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^        $shouldBe = new ExpressionNode($/;"	variable	line:296
+testSyntaxErrorException	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    public function testSyntaxErrorException()$/;"	function	line:306
+testParenthesisMismatchException	/Users/frankw/Sites/math-parser/tests/MathParser/Parsing/StdMathParserTest.php	/^    public function testParenthesisMismatchException()$/;"	function	line:315
+StdMathLexerTest	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^class StdMathLexerTest extends PHPUnit_Framework_TestCase$/;"	class	line:10
+lexer	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^    private $lexer;$/;"	variable	line:12
+setUp	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^    public function setUp()$/;"	function	line:14
+lexer	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $lexer = new StdMathLexer();$/;"	variable	line:16
+lexer	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $this->lexer = $lexer;$/;"	variable	line:17
+testCanTokenizeNumber	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^    public function testCanTokenizeNumber()$/;"	function	line:20
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize('325');$/;"	variable	line:22
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize('-5');$/;"	variable	line:25
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize('2.3');$/;"	variable	line:30
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize('-2.3');$/;"	variable	line:33
+testCanTokenizeOperator	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^    public function testCanTokenizeOperator()$/;"	function	line:39
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize('+');$/;"	variable	line:41
+t	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $t = $tokens[0];$/;"	variable	line:43
+testCanTokenizeNumbersAndOperators	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^    public function testCanTokenizeNumbersAndOperators()$/;"	function	line:47
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize('3+5');$/;"	variable	line:49
+testExceptionIsThrownOnUnknownToken	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^    public function testExceptionIsThrownOnUnknownToken()$/;"	function	line:58
+assertTokenEquals	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^    private function assertTokenEquals($value, $type, Token $token)$/;"	function	line:65
+testIdentifierTokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^    public function testIdentifierTokens()$/;"	function	line:71
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize('xy');$/;"	variable	line:73
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize('xsinx');$/;"	variable	line:79
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize('xsix');$/;"	variable	line:86
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize('asin');$/;"	variable	line:94
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize('a sin');$/;"	variable	line:99
+testParenthesisTokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^    public function testParenthesisTokens()$/;"	function	line:108
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize('(()');$/;"	variable	line:110
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize('(x+1)');$/;"	variable	line:118
+testWhitepsace	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^    public function testWhitepsace()$/;"	function	line:128
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize("  x\\t+\\n ");$/;"	variable	line:130
+testArcsin	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^    public function testArcsin()$/;"	function	line:142
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize("asin");$/;"	variable	line:144
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize("arcsin");$/;"	variable	line:147
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize("asin(x)");$/;"	variable	line:150
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize("arcsin(x)");$/;"	variable	line:157
+testArccos	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^    public function testArccos()$/;"	function	line:164
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize("acos");$/;"	variable	line:166
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize("arccos");$/;"	variable	line:169
+testArctan	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^    public function testArctan()$/;"	function	line:173
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize("atan");$/;"	variable	line:175
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize("arctan");$/;"	variable	line:178
+testIsOperator	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^    public function testIsOperator()$/;"	function	line:182
+tokens	/Users/frankw/Sites/math-parser/tests/MathParser/Lexing/StdMathLexerTest.php	/^        $tokens = $this->lexer->tokenize('+0');$/;"	variable	line:184
+parser	/Users/frankw/Sites/math-parser/src/Tester.php	/^$parser = new StdMathParser(true);$/;"	variable	line:14
+tree	/Users/frankw/Sites/math-parser/src/Tester.php	/^$tree = $parser->getTree();$/;"	variable	line:23
+interpreter	/Users/frankw/Sites/math-parser/src/Tester.php	/^\/\/ $interpreter = new Interpreter();$/;"	variable	line:25
+result	/Users/frankw/Sites/math-parser/src/Tester.php	/^\/\/ $result = $tree->accept($interpreter);$/;"	variable	line:26
+printer	/Users/frankw/Sites/math-parser/src/Tester.php	/^$printer = new LaTeXPrinter();$/;"	variable	line:29
+treeprinter	/Users/frankw/Sites/math-parser/src/Tester.php	/^$treeprinter = new TreePrinter();$/;"	variable	line:32
+differentiator	/Users/frankw/Sites/math-parser/src/Tester.php	/^$differentiator = new Differentiator('x');$/;"	variable	line:37
+derivative	/Users/frankw/Sites/math-parser/src/Tester.php	/^$derivative = $tree->accept($differentiator);$/;"	variable	line:38
+Token	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^class Token$/;"	class	line:17
+value	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    private $value;$/;"	variable	line:19
+type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    private $type;$/;"	variable	line:20
+precedence	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    private $precedence;$/;"	variable	line:21
+associativity	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    private $associativity;$/;"	variable	line:22
+match	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    private $match;$/;"	variable	line:23
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function __construct($value, $type, $match=null)$/;"	function	line:25
+match	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function __construct($value, $type, $match=null)$/;"	variable	line:25
+value	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $this->value = $value;$/;"	variable	line:27
+type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $this->type = $type;$/;"	variable	line:28
+precedence	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $this->precedence = TokenPrecedence::get($type);$/;"	variable	line:29
+associativity	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $this->associativity = TokenAssociativity::get($type);$/;"	variable	line:30
+match	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $this->match = $match ? $match : $value;$/;"	variable	line:31
+length	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function length()$/;"	function	line:35
+getValue	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function getValue()$/;"	function	line:40
+getType	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function getType()$/;"	function	line:45
+setType	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function setType($type)$/;"	function	line:50
+type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $this->type = $type;$/;"	variable	line:52
+getPrecedence	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function getPrecedence()$/;"	function	line:55
+getAssociativity	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function getAssociativity()$/;"	function	line:60
+getArity	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function getArity()$/;"	function	line:65
+isOperator	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function isOperator()$/;"	function	line:82
+type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^            $this->type == TokenType::FunctionName ||$/;"	variable	line:85
+type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^            $this->type == TokenType::PosInt ||$/;"	variable	line:86
+type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^            $this->type == TokenType::Integer ||$/;"	variable	line:87
+type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^            $this->type == TokenType::RealNumber ||$/;"	variable	line:88
+type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^            $this->type == TokenType::Constant ||$/;"	variable	line:89
+type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^            $this->type == TokenType::Identifier$/;"	variable	line:90
+__toString	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function __toString()$/;"	function	line:96
+canFactorsInImplicitMultiplication	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public static function canFactorsInImplicitMultiplication($token1, $token2)$/;"	function	line:101
+check1	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $check1 = ($/;"	variable	line:103
+check2	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $check2 = ($/;"	variable	line:115
+Parser	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^class Parser$/;"	class	line:32
+tokens	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private $tokens;$/;"	variable	line:37
+operatorStack	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private $operatorStack;$/;"	variable	line:38
+operandStack	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private $operandStack;$/;"	variable	line:39
+parse	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    public function parse(array $tokens)$/;"	function	line:41
+tokens	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $tokens = $this->filterTokens($tokens);$/;"	variable	line:43
+tokens	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $this->tokens = $tokens;$/;"	variable	line:44
+ShuntingYard	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private function ShuntingYard(array $tokens)$/;"	function	line:49
+Sentinel	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $Sentinel = new Token('%%END%%', TokenType::Sentinel, TokenPrecedence::Sentinel);$/;"	variable	line:51
+operatorStack	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $this->operatorStack = new Stack();$/;"	variable	line:52
+operandStack	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $this->operandStack = new Stack();$/;"	variable	line:55
+lastToken	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $lastToken = $Sentinel;$/;"	variable	line:57
+token	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $token = $tokens[$index];$/;"	variable	line:61
+index	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $index = $index-1;$/;"	variable	line:69
+token	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $token = new Token('*', TokenType::MultiplicationOperator, TokenPrecedence::BinaryMultiplication);$/;"	variable	line:70
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $node = Node::factory($token);$/;"	variable	line:73
+clean	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                $clean = false;$/;"	variable	line:85
+clean	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                        $clean = true;$/;"	variable	line:93
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                        $node = $this->handleExpression($popped);$/;"	variable	line:98
+current	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                $current = $this->operatorStack->peek();$/;"	variable	line:106
+tok	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $tok = $this->operatorStack->pop();$/;"	variable	line:108
+op	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $op = $this->operandStack->pop();$/;"	variable	line:109
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $node = new FunctionNode($tok->getValue(), $op);$/;"	variable	line:110
+unary	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                $unary = false;$/;"	variable	line:117
+currentOperator	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $currentOperator = $this->operatorStack->peek();$/;"	variable	line:123
+unary	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                            $unary = true;$/;"	variable	line:129
+token	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                                    $token = null;$/;"	variable	line:134
+token	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                                    $token = new Token('-', TokenType::UnaryMinus);$/;"	variable	line:137
+popped	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                        $popped = $this->operatorStack->pop();$/;"	variable	line:150
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                        $node = $this->handleExpression($popped);$/;"	variable	line:153
+lastToken	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            if ($token) $lastToken = $token;$/;"	variable	line:162
+token	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $token = $this->operatorStack->pop();$/;"	variable	line:169
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $node = $this->handleExpression($token);$/;"	variable	line:170
+handleExpression	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private function handleExpression($token)$/;"	function	line:182
+arity	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $arity = $token->getArity();$/;"	variable	line:184
+left	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $left = $this->operandStack->pop();$/;"	variable	line:187
+right	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $right = $this->operandStack->pop();$/;"	variable	line:199
+left	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $left = $this->operandStack->pop();$/;"	variable	line:200
+left	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            if ($right === null || $left === null) {$/;"	variable	line:201
+filterTokens	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private function filterTokens(array $tokens)$/;"	function	line:213
+filteredTokens	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $filteredTokens = array_filter($tokens, function (Token $t) {$/;"	variable	line:215

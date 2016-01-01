@@ -23,7 +23,12 @@ abstract class Node implements Visitable
     {
         switch($token->getType()) {
             case TokenType::PosInt:
-                $x = intval(str_replace("~", "-", $token->getValue()));
+            case TokenType::Integer:
+                $x = intval($token->getValue());
+                $node = new NumberNode($x);
+                break;
+            case TokenType::RealNumber:
+                $x = floatval($token->getValue());
                 $node = new NumberNode($x);
                 break;
             case TokenType::Identifier:

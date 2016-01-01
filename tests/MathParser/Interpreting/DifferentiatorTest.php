@@ -98,7 +98,7 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
 
     public function testCanDifferentiateCot()
     {
-        $this->assertResult('cot(x)', '~1-cot(x)^2');
+        $this->assertResult('cot(x)', '-1-cot(x)^2');
 ;
     }
 
@@ -109,7 +109,7 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
 
     public function testCanDifferentiateArccos()
     {
-        $this->assertResult('arccos(x)', '~1/sqrt(1-x^2)');
+        $this->assertResult('arccos(x)', '-1/sqrt(1-x^2)');
     }
 
     public function testCanDifferentiateArctan()
@@ -174,7 +174,7 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
 
     public function testCanDifferentiateUnaryMinus()
     {
-        $this->assertResult('-x', '~1');
+        $this->assertResult('-x', '-1');
     }
 
     public function testCannotDifferentiateUnknownFunction()

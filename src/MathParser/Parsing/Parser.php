@@ -73,15 +73,12 @@ class Parser
             $node = Node::factory($token);
 
             if ($node instanceof NumberNode || $node instanceof VariableNode || $node instanceof ConstantNode) {
-                $val = $token->getValue();
                 $this->operandStack->push($node);
 
             } elseif ($token->getType() == TokenType::FunctionName) {
-                $val = $token->getValue();
                 $this->operatorStack->push($token);
 
             } elseif ($token->getType() == TokenType::OpenParenthesis) {
-                $val = $token->getValue();
                 $this->operatorStack->push($token);
 
             } elseif ($token->getType() == TokenType::CloseParenthesis) {
@@ -137,7 +134,7 @@ class Parser
                                     $token = null;
                                     break;
                                 case TokenType::SubtractionOperator:
-                                    $token->setType(TokenType::UnaryMinus);
+                                    $token = new Token('-', TokenType::UnaryMinus);
                                     break;
                             }
                     }
@@ -190,6 +187,10 @@ class Parser
             $left = $this->operandStack->pop();
             if ($left === null) {
                 throw new SyntaxErrorException();
+            }
+
+            if ($token->getType() == TokenType::UnaryMinus && $left instanceof NumberNode) {
+                return new NumberNode(-$left->getValue());
             }
 
             return new ExpressionNode($left, $token->getValue());

@@ -68,7 +68,9 @@ class Token
             case TokenType::UnaryMinus:
             case TokenType::FunctionName:
                 return 1;
-            case TokenType::PosInt;
+            case TokenType::PosInt:
+            case TokenType::Integer:
+            case TokenType::RealNumber:
             case TokenType::Constant:
             case TokenType::Identifier:
                 return 0;
@@ -82,6 +84,8 @@ class Token
         if (
             $this->type == TokenType::FunctionName ||
             $this->type == TokenType::PosInt ||
+            $this->type == TokenType::Integer ||
+            $this->type == TokenType::RealNumber ||
             $this->type == TokenType::Constant ||
             $this->type == TokenType::Identifier
         ) return false;
@@ -98,6 +102,8 @@ class Token
     {
         $check1 = (
             $token1->type == TokenType::PosInt ||
+            $token1->type == TokenType::Integer ||
+            $token1->type == TokenType::RealNumber ||
             $token1->type == TokenType::Constant ||
             $token1->type == TokenType::Identifier ||
             $token1->type == TokenType::FunctionName ||
@@ -108,6 +114,8 @@ class Token
 
         $check2 = (
             $token2->type == TokenType::PosInt ||
+            $token2->type == TokenType::Integer ||
+            $token2->type == TokenType::RealNumber ||
             $token2->type == TokenType::Constant ||
             $token2->type == TokenType::Identifier ||
             $token2->type == TokenType::FunctionName ||
