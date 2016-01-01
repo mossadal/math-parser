@@ -1,16 +1,69 @@
-<?php namespace MathParser\Lexing;
+<?php
+/*
+ * @package     Lexical analysis
+ * @author      Frank Wikström <frank@mossadal.se>
+ * @copyright   2015 Frank Wikström
+ * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
+ *
+ */
+
+/** @namespace MathParser::Lexing
+ * Lexer and Token related classes.
+ *
+ * [Lexical analysis](https://en.wikipedia.org/wiki/Lexical_analysis)
+ * or *lexing* is the process of converting an input string into a sequence
+ * of tokens, representing discrete parts of the input each carrying certain meaning.
+ *
+ */
+namespace MathParser\Lexing;
 
 use MathParser\Exceptions\UnknownTokenException;
 
+/** Generic very simple lexer, capable of matching tokens defined by regular expressions.
+  *
+  * The Lexer works on an input string, sequentially building a list of matched
+  * Tokens (or throwing an Exception if the input string cannot be tokenized).
+  *
+  * The Lexer is context independent and without lookahead, and cannot for
+  * example distinguish between `-` used as a binary subtraction operation
+  * or as a unary negation. This is  handled by the parser.
+  *
+  * Tokens are added to the Lexer as TokenDefinition instances, and are saved in
+  * an ordered list. Hence some care has to be taken when defining the Lexer (see
+  * the implementation of StdMathLexer). For example, if we want the lexer to
+  * recognize `sin` as well as `sinh` as separate tokens, the more specific `sinh`
+  * pattern should be added to the Lexer *before* `sin`.
+  */
 class Lexer
 {
     private $tokenDefinitions = [];
 
+    /** Add a Token to the list of tokens recognized by the Lexer.
+      *
+      * Adds the supplied TokenDefinition at the end of the list of known
+      * tokens.
+      *
+      * @param TokenDefinition $tokenDefinition token to add to the list of known tokens.
+      * @return void
+      */
     public function add(TokenDefinition $tokenDefinition)
     {
         $this->tokenDefinitions[] = $tokenDefinition;
     }
 
+    /** Convert an input string to a list of tokens.
+     *
+     * Using the list of knowns tokens, sequentially match the input string to
+     * known tokens. Note that the first matching token from the list is chosen,
+     * so if there are tokens sharing parts of the pattern (e.g. `sin` and `sinh`),
+     * care should be taken to add `sinh` before `sin`, otherwise the lexer will
+     * never match a `sinh`.
+     *
+     * @param string $input String to tokenize.
+     * @return Token[] sequence of recognize tokens
+     * @throws UnknownTokenException throwns when encountering characters in the input string
+     *      that doesn't match any knwon token.
+     */
     public function tokenize($input)
     {
         // The list of tokens we'll eventually return

@@ -1,4 +1,13 @@
-<?php namespace MathParser\Parsing\Nodes;
+<?php
+/*
+ * @package     Parsing
+ * @author      Frank Wikström <frank@mossadal.se>
+ * @copyright   2015 Frank Wikström
+ * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
+ *
+ */
+
+namespace MathParser\Parsing\Nodes;
 
 use MathParser\Interpreting\Visitors\Visitor;
 
@@ -9,8 +18,11 @@ class ExpressionNode extends Node
     private $right;
     private $precedence;
 
-    function __construct(Node $left, $operator = null, Node $right = null)
+    function __construct($left, $operator = null, $right = null)
     {
+        if (is_int($left)) $left = new NumberNode($left);
+        if (is_int($right)) $right = new NumberNode($right);
+        
         $this->left = $left;
 
         // $operator and $right are optional in case we have

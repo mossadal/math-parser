@@ -1,0 +1,66 @@
+\hypertarget{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitable}{\section{Math\-Parser\textbackslash{}Interpreting\textbackslash{}Visitors\textbackslash{}Visitable Interface Reference}
+\label{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitable}\index{Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Visitors\textbackslash{}\-Visitable@{Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Visitors\textbackslash{}\-Visitable}}
+}
+
+
+\hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitable}{Visitable} interface,.  
+
+
+Inheritance diagram for Math\-Parser\textbackslash{}Interpreting\textbackslash{}Visitors\textbackslash{}Visitable\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.249071cm]{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitable}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitable_a44418d4bae6a68865102c09dc167409f}{accept} (\hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor}{Visitor} \$visitor)
+\begin{DoxyCompactList}\small\item\em Single function in the \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitable}{Visitable} interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitable}{Visitable} interface,. 
+
+Part of the visitor design pattern implementation. Every Node implements the \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitable}{Visitable} interface, containing the single function \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitable_a44418d4bae6a68865102c09dc167409f}{accept()}
+
+Implemented by the (abstract) Node class.
+
+\paragraph*{Example}
+
+
+\begin{DoxyCode}
+$node = \textcolor{keyword}{new} ExpressionNode(1, \textcolor{charliteral}{'+'}, 2);
+$visitor = \textcolor{keyword}{new} TreePrinter();    \textcolor{comment}{// Or any other Visitor}
+$node->accept();
+\end{DoxyCode}
+ 
+
+\subsection{Member Function Documentation}
+\hypertarget{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitable_a44418d4bae6a68865102c09dc167409f}{\index{Math\-Parser\-::\-Interpreting\-::\-Visitors\-::\-Visitable@{Math\-Parser\-::\-Interpreting\-::\-Visitors\-::\-Visitable}!accept@{accept}}
+\index{accept@{accept}!MathParser::Interpreting::Visitors::Visitable@{Math\-Parser\-::\-Interpreting\-::\-Visitors\-::\-Visitable}}
+\subsubsection[{accept}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Visitors\textbackslash{}\-Visitable\-::accept (
+\begin{DoxyParamCaption}
+\item[{{\bf Visitor}}]{\$visitor}
+\end{DoxyParamCaption}
+)}}\label{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitable_a44418d4bae6a68865102c09dc167409f}
+
+
+Single function in the \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitable}{Visitable} interface. 
+
+Calling the \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitable_a44418d4bae6a68865102c09dc167409f}{accept()} function on a \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitable}{Visitable} class, i.\-e. a Node (or subclass thereof) causes the supplied \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor}{Visitor} to traverse the A\-S\-T.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor}{Visitor} & {\em \$visitor} & \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_a3794b9185ed7928df1f39ec42c557106}{Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Expression\-Node}, \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode_a9796a0fdaf49525adc9ea539b4291835}{Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Function\-Node}, \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1ConstantNode_a5debc023d33ccf262a4c73569b4af841}{Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Constant\-Node}, \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1NumberNode_afe0acdb60d40d8f053a00cddef53a2d4}{Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Number\-Node}, and \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode_a1c41ef12cc6469a2de9c2de325cf6258}{Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Variable\-Node}.
+
+
+
+The documentation for this interface was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/\-Math\-Parser/\-Interpreting/\-Visitors/Visitable.\-php\end{DoxyCompactItemize}

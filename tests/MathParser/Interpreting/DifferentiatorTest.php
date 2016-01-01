@@ -39,238 +39,126 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(Node::compareNodes($node1, $node2), $message);
     }
 
+    private function assertResult($f, $df)
+    {
+        $fnc = $this->parser->parse($f);
+        $derivative = $this->parser->parse($df);
+
+        $this->assertNodesEqual($this->diff($fnc), $derivative);
+    }
+
     public function testCanDifferentiateVariable()
     {
-        $f = $this->parser->parse('x');
-        $df = $this->parser->parse('1');
-
-        $this->assertNodesEqual($this->diff($f), $df);
-
-        $f = $this->parser->parse('y');
-        $df = $this->parser->parse('0');
-
-        $this->assertNodesEqual($this->diff($f), $df);
+        $this->assertResult('x', '1');
+        $this->assertResult('y', '0');
     }
 
     public function testCanDifferentiateConstant()
     {
-        $f = $this->parser->parse('pi');
-        $df = $this->parser->parse('0');
-
-        $this->assertNodesEqual($this->diff($f), $df);
-
-        $f = $this->parser->parse('pi*e');
-        $df = $this->parser->parse('0');
-
-        $this->assertNodesEqual($this->diff($f), $df);
-
-        $f = $this->parser->parse('7');
-        $df = $this->parser->parse('0');
-
-        $this->assertNodesEqual($this->diff($f), $df);
-
-        $f = $this->parser->parse('1+3');
-        $df = $this->parser->parse('0');
-
-        $this->assertNodesEqual($this->diff($f), $df);
-
-        $f = $this->parser->parse('5*2');
-        $df = $this->parser->parse('0');
-
-        $this->assertNodesEqual($this->diff($f), $df);
-
-        $f = $this->parser->parse('1/2');
-        $df = $this->parser->parse('0');
-
-        $this->assertNodesEqual($this->diff($f), $df);
-
-        $f = $this->parser->parse('2^2');
-        $df = $this->parser->parse('0');
-
-        $this->assertNodesEqual($this->diff($f), $df);
-
+        $this->assertResult('pi', '0');
+        $this->assertResult('pi*e', '0');
+        $this->assertResult('7', '0');
+        $this->assertResult('1+3', '0');
+        $this->assertResult('5*2', '0');
+        $this->assertResult('1/2', '0');
+        $this->assertResult('2^2', '0');
+        $this->assertResult('-2', '0');
     }
 
     public function testCanDifferentiateExp()
     {
-        $f = $this->parser->parse('exp(x)');
-        $this->assertNodesEqual($this->diff($f), $f);
+        $this->assertResult('exp(x)', 'exp(x)');
     }
 
 
     public function testCanDifferentiateLog()
     {
-        $f = $this->parser->parse('log(x)');
-        $df = $this->parser->parse('1/x');
-
-        $this->assertNodesEqual($this->diff($f), $df);
+        $this->assertResult('log(x)', '1/x');
     }
 
     public function testCanDifferentiateLog10()
     {
-        $f = $this->parser->parse('log10(x)');
-        $df = $this->parser->parse('1/(log(10)x)');
-
-        $this->assertNodesEqual($this->diff($f), $df);
+        $this->assertResult('log10(x)', '1/(log(10)x)');
     }
 
     public function testCanDifferentiateSin()
     {
-        $f = $this->parser->parse('sin(x)');
-        $df = $this->parser->parse('cos(x)');
-
-        $this->assertNodesEqual($this->diff($f), $df);
+        $this->assertResult('sin(x)', 'cos(x)');
     }
 
     public function testCanDifferentiateCos()
     {
-        $f = $this->parser->parse('cos(x)');
-        $df = $this->parser->parse('-sin(x)');
-
-        $this->assertNodesEqual($this->diff($f), $df);
+        $this->assertResult('cos(x)', '-sin(x)');
     }
 
     public function testCanDifferentiateTan()
     {
-        $f = $this->parser->parse('tan(x)');
-        $df = $this->parser->parse('1+tan(x)^2');
-
-        $this->assertNodesEqual($this->diff($f), $df);
+        $this->assertResult('tan(x)', '1+tan(x)^2');
     }
 
     public function testCanDifferentiateCot()
     {
-        $f = $this->parser->parse('cot(x)');
-        $df = $this->parser->parse('~1-cot(x)^2');
-
-        $this->assertNodesEqual($this->diff($f), $df);
+        $this->assertResult('cot(x)', '~1-cot(x)^2');
+;
     }
 
     public function testCanDifferentiateArcsin()
     {
-        $f = $this->parser->parse('arcsin(x)');
-        $df = $this->parser->parse('1/sqrt(1-x^2)');
-
-        $this->assertNodesEqual($this->diff($f), $df);
+        $this->assertResult('arcsin(x)', '1/sqrt(1-x^2)');
     }
 
     public function testCanDifferentiateArccos()
     {
-        $f = $this->parser->parse('arccos(x)');
-        $df = $this->parser->parse('~1/sqrt(1-x^2)');
-
-        $this->assertNodesEqual($this->diff($f), $df);
+        $this->assertResult('arccos(x)', '~1/sqrt(1-x^2)');
     }
 
     public function testCanDifferentiateArctan()
     {
-        $f = $this->parser->parse('arctan(x)');
-        $df = $this->parser->parse('1/(1+x^2)');
-
-        $this->assertNodesEqual($this->diff($f), $df);
-
-        $f = $this->parser->parse('arctan(x^3)');
-        $df = $this->parser->parse('(3x^2)/(1+x^6)');
-
-        $this->assertNodesEqual($this->diff($f), $df);
+        $this->assertResult('arctan(x)', '1/(1+x^2)');
+        $this->assertResult('arctan(x^3)', '(3x^2)/(1+x^6)');
     }
 
     public function testCanDifferentiateArccot()
     {
-        $f = $this->parser->parse('-arccot(x)');
-        $df = $this->parser->parse('1/(1+x^2)');
-
-        $this->assertNodesEqual($this->diff($f), $df);
-
+        $this->assertResult('-arccot(x)', '1/(1+x^2)');
     }
 
     public function testCanDifferentiateSqrt()
     {
-        $f = $this->parser->parse('sqrt(x)');
-        $df = $this->parser->parse('1/(2sqrt(x))');
-
-        $this->assertNodesEqual($this->diff($f), $df);
-
+        $this->assertResult('sqrt(x)', '1/(2sqrt(x))');
     }
 
     public function testCanDifferentiateSum()
     {
-        $f = $this->parser->parse('x+sin(x)');
-        $df = $this->parser->parse('1+cos(x)');
-
-        $this->assertNodesEqual($this->diff($f), $df);
-
-        $f = $this->parser->parse('sin(x)+y');
-        $df = $this->parser->parse('cos(x)');
-
-        $this->assertNodesEqual($this->diff($f), $df);
-
-        $f = $this->parser->parse('y+sin(x)');
-        $df = $this->parser->parse('cos(x)');
-
-        $this->assertNodesEqual($this->diff($f), $df);
+        $this->assertResult('x+sin(x)', '1+cos(x)');
+        $this->assertResult('sin(x)+y', 'cos(x)');
+        $this->assertResult('y+sin(x)', 'cos(x)');
     }
 
     public function testCanDifferentiateDifference()
     {
-        $f = $this->parser->parse('x-sin(x)');
-        $df = $this->parser->parse('1-cos(x)');
-
-        $this->assertNodesEqual($this->diff($f), $df);
-
-        $f = $this->parser->parse('sin(x)-y');
-        $df = $this->parser->parse('cos(x)');
-
-        $this->assertNodesEqual($this->diff($f), $df);
-
-        $f = $this->parser->parse('sin(x)-sin(x)');
-        $df = $this->parser->parse('0');
-
-        $this->assertNodesEqual($this->diff($f), $df);
+        $this->assertResult('x+sin(x)', '1-cos(x)');
+        $this->assertResult('sin(x)-y', 'cos(x)');
+        $this->assertResult('sin(x)-sin(x)', '0');
     }
 
     public function testCanDifferentiateProduct()
     {
-        $f = $this->parser->parse('x*sin(x)');
-        $df = $this->parser->parse('x*cos(x)+sin(x)');
-
-        $this->assertNodesEqual($this->diff($f), $df);
+        $this->assertResult('x*sin(x)', 'x*cos(x)+sin(x)');
     }
 
     public function testCanDifferentiateExponent()
     {
-        $f = $this->parser->parse('x^1');
-        $df = $this->parser->parse('1');
-
-        $this->assertNodesEqual($this->diff($f), $df);
-
-        $f = $this->parser->parse('x^2');
-        $df = $this->parser->parse('2x');
-
-        $this->assertNodesEqual($this->diff($f), $df);
-
-        $f = $this->parser->parse('x^3');
-        $df = $this->parser->parse('3x^2');
-
-        $this->assertNodesEqual($this->diff($f), $df);
-
-        $f = $this->parser->parse('x^x');
-        $df = $this->parser->parse('x^x*(log(x)+1)');
-
-        $this->assertNodesEqual($this->diff($f), $df);
+        $this->assertResult('x^1', '1');
+        $this->assertResult('x^2', '2x');
+        $this->assertResult('x^3', '3x^2');
+        $this->assertResult('x^x', 'x^x*(log(x)+1)');
     }
 
     public function testCanDifferentiateQuotient()
     {
-        $f = $this->parser->parse('x/sin(x)');
-        $df = $this->parser->parse('(sin(x)-x*cos(x))/sin(x)^2');
-
-        $this->assertNodesEqual($this->diff($f), $df);
-
-        $f = $this->parser->parse('x/1');
-        $df = $this->parser->parse('1');
-
-        $this->assertNodesEqual($this->diff($f), $df);
+        $this->assertResult('x/sin(x)', '(sin(x)-x*cos(x))/sin(x)^2');
+        $this->assertResult('x/1', '1');
 
 
         $f = $this->parser->parse('x/0');
@@ -280,18 +168,13 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
 
     public function testCanDifferentiateComposite()
     {
-        $f = $this->parser->parse('sin(sin(x))');
-        $df = $this->parser->parse('cos(x)*cos(sin(x))');
+        $this->assertResult('sin(sin(x))', 'cos(x)*cos(sin(x))');
 
-        $this->assertNodesEqual($this->diff($f), $df);
     }
 
     public function testCanDifferentiateUnaryMinus()
     {
-        $f = $this->parser->parse('-x');
-        $df = $this->parser->parse('-1');
-
-        $this->assertNodesEqual($this->diff($f), $df);
+        $this->assertResult('-x', '~1');
     }
 
     public function testCannotDifferentiateUnknownFunction()
@@ -312,4 +195,16 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
 
     }
 
+    public function testCanDifferentiateHyperbolicFunctions()
+    {
+        $this->assertResult('sinh(x)', 'cosh(x)');
+        $this->assertResult('cosh(x)', 'sinh(x)');
+        $this->assertResult('tanh(x)', '1-tanh(x)^2');
+        $this->assertResult('coth(x)', '1-coth(x)^2');
+
+        $this->assertResult('arsinh(x)', '1/sqrt(x^2+1)');
+        $this->assertResult('arcosh(x)', '1/sqrt(x^2-1)');
+        $this->assertResult('artanh(x)', '1/(1-x^2)');
+        $this->assertResult('arcoth(x)', '1/(1-x^2)');
+    }
 }

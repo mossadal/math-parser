@@ -1,4 +1,11 @@
-<?php namespace MathParser\Interpreting;
+<?php
+/*
+ * @author      Frank Wikström <frank@mossadal.se>
+ * @copyright   2015 Frank Wikström
+ * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
+*/
+
+namespace MathParser\Interpreting;
 
 use MathParser\Interpreting\Visitors\Visitor;
 use MathParser\Parsing\Nodes\ExpressionNode;
@@ -8,6 +15,22 @@ use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\ConstantNode;
 
 
+/**
+ * Simple string representation of an AST. Probably most
+ * useful for debugging purposes.
+ *
+ * Implementation of a Visitor, transforming an AST into a string
+ * representation of the tree.
+ *
+ * ## Example:
+ *
+ * ~~~{.php}
+ * $parser = new StdMathParser();
+ * $f = $parser->parse('exp(2x)+xy');
+ * printer = new TreePrinter();
+ * result = $f->accept($printer);    // Generates "(+ (exp (* 2 x)) (* x y))"
+ * ~~~
+ */
 class TreePrinter implements Visitor
 {
     public function visitExpressionNode(ExpressionNode $node)

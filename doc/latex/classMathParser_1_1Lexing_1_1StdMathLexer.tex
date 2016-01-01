@@ -1,0 +1,64 @@
+\hypertarget{classMathParser_1_1Lexing_1_1StdMathLexer}{\section{Math\-Parser\textbackslash{}Lexing\textbackslash{}Std\-Math\-Lexer Class Reference}
+\label{classMathParser_1_1Lexing_1_1StdMathLexer}\index{Math\-Parser\textbackslash{}\-Lexing\textbackslash{}\-Std\-Math\-Lexer@{Math\-Parser\textbackslash{}\-Lexing\textbackslash{}\-Std\-Math\-Lexer}}
+}
+
+
+\hyperlink{classMathParser_1_1Lexing_1_1Lexer}{Lexer} capable of recognizing all standard mathematical expressions.  
+
+
+Inheritance diagram for Math\-Parser\textbackslash{}Lexing\textbackslash{}Std\-Math\-Lexer\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classMathParser_1_1Lexing_1_1StdMathLexer}
+\end{center}
+\end{figure}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{classMathParser_1_1Lexing_1_1Lexer}{Lexer} capable of recognizing all standard mathematical expressions. 
+
+Subclass of the generic \hyperlink{classMathParser_1_1Lexing_1_1Lexer}{Lexer}, with \hyperlink{classMathParser_1_1Lexing_1_1TokenDefinition}{Token\-Definition} patterns for numbers, elementary functions, arithmetic operations and variables.
+
+\paragraph*{Recognized tokens}
+
+
+\begin{DoxyItemize}
+\item {\ttfamily /?\textbackslash{}d+/} matching integers matching
+\item {\ttfamily /sqrt/} matching square root function
+\item {\ttfamily /sinh/} matching hyperbolic sine
+\item {\ttfamily /cosh/} matching hyperbolic cosine
+\item {\ttfamily /tanh/} matching hyperbolic tangent
+\item {\ttfamily /coth/} matching hyperbolic cotangent
+\item {\ttfamily /sin/} matching sine
+\item {\ttfamily /cos/} matching cosine
+\item {\ttfamily /tan/} matching tangent
+\item {\ttfamily /cot/} matching cotangent
+\item {\ttfamily /arsinh$\vert$arcsinh$\vert$asinh/} matching inverse hyperbolic sine
+\item {\ttfamily /arcosh$\vert$arccosh$\vert$acosh/} matching inverse hyperbolic cosine
+\item {\ttfamily /artanh$\vert$arctanh$\vert$atanh/} matching inverse hyperbolic tangent
+\item {\ttfamily /arcoth$\vert$arccoth$\vert$acoth/} matching inverse hyperbolic cotangent
+\item {\ttfamily /arcsin$\vert$asin/} matching inverse sine
+\item {\ttfamily /arccos$\vert$acos/} matching inverse cosine
+\item {\ttfamily /arctan$\vert$atan/} matching inverse tangent
+\item {\ttfamily /arccot$\vert$acot/} matching inverse cotangent
+\item {\ttfamily /exp/} matching exponential function
+\item {\ttfamily /log10$\vert$lg/} matching logarithm (base 10)
+\item {\ttfamily /log$\vert$ln/} matching natural logarithm
+\item {\ttfamily /\textbackslash{}(/} matching opening parenthesis (both as delimiter and function evaluation)
+\item {\ttfamily /\textbackslash{})/} matching closing parenthesisis (both as delimiter and function evaluation)
+\item {\ttfamily /\textbackslash{}+/} matching + for addition (or unary +)
+\item {\ttfamily /\textbackslash{}-\//} matching -\/ for subtraction (or unary -\/)
+\item {\ttfamily /\textbackslash{}$\ast$ /} matching $\ast$ for multiplication
+\item {\ttfamily /\textbackslash{}//} matching / for division
+\item {\ttfamily /\textbackslash{}$^\wedge$/} matching $^\wedge$ for exponentiation
+\item {\ttfamily /pi/} matching constant pi
+\item {\ttfamily /e/} matching constant e
+\item {\ttfamily /\mbox{[}a-\/z\-A-\/\-Z\mbox{]}/} matching variables (note that we only allow single letter identifiers, this improves parsing of implicit multiplication)
+\item {\ttfamily /\textbackslash{}n/} matching newline
+\item {\ttfamily /\textbackslash{}s+/} matching whitespace 
+\end{DoxyItemize}
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/\-Math\-Parser/\-Lexing/Std\-Math\-Lexer.\-php\end{DoxyCompactItemize}

@@ -1,0 +1,153 @@
+\hypertarget{classMathParser_1_1Interpreting_1_1TreePrinter}{\section{Math\-Parser\textbackslash{}Interpreting\textbackslash{}Tree\-Printer Class Reference}
+\label{classMathParser_1_1Interpreting_1_1TreePrinter}\index{Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Tree\-Printer@{Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Tree\-Printer}}
+}
+
+
+Simple string representation of an A\-S\-T.  
+
+
+Inheritance diagram for Math\-Parser\textbackslash{}Interpreting\textbackslash{}Tree\-Printer\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classMathParser_1_1Interpreting_1_1TreePrinter}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMathParser_1_1Interpreting_1_1TreePrinter_a5d879664f70352a684d925d0225589d3}{visit\-Expression\-Node} (\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode}{Expression\-Node} \$node)
+\begin{DoxyCompactList}\small\item\em Interface function for visiting Expression\-Nodes. \end{DoxyCompactList}\item 
+\hyperlink{classMathParser_1_1Interpreting_1_1TreePrinter_aff9bf4ad6fc5ea711b23d39b60f0235c}{visit\-Number\-Node} (\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1NumberNode}{Number\-Node} \$node)
+\begin{DoxyCompactList}\small\item\em Interface function for visiting Number\-Nodes. \end{DoxyCompactList}\item 
+\hyperlink{classMathParser_1_1Interpreting_1_1TreePrinter_a9fa160448c7e0a16e907c79c8d3e4f38}{visit\-Variable\-Node} (\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode}{Variable\-Node} \$node)
+\begin{DoxyCompactList}\small\item\em Interface function for visiting Variable\-Nodes. \end{DoxyCompactList}\item 
+\hyperlink{classMathParser_1_1Interpreting_1_1TreePrinter_ae5fc098c679ae4e30030bc0a22d621d0}{visit\-Function\-Node} (\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode}{Function\-Node} \$node)
+\begin{DoxyCompactList}\small\item\em Interface function for visiting Function\-Node. \end{DoxyCompactList}\item 
+\hyperlink{classMathParser_1_1Interpreting_1_1TreePrinter_af2b9784abe53d0fa5ddb75528d1a7e8f}{visit\-Constant\-Node} (\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1ConstantNode}{Constant\-Node} \$node)
+\begin{DoxyCompactList}\small\item\em Interface function for visiting Constant\-Node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Simple string representation of an A\-S\-T. 
+
+Probably most useful for debugging purposes.
+
+Implementation of a Visitor, transforming an A\-S\-T into a string representation of the tree.
+
+\subsubsection*{Example\-:}
+
+
+\begin{DoxyCode}
+$parser = \textcolor{keyword}{new} StdMathParser();
+$f = $parser->parse(\textcolor{stringliteral}{'exp(2x)+xy'});
+printer = \textcolor{keyword}{new} TreePrinter();
+result = $f->accept($printer);    \textcolor{comment}{// Generates "(+ (exp (* 2 x)) (* x y))"}
+\end{DoxyCode}
+ 
+
+\subsection{Member Function Documentation}
+\hypertarget{classMathParser_1_1Interpreting_1_1TreePrinter_af2b9784abe53d0fa5ddb75528d1a7e8f}{\index{Math\-Parser\-::\-Interpreting\-::\-Tree\-Printer@{Math\-Parser\-::\-Interpreting\-::\-Tree\-Printer}!visit\-Constant\-Node@{visit\-Constant\-Node}}
+\index{visit\-Constant\-Node@{visit\-Constant\-Node}!MathParser::Interpreting::TreePrinter@{Math\-Parser\-::\-Interpreting\-::\-Tree\-Printer}}
+\subsubsection[{visit\-Constant\-Node}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Tree\-Printer\-::visit\-Constant\-Node (
+\begin{DoxyParamCaption}
+\item[{{\bf Constant\-Node}}]{\$node}
+\end{DoxyParamCaption}
+)}}\label{classMathParser_1_1Interpreting_1_1TreePrinter_af2b9784abe53d0fa5ddb75528d1a7e8f}
+
+
+Interface function for visiting Constant\-Node. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+Constant\-Node & {\em \$node} & Node to visit. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor_ac694089225b20c9f848bcfb0a5e600f0}{Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Visitors\textbackslash{}\-Visitor}.
+
+\hypertarget{classMathParser_1_1Interpreting_1_1TreePrinter_a5d879664f70352a684d925d0225589d3}{\index{Math\-Parser\-::\-Interpreting\-::\-Tree\-Printer@{Math\-Parser\-::\-Interpreting\-::\-Tree\-Printer}!visit\-Expression\-Node@{visit\-Expression\-Node}}
+\index{visit\-Expression\-Node@{visit\-Expression\-Node}!MathParser::Interpreting::TreePrinter@{Math\-Parser\-::\-Interpreting\-::\-Tree\-Printer}}
+\subsubsection[{visit\-Expression\-Node}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Tree\-Printer\-::visit\-Expression\-Node (
+\begin{DoxyParamCaption}
+\item[{{\bf Expression\-Node}}]{\$node}
+\end{DoxyParamCaption}
+)}}\label{classMathParser_1_1Interpreting_1_1TreePrinter_a5d879664f70352a684d925d0225589d3}
+
+
+Interface function for visiting Expression\-Nodes. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+Expression\-Node & {\em \$node} & Node to visit. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor_a201489f6ae0ccc3c25ff153a57994fa1}{Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Visitors\textbackslash{}\-Visitor}.
+
+\hypertarget{classMathParser_1_1Interpreting_1_1TreePrinter_ae5fc098c679ae4e30030bc0a22d621d0}{\index{Math\-Parser\-::\-Interpreting\-::\-Tree\-Printer@{Math\-Parser\-::\-Interpreting\-::\-Tree\-Printer}!visit\-Function\-Node@{visit\-Function\-Node}}
+\index{visit\-Function\-Node@{visit\-Function\-Node}!MathParser::Interpreting::TreePrinter@{Math\-Parser\-::\-Interpreting\-::\-Tree\-Printer}}
+\subsubsection[{visit\-Function\-Node}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Tree\-Printer\-::visit\-Function\-Node (
+\begin{DoxyParamCaption}
+\item[{{\bf Function\-Node}}]{\$node}
+\end{DoxyParamCaption}
+)}}\label{classMathParser_1_1Interpreting_1_1TreePrinter_ae5fc098c679ae4e30030bc0a22d621d0}
+
+
+Interface function for visiting Function\-Node. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+Function\-Node & {\em \$node} & Node to visit. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor_a497e4a990f99689616c25e76b0ec6ef1}{Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Visitors\textbackslash{}\-Visitor}.
+
+\hypertarget{classMathParser_1_1Interpreting_1_1TreePrinter_aff9bf4ad6fc5ea711b23d39b60f0235c}{\index{Math\-Parser\-::\-Interpreting\-::\-Tree\-Printer@{Math\-Parser\-::\-Interpreting\-::\-Tree\-Printer}!visit\-Number\-Node@{visit\-Number\-Node}}
+\index{visit\-Number\-Node@{visit\-Number\-Node}!MathParser::Interpreting::TreePrinter@{Math\-Parser\-::\-Interpreting\-::\-Tree\-Printer}}
+\subsubsection[{visit\-Number\-Node}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Tree\-Printer\-::visit\-Number\-Node (
+\begin{DoxyParamCaption}
+\item[{{\bf Number\-Node}}]{\$node}
+\end{DoxyParamCaption}
+)}}\label{classMathParser_1_1Interpreting_1_1TreePrinter_aff9bf4ad6fc5ea711b23d39b60f0235c}
+
+
+Interface function for visiting Number\-Nodes. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+Number\-Node & {\em \$node} & Node to visit. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor_acbcd1cbecf76ba51c893a49746162dc1}{Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Visitors\textbackslash{}\-Visitor}.
+
+\hypertarget{classMathParser_1_1Interpreting_1_1TreePrinter_a9fa160448c7e0a16e907c79c8d3e4f38}{\index{Math\-Parser\-::\-Interpreting\-::\-Tree\-Printer@{Math\-Parser\-::\-Interpreting\-::\-Tree\-Printer}!visit\-Variable\-Node@{visit\-Variable\-Node}}
+\index{visit\-Variable\-Node@{visit\-Variable\-Node}!MathParser::Interpreting::TreePrinter@{Math\-Parser\-::\-Interpreting\-::\-Tree\-Printer}}
+\subsubsection[{visit\-Variable\-Node}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Tree\-Printer\-::visit\-Variable\-Node (
+\begin{DoxyParamCaption}
+\item[{{\bf Variable\-Node}}]{\$node}
+\end{DoxyParamCaption}
+)}}\label{classMathParser_1_1Interpreting_1_1TreePrinter_a9fa160448c7e0a16e907c79c8d3e4f38}
+
+
+Interface function for visiting Variable\-Nodes. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+Variable\-Node & {\em \$node} & Node to visit. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor_a292630a7204dadd96877d8182f38deb0}{Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Visitors\textbackslash{}\-Visitor}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/\-Math\-Parser/\-Interpreting/Tree\-Printer.\-php\end{DoxyCompactItemize}

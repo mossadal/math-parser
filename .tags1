@@ -1,0 +1,10 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+evaluation	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/StdMathLexer.php	/^ * * `\/\\(\/` matching opening parenthesis (both as delimiter and function evaluation)$/;"	function	line:44
+evaluation	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/StdMathLexer.php	/^ * * `\/\\)\/` matching closing parenthesisis (both as delimiter and function evaluation)$/;"	function	line:45
+StdMathLexer	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/StdMathLexer.php	/^ class StdMathLexer extends Lexer$/;"	class	line:58
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/StdMathLexer.php	/^    public function __construct()$/;"	function	line:60

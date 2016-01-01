@@ -1,4 +1,14 @@
-<?php namespace MathParser\Lexing;
+<?php
+/*
+ * @package     Lexical analysis
+ * @subpackage  Token handling
+ * @author      Frank Wikström <frank@mossadal.se>
+ * @copyright   2015 Frank Wikström
+ * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
+ *
+ */
+
+namespace MathParser\Lexing;
 
 use MathParser\Lexing\TokenType;
 use MathParser\Exceptions\UnknownTokenException;

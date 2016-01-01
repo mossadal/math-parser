@@ -1,0 +1,272 @@
+\hypertarget{classMathParser_1_1Interpreting_1_1LaTeXPrinter}{\section{Math\-Parser\textbackslash{}Interpreting\textbackslash{}La\-Te\-X\-Printer Class Reference}
+\label{classMathParser_1_1Interpreting_1_1LaTeXPrinter}\index{Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-La\-Te\-X\-Printer@{Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-La\-Te\-X\-Printer}}
+}
+
+
+Create La\-Te\-X code for prettyprinting a mathematical expression (for example via Math\-Jax)  
+
+
+Inheritance diagram for Math\-Parser\textbackslash{}Interpreting\textbackslash{}La\-Te\-X\-Printer\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classMathParser_1_1Interpreting_1_1LaTeXPrinter}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMathParser_1_1Interpreting_1_1LaTeXPrinter_a68bcaa8f65dbebd8aadd6002b50dea49}{visit\-Expression\-Node} (\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode}{Expression\-Node} \$node)
+\begin{DoxyCompactList}\small\item\em Generate La\-Te\-X code for an Expression\-Node. \end{DoxyCompactList}\item 
+\hyperlink{classMathParser_1_1Interpreting_1_1LaTeXPrinter_a5bbb40a11601dc347c9d4ec629723396}{visit\-Number\-Node} (\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1NumberNode}{Number\-Node} \$node)
+\begin{DoxyCompactList}\small\item\em Generate La\-Te\-X code for a Number\-Node. \end{DoxyCompactList}\item 
+\hyperlink{classMathParser_1_1Interpreting_1_1LaTeXPrinter_aced38823c7de0b9ad84884028370a8d2}{visit\-Variable\-Node} (\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode}{Variable\-Node} \$node)
+\begin{DoxyCompactList}\small\item\em Generate La\-Te\-X code for a Variable\-Node. \end{DoxyCompactList}\item 
+\hyperlink{classMathParser_1_1Interpreting_1_1LaTeXPrinter_a85eb667103f7b04abfe3c83e6c0e24a2}{visit\-Function\-Node} (\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode}{Function\-Node} \$node)
+\begin{DoxyCompactList}\small\item\em Generate La\-Te\-X code for a Function\-Node. \end{DoxyCompactList}\item 
+\hyperlink{classMathParser_1_1Interpreting_1_1LaTeXPrinter_aaa2c3cfcfa01461f52a8f656ef52b92c}{visit\-Constant\-Node} (\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1ConstantNode}{Constant\-Node} \$node)
+\begin{DoxyCompactList}\small\item\em Generate La\-Te\-X code for a Constant\-Node. \end{DoxyCompactList}\item 
+\hyperlink{classMathParser_1_1Interpreting_1_1LaTeXPrinter_a0155571b5b4fea8a6b762beabdb02ccf}{parenthesize} (\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1Node}{Node} \$node, \$cutoff='$\ast$', \$add\-Space=false)
+\begin{DoxyCompactList}\small\item\em Add parentheses to the La\-Te\-X representation of \$node if needed. \end{DoxyCompactList}\item 
+\hyperlink{classMathParser_1_1Interpreting_1_1LaTeXPrinter_a0f7cfa301dbab484b82a4aa83e9a37f1}{braces\-Needed} (\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1Node}{Node} \$node)
+\begin{DoxyCompactList}\small\item\em Add curly braces around the La\-Tex representation of \$node if needed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classMathParser_1_1Interpreting_1_1LaTeXPrinter_ad3c7631e73a252a1920dab0825b0be30}{{\bfseries \$lexer}}\label{classMathParser_1_1Interpreting_1_1LaTeXPrinter_ad3c7631e73a252a1920dab0825b0be30}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Create La\-Te\-X code for prettyprinting a mathematical expression (for example via Math\-Jax) 
+
+Implementation of a Visitor, transforming an A\-S\-T into a string giving La\-Te\-X code for the expression.
+
+The class in general does {\itshape not} generate the best possible La\-Te\-X code, and needs more work to be used in a production setting.
+
+\subsubsection*{Example\-:}
+
+
+\begin{DoxyCode}
+$parser = \textcolor{keyword}{new} StdMathParser();
+$f = $parser->parse(\textcolor{stringliteral}{'exp(2x)+xy'});
+printer = \textcolor{keyword}{new} LaTeXPrinter();
+result = $f->accept($printer);    \textcolor{comment}{// Generates "e^\{2x\}+xy"}
+\end{DoxyCode}
+
+
+Note that surrounding {\ttfamily \$}, {\ttfamily \$\$} or {\ttfamily \textbackslash{}begin\{equation\}..\textbackslash{}end\{equation\}} has to be added manually. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classMathParser_1_1Interpreting_1_1LaTeXPrinter_a0f7cfa301dbab484b82a4aa83e9a37f1}{\index{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer@{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer}!braces\-Needed@{braces\-Needed}}
+\index{braces\-Needed@{braces\-Needed}!MathParser::Interpreting::LaTeXPrinter@{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer}}
+\subsubsection[{braces\-Needed}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-La\-Te\-X\-Printer\-::braces\-Needed (
+\begin{DoxyParamCaption}
+\item[{{\bf Node}}]{\$node}
+\end{DoxyParamCaption}
+)}}\label{classMathParser_1_1Interpreting_1_1LaTeXPrinter_a0f7cfa301dbab484b82a4aa83e9a37f1}
+
+
+Add curly braces around the La\-Tex representation of \$node if needed. 
+
+Nodes representing a single Constant\-Node, Variable\-Node or Number\-Nodes (0--9) are returned as-\/is. Other Nodes get curly braces around their La\-Te\-X code.
+
+
+\begin{DoxyParams}[1]{Parameters}
+Node & {\em \$node} & A\-S\-T to parse \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em string} & \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{classMathParser_1_1Interpreting_1_1LaTeXPrinter_a0155571b5b4fea8a6b762beabdb02ccf}{\index{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer@{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer}!parenthesize@{parenthesize}}
+\index{parenthesize@{parenthesize}!MathParser::Interpreting::LaTeXPrinter@{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer}}
+\subsubsection[{parenthesize}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-La\-Te\-X\-Printer\-::parenthesize (
+\begin{DoxyParamCaption}
+\item[{{\bf Node}}]{\$node, }
+\item[{}]{\$cutoff = {\ttfamily '$\ast$'}, }
+\item[{}]{\$add\-Space = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}}\label{classMathParser_1_1Interpreting_1_1LaTeXPrinter_a0155571b5b4fea8a6b762beabdb02ccf}
+
+
+Add parentheses to the La\-Te\-X representation of \$node if needed. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+Node & {\em \$node} & The A\-S\-T to typeset \\
+\hline
+string & {\em \$cutoff} & A token representing the precedence of the parent node. Operands with a lower precedence have parentheses added. \\
+\hline
+bool & {\em \$add\-Space} & Flag determining whether an additional space should be added at the beginning of the returned string. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em string} & \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{classMathParser_1_1Interpreting_1_1LaTeXPrinter_aaa2c3cfcfa01461f52a8f656ef52b92c}{\index{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer@{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer}!visit\-Constant\-Node@{visit\-Constant\-Node}}
+\index{visit\-Constant\-Node@{visit\-Constant\-Node}!MathParser::Interpreting::LaTeXPrinter@{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer}}
+\subsubsection[{visit\-Constant\-Node}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-La\-Te\-X\-Printer\-::visit\-Constant\-Node (
+\begin{DoxyParamCaption}
+\item[{{\bf Constant\-Node}}]{\$node}
+\end{DoxyParamCaption}
+)}}\label{classMathParser_1_1Interpreting_1_1LaTeXPrinter_aaa2c3cfcfa01461f52a8f656ef52b92c}
+
+
+Generate La\-Te\-X code for a Constant\-Node. 
+
+Create a string giving La\-Te\-X code for a Constant\-Node. {\ttfamily pi} typesets as {\ttfamily \textbackslash{}pi} and {\ttfamily e} simply as {\ttfamily e}.
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Unknown\-Constant\-Exception} & for nodes representing other constants. \\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}[1]{Parameters}
+Constant\-Node & {\em \$node} & A\-S\-T to be typeset \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em string} & \\
+\hline
+\end{DoxyRetVals}
+
+
+Implements \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor_ac694089225b20c9f848bcfb0a5e600f0}{Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Visitors\textbackslash{}\-Visitor}.
+
+\hypertarget{classMathParser_1_1Interpreting_1_1LaTeXPrinter_a68bcaa8f65dbebd8aadd6002b50dea49}{\index{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer@{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer}!visit\-Expression\-Node@{visit\-Expression\-Node}}
+\index{visit\-Expression\-Node@{visit\-Expression\-Node}!MathParser::Interpreting::LaTeXPrinter@{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer}}
+\subsubsection[{visit\-Expression\-Node}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-La\-Te\-X\-Printer\-::visit\-Expression\-Node (
+\begin{DoxyParamCaption}
+\item[{{\bf Expression\-Node}}]{\$node}
+\end{DoxyParamCaption}
+)}}\label{classMathParser_1_1Interpreting_1_1LaTeXPrinter_a68bcaa8f65dbebd8aadd6002b50dea49}
+
+
+Generate La\-Te\-X code for an Expression\-Node. 
+
+Create a string giving La\-Te\-X code for an Expression\-Node {\ttfamily (x op y)} where {\ttfamily op} is one of {\ttfamily +}, {\ttfamily -\/}, {\ttfamily $\ast$}, {\ttfamily /} or {\ttfamily $^\wedge$}
+
+\paragraph*{Typesetting rules\-:}
+
+
+\begin{DoxyItemize}
+\item Adds parantheses around each operand, if needed. (I.\-e. if their precedence lower than that of the current Node.) For example, the A\-S\-T {\ttfamily ($^\wedge$ (+ 1 2) 3)} generates {\ttfamily (1+2)$^\wedge$3} but {\ttfamily (+ ($^\wedge$ 1 2) 3)} generates {\ttfamily 1$^\wedge$2+3} as expected.
+\item Multiplications are typeset implicitly {\ttfamily ($\ast$ x y)} returns {\ttfamily xy} or using {\ttfamily \textbackslash{}cdot} if the first factor is a Function\-Node or the (left operand) in the second factor is a Number\-Node, so {\ttfamily ($\ast$ x 2)} return {\ttfamily x \textbackslash{}cdot 2} and {\ttfamily ($\ast$ (sin x) x)} return {\ttfamily \textbackslash{}sin x \textbackslash{}cdot x} (but {\ttfamily ($\ast$ x (sin x))} returns {\ttfamily x\textbackslash{}sin x})
+\item Divisions are typeset using {\ttfamily \textbackslash{}frac}
+\item Exponentiation adds braces around the power when needed.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}[1]{Parameters}
+Expression\-Node & {\em \$node} & A\-S\-T to be typeset \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em string} & \\
+\hline
+\end{DoxyRetVals}
+
+
+Implements \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor_a201489f6ae0ccc3c25ff153a57994fa1}{Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Visitors\textbackslash{}\-Visitor}.
+
+\hypertarget{classMathParser_1_1Interpreting_1_1LaTeXPrinter_a85eb667103f7b04abfe3c83e6c0e24a2}{\index{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer@{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer}!visit\-Function\-Node@{visit\-Function\-Node}}
+\index{visit\-Function\-Node@{visit\-Function\-Node}!MathParser::Interpreting::LaTeXPrinter@{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer}}
+\subsubsection[{visit\-Function\-Node}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-La\-Te\-X\-Printer\-::visit\-Function\-Node (
+\begin{DoxyParamCaption}
+\item[{{\bf Function\-Node}}]{\$node}
+\end{DoxyParamCaption}
+)}}\label{classMathParser_1_1Interpreting_1_1LaTeXPrinter_a85eb667103f7b04abfe3c83e6c0e24a2}
+
+
+Generate La\-Te\-X code for a Function\-Node. 
+
+Create a string giving La\-Te\-X code for a function\-Node.
+
+\paragraph*{Typesetting rules\-:}
+
+
+\begin{DoxyItemize}
+\item {\ttfamily sqrt(op)} is typeset as {\ttfamily \textbackslash{}sqrt\{op\} -\/}exp(op){\ttfamily is either typeset as}e$^\wedge$\{op\}{\ttfamily , if}op{\ttfamily is a simple expression or as}(op)` for more complicated operands.
+\end{DoxyItemize}
+
+T\-O\-D\-O Non-\/standard functions should be typeset using  
+\begin{DoxyParams}[1]{Parameters}
+Function\-Node & {\em \$node} & A\-S\-T to be typeset \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em string} & \\
+\hline
+\end{DoxyRetVals}
+
+
+Implements \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor_a497e4a990f99689616c25e76b0ec6ef1}{Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Visitors\textbackslash{}\-Visitor}.
+
+\hypertarget{classMathParser_1_1Interpreting_1_1LaTeXPrinter_a5bbb40a11601dc347c9d4ec629723396}{\index{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer@{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer}!visit\-Number\-Node@{visit\-Number\-Node}}
+\index{visit\-Number\-Node@{visit\-Number\-Node}!MathParser::Interpreting::LaTeXPrinter@{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer}}
+\subsubsection[{visit\-Number\-Node}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-La\-Te\-X\-Printer\-::visit\-Number\-Node (
+\begin{DoxyParamCaption}
+\item[{{\bf Number\-Node}}]{\$node}
+\end{DoxyParamCaption}
+)}}\label{classMathParser_1_1Interpreting_1_1LaTeXPrinter_a5bbb40a11601dc347c9d4ec629723396}
+
+
+Generate La\-Te\-X code for a Number\-Node. 
+
+Create a string giving La\-Te\-X code for a Number\-Node. Currently, there is no special formatting of numbers.
+
+
+\begin{DoxyParams}[1]{Parameters}
+Number\-Node & {\em \$node} & A\-S\-T to be typeset \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em string} & \\
+\hline
+\end{DoxyRetVals}
+
+
+Implements \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor_acbcd1cbecf76ba51c893a49746162dc1}{Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Visitors\textbackslash{}\-Visitor}.
+
+\hypertarget{classMathParser_1_1Interpreting_1_1LaTeXPrinter_aced38823c7de0b9ad84884028370a8d2}{\index{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer@{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer}!visit\-Variable\-Node@{visit\-Variable\-Node}}
+\index{visit\-Variable\-Node@{visit\-Variable\-Node}!MathParser::Interpreting::LaTeXPrinter@{Math\-Parser\-::\-Interpreting\-::\-La\-Te\-X\-Printer}}
+\subsubsection[{visit\-Variable\-Node}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-La\-Te\-X\-Printer\-::visit\-Variable\-Node (
+\begin{DoxyParamCaption}
+\item[{{\bf Variable\-Node}}]{\$node}
+\end{DoxyParamCaption}
+)}}\label{classMathParser_1_1Interpreting_1_1LaTeXPrinter_aced38823c7de0b9ad84884028370a8d2}
+
+
+Generate La\-Te\-X code for a Variable\-Node. 
+
+Create a string giving La\-Te\-X code for a Variable\-Node. Currently, there is no special formatting of variables.
+
+
+\begin{DoxyParams}[1]{Parameters}
+Variable\-Node & {\em \$node} & A\-S\-T to be typeset \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em string} & \\
+\hline
+\end{DoxyRetVals}
+
+
+Implements \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor_a292630a7204dadd96877d8182f38deb0}{Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Visitors\textbackslash{}\-Visitor}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/\-Math\-Parser/\-Interpreting/La\-Te\-X\-Printer.\-php\end{DoxyCompactItemize}

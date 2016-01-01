@@ -1,5 +1,13 @@
-<?php namespace MathParser\Interpreting;
+<?php
+/*
+ * @author      Frank Wikström <frank@mossadal.se>
+ * @copyright   2015 Frank Wikström
+ * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
+*/
 
+namespace MathParser\Interpreting;
+
+use MathParser\Lexer\StdMathLexer;
 use MathParser\Interpreting\Visitors\Visitor;
 use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\ExpressionNode;
@@ -14,8 +22,37 @@ use MathParser\Exceptions\UnknownFunctionException;
 use MathParser\Exceptions\UnknownOperatorException;
 use MathParser\Exceptions\DivisionByZeroException;
 
+/**
+ * Evalutate a parsed mathematical expression.
+ *
+ * Implementation of a Visitor, transforming an AST into a floating
+ * point number, giving the *value* of the expression represented by
+ * the AST.
+ *
+ * The class implements evaluation of all all arithmetic operators
+ * as well as every elementary function and predefined constant recognized
+ * by StdMathLexer and StdmathParser.
+ *
+ * ## Example:
+ * ~~~{.php}
+ * $parser = new StdMathParser();
+ * $f = $parser->parse('exp(2x)+xy');
+ * $evaluator = new Evaluator();
+ * $evaluator->setVariables([ 'x' => 1, 'y' => '-1' ]);
+ * result = $f->accept($evaluator);    // Evaluate $f using x=1, y=-1
+ * ~~~
+ *
+ * TODO: handle user specified functions
+ *
+ */
 class Evaluator implements Visitor
 {
+    /**
+     * undocumented class variable
+     *
+     * @var array $variables Key/value pair holding current values
+     *      of the variables used for evaluating.
+     **/
     private $variables;
 
     public function __construct($variables=null)
@@ -23,11 +60,29 @@ class Evaluator implements Visitor
         $this->variables = $variables;
     }
 
+    /**
+     * Update the variables used for evaluating
+     *
+     * @param array $variables  Key/value pair holding current variable values
+     * @return void
+    */
     public function setVariables($variables)
     {
         $this->variables = $variables;
     }
 
+    /**
+     * Evaluate an ExpressionNode
+     *
+     * Computes the value of an ExpressionNode `x op y`
+     * where `op` is one of `+`, `-`, `*`, `/` or `^`
+     *
+     * @throws UnknownOperatorException if the operator is something other than
+     *      `+`, `-`, `*`, `/` or `^`
+     *
+     * @param ExpressionNode $node AST to be evaluated
+     * @return float
+     */
     public function visitExpressionNode(ExpressionNode $node)
     {
         $operator = $node->getOperator();
@@ -59,11 +114,32 @@ class Evaluator implements Visitor
         }
     }
 
+    /**
+     * Evaluate a NumberNode
+     *
+     * Retuns the value of an NumberNode
+     *
+     * @param NumberNode $node AST to be evaluated
+     * @return float
+     */
     public function visitNumberNode(NumberNode $node)
     {
         return $node->getValue();
     }
 
+    /**
+     * Evaluate a VariableNode
+     *
+     * Returns the current value of a VariableNode, as defined
+     * either by the constructor or set using the `Evaluator::setVariables()` method.
+
+     * @see Evaluator::setVariables() to define the variables
+     * @throws UnknownVariableException if the variable respresented by the
+     *      VariableNode is *not* set.
+     *
+     * @param VariableNode $node AST to be evaluated
+     * @return float
+     */
     public function visitVariableNode(VariableNode $node)
     {
         $x = $node->getName();
@@ -75,12 +151,28 @@ class Evaluator implements Visitor
             throw new UnknownVariableException($x);
     }
 
+
+    /**
+     * Evaluate a FunctionNode
+     *
+     * Computes the value of a FunctionNode `f(x)`, where f is
+     * an elementary function recognized by StdMathLexer and StdMathParser.
+     *
+     * @see \MathParser\Lexer\StdMathLexer StdMathLexer
+     * @see \MathParser\StdMathParser StdMathParser
+     * @throws UnknownFunctionException if the function respresented by the
+     *      FunctionNode is *not* recognized.
+     *
+     * @param FunctionNode $node AST to be evaluated
+     * @return float
+     */
     public function visitFunctionNode(FunctionNode $node)
     {
         $inner = $node->getOperand()->accept($this);
 
         switch ($node->getName()) {
 
+            // Trigonometric functions
             case 'sin':
                 return sin($inner);
             case 'cos':
@@ -90,6 +182,7 @@ class Evaluator implements Visitor
             case 'cot':
                 return 1/tan($inner);
 
+            // Inverse trigonometric functions
             case 'arcsin':
                 return asin($inner);
             case 'arccos':
@@ -99,6 +192,7 @@ class Evaluator implements Visitor
             case 'arccot':
                 return pi()/2-atan($inner);
 
+            // Exponentials and logarithms
             case 'exp':
                 return exp($inner);
             case 'log':
@@ -106,14 +200,49 @@ class Evaluator implements Visitor
             case 'lg':
                 return log10($inner);
 
+            // Powers
             case 'sqrt':
                 return sqrt($inner);
+
+            // Hyperbolic functions
+            case 'sinh':
+                return sinh($inner);
+            case 'cosh':
+                return cosh($inner);
+            case 'tanh':
+                return tanh($inner);
+            case 'coth':
+                return 1/tanh($inner);
+
+            // Inverse hyperbolic functions
+            case 'arsinh':
+                return asinh($inner);
+            case 'arcosh':
+                return acosh($inner);
+            case 'artanh':
+                return atanh($inner);
+            case 'arcoth':
+                return atanh(1/$inner);
+
             default:
                 throw new UnknownFunctionException($node->getName());
 
         }
     }
 
+    /**
+     * Evaluate a ConstantNode
+     *
+     * Returns the value of a ConstantNode recognized by StdMathLexer and StdMathParser.
+     *
+     * @see \MathParser\Lexer\StdMathLexer StdMathLexer
+     * @see \MathParser\StdMathParser StdMathParser
+     * @throws UnknownConstantException if the variable respresented by the
+     *      ConstantNode is *not* recognized.
+     *
+     * @param ConstantNode $node AST to be evaluated
+     * @return float
+     */
     public function visitConstantNode(ConstantNode $node)
     {
         switch($node->getName()) {

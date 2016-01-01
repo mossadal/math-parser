@@ -1,0 +1,405 @@
+html	/Users/frankw/Sites/math-parser/doxygen/header.html	/^<html xmlns="http:\/\/www.w3.org\/1999\/xhtml">$/;"	function	line:3
+head	/Users/frankw/Sites/math-parser/doxygen/header.html	/^    <head>$/;"	function	line:4
+meta	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <meta http-equiv="X-UA-Compatible" content="IE=edge">$/;"	function	line:5
+meta	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <meta name="viewport" content="width=device-width, initial-scale=1">$/;"	function	line:7
+meta	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <meta http-equiv="Content-Type" content="text\/xhtml;charset=UTF-8"\/>$/;"	function	line:9
+meta	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <meta name="generator" content="Doxygen $doxygenversion"\/>$/;"	function	line:10
+script	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <script type="text\/javascript" src="https:\/\/code.jquery.com\/jquery-2.1.1.min.js"><\/script>$/;"	function	line:12
+script	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <script type="text\/javascript" src="$relpath^dynsections.js"><\/script>$/;"	function	line:17
+link	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <link href="$relpath^$stylesheet" rel="stylesheet" type="text\/css" \/>$/;"	function	line:21
+link	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <link rel="stylesheet" href="https:\/\/maxcdn.bootstrapcdn.com\/bootstrap\/3.3.6\/css\/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">$/;"	function	line:25
+link	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <link rel="stylesheet" href="https:\/\/maxcdn.bootstrapcdn.com\/bootstrap\/3.3.6\/css\/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l\/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">$/;"	function	line:28
+script	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <script src="https:\/\/maxcdn.bootstrapcdn.com\/bootstrap\/3.3.6\/js\/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"><\/script>$/;"	function	line:31
+script	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <script type="text\/javascript" src="$relpath^doxy-boot.js"><\/script>$/;"	function	line:32
+body	/Users/frankw/Sites/math-parser/doxygen/header.html	/^    <body>$/;"	function	line:34
+nav	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <nav class="navbar navbar-default" role="navigation">$/;"	function	line:35
+div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^            <div class="container">$/;"	function	line:36
+div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^                <div class="navbar-header">$/;"	function	line:37
+a	/Users/frankw/Sites/math-parser/doxygen/header.html	/^                    <a class="navbar-brand">$projectname $projectnumber<\/a>$/;"	function	line:38
+div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <div id="top"><!-- do not remove this div, it is closed by doxygen! -->$/;"	function	line:42
+div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^            <div class="content" id="content">$/;"	function	line:43
+div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^                <div class="container">$/;"	function	line:44
+div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^                    <div class="row">$/;"	function	line:45
+div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^                        <div class="col-sm-12 panel panel-default" style="padding-bottom: 15px;">$/;"	function	line:46
+div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^                            <div style="margin-bottom: 15px;">$/;"	function	line:47
+getOriginalWidthOfImg	/Users/frankw/Sites/math-parser/doxygen/doxygen-bootstrapped/doxy-boot.js	/^	function getOriginalWidthOfImg(img_element) {$/;"	function	line:83
+specifies	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitor.php	/^ * Implemented by every interpreter. The interface specifies$/;"	interface	line:26
+Visitor	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitor.php	/^interface Visitor$/;"	interface	line:30
+for	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitor.php	/^     * Interface function for visiting ExpressionNodes$/;"	function	line:33
+visitExpressionNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitor.php	/^    function visitExpressionNode(ExpressionNode $node);$/;"	function	line:37
+for	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitor.php	/^     * Interface function for visiting NumberNodes$/;"	function	line:40
+visitNumberNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitor.php	/^    function visitNumberNode(NumberNode $node);$/;"	function	line:44
+for	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitor.php	/^     * Interface function for visiting VariableNodes$/;"	function	line:47
+visitVariableNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitor.php	/^    function visitVariableNode(VariableNode $node);$/;"	function	line:51
+for	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitor.php	/^     * Interface function for visiting FunctionNode$/;"	function	line:54
+visitFunctionNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitor.php	/^    function visitFunctionNode(FunctionNode $node);$/;"	function	line:58
+for	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitor.php	/^     * Interface function for visiting ConstantNode$/;"	function	line:61
+visitConstantNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitor.php	/^    function visitConstantNode(ConstantNode $node);$/;"	function	line:65
+TokenType	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenType.php	/^final class TokenType$/;"	class	line:13
+TokenPrecedence	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenPrecedence.php	/^final class TokenPrecedence$/;"	class	line:16
+get	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenPrecedence.php	/^    public static function get($type)$/;"	function	line:30
+TokenDefinition	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenDefinition.php	/^class TokenDefinition$/;"	class	line:15
+pattern	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenDefinition.php	/^    private $pattern;$/;"	variable	line:17
+value	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenDefinition.php	/^    private $value;$/;"	variable	line:18
+tokenType	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenDefinition.php	/^    private $tokenType;$/;"	variable	line:19
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenDefinition.php	/^    public function __construct($pattern, $tokenType, $value=null)$/;"	function	line:21
+value	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenDefinition.php	/^    public function __construct($pattern, $tokenType, $value=null)$/;"	variable	line:21
+pattern	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenDefinition.php	/^        $this->pattern = $pattern;$/;"	variable	line:23
+value	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenDefinition.php	/^        $this->value = $value;$/;"	variable	line:24
+tokenType	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenDefinition.php	/^        $this->tokenType = $tokenType;$/;"	variable	line:25
+match	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenDefinition.php	/^    public function match($input)$/;"	function	line:28
+result	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenDefinition.php	/^        $result = preg_match($this->pattern, $input, $matches, PREG_OFFSET_CAPTURE);$/;"	variable	line:32
+getTokenFromMatch	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenDefinition.php	/^    private function getTokenFromMatch($match)$/;"	function	line:45
+value	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenDefinition.php	/^        $value = $match[0];$/;"	variable	line:47
+offset	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenDefinition.php	/^        $offset = $match[1];$/;"	variable	line:48
+value	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenDefinition.php	/^        if ($this->value) $value = $this->value;$/;"	variable	line:54
+TokenAssociativity	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenAssociativity.php	/^final class TokenAssociativity$/;"	class	line:15
+get	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/TokenAssociativity.php	/^    public static function get($type)$/;"	function	line:21
+Token	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^class Token$/;"	class	line:17
+value	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    private $value;$/;"	variable	line:19
+type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    private $type;$/;"	variable	line:20
+precedence	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    private $precedence;$/;"	variable	line:21
+associativity	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    private $associativity;$/;"	variable	line:22
+match	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    private $match;$/;"	variable	line:23
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function __construct($value, $type, $match=null)$/;"	function	line:25
+match	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function __construct($value, $type, $match=null)$/;"	variable	line:25
+value	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $this->value = $value;$/;"	variable	line:27
+type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $this->type = $type;$/;"	variable	line:28
+precedence	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $this->precedence = TokenPrecedence::get($type);$/;"	variable	line:29
+associativity	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $this->associativity = TokenAssociativity::get($type);$/;"	variable	line:30
+match	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $this->match = $match ? $match : $value;$/;"	variable	line:31
+length	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function length()$/;"	function	line:35
+getValue	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function getValue()$/;"	function	line:40
+getType	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function getType()$/;"	function	line:45
+setType	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function setType($type)$/;"	function	line:50
+type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $this->type = $type;$/;"	variable	line:52
+getPrecedence	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function getPrecedence()$/;"	function	line:55
+getAssociativity	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function getAssociativity()$/;"	function	line:60
+getArity	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function getArity()$/;"	function	line:65
+isOperator	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function isOperator()$/;"	function	line:80
+type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^            $this->type == TokenType::FunctionName ||$/;"	variable	line:83
+type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^            $this->type == TokenType::PosInt ||$/;"	variable	line:84
+type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^            $this->type == TokenType::Constant ||$/;"	variable	line:85
+type	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^            $this->type == TokenType::Identifier$/;"	variable	line:86
+__toString	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public function __toString()$/;"	function	line:92
+canFactorsInImplicitMultiplication	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^    public static function canFactorsInImplicitMultiplication($token1, $token2)$/;"	function	line:97
+check1	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $check1 = ($/;"	variable	line:99
+check2	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Token.php	/^        $check2 = ($/;"	variable	line:109
+DivisionByZeroException	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/DivisionByZeroException.php	/^class DivisionByZeroException extends \\Exception$/;"	class	line:12
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/DivisionByZeroException.php	/^    public function __construct()$/;"	function	line:14
+ParenthesisMismatchException	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/ParenthesisMismatchException.php	/^class ParenthesisMismatchException extends \\Exception$/;"	class	line:12
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/ParenthesisMismatchException.php	/^    public function __construct()$/;"	function	line:14
+UnknownVariableException	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownVariableException.php	/^class UnknownVariableException extends \\Exception$/;"	class	line:12
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownVariableException.php	/^    public function __construct($variable)$/;"	function	line:14
+UnknownTokenException	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownTokenException.php	/^class UnknownTokenException extends \\Exception$/;"	class	line:12
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownTokenException.php	/^    public function __construct($line, $column)$/;"	function	line:14
+UnknownOperatorException	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownOperatorException.php	/^class UnknownOperatorException extends \\Exception$/;"	class	line:12
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownOperatorException.php	/^    public function __construct($operator)$/;"	function	line:14
+UnknownNodeException	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownNodeException.php	/^class UnknownNodeException extends \\Exception$/;"	class	line:11
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownNodeException.php	/^    public function __construct($node)$/;"	function	line:13
+UnknownFunctionException	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownFunctionException.php	/^class UnknownFunctionException extends \\Exception$/;"	class	line:12
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownFunctionException.php	/^    public function __construct($operator)$/;"	function	line:14
+UnknownConstantException	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownConstantException.php	/^class UnknownConstantException extends \\Exception$/;"	class	line:12
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownConstantException.php	/^    public function __construct($operator)$/;"	function	line:14
+SyntaxErrorException	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/SyntaxErrorException.php	/^class SyntaxErrorException extends \\Exception$/;"	class	line:12
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/SyntaxErrorException.php	/^    public function __construct()$/;"	function	line:14
+ConstantNode	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ConstantNode.php	/^class ConstantNode extends Node$/;"	class	line:14
+value	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ConstantNode.php	/^    private $value;$/;"	variable	line:16
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ConstantNode.php	/^    function __construct($value)$/;"	function	line:18
+value	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ConstantNode.php	/^        $this->value = $value;$/;"	variable	line:20
+getName	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ConstantNode.php	/^    public function getName()$/;"	function	line:26
+accept	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ConstantNode.php	/^    public function accept(Visitor $visitor)$/;"	function	line:31
+VariableNode	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/VariableNode.php	/^class VariableNode extends Node$/;"	class	line:14
+name	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/VariableNode.php	/^    private $name;$/;"	variable	line:16
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/VariableNode.php	/^    function __construct($name)$/;"	function	line:18
+name	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/VariableNode.php	/^        $this->name = $name;$/;"	variable	line:20
+getName	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/VariableNode.php	/^    public function getName()$/;"	function	line:26
+accept	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/VariableNode.php	/^    public function accept(Visitor $visitor)$/;"	function	line:31
+NumberNode	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/NumberNode.php	/^class NumberNode extends Node$/;"	class	line:14
+value	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/NumberNode.php	/^    private $value;$/;"	variable	line:16
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/NumberNode.php	/^    function __construct($value)$/;"	function	line:18
+value	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/NumberNode.php	/^        $this->value = $value;$/;"	variable	line:20
+getValue	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/NumberNode.php	/^    public function getValue()$/;"	function	line:26
+accept	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/NumberNode.php	/^    public function accept(Visitor $visitor)$/;"	function	line:31
+Node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^abstract class Node implements Visitable$/;"	class	line:20
+factory	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^    public static function factory(Token $token)$/;"	function	line:22
+x	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^                $x = intval(str_replace("~", "-", $token->getValue()));$/;"	variable	line:26
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^                $node = new NumberNode($x);$/;"	variable	line:27
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^                $node = new VariableNode($token->getValue());$/;"	variable	line:30
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^                $node = new ConstantNode($token->getValue());$/;"	variable	line:33
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^                $node = null;$/;"	variable	line:36
+compareNodes	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^    public static function compareNodes($node1, $node2)$/;"	function	line:43
+node2	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^            if ($node1 === null && $node2 === null) return true;$/;"	variable	line:45
+node2	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^            if ($node1 === null || $node2 === null) return false;$/;"	variable	line:46
+for	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^     * Convenience function for evaluating a tree, using$/;"	function	line:74
+parser	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^     * $parser = new StdMathParser();$/;"	variable	line:78
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^     * $node = $parser->parse('sin(x)cos(y)');$/;"	variable	line:79
+functionValue	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^     * $functionValue = $node->evaluate( array( 'x' => 1.3, 'y' => 1.4 ) );$/;"	variable	line:80
+evaluate	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^    public function evaluate($variables)$/;"	function	line:85
+evaluator	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^        $evaluator = new Evaluator($variables);$/;"	variable	line:87
+complexity	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^    public function complexity()$/;"	function	line:92
+operator	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^            $operator = $this->getOperator();$/;"	variable	line:99
+left	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^            $left = $this->getLeft();$/;"	variable	line:100
+right	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/Node.php	/^            $right = $this->getRight();$/;"	variable	line:101
+Parser	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^class Parser$/;"	class	line:32
+tokens	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private $tokens;$/;"	variable	line:37
+operatorStack	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private $operatorStack;$/;"	variable	line:38
+operandStack	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private $operandStack;$/;"	variable	line:39
+parse	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    public function parse(array $tokens)$/;"	function	line:41
+tokens	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $tokens = $this->filterTokens($tokens);$/;"	variable	line:43
+tokens	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $this->tokens = $tokens;$/;"	variable	line:44
+ShuntingYard	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private function ShuntingYard(array $tokens)$/;"	function	line:49
+Sentinel	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $Sentinel = new Token('%%END%%', TokenType::Sentinel, TokenPrecedence::Sentinel);$/;"	variable	line:51
+operatorStack	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $this->operatorStack = new Stack();$/;"	variable	line:52
+operandStack	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $this->operandStack = new Stack();$/;"	variable	line:55
+lastToken	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $lastToken = $Sentinel;$/;"	variable	line:57
+token	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $token = $tokens[$index];$/;"	variable	line:61
+index	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $index = $index-1;$/;"	variable	line:69
+token	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $token = new Token('*', TokenType::MultiplicationOperator, TokenPrecedence::BinaryMultiplication);$/;"	variable	line:70
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $node = Node::factory($token);$/;"	variable	line:73
+val	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                $val = $token->getValue();$/;"	variable	line:76
+val	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                $val = $token->getValue();$/;"	variable	line:80
+val	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                $val = $token->getValue();$/;"	variable	line:84
+clean	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                $clean = false;$/;"	variable	line:88
+clean	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                        $clean = true;$/;"	variable	line:96
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                        $node = $this->handleExpression($popped);$/;"	variable	line:101
+current	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                $current = $this->operatorStack->peek();$/;"	variable	line:109
+tok	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $tok = $this->operatorStack->pop();$/;"	variable	line:111
+op	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $op = $this->operandStack->pop();$/;"	variable	line:112
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $node = new FunctionNode($tok->getValue(), $op);$/;"	variable	line:113
+unary	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                $unary = false;$/;"	variable	line:120
+currentOperator	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                    $currentOperator = $this->operatorStack->peek();$/;"	variable	line:126
+unary	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                            $unary = true;$/;"	variable	line:132
+token	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                                    $token = null;$/;"	variable	line:137
+popped	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                        $popped = $this->operatorStack->pop();$/;"	variable	line:153
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^                        $node = $this->handleExpression($popped);$/;"	variable	line:156
+lastToken	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            if ($token) $lastToken = $token;$/;"	variable	line:165
+token	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $token = $this->operatorStack->pop();$/;"	variable	line:172
+node	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $node = $this->handleExpression($token);$/;"	variable	line:173
+handleExpression	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private function handleExpression($token)$/;"	function	line:185
+arity	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $arity = $token->getArity();$/;"	variable	line:187
+left	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $left = $this->operandStack->pop();$/;"	variable	line:190
+right	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $right = $this->operandStack->pop();$/;"	variable	line:198
+left	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            $left = $this->operandStack->pop();$/;"	variable	line:199
+left	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^            if ($right === null || $left === null) {$/;"	variable	line:200
+filterTokens	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^    private function filterTokens(array $tokens)$/;"	function	line:212
+filteredTokens	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Parser.php	/^        $filteredTokens = array_filter($tokens, function (Token $t) {$/;"	variable	line:214
+Stack	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Stack.php	/^class Stack {$/;"	class	line:14
+data	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Stack.php	/^    public $data = array();$/;"	variable	line:15
+data	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Stack.php	/^    public $data = array();$/;"	variable	line:15
+push	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Stack.php	/^    public function push($element) {$/;"	function	line:17
+peek	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Stack.php	/^    public function peek() {$/;"	function	line:21
+pop	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Stack.php	/^    public function pop() {$/;"	function	line:25
+count	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Stack.php	/^    public function count() {$/;"	function	line:29
+NSS	/Users/frankw/Sites/math-parser/doxygen/doxygen-filter.php	/^define ('NSS', '::');$/;"	define	line:16
+source	/Users/frankw/Sites/math-parser/doxygen/doxygen-filter.php	/^$source = file_get_contents($_SERVER['argv'][1]);$/;"	variable	line:19
+source	/Users/frankw/Sites/math-parser/doxygen/doxygen-filter.php	/^$source = preg_replace_callback($/;"	variable	line:22
+tokens	/Users/frankw/Sites/math-parser/doxygen/doxygen-filter.php	/^$tokens = token_get_all($source);$/;"	variable	line:32
+buffer	/Users/frankw/Sites/math-parser/doxygen/doxygen-filter.php	/^$buffer = null;$/;"	variable	line:33
+text	/Users/frankw/Sites/math-parser/doxygen/doxygen-filter.php	/^		$text = preg_replace('#\\*\\s*@(codeCoverageIgnore)(\\s[^\\n\\r]*)?\\s+#', '', $text);$/;"	variable	line:46
+text	/Users/frankw/Sites/math-parser/doxygen/doxygen-filter.php	/^		$text = preg_replace('#@return\\s#', '@retval ', $text);$/;"	variable	line:48
+text	/Users/frankw/Sites/math-parser/doxygen/doxygen-filter.php	/^		$text = preg_replace('#(\\s)\\\\\\\\([A-Z]\\w+)#ms', '$1$2', $text);$/;"	variable	line:50
+text	/Users/frankw/Sites/math-parser/doxygen/doxygen-filter.php	/^		    $text = preg_replace('#(\\*\\s*[^*]*?\\b\\w+[^\\n\\r ]+)\\\\\\\\([A-Z])#ms', '$1'.NSS.'$2', $text, 1, $count);$/;"	variable	line:53
+buffer	/Users/frankw/Sites/math-parser/doxygen/doxygen-filter.php	/^                    $buffer = preg_replace('#(@var\\s+[^\\n\\r]+)(\\n\\r?.*\\*\/)#ms',$/;"	variable	line:57
+text	/Users/frankw/Sites/math-parser/doxygen/doxygen-filter.php	/^               	    $text = preg_replace('#(\\*\\s*@namespace\\s[^\\n\\r]+)\\\\\\\\#', '$1::', $text,1, $count);$/;"	variable	line:75
+text	/Users/frankw/Sites/math-parser/doxygen/doxygen-filter.php	/^		    $text = preg_replace('#(\\*\\s*[^*]*?\\b\\w+[^\\n\\r ]+)\\\\\\\\([A-Z])#ms', '$1'.NSS.'$2', $text, 1, $count);$/;"	variable	line:79
+text	/Users/frankw/Sites/math-parser/doxygen/doxygen-filter.php	/^		    $text = preg_replace('#(\\*\\s*[^*]*\\s)\\\\\\\\([A-Z])#ms', '$1$2', $text, 1, $count);$/;"	variable	line:83
+ExpressionNode	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^class ExpressionNode extends Node$/;"	class	line:14
+left	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^    private $left;$/;"	variable	line:16
+operator	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^    private $operator;$/;"	variable	line:17
+right	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^    private $right;$/;"	variable	line:18
+precedence	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^    private $precedence;$/;"	variable	line:19
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^    function __construct($left, $operator = null, $right = null)$/;"	function	line:21
+operator	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^    function __construct($left, $operator = null, $right = null)$/;"	variable	line:21
+left	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^        if (is_int($left)) $left = new NumberNode($left);$/;"	variable	line:23
+right	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^        if (is_int($right)) $right = new NumberNode($right);$/;"	variable	line:24
+left	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^        $this->left = $left;$/;"	variable	line:26
+operator	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^        $this->operator = $operator;$/;"	variable	line:30
+right	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^        $this->right = $right;$/;"	variable	line:31
+getLeft	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^    public function getLeft()$/;"	function	line:37
+setLeft	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^    public function setLeft($node)$/;"	function	line:42
+left	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^        $this->left = $node;$/;"	variable	line:44
+getOperator	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^    public function getOperator()$/;"	function	line:50
+getRight	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^    public function getRight()$/;"	function	line:58
+setRight	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^    public function setRight()$/;"	function	line:63
+right	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^        $this->right = $right;$/;"	variable	line:65
+getPrecedence	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^    public function getPrecedence()$/;"	function	line:68
+accept	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/ExpressionNode.php	/^    public function accept(Visitor $visitor)$/;"	function	line:73
+FunctionNode	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/FunctionNode.php	/^class FunctionNode extends Node$/;"	class	line:14
+name	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/FunctionNode.php	/^    private $name;$/;"	variable	line:16
+operand	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/FunctionNode.php	/^    private $operand;$/;"	variable	line:17
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/FunctionNode.php	/^    function __construct($name, $operand)$/;"	function	line:19
+name	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/FunctionNode.php	/^        $this->name = $name;$/;"	variable	line:21
+operand	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/FunctionNode.php	/^        if (is_int($operand)) $operand = new NumberNode($operand);$/;"	variable	line:22
+operand	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/FunctionNode.php	/^        $this->operand = $operand;$/;"	variable	line:23
+getName	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/FunctionNode.php	/^    public function getName()$/;"	function	line:29
+getOperand	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/FunctionNode.php	/^    public function getOperand()$/;"	function	line:34
+accept	/Users/frankw/Sites/math-parser/src/MathParser/Parsing/Nodes/FunctionNode.php	/^    public function accept(Visitor $visitor)$/;"	function	line:39
+Lexer	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Lexer.php	/^class Lexer$/;"	class	line:37
+tokenDefinitions	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Lexer.php	/^    private $tokenDefinitions = [];$/;"	variable	line:39
+tokenDefinitions	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Lexer.php	/^    private $tokenDefinitions = [];$/;"	variable	line:39
+add	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Lexer.php	/^    public function add(TokenDefinition $tokenDefinition)$/;"	function	line:49
+tokenize	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Lexer.php	/^    public function tokenize($input)$/;"	function	line:67
+tokens	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Lexer.php	/^        $tokens = [];$/;"	variable	line:70
+currentIndex	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Lexer.php	/^        $currentIndex = 0;$/;"	variable	line:73
+token	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Lexer.php	/^            $token = $this->findMatchingToken(substr($input, $currentIndex));$/;"	variable	line:79
+findMatchingToken	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Lexer.php	/^    private function findMatchingToken($input)$/;"	function	line:97
+token	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/Lexer.php	/^            $token = $tokenDefinition->match($input);$/;"	variable	line:101
+Implicit multiplication	/Users/frankw/Sites/math-parser/README.md	/^### Implicit multiplication$/;"	function	line:63
+consists	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitable.php	/^ *      This interface consists of a single function `accept()`, called to visit the AST.$/;"	interface	line:20
+node	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitable.php	/^ * $node = new ExpressionNode(1, '+', 2);$/;"	variable	line:39
+visitor	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitable.php	/^ * $visitor = new TreePrinter();    \/\/ Or any other Visitor$/;"	variable	line:40
+Visitable	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitable.php	/^interface Visitable$/;"	interface	line:44
+in	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitable.php	/^     * Single function in the Visitable interface$/;"	function	line:47
+on	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitable.php	/^     * Calling the accept() function on a Visitable class,$/;"	function	line:49
+accept	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitable.php	/^    function accept(Visitor $visitor);$/;"	function	line:55
+implements	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^ * The class implements evaluation of all all arithmetic operators$/;"	class	line:32
+and	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^ * as well as every elementary function and predefined constant recognized$/;"	function	line:33
+parser	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^ * $parser = new StdMathParser();$/;"	variable	line:38
+f	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^ * $f = $parser->parse('exp(2x)+xy');$/;"	variable	line:39
+evaluator	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^ * $evaluator = new Evaluator();$/;"	variable	line:40
+Evaluator	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^class Evaluator implements Visitor$/;"	class	line:48
+variable	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^     * undocumented class variable$/;"	class	line:51
+variables	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^    private $variables;$/;"	variable	line:56
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^    public function __construct($variables=null)$/;"	function	line:58
+variables	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^        $this->variables = $variables;$/;"	variable	line:60
+setVariables	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^    public function setVariables($variables)$/;"	function	line:69
+variables	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^        $this->variables = $variables;$/;"	variable	line:71
+visitExpressionNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^    public function visitExpressionNode(ExpressionNode $node)$/;"	function	line:86
+operator	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^        $operator = $node->getOperator();$/;"	variable	line:88
+leftValue	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^        $leftValue = $node->getLeft()->accept($this);$/;"	variable	line:90
+rightValue	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^            $rightValue = $node->getRight()->accept($this);$/;"	variable	line:93
+rightValue	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^            $rightValue = null;$/;"	variable	line:95
+rightValue	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^                return $rightValue === null ? -$leftValue : $leftValue - $rightValue;$/;"	variable	line:103
+visitNumberNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^    public function visitNumberNode(NumberNode $node)$/;"	function	line:125
+visitVariableNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^    public function visitVariableNode(VariableNode $node)$/;"	function	line:143
+x	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^        $x = $node->getName();$/;"	variable	line:145
+recognized	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^     * an elementary function recognized by StdMathLexer and StdMathParser.$/;"	function	line:159
+respresented	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^     * @throws UnknownFunctionException if the function respresented by the$/;"	function	line:163
+visitFunctionNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^    public function visitFunctionNode(FunctionNode $node)$/;"	function	line:169
+inner	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^        $inner = $node->getOperand()->accept($this);$/;"	variable	line:171
+visitConstantNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Evaluator.php	/^    public function visitConstantNode(ConstantNode $node)$/;"	function	line:246
+in	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^ * The class in general does *not* generate the best possible LaTeX$/;"	class	line:30
+parser	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^ * $parser = new StdMathParser();$/;"	variable	line:35
+f	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^ * $f = $parser->parse('exp(2x)+xy');$/;"	variable	line:36
+LaTeXPrinter	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^class LaTeXPrinter implements Visitor$/;"	class	line:45
+lexer	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^    private $lexer;$/;"	variable	line:48
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^    public function __construct()$/;"	function	line:50
+lexer	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^        $this->lexer = new StdMathLexer();$/;"	variable	line:52
+visitExpressionNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^    public function visitExpressionNode(ExpressionNode $node)$/;"	function	line:76
+left	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^        $left = $node->getLeft();$/;"	variable	line:78
+leftValue	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^        $leftValue = $this->parenthesize($left, $node->getOperator());$/;"	variable	line:79
+operator	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^        $operator = $node->getOperator();$/;"	variable	line:80
+right	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^        $right = $node->getRight();$/;"	variable	line:82
+operator	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^            $operator = '';$/;"	variable	line:85
+operator	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^                $operator = '\\cdot ';$/;"	variable	line:87
+rightValue	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^            $rightValue = $this->parenthesize($right, $node->getOperator());$/;"	variable	line:92
+visitNumberNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^    public function visitNumberNode(NumberNode $node)$/;"	function	line:119
+val	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^        $val = $node->getValue();$/;"	variable	line:121
+visitVariableNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^    public function visitVariableNode(VariableNode $node)$/;"	function	line:134
+visitFunctionNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^    public function visitFunctionNode(FunctionNode $node)$/;"	function	line:155
+functionName	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^        $functionName = $node->getName();$/;"	variable	line:157
+operand	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^        $operand = $this->parenthesize($node->getOperand(), '*', true);$/;"	variable	line:158
+operand	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^                $operand = $node->getOperand();$/;"	variable	line:163
+visitConstantNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^    public function visitConstantNode(ConstantNode $node)$/;"	function	line:185
+parenthesize	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^    public function parenthesize(Node $node, $cutoff='*', $addSpace=false)$/;"	function	line:206
+cutoff	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^    public function parenthesize(Node $node, $cutoff='*', $addSpace=false)$/;"	variable	line:206
+cutoffToken	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^        $cutoffToken = $this->lexer->tokenize($cutoff);$/;"	variable	line:208
+text	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^        $text = $node->accept($this);$/;"	variable	line:210
+thisToken	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^            $thisToken = $this->lexer->tokenize($node->getOperator());$/;"	variable	line:213
+bracesNeeded	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/LaTeXPrinter.php	/^    public function bracesNeeded(Node $node)$/;"	function	line:235
+parser	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/TreePrinter.php	/^ * $parser = new StdMathParser();$/;"	variable	line:28
+f	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/TreePrinter.php	/^ * $f = $parser->parse('exp(2x)+xy');$/;"	variable	line:29
+TreePrinter	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/TreePrinter.php	/^class TreePrinter implements Visitor$/;"	class	line:34
+visitExpressionNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/TreePrinter.php	/^    public function visitExpressionNode(ExpressionNode $node)$/;"	function	line:36
+leftValue	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/TreePrinter.php	/^        $leftValue = $node->getLeft()->accept($this);$/;"	variable	line:38
+operator	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/TreePrinter.php	/^        $operator = $node->getOperator();$/;"	variable	line:39
+right	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/TreePrinter.php	/^        $right = $node->getRight();$/;"	variable	line:45
+rightValue	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/TreePrinter.php	/^            $rightValue = $node->getRight()->accept($this);$/;"	variable	line:48
+visitNumberNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/TreePrinter.php	/^    public function visitNumberNode(NumberNode $node)$/;"	function	line:56
+val	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/TreePrinter.php	/^        $val = $node->getValue();$/;"	variable	line:58
+visitVariableNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/TreePrinter.php	/^    public function visitVariableNode(VariableNode $node)$/;"	function	line:62
+visitFunctionNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/TreePrinter.php	/^    public function visitFunctionNode(FunctionNode $node)$/;"	function	line:67
+functionName	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/TreePrinter.php	/^        $functionName = $node->getName();$/;"	variable	line:69
+operand	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/TreePrinter.php	/^        $operand = $node->getOperand()->accept($this);$/;"	variable	line:70
+visitConstantNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/TreePrinter.php	/^    public function visitConstantNode(ConstantNode $node)$/;"	function	line:75
+implements	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^ * The class implements differentiation rules for all arithmetic operators$/;"	class	line:33
+recognized	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^ * as well as every elementary function recognized by StdMathLexer and$/;"	function	line:34
+parser	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^ * $parser = new StdMathParser();$/;"	variable	line:44
+f	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^ * $f = $parser->parse('exp(2x)+xy');$/;"	variable	line:45
+ddx	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^ * $ddx = new Differentiator('x');     \/\/ Create a d\/dx operator$/;"	variable	line:46
+df	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^ * $df = $f->accept($ddx);             \/\/ $df now contains the AST of '2exp(2x)+y'$/;"	variable	line:47
+Differentiator	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^class Differentiator implements Visitor$/;"	class	line:53
+variable	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^    private $variable;$/;"	variable	line:60
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^    public function __construct($variable)$/;"	function	line:67
+variable	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^        $this->variable = $variable;$/;"	variable	line:69
+createAdditionNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^    private function createAdditionNode($x, $y)$/;"	function	line:88
+x	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^        if (is_int($x)) $x = new NumberNode($x);$/;"	variable	line:90
+y	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^        if (is_int($y)) $y = new NumberNode($y);$/;"	variable	line:91
+createSubtractionNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^    private function createSubtractionNode($x, $y)$/;"	function	line:125
+x	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^        if (is_int($x)) $x = new NumberNode($x);$/;"	variable	line:129
+y	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^        if (is_int($y)) $y = new NumberNode($y);$/;"	variable	line:130
+createUnaryMinusNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^    private function createUnaryMinusNode($x)$/;"	function	line:162
+x	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^        if (is_int($x)) $x = new NumberNode($x);$/;"	variable	line:164
+createMultiplicationNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^    private function createMultiplicationNode($x, $y)$/;"	function	line:195
+x	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^        if (is_int($x)) $x = new NumberNode($x);$/;"	variable	line:197
+y	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^        if (is_int($y)) $y = new NumberNode($y);$/;"	variable	line:198
+createDivisionNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^    private function createDivisionNode($x, $y)$/;"	function	line:238
+x	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^        if (is_int($x)) $x = new NumberNode($x);$/;"	variable	line:240
+y	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^        if (is_int($y)) $y = new NumberNode($y);$/;"	variable	line:241
+createExponentiationNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^    private function createExponentiationNode($x, $y)$/;"	function	line:283
+x	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^        if (is_int($x)) $x = new NumberNode($x);$/;"	variable	line:285
+y	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^        if (is_int($y)) $y = new NumberNode($y);$/;"	variable	line:286
+power	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^            $power = new NumberNode($x->getRight()->getValue() * $y->getValue());$/;"	variable	line:301
+base	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^            $base = $x->getLeft();$/;"	variable	line:302
+visitExpressionNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^    public function visitExpressionNode(ExpressionNode $node)$/;"	function	line:331
+operator	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^        $operator = $node->getOperator();$/;"	variable	line:333
+leftValue	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^        $leftValue = $node->getLeft()->accept($this);$/;"	variable	line:335
+rightValue	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^            $rightValue = $node->getRight()->accept($this);$/;"	variable	line:338
+rightValue	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^            $rightValue = null;$/;"	variable	line:340
+term1	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $term1 = $this->createMultiplicationNode($leftValue, $node->getRight());$/;"	variable	line:359
+term2	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $term2 = $this->createMultiplicationNode($node->getLeft(), $rightValue);$/;"	variable	line:360
+numerator	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $numerator = $this->createSubtractionNode($term1, $term2);$/;"	variable	line:361
+denominator	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $denominator = $this->createExponentiationNode($node->getRight(), new NumberNode(2));$/;"	variable	line:362
+base	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $base = $node->getLeft();$/;"	variable	line:367
+exponent	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $exponent = $node->getRight();$/;"	variable	line:368
+power	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                    $power = $exponent->getValue();$/;"	variable	line:371
+fpow	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                    $fpow = $this->createExponentiationNode($base, $power-1);$/;"	variable	line:372
+term1	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                    $term1 = $this->createMultiplicationNode($rightValue, new FunctionNode('log', $node->getLeft()));$/;"	variable	line:375
+term2	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                    $term2 = $this->createDivisionNode($node->getRight(), $node->getLeft());$/;"	variable	line:376
+factor2	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                    $factor2 = $this->createAdditionNode($term1, $term2);$/;"	variable	line:377
+visitNumberNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^    public function visitNumberNode(NumberNode $node)$/;"	function	line:396
+visitVariableNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^    public function visitVariableNode(VariableNode $node)$/;"	function	line:410
+name	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^     * @throws UnknownFunctionException if the function name doesn't match$/;"	function	line:449
+visitFunctionNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^    public function visitFunctionNode(FunctionNode $node)$/;"	function	line:455
+inner	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^        $inner = $node->getOperand()->accept($this);$/;"	variable	line:457
+arg	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^        $arg = $node->getOperand();$/;"	variable	line:458
+df	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $df = new FunctionNode('cos', $arg);$/;"	variable	line:463
+sin	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $sin = new FunctionNode('sin', $arg);$/;"	variable	line:466
+df	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $df = $this->createUnaryMinusNode($sin);$/;"	variable	line:467
+tansquare	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $tansquare = $this->createExponentiationNode($node, 2);$/;"	variable	line:470
+df	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $df = $this->createAdditionNode(1, $tansquare);$/;"	variable	line:471
+cotsquare	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $cotsquare = $this->createExponentiationNode($node, 2);$/;"	variable	line:474
+df	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $df = $this->createAdditionNode($this->createUnaryMinusNode(1), $cotsquare);$/;"	variable	line:475
+denom	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $denom = new FunctionNode('sqrt',$/;"	variable	line:479
+denom	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $denom = new FunctionNode('sqrt',$/;"	variable	line:484
+denom	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $denom = $this->createAdditionNode(1, $this->createExponentiationNode($arg, 2));$/;"	variable	line:489
+denom	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $denom = $this->createAdditionNode(1, $this->createExponentiationNode($arg, 2));$/;"	variable	line:493
+df	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $df = $this->createUnaryMinusNode($this->createDivisionNode(1, $denom));$/;"	variable	line:494
+df	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $df = new FunctionNode('exp', $arg);$/;"	variable	line:498
+denominator	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $denominator = $this->createMultiplicationNode(new FunctionNode('log', new NumberNode(10)), $arg);$/;"	variable	line:503
+denom	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $denom = $this->createMultiplicationNode(2, $node);$/;"	variable	line:507
+df	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $df = new FunctionNode('cosh', $arg);$/;"	variable	line:511
+df	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $df = new FunctionNode('sinh', $arg);$/;"	variable	line:515
+tanhsquare	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $tanhsquare = $this->createExponentiationNode(new FunctionNode('tanh', $arg), 2);$/;"	variable	line:519
+df	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $df = $this->createSubtractionNode(1, $tanhsquare);$/;"	variable	line:520
+cothsquare	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $cothsquare = $this->createExponentiationNode(new FunctionNode('coth', $arg), 2);$/;"	variable	line:524
+df	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $df = $this->createSubtractionNode(1, $cothsquare);$/;"	variable	line:525
+temp	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $temp = $this->createAdditionNode($this->createExponentiationNode($arg, 2), 1);$/;"	variable	line:529
+temp	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $temp = $this->createSubtractionNode($this->createExponentiationNode($arg, 2), 1);$/;"	variable	line:533
+denominator	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^                $denominator = $this->createSubtractionNode(1, $this->createExponentiationNode($arg, 2));$/;"	variable	line:538
+visitConstantNode	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Differentiator.php	/^    public function visitConstantNode(ConstantNode $node)$/;"	function	line:557
+evaluation	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/StdMathLexer.php	/^ * * `\/\\(\/` matching opening parenthesis (both as delimiter and function evaluation)$/;"	function	line:44
+evaluation	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/StdMathLexer.php	/^ * * `\/\\)\/` matching closing parenthesisis (both as delimiter and function evaluation)$/;"	function	line:45
+StdMathLexer	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/StdMathLexer.php	/^ class StdMathLexer extends Lexer$/;"	class	line:58
+__construct	/Users/frankw/Sites/math-parser/src/MathParser/Lexing/StdMathLexer.php	/^    public function __construct()$/;"	function	line:60

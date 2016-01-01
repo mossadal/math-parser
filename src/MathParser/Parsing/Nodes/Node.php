@@ -1,4 +1,13 @@
-<?php namespace MathParser\Parsing\Nodes;
+<?php
+/*
+ * @package     Parsing
+ * @author      Frank Wikström <frank@mossadal.se>
+ * @copyright   2015 Frank Wikström
+ * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
+ *
+ */
+
+namespace MathParser\Parsing\Nodes;
 
 use MathParser\Interpreting\Visitors\Visitable;
 use MathParser\Lexing\Token;

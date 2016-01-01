@@ -1,0 +1,25 @@
+Math\-Parser implements a grammar that can parse complex mathematical expressions, including functions, variables and implicit multiplication
+
+\section*{Grammar}
+
+sign =$>$ +$\vert$-\/ posint =$>$ \{0-\/9\} whitespace =$>$ + terminator =$>$ \par
+ O\-P\-\_\-\-A\-D\-D =$>$ \mbox{[}whitespace\mbox{]} '+' $\vert$ '-\/' \mbox{[}whitespace\mbox{]} O\-P\-\_\-\-M\-U\-L =$>$ \mbox{[}whitespace\mbox{]} '$\ast$' $\vert$ '/' \mbox{[}whitespace\mbox{]} O\-P\-\_\-\-P\-O\-W =$>$ \mbox{[}whitespace\mbox{]} '$^\wedge$' \mbox{[}whitespace\mbox{]}
+
+integer =$>$ \mbox{[}sign\mbox{]} integer $\vert$ posint atom =$>$ posint $\vert$ variable
+
+exponent =$>$ atom \mbox{[} '$^\wedge$' atom \mbox{]}
+
+factor =$>$ exponent $\vert$ factor O\-P\-\_\-\-M\-U\-L exponent
+
+term =$>$ factor \mbox{[}O\-P\-\_\-\-A\-D\-D factor\mbox{]}
+
+root =$>$ term \{terminator term\}
+
+a-\/b-\/c
+
+
+\begin{DoxyItemize}
+\item / \textbackslash{}
+\end{DoxyItemize}
+
+c / \textbackslash{} a b 

@@ -36,30 +36,22 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
         return $f->accept($this->evaluator);
     }
 
+    private function assertResult($f, $x)
+    {
+        $value = $this->evaluate($this->parser->parse($f));
+        $this->assertEquals($value, $x);
+    }
+
     public function testCanEvaluateNumber()
     {
-        $f = $this->parser->parse("3");
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, 3);
-
-        $f = $this->parser->parse("(-2)");
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, -2);
+        $this->assertResult('3', 3);
+        $this->assertResult('-2', -2);
     }
 
     public function testCanEvaluateConstant()
     {
-        $f = $this->parser->parse("pi");
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, pi());
-
-        $f = $this->parser->parse("e");
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, exp(1));
+        $this->assertResult('pi', pi());
+        $this->assertResult('e', exp(1));
 
         $f = new ConstantNode('sdf');
         $this->setExpectedException(UnknownConstantException::class);
@@ -68,10 +60,7 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function testCanEvaluateVariable()
     {
-        $f = $this->parser->parse("x");
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, $this->variables['x']);
+        $this->assertResult('x', $this->variables['x']);
 
         $this->setExpectedException(UnknownVariableException::class);
 
@@ -81,50 +70,26 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function testCanEvaluateAdditiion()
     {
-        $f = $this->parser->parse('3+5');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, 8);
-
-        $f = $this->parser->parse('3+5+1');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, 9);
+        $this->assertResult('3+5', 8);
+        $this->assertResult('3+5+1', 9);
     }
 
     public function testCanEvaluateSubtraction()
     {
-        $f = $this->parser->parse('3-5');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, -2);
-
-        $f = $this->parser->parse('3-5-1');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, -3);
-
+        $this->assertResult('3-5', -2);
+        $this->assertResult('3-5-1', -3);
     }
 
     public function testCanEvaluateMultiplication()
     {
-        $f = $this->parser->parse('3*5');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, 15);
+        $this->assertResult('3*5', 15);
+        $this->assertResult('3*5*2', 30);
     }
 
     public function testCanEvaluateDivision()
     {
-        $f = $this->parser->parse('3/5');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, 0.6);
-
-        $f = $this->parser->parse('20/2/5');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, 2);
+        $this->assertResult('3/5', 0.6);
+        $this->assertResult('20/2/5', 2);
     }
 
     public function testCannotDivideByZero()
@@ -138,25 +103,10 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function testCanEvaluateExponentiation()
     {
-        $f = $this->parser->parse('2^3');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, 8);
-
-        $f = $this->parser->parse('2^3^2');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, 512);
-
-        $f = $this->parser->parse('0^0');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, 1);
-
-        $f = $this->parser->parse('(-1)^(-1)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, -1);
+        $this->assertResult('2^3', 8);
+        $this->assertResult('2^3^2', 512);
+        $this->assertResult('0^0', 1);
+        $this->assertResult('(-1)^(-1)', -1);
     }
 
     public function testExponentiationExceptions()
@@ -174,77 +124,39 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function testCanEvaluateSine()
     {
-        $f = $this->parser->parse('sin(pi)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, 0);
-
-        $f = $this->parser->parse('sin(pi/2)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, 1);
-
-        $f = $this->parser->parse('sin(x)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, sin($this->variables['x']));
+        $this->assertResult('sin(pi)', 0);
+        $this->assertResult('sin(pi/2)', 1);
+        $this->assertResult('sin(pi/6)', 0.5);
+        $this->assertResult('sin(x)', sin($this->variables['x']));
     }
 
     public function testCanEvaluateCosine()
     {
-        $f = $this->parser->parse('cos(pi)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, -1);
-
-        $f = $this->parser->parse('cos(pi/2)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, 0);
-
-        $f = $this->parser->parse('cos(x)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, cos($this->variables['x']));
+        $this->assertResult('cos(pi)', -1);
+        $this->assertResult('cos(pi/2)', 0);
+        $this->assertResult('cos(pi/3)', 0.5);
+        $this->assertResult('cos(x)', cos($this->variables['x']));
     }
 
     public function testCanEvaluateTangent()
     {
-        $f = $this->parser->parse('tan(pi)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, 0);
-
-        $f = $this->parser->parse('tan(x)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, tan($this->variables['x']));
+        $this->assertResult('tan(pi)', 0);
+        $this->assertResult('tan(pi/4)', 1);
+        $this->assertResult('tan(x)', tan($this->variables['x']));
     }
 
     public function testCanEvaluateCotangent()
     {
-        $f = $this->parser->parse('cot(pi/2)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, 0);
-
-        $f = $this->parser->parse('cot(x)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, 1/tan($this->variables['x']));
+        $this->assertResult('cot(pi/2)', 0);
+        $this->assertResult('cot(pi/4)', 1);
+        $this->assertResult('cot(x)', 1/tan($this->variables['x']));
     }
 
     public function testCanEvaluateArcsin()
     {
-        $f = $this->parser->parse('arcsin(1)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, pi()/2);
-
-        $f = $this->parser->parse('arcsin(x)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, asin($this->variables['x']));
+        $this->assertResult('arcsin(1)', pi()/2);
+        $this->assertResult('arcsin(1/2)', pi()/6);
+        $this->assertResult('arcsin(x)', asin($this->variables['x']));
 
         $f = $this->parser->parse('arcsin(2)');
         $value = $this->evaluate($f);
@@ -255,20 +167,9 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function testCanEvaluateArccos()
     {
-        $f = $this->parser->parse('arccos(0)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, pi()/2);
-
-        $f = $this->parser->parse('arccos(1)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, 0);
-
-        $f = $this->parser->parse('arccos(x)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, acos($this->variables['x']));
+        $this->assertResult('arccos(0)', pi()/2);
+        $this->assertResult('arccos(1/2)', pi()/3);
+        $this->assertResult('arccos(x)', acos($this->variables['x']));
 
         $f = $this->parser->parse('arccos(2)');
         $value = $this->evaluate($f);
@@ -279,46 +180,24 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function testCanEvaluateArctan()
     {
-        $f = $this->parser->parse('arctan(1)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, pi()/4);
-
-
-        $f = $this->parser->parse('arctan(x)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, atan($this->variables['x']));
+        $this->assertResult('arctan(1)', pi()/4);
+        $this->assertResult('arctan(x)', atan($this->variables['x']));
     }
 
     public function testCanEvaluateArccot()
     {
-        $f = $this->parser->parse('arccot(1)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, pi()/4);
-
-
-        $f = $this->parser->parse('arccot(x)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, pi()/2-atan($this->variables['x']));
+        $this->assertResult('arccot(1)', pi()/4);
+        $this->assertResult('arccot(x)', pi()/2-atan($this->variables['x']));
     }
 
     public function testCanEvaluateExp()
     {
-        $f = $this->parser->parse('exp(x)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, exp($this->variables['x']));
+        $this->assertResult('exp(x)', exp($this->variables['x']));
     }
 
     public function testCanEvaluateLog()
     {
-        $f = $this->parser->parse('log(x)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, log($this->variables['x']));
+        $this->assertResult('log(x)', log($this->variables['x']));
 
         $f = $this->parser->parse('log(-1)');
         $value = $this->evaluate($f);
@@ -329,24 +208,45 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function testCanEvaluateLog10()
     {
-        $f = $this->parser->parse('log10(x)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, log($this->variables['x'])/log(10));
+        $this->assertResult('log10(x)', log($this->variables['x'])/log(10));
     }
 
     public function testCanEvaluateSqrt()
     {
-        $f = $this->parser->parse('sqrt(x)');
-        $value = $this->evaluate($f);
-
-        $this->assertEquals($value, sqrt($this->variables['x']));
+        $this->assertResult('sqrt(x)', sqrt($this->variables['x']));
 
         $f = $this->parser->parse('sqrt(-2)');
         $value = $this->evaluate($f);
 
         $this->assertNaN($value);
+    }
 
+
+    public function testCanEvaluateHyperbolicFunctions()
+    {
+        $x = $this->variables['x'];
+
+        $this->assertResult('sinh(0)', 0);
+        $this->assertResult('sinh(x)', sinh($x));
+
+        $this->assertResult('cosh(0)', 1);
+        $this->assertResult('cosh(x)', cosh($x));
+
+        $this->assertResult('tanh(0)', 0);
+        $this->assertResult('tanh(x)', tanh($x));
+
+        $this->assertResult('coth(x)', 1/tanh($x));
+
+        $this->assertResult('arsinh(0)', 0);
+        $this->assertResult('arsinh(x)', asinh($x));
+
+        $this->assertResult('arcosh(1)', 0);
+        $this->assertResult('arcosh(3)', acosh(3));
+
+        $this->assertResult('artanh(0)', 0);
+        $this->assertResult('artanh(x)', atanh($x));
+
+        $this->assertResult('arcoth(3)', atanh(1/3));
     }
 
     public function testCanIdentifyUnknownFunction()
