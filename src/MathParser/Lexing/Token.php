@@ -100,6 +100,8 @@ class Token
 
     public static function canFactorsInImplicitMultiplication($token1, $token2)
     {
+        if ($token1 === null || $token2 === null) return false;
+
         $check1 = (
             $token1->type == TokenType::PosInt ||
             $token1->type == TokenType::Integer ||

@@ -87,8 +87,8 @@ class Differentiator implements Visitor
      */
     private function createAdditionNode($x, $y)
     {
-        if (is_int($x)) $x = new NumberNode($x);
-        if (is_int($y)) $y = new NumberNode($y);
+        if (is_int($x) || is_float($x)) $x = new NumberNode($x);
+        if (is_int($y) || is_float($y)) $y = new NumberNode($y);
 
         if ($x instanceof NumberNode && $y instanceof NumberNode) {
             return new NumberNode($x->getValue() + $y->getValue());
@@ -126,8 +126,8 @@ class Differentiator implements Visitor
     {
         if ($y === null) return $this->createUnaryMinusNode($x);
 
-        if (is_int($x)) $x = new NumberNode($x);
-        if (is_int($y)) $y = new NumberNode($y);
+        if (is_int($x) || is_float($x)) $x = new NumberNode($x);
+        if (is_int($y) || is_float($y)) $y = new NumberNode($y);
 
         if ($x instanceof NumberNode && $y instanceof NumberNode) {
             return new NumberNode($x->getValue() + $y->getValue());
@@ -161,7 +161,7 @@ class Differentiator implements Visitor
      */
     private function createUnaryMinusNode($x)
     {
-        if (is_int($x)) $x = new NumberNode($x);
+        if (is_int($x) || is_float($x)) $x = new NumberNode($x);
 
         if ($x instanceof NumberNode) {
             return new NumberNode(-$x->getValue());
@@ -194,8 +194,8 @@ class Differentiator implements Visitor
      */
     private function createMultiplicationNode($x, $y)
     {
-        if (is_int($x)) $x = new NumberNode($x);
-        if (is_int($y)) $y = new NumberNode($y);
+        if (is_int($x) || is_float($x)) $x = new NumberNode($x);
+        if (is_int($y) || is_float($y)) $y = new NumberNode($y);
 
         if ($x instanceof NumberNode && $y instanceof NumberNode) {
             return new NumberNode($x->getValue() * $y->getValue());
@@ -237,8 +237,8 @@ class Differentiator implements Visitor
      */
     private function createDivisionNode($x, $y)
     {
-        if (is_int($x)) $x = new NumberNode($x);
-        if (is_int($y)) $y = new NumberNode($y);
+        if (is_int($x) || is_float($x)) $x = new NumberNode($x);
+        if (is_int($y) || is_float($y)) $y = new NumberNode($y);
 
         // Return rational number?
         // if ($x instanceof NumberNode && $y instanceof NumberNode)
@@ -282,8 +282,8 @@ class Differentiator implements Visitor
      */
     private function createExponentiationNode($x, $y)
     {
-        if (is_int($x)) $x = new NumberNode($x);
-        if (is_int($y)) $y = new NumberNode($y);
+        if (is_int($x) || is_float($x)) $x = new NumberNode($x);
+        if (is_int($y) || is_float($y)) $y = new NumberNode($y);
 
         if ($y instanceof NumberNode && $y->getValue() == 0) {
             return new NumberNode(1);

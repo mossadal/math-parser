@@ -34,13 +34,18 @@ class Parser
     /**
      * @Token[]
      */
-    private $tokens;
-    private $operatorStack;
-    private $operandStack;
+    protected $tokens;
+    protected $operatorStack;
+    protected $operandStack;
 
     public function parse(array $tokens)
     {
         $tokens = $this->filterTokens($tokens);
+
+        if (self::allowImplicitMultipliication()) {
+            $tokens = $this->parseImplicitMultiplication($tokens);
+        }
+
         $this->tokens = $tokens;
 
         return $this->ShuntingYard($tokens);
@@ -59,16 +64,6 @@ class Parser
         for ($index = 0; $index < count($tokens); $index++)
         {
             $token = $tokens[$index];
-
-            // Check for implicit multiplication
-            if (Token::canFactorsInImplicitMultiplication($lastToken, $token)) {
-                    // Push the current token back on the stack
-                    // and instead insert a multiplcation token.
-                    // Since this is added with the standard precedence,
-                    // expressions such as "x^2x" will be parsed as "x^2*x".
-                    $index = $index-1;
-                    $token = new Token('*', TokenType::MultiplicationOperator, TokenPrecedence::BinaryMultiplication);
-            }
 
             $node = Node::factory($token);
 
@@ -179,7 +174,8 @@ class Parser
         return $this->operandStack->pop();
     }
 
-    private function handleExpression($token)
+
+    protected function handleExpression($token)
     {
         $arity = $token->getArity();
 
@@ -210,7 +206,7 @@ class Parser
     }
 
 
-    private function filterTokens(array $tokens)
+    protected function filterTokens(array $tokens)
     {
         $filteredTokens = array_filter($tokens, function (Token $t) {
             return $t->getType() !== TokenType::Whitespace;
@@ -218,6 +214,25 @@ class Parser
 
         // Return the array values only, because array_filter preserves the keys
         return array_values($filteredTokens);
+    }
+
+    protected function parseImplicitMultiplication(array $tokens)
+    {
+        $result = [];
+        $lastToken = null;
+        foreach ($tokens as $token) {
+            if (Token::canFactorsInImplicitMultiplication($lastToken, $token)) {
+                $result[] = new Token('*', TokenType::MultiplicationOperator, TokenPrecedence::BinaryMultiplication);
+            }
+            $lastToken = $token;
+            $result[] = $token;
+        }
+        return $result;
+    }
+
+    protected static function allowImplicitMultipliication()
+    {
+        return true;
     }
 
 

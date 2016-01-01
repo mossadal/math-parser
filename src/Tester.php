@@ -37,5 +37,5 @@ echo "Derivative: ";
 $differentiator = new Differentiator('x');
 $derivative = $tree->accept($differentiator);
 
-var_dump($derivative->accept($printer));
 var_dump($derivative->accept($treeprinter));
+var_dump($derivative->accept($printer));
