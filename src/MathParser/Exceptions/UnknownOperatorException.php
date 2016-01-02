@@ -9,7 +9,13 @@
 
  namespace MathParser\Exceptions;
 
-class UnknownOperatorException extends \Exception
+ /**
+  * Exception thrown when parsing or evaluating expressions containing an
+  * unknown oprator.
+  *
+  * This should not happen under normal circumstances.
+  */
+class UnknownOperatorException extends MathParserException
 {
     public function __construct($operator)
     {

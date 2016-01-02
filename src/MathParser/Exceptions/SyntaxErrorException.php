@@ -9,7 +9,10 @@
 
  namespace MathParser\Exceptions;
 
-class SyntaxErrorException extends \Exception
+ /**
+  * Exception thrown when parsing expressions that are not well-formed.
+  */
+class SyntaxErrorException extends MathParserException
 {
     public function __construct()
     {

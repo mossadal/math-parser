@@ -13,20 +13,36 @@ namespace MathParser\Lexing;
 use MathParser\Lexing\TokenType;
 use MathParser\Exceptions\UnknownTokenException;
 
+/**
+ * Token precedence definitions.
+ *
+ * Tokens with higher precedence "bind harder", affecting the parsing,
+ * for example, the input string "2+3*4" should be parsed as (+ 2 (* 3 4))
+ * whereas the input string "2*3+4" should be parsed as (+ (* 2 3) 4).
+ *
+ */
+
 final class TokenPrecedence
 {
-    const Sentinel = -1;
-    const Terminal = 0;
-    const FunctionEvaluation = 1;
     const BinaryAddition = 10;
     const BinarySubtraction = 10;
-    const UnaryMinus = 35;
     const BinaryMultiplication = 30;
     const BinaryDivision = 30;
+    const UnaryMinus = 35;
     const BinaryExponentiation = 40;
+
+    // These are dummy values
+    const Sentinel = -1;
+    const Terminal = 0;
     const OpenParenthesis = -1;
     const CloseParenthesis = -1;
+    const FunctionEvaluation = 1;
 
+    /**
+     * Returns the standard precedence of a token type.
+     *
+     * @return int precedence
+     */
     public static function get($type)
     {
         switch($type) {

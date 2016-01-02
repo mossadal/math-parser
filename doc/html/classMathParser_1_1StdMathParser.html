@@ -54,7 +54,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li>
@@ -88,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -111,20 +110,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">MathParser\StdMathParser Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Convenience class for using the MathParser library.  
+ <a href="classMathParser_1_1StdMathParser.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a582d6ace9e6ef10d6d3314d82496c5cc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a582d6ace9e6ef10d6d3314d82496c5cc"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>__construct</b> ($debug=false)</td></tr>
-<tr class="separator:a582d6ace9e6ef10d6d3314d82496c5cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8eb08ff6c902fc7c1d01cf5ec14c67a5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8eb08ff6c902fc7c1d01cf5ec14c67a5"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>parse</b> ($text)</td></tr>
+<tr class="memitem:a8eb08ff6c902fc7c1d01cf5ec14c67a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1StdMathParser.html#a8eb08ff6c902fc7c1d01cf5ec14c67a5">parse</a> ($text)</td></tr>
+<tr class="memdesc:a8eb08ff6c902fc7c1d01cf5ec14c67a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse the given mathematical expression into an abstract syntax tree.  <a href="#a8eb08ff6c902fc7c1d01cf5ec14c67a5">More...</a><br/></td></tr>
 <tr class="separator:a8eb08ff6c902fc7c1d01cf5ec14c67a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a656006e54a870b98dfa9352e7cc02ebe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a656006e54a870b98dfa9352e7cc02ebe"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>getTokenList</b> ()</td></tr>
+<tr class="memitem:a656006e54a870b98dfa9352e7cc02ebe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1StdMathParser.html#a656006e54a870b98dfa9352e7cc02ebe">getTokenList</a> ()</td></tr>
+<tr class="memdesc:a656006e54a870b98dfa9352e7cc02ebe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the token list for the last parsed expression.  <a href="#a656006e54a870b98dfa9352e7cc02ebe">More...</a><br/></td></tr>
 <tr class="separator:a656006e54a870b98dfa9352e7cc02ebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c824c8b42c4ed45b4b6b212eb06b617"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9c824c8b42c4ed45b4b6b212eb06b617"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>getTree</b> ()</td></tr>
+<tr class="memitem:a9c824c8b42c4ed45b4b6b212eb06b617"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1StdMathParser.html#a9c824c8b42c4ed45b4b6b212eb06b617">getTree</a> ()</td></tr>
+<tr class="memdesc:a9c824c8b42c4ed45b4b6b212eb06b617"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the AST of the last parsed expression.  <a href="#a9c824c8b42c4ed45b4b6b212eb06b617">More...</a><br/></td></tr>
 <tr class="separator:a9c824c8b42c4ed45b4b6b212eb06b617"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -142,6 +141,103 @@ Private Attributes</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>$tree</b></td></tr>
 <tr class="separator:a520e08ff2d81d78f211e11ed7d9b8a23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Convenience class for using the MathParser library. </p>
+<p><a class="el" href="classMathParser_1_1StdMathParser.html" title="Convenience class for using the MathParser library. ">StdMathParser</a> is a wrapper for the StdMathLexer and Parser classes, and if you do not require any tweaking, this is the most straightforward way to use the MathParser library.</p>
+<h3>Example usage:</h3>
+<div class="fragment"><div class="line">use <a class="code" href="classMathParser_1_1StdMathParser.html">MathParser::StdMathParser</a>;</div>
+<div class="line">use <a class="code" href="classMathParser_1_1Interpreting_1_1Evaluator.html">MathParser::Interpreting::Evaluator</a>;</div>
+<div class="line">use <a class="code" href="classMathParser_1_1Interpreting_1_1Differentiator.html">MathParser::Interpreting::Differentiator</a>;</div>
+<div class="line"></div>
+<div class="line">$parser = <span class="keyword">new</span> StdMathParser();</div>
+<div class="line">$AST = $parser-&gt;parse(<span class="stringliteral">&#39;2x + 2y^2/sin(x)&#39;</span>);</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// Do whatever you want with the parsed expression,</span></div>
+<div class="line"><span class="comment">// for example evaluate it.</span></div>
+<div class="line">$evaluator = <span class="keyword">new</span> Evaluator([ <span class="charliteral">&#39;x&#39;</span> =&gt; 1, <span class="charliteral">&#39;y&#39;</span> =&gt; 2 ]);</div>
+<div class="line">$value = $AST-&gt;accept($evaluator);</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// or differentiate it:</span></div>
+<div class="line">$d_dx = <span class="keyword">new</span> Differentiator(<span class="charliteral">&#39;x&#39;</span>);</div>
+<div class="line">$derivative = $AST-&gt;accept($d_dx);</div>
+<div class="line">$valueOfDerivative = $derivative-&gt;accept($evaluator);</div>
+</div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a656006e54a870b98dfa9352e7cc02ebe"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\StdMathParser::getTokenList </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the token list for the last parsed expression. </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Token[]</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a9c824c8b42c4ed45b4b6b212eb06b617"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\StdMathParser::getTree </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the AST of the last parsed expression. </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Node</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a8eb08ff6c902fc7c1d01cf5ec14c67a5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\StdMathParser::parse </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$text</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parse the given mathematical expression into an abstract syntax tree. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$text</td><td>Input </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Node</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/MathParser/StdMathParser.php</li>
 </ul>
@@ -154,7 +250,7 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jan 1 2016 01:43:29 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 2 2016 22:29:57 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

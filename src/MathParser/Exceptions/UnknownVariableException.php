@@ -9,7 +9,11 @@
 
  namespace MathParser\Exceptions;
 
-class UnknownVariableException extends \Exception
+ /**
+  * Exception thrown when parsing or evaluating expressions containing an
+  * unknown or undefined variable.
+  */
+class UnknownVariableException extends MathParserException
 {
     public function __construct($variable)
     {

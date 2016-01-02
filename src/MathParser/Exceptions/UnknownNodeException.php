@@ -7,8 +7,15 @@
  *
  */
 
+namespace MathParser\Exceptions;
 
-class UnknownNodeException extends \Exception
+/**
+ * Exception thrown when parsing or evaluating expressions containing an
+ * unknown node type.
+ *
+ * This should not happen under normal circumstances.
+ */
+class UnknownNodeException extends MathParserException
 {
     public function __construct($node)
     {

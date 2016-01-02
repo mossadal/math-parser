@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tokenize',['tokenize',['../classMathParser_1_1Lexing_1_1Lexer.html#a28038b866d03c73744dd9183326a4ae3',1,'MathParser::Lexing::Lexer']]]
+  ['isoperator',['isOperator',['../classMathParser_1_1Lexing_1_1Token.html#aa75fbfc8c2131200c664a6f9ab724915',1,'MathParser::Lexing::Token']]]
 ];

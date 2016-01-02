@@ -54,7 +54,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li>
@@ -81,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -106,8 +105,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </ul>
 <h2>EXAMPLES </h2>
 <p>It is possible to fine-tune the lexer and parser, but the library ships with a StdMathParser class, capable of tokenizing and parsing standard mathematical expressions, including aritmethical operations as well as elementary functions.</p>
-<div class="fragment"><div class="line">use <a class="code" href="classMathParser_1_1StdMathParser.html">MathParser::StdMathParser</a>;</div>
-<div class="line">use <a class="code" href="classMathParser_1_1Interpreting_1_1Evaluator.html">MathParser::Interpreting::Evaluator</a>;</div>
+<div class="fragment"><div class="line">use MathParser::StdMathParser;</div>
+<div class="line">use MathParser::Interpreting::Evaluator;</div>
 <div class="line"></div>
 <div class="line">$parser = <span class="keyword">new</span> StdMathParser();</div>
 <div class="line"></div>
@@ -125,7 +124,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">$evaluator-&gt;setVariables([ <span class="charliteral">&#39;x&#39;</span> =&gt; 2, <span class="charliteral">&#39;y&#39;</span> =&gt; 3 ]);</div>
 <div class="line">$value = $AST-&gt;accept($evaluator);</div>
 </div><!-- fragment --><p>We can do other things with the AST. The library ships with a differentiator, computing the (symbolic) derivative with respect to a given variable.</p>
-<div class="fragment"><div class="line">use <a class="code" href="classMathParser_1_1Interpreting_1_1Differentiator.html">MathParser::Interpreting::Differentiator</a>;</div>
+<div class="fragment"><div class="line">use MathParser::Interpreting::Differentiator;</div>
 <div class="line"></div>
 <div class="line">$differentiator = <span class="keyword">new</span> Differentiator(<span class="charliteral">&#39;x&#39;</span>);</div>
 <div class="line">$f = $parser-&gt;parse(<span class="stringliteral">&#39;exp(2*x)-x*y&#39;</span>);</div>
@@ -150,7 +149,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jan 1 2016 01:43:30 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 2 2016 22:29:58 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

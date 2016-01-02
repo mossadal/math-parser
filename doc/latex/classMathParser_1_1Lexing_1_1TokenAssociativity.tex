@@ -1,12 +1,16 @@
 \hypertarget{classMathParser_1_1Lexing_1_1TokenAssociativity}{\section{Math\-Parser\textbackslash{}Lexing\textbackslash{}Token\-Associativity Class Reference}
 \label{classMathParser_1_1Lexing_1_1TokenAssociativity}\index{Math\-Parser\textbackslash{}\-Lexing\textbackslash{}\-Token\-Associativity@{Math\-Parser\textbackslash{}\-Lexing\textbackslash{}\-Token\-Associativity}}
 }
+
+
+Defining associativity of tokens.  
+
+
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classMathParser_1_1Lexing_1_1TokenAssociativity_a9b7bd3f830a05b42f4c3dab23e460259}{static {\bfseries get} (\$type)}\label{classMathParser_1_1Lexing_1_1TokenAssociativity_a9b7bd3f830a05b42f4c3dab23e460259}
-
-\end{DoxyCompactItemize}
+static \hyperlink{classMathParser_1_1Lexing_1_1TokenAssociativity_a9b7bd3f830a05b42f4c3dab23e460259}{get} (\$type)
+\begin{DoxyCompactList}\small\item\em Returns associativity of given token type. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -19,6 +23,37 @@
 \hypertarget{classMathParser_1_1Lexing_1_1TokenAssociativity_aee48fa332e48fcc040ce2383f7a0239c}{const {\bfseries Right} = 2}\label{classMathParser_1_1Lexing_1_1TokenAssociativity_aee48fa332e48fcc040ce2383f7a0239c}
 
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Defining associativity of tokens. 
+
+\hyperlink{classMathParser_1_1Lexing_1_1Token}{Token} associativity is used to specify how tokens of the same precedence should be parsed. Most operators are left associative. For some (addition and multiplciation) it doesn't really matter, but for others (subtration and division) it does. Input such as \char`\"{}1+2+3\char`\"{} and \char`\"{}3-\/2-\/1\char`\"{} should be parsed as (+ (+ 1 2) 3) and (-\/ (-\/ 3 2) 1) respectively.
+
+The exponentiation operator on the other hand is right associative, and the input \char`\"{}x$^\wedge$2$^\wedge$3\char`\"{} should be parsed as ($^\wedge$ x ($^\wedge$ 2 3)). 
+
+\subsection{Member Function Documentation}
+\hypertarget{classMathParser_1_1Lexing_1_1TokenAssociativity_a9b7bd3f830a05b42f4c3dab23e460259}{\index{Math\-Parser\-::\-Lexing\-::\-Token\-Associativity@{Math\-Parser\-::\-Lexing\-::\-Token\-Associativity}!get@{get}}
+\index{get@{get}!MathParser::Lexing::TokenAssociativity@{Math\-Parser\-::\-Lexing\-::\-Token\-Associativity}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}static Math\-Parser\textbackslash{}\-Lexing\textbackslash{}\-Token\-Associativity\-::get (
+\begin{DoxyParamCaption}
+\item[{}]{\$type}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classMathParser_1_1Lexing_1_1TokenAssociativity_a9b7bd3f830a05b42f4c3dab23e460259}
+
+
+Returns associativity of given token type. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+int & {\em \$type} & \hyperlink{classMathParser_1_1Lexing_1_1Token}{Token} type \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em int\-::\$associativity} & (left or right). \\
+\hline
+\end{DoxyRetVals}
 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}

@@ -7,9 +7,15 @@
  *
  */
 
- namespace MathParser\Exceptions;
+namespace MathParser\Exceptions;
 
-class UnknownFunctionException extends \Exception
+/**
+ * Exception thrown when parsing or evaluating expressions containing an
+ * unknown function symbol.
+ *
+ * This should not happen under normal circumstances.
+ */
+class UnknownFunctionException extends MathParserException
 {
     public function __construct($operator)
     {

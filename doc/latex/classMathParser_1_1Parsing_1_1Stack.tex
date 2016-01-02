@@ -1,27 +1,98 @@
 \hypertarget{classMathParser_1_1Parsing_1_1Stack}{\section{Math\-Parser\textbackslash{}Parsing\textbackslash{}Stack Class Reference}
 \label{classMathParser_1_1Parsing_1_1Stack}\index{Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Stack@{Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Stack}}
 }
+
+
+Utility class, implementing a simple F\-I\-F\-O stack.  
+
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classMathParser_1_1Parsing_1_1Stack_a50f3a135fdf9401b17494c50652b152a}{{\bfseries push} (\$element)}\label{classMathParser_1_1Parsing_1_1Stack_a50f3a135fdf9401b17494c50652b152a}
-
-\item 
-\hypertarget{classMathParser_1_1Parsing_1_1Stack_a13b5dc80388b7900af165e0822ebec93}{{\bfseries peek} ()}\label{classMathParser_1_1Parsing_1_1Stack_a13b5dc80388b7900af165e0822ebec93}
-
-\item 
-\hypertarget{classMathParser_1_1Parsing_1_1Stack_a23eff250a1077d7a9838a88e6755a84a}{{\bfseries pop} ()}\label{classMathParser_1_1Parsing_1_1Stack_a23eff250a1077d7a9838a88e6755a84a}
-
-\item 
-\hypertarget{classMathParser_1_1Parsing_1_1Stack_ad85713b07820a24a6e781b32e18271e6}{{\bfseries count} ()}\label{classMathParser_1_1Parsing_1_1Stack_ad85713b07820a24a6e781b32e18271e6}
-
-\end{DoxyCompactItemize}
+\hyperlink{classMathParser_1_1Parsing_1_1Stack_a50f3a135fdf9401b17494c50652b152a}{push} (\$element)
+\begin{DoxyCompactList}\small\item\em Push an element onto the stack. \end{DoxyCompactList}\item 
+\hyperlink{classMathParser_1_1Parsing_1_1Stack_a13b5dc80388b7900af165e0822ebec93}{peek} ()
+\begin{DoxyCompactList}\small\item\em Return the top element (without popping it) \end{DoxyCompactList}\item 
+\hyperlink{classMathParser_1_1Parsing_1_1Stack_a23eff250a1077d7a9838a88e6755a84a}{pop} ()
+\begin{DoxyCompactList}\small\item\em Return the top element and remove it from the stack. \end{DoxyCompactList}\item 
+\hyperlink{classMathParser_1_1Parsing_1_1Stack_ad85713b07820a24a6e781b32e18271e6}{count} ()
+\begin{DoxyCompactList}\small\item\em Return the current number of elements in the stack. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \hypertarget{classMathParser_1_1Parsing_1_1Stack_ab508efbeda55b29432f6aefbb591ca10}{{\bfseries \$data} = array()}\label{classMathParser_1_1Parsing_1_1Stack_ab508efbeda55b29432f6aefbb591ca10}
 
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Utility class, implementing a simple F\-I\-F\-O stack. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classMathParser_1_1Parsing_1_1Stack_ad85713b07820a24a6e781b32e18271e6}{\index{Math\-Parser\-::\-Parsing\-::\-Stack@{Math\-Parser\-::\-Parsing\-::\-Stack}!count@{count}}
+\index{count@{count}!MathParser::Parsing::Stack@{Math\-Parser\-::\-Parsing\-::\-Stack}}
+\subsubsection[{count}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Stack\-::count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classMathParser_1_1Parsing_1_1Stack_ad85713b07820a24a6e781b32e18271e6}
+
+
+Return the current number of elements in the stack. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em int} & \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{classMathParser_1_1Parsing_1_1Stack_a13b5dc80388b7900af165e0822ebec93}{\index{Math\-Parser\-::\-Parsing\-::\-Stack@{Math\-Parser\-::\-Parsing\-::\-Stack}!peek@{peek}}
+\index{peek@{peek}!MathParser::Parsing::Stack@{Math\-Parser\-::\-Parsing\-::\-Stack}}
+\subsubsection[{peek}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Stack\-::peek (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classMathParser_1_1Parsing_1_1Stack_a13b5dc80388b7900af165e0822ebec93}
+
+
+Return the top element (without popping it) 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em mixed} & \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{classMathParser_1_1Parsing_1_1Stack_a23eff250a1077d7a9838a88e6755a84a}{\index{Math\-Parser\-::\-Parsing\-::\-Stack@{Math\-Parser\-::\-Parsing\-::\-Stack}!pop@{pop}}
+\index{pop@{pop}!MathParser::Parsing::Stack@{Math\-Parser\-::\-Parsing\-::\-Stack}}
+\subsubsection[{pop}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Stack\-::pop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classMathParser_1_1Parsing_1_1Stack_a23eff250a1077d7a9838a88e6755a84a}
+
+
+Return the top element and remove it from the stack. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em mixed} & \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{classMathParser_1_1Parsing_1_1Stack_a50f3a135fdf9401b17494c50652b152a}{\index{Math\-Parser\-::\-Parsing\-::\-Stack@{Math\-Parser\-::\-Parsing\-::\-Stack}!push@{push}}
+\index{push@{push}!MathParser::Parsing::Stack@{Math\-Parser\-::\-Parsing\-::\-Stack}}
+\subsubsection[{push}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Stack\-::push (
+\begin{DoxyParamCaption}
+\item[{}]{\$element}
+\end{DoxyParamCaption}
+)}}\label{classMathParser_1_1Parsing_1_1Stack_a50f3a135fdf9401b17494c50652b152a}
+
+
+Push an element onto the stack. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+mixed & {\em \$element} & \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}

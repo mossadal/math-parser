@@ -9,7 +9,11 @@
 
  namespace MathParser\Exceptions;
 
-class UnknownTokenException extends \Exception
+ /**
+  * Exception thrown when tokenizing expressions containing illegal
+  * characters.
+  */
+class UnknownTokenException extends MathParserException
 {
     public function __construct($name)
     {

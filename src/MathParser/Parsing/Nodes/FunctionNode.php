@@ -7,10 +7,13 @@
  *
  */
 
- namespace MathParser\Parsing\Nodes;
+namespace MathParser\Parsing\Nodes;
 
 use MathParser\Interpreting\Visitors\Visitor;
 
+/**
+ * AST node representing a function applications (e.g. sin(...))
+ */
 class FunctionNode extends Node
 {
     private $name;
@@ -24,18 +27,26 @@ class FunctionNode extends Node
     }
 
     /**
-     * @return mixed
+     * Return the name of the function
+     * @return string
      */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * Return the operand
+     * @return Node
+     */
     public function getOperand()
     {
         return $this->operand;
     }
 
+    /**
+     * Implementing the Visitable interface.
+     */
     public function accept(Visitor $visitor)
     {
         return $visitor->visitFunctionNode($this);

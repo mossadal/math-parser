@@ -54,7 +54,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li>
@@ -88,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -111,11 +110,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">MathParser\Lexing\TokenAssociativity Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Defining associativity of tokens.  
+ <a href="classMathParser_1_1Lexing_1_1TokenAssociativity.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a9b7bd3f830a05b42f4c3dab23e460259"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9b7bd3f830a05b42f4c3dab23e460259"></a>
-static&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> ($type)</td></tr>
+<tr class="memitem:a9b7bd3f830a05b42f4c3dab23e460259"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Lexing_1_1TokenAssociativity.html#a9b7bd3f830a05b42f4c3dab23e460259">get</a> ($type)</td></tr>
+<tr class="memdesc:a9b7bd3f830a05b42f4c3dab23e460259"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns associativity of given token type.  <a href="#a9b7bd3f830a05b42f4c3dab23e460259">More...</a><br/></td></tr>
 <tr class="separator:a9b7bd3f830a05b42f4c3dab23e460259"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -130,6 +132,49 @@ const&#160;</td><td class="memItemRight" valign="bottom"><b>Left</b> = 1</td></t
 const&#160;</td><td class="memItemRight" valign="bottom"><b>Right</b> = 2</td></tr>
 <tr class="separator:aee48fa332e48fcc040ce2383f7a0239c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Defining associativity of tokens. </p>
+<p><a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> associativity is used to specify how tokens of the same precedence should be parsed. Most operators are left associative. For some (addition and multiplciation) it doesn't really matter, but for others (subtration and division) it does. Input such as "1+2+3" and "3-2-1" should be parsed as (+ (+ 1 2) 3) and (- (- 3 2) 1) respectively.</p>
+<p>The exponentiation operator on the other hand is right associative, and the input "x^2^3" should be parsed as (^ x (^ 2 3)). </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a9b7bd3f830a05b42f4c3dab23e460259"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static MathParser\Lexing\TokenAssociativity::get </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns associativity of given token type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">int</td><td class="paramname">$type</td><td><a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">int::$associativity</td><td>(left or right). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/MathParser/Lexing/TokenAssociativity.php</li>
 </ul>
@@ -142,7 +187,7 @@ const&#160;</td><td class="memItemRight" valign="bottom"><b>Right</b> = 2</td></
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jan 1 2016 01:43:29 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 2 2016 22:29:58 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

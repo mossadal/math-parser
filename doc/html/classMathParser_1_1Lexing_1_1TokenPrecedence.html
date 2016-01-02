@@ -54,7 +54,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li>
@@ -88,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -111,49 +110,88 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">MathParser\Lexing\TokenPrecedence Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> precedence definitions.  
+ <a href="classMathParser_1_1Lexing_1_1TokenPrecedence.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a1df0dfad03e91f649a2aba049ba8c815"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1df0dfad03e91f649a2aba049ba8c815"></a>
-static&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> ($type)</td></tr>
+<tr class="memitem:a1df0dfad03e91f649a2aba049ba8c815"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Lexing_1_1TokenPrecedence.html#a1df0dfad03e91f649a2aba049ba8c815">get</a> ($type)</td></tr>
+<tr class="memdesc:a1df0dfad03e91f649a2aba049ba8c815"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the standard precedence of a token type.  <a href="#a1df0dfad03e91f649a2aba049ba8c815">More...</a><br/></td></tr>
 <tr class="separator:a1df0dfad03e91f649a2aba049ba8c815"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a6cfe696204fd5a79456c389b9edd8dbb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6cfe696204fd5a79456c389b9edd8dbb"></a>
-const&#160;</td><td class="memItemRight" valign="bottom"><b>Sentinel</b> = -1</td></tr>
-<tr class="separator:a6cfe696204fd5a79456c389b9edd8dbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d03f534a5c533279a428fa98c832d3d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9d03f534a5c533279a428fa98c832d3d"></a>
-const&#160;</td><td class="memItemRight" valign="bottom"><b>Terminal</b> = 0</td></tr>
-<tr class="separator:a9d03f534a5c533279a428fa98c832d3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad69562f16a0f6e1b21ef505fcb8d9c00"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad69562f16a0f6e1b21ef505fcb8d9c00"></a>
-const&#160;</td><td class="memItemRight" valign="bottom"><b>FunctionEvaluation</b> = 1</td></tr>
-<tr class="separator:ad69562f16a0f6e1b21ef505fcb8d9c00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42dfff9a0e0fdf7a26fccf339f8a001a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a42dfff9a0e0fdf7a26fccf339f8a001a"></a>
 const&#160;</td><td class="memItemRight" valign="bottom"><b>BinaryAddition</b> = 10</td></tr>
 <tr class="separator:a42dfff9a0e0fdf7a26fccf339f8a001a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21f39b1e746f5b94edec76868f401115"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a21f39b1e746f5b94edec76868f401115"></a>
 const&#160;</td><td class="memItemRight" valign="bottom"><b>BinarySubtraction</b> = 10</td></tr>
 <tr class="separator:a21f39b1e746f5b94edec76868f401115"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a095bbfdc6dbee24cc77f7871f96a85b6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a095bbfdc6dbee24cc77f7871f96a85b6"></a>
-const&#160;</td><td class="memItemRight" valign="bottom"><b>UnaryMinus</b> = 20</td></tr>
-<tr class="separator:a095bbfdc6dbee24cc77f7871f96a85b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0050713cb20ff5efaf60e57f7374376"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae0050713cb20ff5efaf60e57f7374376"></a>
 const&#160;</td><td class="memItemRight" valign="bottom"><b>BinaryMultiplication</b> = 30</td></tr>
 <tr class="separator:ae0050713cb20ff5efaf60e57f7374376"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b7c60c900c637d8e6665a7311f60e04"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b7c60c900c637d8e6665a7311f60e04"></a>
 const&#160;</td><td class="memItemRight" valign="bottom"><b>BinaryDivision</b> = 30</td></tr>
 <tr class="separator:a3b7c60c900c637d8e6665a7311f60e04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a095bbfdc6dbee24cc77f7871f96a85b6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a095bbfdc6dbee24cc77f7871f96a85b6"></a>
+const&#160;</td><td class="memItemRight" valign="bottom"><b>UnaryMinus</b> = 35</td></tr>
+<tr class="separator:a095bbfdc6dbee24cc77f7871f96a85b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3726ec81f726ab641bac8c207c82d70"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac3726ec81f726ab641bac8c207c82d70"></a>
 const&#160;</td><td class="memItemRight" valign="bottom"><b>BinaryExponentiation</b> = 40</td></tr>
 <tr class="separator:ac3726ec81f726ab641bac8c207c82d70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cfe696204fd5a79456c389b9edd8dbb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6cfe696204fd5a79456c389b9edd8dbb"></a>
+const&#160;</td><td class="memItemRight" valign="bottom"><b>Sentinel</b> = -1</td></tr>
+<tr class="separator:a6cfe696204fd5a79456c389b9edd8dbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d03f534a5c533279a428fa98c832d3d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9d03f534a5c533279a428fa98c832d3d"></a>
+const&#160;</td><td class="memItemRight" valign="bottom"><b>Terminal</b> = 0</td></tr>
+<tr class="separator:a9d03f534a5c533279a428fa98c832d3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23ad66e41ed25314ffc29d5eebe29d60"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a23ad66e41ed25314ffc29d5eebe29d60"></a>
 const&#160;</td><td class="memItemRight" valign="bottom"><b>OpenParenthesis</b> = -1</td></tr>
 <tr class="separator:a23ad66e41ed25314ffc29d5eebe29d60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a061d70719b5bb47c018fd6841832b34f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a061d70719b5bb47c018fd6841832b34f"></a>
 const&#160;</td><td class="memItemRight" valign="bottom"><b>CloseParenthesis</b> = -1</td></tr>
 <tr class="separator:a061d70719b5bb47c018fd6841832b34f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad69562f16a0f6e1b21ef505fcb8d9c00"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad69562f16a0f6e1b21ef505fcb8d9c00"></a>
+const&#160;</td><td class="memItemRight" valign="bottom"><b>FunctionEvaluation</b> = 1</td></tr>
+<tr class="separator:ad69562f16a0f6e1b21ef505fcb8d9c00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> precedence definitions. </p>
+<p>Tokens with higher precedence "bind harder", affecting the parsing, for example, the input string "2+3*4" should be parsed as (+ 2 (* 3 4)) whereas the input string "2*3+4" should be parsed as (+ (* 2 3) 4). </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a1df0dfad03e91f649a2aba049ba8c815"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static MathParser\Lexing\TokenPrecedence::get </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the standard precedence of a token type. </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">int</td><td>precedence </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/MathParser/Lexing/TokenPrecedence.php</li>
 </ul>
@@ -166,7 +204,7 @@ const&#160;</td><td class="memItemRight" valign="bottom"><b>CloseParenthesis</b>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jan 1 2016 01:43:29 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 2 2016 22:29:58 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -1,6 +1,11 @@
 \hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1ConstantNode}{\section{Math\-Parser\textbackslash{}Parsing\textbackslash{}Nodes\textbackslash{}Constant\-Node Class Reference}
 \label{classMathParser_1_1Parsing_1_1Nodes_1_1ConstantNode}\index{Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Constant\-Node@{Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Constant\-Node}}
 }
+
+
+A\-S\-T node representing a known constant (e.\-g.  
+
+
 Inheritance diagram for Math\-Parser\textbackslash{}Parsing\textbackslash{}Nodes\textbackslash{}Constant\-Node\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -14,9 +19,10 @@ Inheritance diagram for Math\-Parser\textbackslash{}Parsing\textbackslash{}Nodes
 
 \item 
 \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1ConstantNode_a537089b5aa92491a904193f449318090}{get\-Name} ()
-\item 
-\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1ConstantNode_a5debc023d33ccf262a4c73569b4af841}{accept} (\hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor}{Visitor} \$visitor)
-\begin{DoxyCompactList}\small\item\em Single function in the Visitable interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Returns the name of the constant. \end{DoxyCompactList}\item 
+\hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1ConstantNode_a5debc023d33ccf262a4c73569b4af841}{\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1ConstantNode_a5debc023d33ccf262a4c73569b4af841}{accept} (\hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor}{Visitor} \$visitor)}\label{classMathParser_1_1Parsing_1_1Nodes_1_1ConstantNode_a5debc023d33ccf262a4c73569b4af841}
+
+\begin{DoxyCompactList}\small\item\em Implementing the Visitable interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -26,29 +32,12 @@ Inheritance diagram for Math\-Parser\textbackslash{}Parsing\textbackslash{}Nodes
 \subsection*{Additional Inherited Members}
 
 
+\subsection{Detailed Description}
+A\-S\-T node representing a known constant (e.\-g. 
+
+pi, e) 
+
 \subsection{Member Function Documentation}
-\hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1ConstantNode_a5debc023d33ccf262a4c73569b4af841}{\index{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Constant\-Node@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Constant\-Node}!accept@{accept}}
-\index{accept@{accept}!MathParser::Parsing::Nodes::ConstantNode@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Constant\-Node}}
-\subsubsection[{accept}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Constant\-Node\-::accept (
-\begin{DoxyParamCaption}
-\item[{{\bf Visitor}}]{\$visitor}
-\end{DoxyParamCaption}
-)}}\label{classMathParser_1_1Parsing_1_1Nodes_1_1ConstantNode_a5debc023d33ccf262a4c73569b4af841}
-
-
-Single function in the Visitable interface. 
-
-Calling the \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1ConstantNode_a5debc023d33ccf262a4c73569b4af841}{accept()} function on a Visitable class, i.\-e. a \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1Node}{Node} (or subclass thereof) causes the supplied Visitor to traverse the A\-S\-T.
-
-
-\begin{DoxyParams}[1]{Parameters}
-Visitor & {\em \$visitor} & \\
-\hline
-\end{DoxyParams}
-
-
-Implements \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitable_a44418d4bae6a68865102c09dc167409f}{Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Visitors\textbackslash{}\-Visitable}.
-
 \hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1ConstantNode_a537089b5aa92491a904193f449318090}{\index{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Constant\-Node@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Constant\-Node}!get\-Name@{get\-Name}}
 \index{get\-Name@{get\-Name}!MathParser::Parsing::Nodes::ConstantNode@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Constant\-Node}}
 \subsubsection[{get\-Name}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Constant\-Node\-::get\-Name (
@@ -57,8 +46,12 @@ Implements \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitab
 \end{DoxyParamCaption}
 )}}\label{classMathParser_1_1Parsing_1_1Nodes_1_1ConstantNode_a537089b5aa92491a904193f449318090}
 
+
+Returns the name of the constant. 
+
+
 \begin{DoxyRetVals}{Return values}
-{\em mixed} & \\
+{\em string} & \\
 \hline
 \end{DoxyRetVals}
 

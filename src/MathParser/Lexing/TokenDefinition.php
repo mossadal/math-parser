@@ -12,6 +12,28 @@ namespace MathParser\Lexing;
 
 use MathParser\Lexing\TokenAssociativity;
 
+/**
+ * Token definitions using regular expressions to match input
+ *
+ * To get the Lexer to recognize tokens, they need to be defined. This is
+ * the task of the TokenDefinition class. Each TokenDefinition consists of
+ * a regular expression used to match the input string, a corresponding
+ * token type and an optional token value (making it possible to standarize
+ * the token value for synonyms, e.g. both ln and log can be tokenized into the
+ * same token with value 'log'.)
+ *
+ * ### Example usage (excerpt from StdMathLexer):
+ *
+ * ~~~{.php}
+ * $lexer = new Lexer();
+ * $lexer->add(new TokenDefinition('/\d+\.\d+/', TokenType::RealNumber));
+ * $lexer->add(new TokenDefinition('/\d+/', TokenType::PosInt));
+ * $lexer->add(new TokenDefinition('/sin/', TokenType::FunctionName));
+ * $lexer->add(new TokenDefinition('/arcsin|asin/', TokenType::FunctionName, 'arcsin'));
+ * $lexer->add(new TokenDefinition('/\+/', TokenType::AdditionOperator));
+ * $lexer->add(new TokenDefinition('/\-/', TokenType::SubtractionOperator));
+ * ~~~
+ */
 class TokenDefinition
 {
     private $pattern;

@@ -10,6 +10,30 @@
 
 namespace MathParser\Lexing;
 
+/**
+ * Token type values
+ *
+ * Currently, the following token types are available
+ *
+ * * PosInt
+ * * Integer
+ * * RealNumber
+ * * Identifier
+ * * OpenParenthesis
+ * * CloseParenthesis
+ * * UnaryMinus
+ * * AdditionOperator
+ * * SubtractionOperator
+ * * MultiplicationOperator
+ * * DivisionOperator
+ * * ExponentiationOperator
+ * * FunctionName
+ * * Constant
+ * * Terminator
+ * * Whitespace
+ * * Sentinel 
+ *
+ */
 final class TokenType
 {
     const PosInt = 1;

@@ -9,7 +9,11 @@
 
  namespace MathParser\Exceptions;
 
-class ParenthesisMismatchException extends \Exception
+ /**
+  * Exception thrown when parsing expressions having non-matching left and
+  * right parentheses.
+  */
+class ParenthesisMismatchException extends MathParserException
 {
     public function __construct()
     {

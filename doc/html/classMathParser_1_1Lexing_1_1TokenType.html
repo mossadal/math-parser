@@ -54,7 +54,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li>
@@ -88,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -110,20 +109,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">MathParser\Lexing\TokenType Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> type values.  
+ <a href="classMathParser_1_1Lexing_1_1TokenType.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a7312d065593448cb9e873b1d88132749"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7312d065593448cb9e873b1d88132749"></a>
 const&#160;</td><td class="memItemRight" valign="bottom"><b>PosInt</b> = 1</td></tr>
 <tr class="separator:a7312d065593448cb9e873b1d88132749"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab73ffac04a5eebc22494de06a1b1a51d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab73ffac04a5eebc22494de06a1b1a51d"></a>
+const&#160;</td><td class="memItemRight" valign="bottom"><b>Integer</b> = 2</td></tr>
+<tr class="separator:ab73ffac04a5eebc22494de06a1b1a51d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9c1a916bb4cdaf96d30eb97cd83548f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab9c1a916bb4cdaf96d30eb97cd83548f"></a>
+const&#160;</td><td class="memItemRight" valign="bottom"><b>RealNumber</b> = 3</td></tr>
+<tr class="separator:ab9c1a916bb4cdaf96d30eb97cd83548f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a841cc795a663257447d71c9a31e29945"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a841cc795a663257447d71c9a31e29945"></a>
-const&#160;</td><td class="memItemRight" valign="bottom"><b>Identifier</b> = 2</td></tr>
+const&#160;</td><td class="memItemRight" valign="bottom"><b>Identifier</b> = 20</td></tr>
 <tr class="separator:a841cc795a663257447d71c9a31e29945"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b2d997bb88448e1a72e43e171cc6c5f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4b2d997bb88448e1a72e43e171cc6c5f"></a>
-const&#160;</td><td class="memItemRight" valign="bottom"><b>OpenParenthesis</b> = 3</td></tr>
+const&#160;</td><td class="memItemRight" valign="bottom"><b>OpenParenthesis</b> = 31</td></tr>
 <tr class="separator:a4b2d997bb88448e1a72e43e171cc6c5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae70cd224de081c16479ead6674f19131"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae70cd224de081c16479ead6674f19131"></a>
-const&#160;</td><td class="memItemRight" valign="bottom"><b>CloseParenthesis</b> = 4</td></tr>
+const&#160;</td><td class="memItemRight" valign="bottom"><b>CloseParenthesis</b> = 32</td></tr>
 <tr class="separator:ae70cd224de081c16479ead6674f19131"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bd4c2dc6a366cee15458c0d39f7ff1c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5bd4c2dc6a366cee15458c0d39f7ff1c"></a>
 const&#160;</td><td class="memItemRight" valign="bottom"><b>UnaryMinus</b> = 99</td></tr>
@@ -159,7 +167,29 @@ const&#160;</td><td class="memItemRight" valign="bottom"><b>Whitespace</b> = 999
 const&#160;</td><td class="memItemRight" valign="bottom"><b>Sentinel</b> = 1000</td></tr>
 <tr class="separator:a78d79415633ade3f490659424d688d2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> type values. </p>
+<p>Currently, the following token types are available</p>
+<ul>
+<li>PosInt</li>
+<li>Integer</li>
+<li>RealNumber</li>
+<li>Identifier</li>
+<li>OpenParenthesis</li>
+<li>CloseParenthesis</li>
+<li>UnaryMinus</li>
+<li>AdditionOperator</li>
+<li>SubtractionOperator</li>
+<li>MultiplicationOperator</li>
+<li>DivisionOperator</li>
+<li>ExponentiationOperator</li>
+<li>FunctionName</li>
+<li>Constant</li>
+<li>Terminator</li>
+<li>Whitespace</li>
+<li>Sentinel </li>
+</ul>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/MathParser/Lexing/TokenType.php</li>
 </ul>
 </div><!-- contents -->
@@ -171,7 +201,7 @@ const&#160;</td><td class="memItemRight" valign="bottom"><b>Sentinel</b> = 1000<
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jan 1 2016 01:43:29 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 2 2016 22:29:58 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

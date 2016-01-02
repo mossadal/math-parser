@@ -1,21 +1,20 @@
 \hypertarget{classMathParser_1_1StdMathParser}{\section{Math\-Parser\textbackslash{}Std\-Math\-Parser Class Reference}
 \label{classMathParser_1_1StdMathParser}\index{Math\-Parser\textbackslash{}\-Std\-Math\-Parser@{Math\-Parser\textbackslash{}\-Std\-Math\-Parser}}
 }
+
+
+Convenience class for using the Math\-Parser library.  
+
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classMathParser_1_1StdMathParser_a582d6ace9e6ef10d6d3314d82496c5cc}{{\bfseries \-\_\-\-\_\-construct} (\$debug=false)}\label{classMathParser_1_1StdMathParser_a582d6ace9e6ef10d6d3314d82496c5cc}
-
-\item 
-\hypertarget{classMathParser_1_1StdMathParser_a8eb08ff6c902fc7c1d01cf5ec14c67a5}{{\bfseries parse} (\$text)}\label{classMathParser_1_1StdMathParser_a8eb08ff6c902fc7c1d01cf5ec14c67a5}
-
-\item 
-\hypertarget{classMathParser_1_1StdMathParser_a656006e54a870b98dfa9352e7cc02ebe}{{\bfseries get\-Token\-List} ()}\label{classMathParser_1_1StdMathParser_a656006e54a870b98dfa9352e7cc02ebe}
-
-\item 
-\hypertarget{classMathParser_1_1StdMathParser_a9c824c8b42c4ed45b4b6b212eb06b617}{{\bfseries get\-Tree} ()}\label{classMathParser_1_1StdMathParser_a9c824c8b42c4ed45b4b6b212eb06b617}
-
-\end{DoxyCompactItemize}
+\hyperlink{classMathParser_1_1StdMathParser_a8eb08ff6c902fc7c1d01cf5ec14c67a5}{parse} (\$text)
+\begin{DoxyCompactList}\small\item\em Parse the given mathematical expression into an abstract syntax tree. \end{DoxyCompactList}\item 
+\hyperlink{classMathParser_1_1StdMathParser_a656006e54a870b98dfa9352e7cc02ebe}{get\-Token\-List} ()
+\begin{DoxyCompactList}\small\item\em Return the token list for the last parsed expression. \end{DoxyCompactList}\item 
+\hyperlink{classMathParser_1_1StdMathParser_a9c824c8b42c4ed45b4b6b212eb06b617}{get\-Tree} ()
+\begin{DoxyCompactList}\small\item\em Return the A\-S\-T of the last parsed expression. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -31,6 +30,90 @@
 \hypertarget{classMathParser_1_1StdMathParser_a520e08ff2d81d78f211e11ed7d9b8a23}{{\bfseries \$tree}}\label{classMathParser_1_1StdMathParser_a520e08ff2d81d78f211e11ed7d9b8a23}
 
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Convenience class for using the Math\-Parser library. 
+
+\hyperlink{classMathParser_1_1StdMathParser}{Std\-Math\-Parser} is a wrapper for the Std\-Math\-Lexer and Parser classes, and if you do not require any tweaking, this is the most straightforward way to use the Math\-Parser library.
+
+\paragraph*{Example usage\-:}
+
+
+\begin{DoxyCode}
+use \hyperlink{classMathParser_1_1StdMathParser}{MathParser::StdMathParser};
+use \hyperlink{classMathParser_1_1Interpreting_1_1Evaluator}{MathParser::Interpreting::Evaluator};
+use \hyperlink{classMathParser_1_1Interpreting_1_1Differentiator}{MathParser::Interpreting::Differentiator};
+
+$parser = \textcolor{keyword}{new} StdMathParser();
+$AST = $parser->parse(\textcolor{stringliteral}{'2x + 2y^2/sin(x)'});
+
+\textcolor{comment}{// Do whatever you want with the parsed expression,}
+\textcolor{comment}{// for example evaluate it.}
+$evaluator = \textcolor{keyword}{new} Evaluator([ \textcolor{charliteral}{'x'} => 1, \textcolor{charliteral}{'y'} => 2 ]);
+$value = $AST->accept($evaluator);
+
+\textcolor{comment}{// or differentiate it:}
+$d\_dx = \textcolor{keyword}{new} Differentiator(\textcolor{charliteral}{'x'});
+$derivative = $AST->accept($d\_dx);
+$valueOfDerivative = $derivative->accept($evaluator);
+\end{DoxyCode}
+ 
+
+\subsection{Member Function Documentation}
+\hypertarget{classMathParser_1_1StdMathParser_a656006e54a870b98dfa9352e7cc02ebe}{\index{Math\-Parser\-::\-Std\-Math\-Parser@{Math\-Parser\-::\-Std\-Math\-Parser}!get\-Token\-List@{get\-Token\-List}}
+\index{get\-Token\-List@{get\-Token\-List}!MathParser::StdMathParser@{Math\-Parser\-::\-Std\-Math\-Parser}}
+\subsubsection[{get\-Token\-List}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Std\-Math\-Parser\-::get\-Token\-List (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classMathParser_1_1StdMathParser_a656006e54a870b98dfa9352e7cc02ebe}
+
+
+Return the token list for the last parsed expression. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em Token\mbox{[}$\,$\mbox{]}} & \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{classMathParser_1_1StdMathParser_a9c824c8b42c4ed45b4b6b212eb06b617}{\index{Math\-Parser\-::\-Std\-Math\-Parser@{Math\-Parser\-::\-Std\-Math\-Parser}!get\-Tree@{get\-Tree}}
+\index{get\-Tree@{get\-Tree}!MathParser::StdMathParser@{Math\-Parser\-::\-Std\-Math\-Parser}}
+\subsubsection[{get\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Std\-Math\-Parser\-::get\-Tree (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classMathParser_1_1StdMathParser_a9c824c8b42c4ed45b4b6b212eb06b617}
+
+
+Return the A\-S\-T of the last parsed expression. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em Node} & \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{classMathParser_1_1StdMathParser_a8eb08ff6c902fc7c1d01cf5ec14c67a5}{\index{Math\-Parser\-::\-Std\-Math\-Parser@{Math\-Parser\-::\-Std\-Math\-Parser}!parse@{parse}}
+\index{parse@{parse}!MathParser::StdMathParser@{Math\-Parser\-::\-Std\-Math\-Parser}}
+\subsubsection[{parse}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Std\-Math\-Parser\-::parse (
+\begin{DoxyParamCaption}
+\item[{}]{\$text}
+\end{DoxyParamCaption}
+)}}\label{classMathParser_1_1StdMathParser_a8eb08ff6c902fc7c1d01cf5ec14c67a5}
+
+
+Parse the given mathematical expression into an abstract syntax tree. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$text} & Input \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Node} & \\
+\hline
+\end{DoxyRetVals}
 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}

@@ -54,7 +54,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li>
@@ -88,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -99,7 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>MathParser</b></li><li class="navelem"><b>Parsing</b></li><li class="navelem"><a class="el" href="classMathParser_1_1Parsing_1_1Stack.html">Stack</a></li>  </ul>
+<li class="navelem"><b>MathParser</b></li><li class="navelem"><a class="el" href="namespaceMathParser_1_1Parsing.html">Parsing</a></li><li class="navelem"><a class="el" href="classMathParser_1_1Parsing_1_1Stack.html">Stack</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -111,20 +110,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">MathParser\Parsing\Stack Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Utility class, implementing a simple FIFO stack.  
+ <a href="classMathParser_1_1Parsing_1_1Stack.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a50f3a135fdf9401b17494c50652b152a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a50f3a135fdf9401b17494c50652b152a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>push</b> ($element)</td></tr>
+<tr class="memitem:a50f3a135fdf9401b17494c50652b152a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Parsing_1_1Stack.html#a50f3a135fdf9401b17494c50652b152a">push</a> ($element)</td></tr>
+<tr class="memdesc:a50f3a135fdf9401b17494c50652b152a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Push an element onto the stack.  <a href="#a50f3a135fdf9401b17494c50652b152a">More...</a><br/></td></tr>
 <tr class="separator:a50f3a135fdf9401b17494c50652b152a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13b5dc80388b7900af165e0822ebec93"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a13b5dc80388b7900af165e0822ebec93"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>peek</b> ()</td></tr>
+<tr class="memitem:a13b5dc80388b7900af165e0822ebec93"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Parsing_1_1Stack.html#a13b5dc80388b7900af165e0822ebec93">peek</a> ()</td></tr>
+<tr class="memdesc:a13b5dc80388b7900af165e0822ebec93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the top element (without popping it)  <a href="#a13b5dc80388b7900af165e0822ebec93">More...</a><br/></td></tr>
 <tr class="separator:a13b5dc80388b7900af165e0822ebec93"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23eff250a1077d7a9838a88e6755a84a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a23eff250a1077d7a9838a88e6755a84a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>pop</b> ()</td></tr>
+<tr class="memitem:a23eff250a1077d7a9838a88e6755a84a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Parsing_1_1Stack.html#a23eff250a1077d7a9838a88e6755a84a">pop</a> ()</td></tr>
+<tr class="memdesc:a23eff250a1077d7a9838a88e6755a84a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the top element and remove it from the stack.  <a href="#a23eff250a1077d7a9838a88e6755a84a">More...</a><br/></td></tr>
 <tr class="separator:a23eff250a1077d7a9838a88e6755a84a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad85713b07820a24a6e781b32e18271e6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad85713b07820a24a6e781b32e18271e6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>count</b> ()</td></tr>
+<tr class="memitem:ad85713b07820a24a6e781b32e18271e6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Parsing_1_1Stack.html#ad85713b07820a24a6e781b32e18271e6">count</a> ()</td></tr>
+<tr class="memdesc:ad85713b07820a24a6e781b32e18271e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the current number of elements in the stack.  <a href="#ad85713b07820a24a6e781b32e18271e6">More...</a><br/></td></tr>
 <tr class="separator:ad85713b07820a24a6e781b32e18271e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -133,6 +135,102 @@ Public Attributes</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>$data</b> = array()</td></tr>
 <tr class="separator:ab508efbeda55b29432f6aefbb591ca10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Utility class, implementing a simple FIFO stack. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ad85713b07820a24a6e781b32e18271e6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Parsing\Stack::count </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the current number of elements in the stack. </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">int</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a13b5dc80388b7900af165e0822ebec93"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Parsing\Stack::peek </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the top element (without popping it) </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">mixed</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a23eff250a1077d7a9838a88e6755a84a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Parsing\Stack::pop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the top element and remove it from the stack. </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">mixed</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a50f3a135fdf9401b17494c50652b152a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Parsing\Stack::push </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$element</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Push an element onto the stack. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">mixed</td><td class="paramname">$element</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/MathParser/Parsing/Stack.php</li>
 </ul>
@@ -145,7 +243,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jan 1 2016 01:43:29 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 2 2016 22:29:58 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

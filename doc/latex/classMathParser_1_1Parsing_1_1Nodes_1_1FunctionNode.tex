@@ -1,6 +1,11 @@
 \hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode}{\section{Math\-Parser\textbackslash{}Parsing\textbackslash{}Nodes\textbackslash{}Function\-Node Class Reference}
 \label{classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode}\index{Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Function\-Node@{Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Function\-Node}}
 }
+
+
+A\-S\-T node representing a function applications (e.\-g.  
+
+
 Inheritance diagram for Math\-Parser\textbackslash{}Parsing\textbackslash{}Nodes\textbackslash{}Function\-Node\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -14,12 +19,12 @@ Inheritance diagram for Math\-Parser\textbackslash{}Parsing\textbackslash{}Nodes
 
 \item 
 \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode_a797c638dc3ef116100b5db449e7fb231}{get\-Name} ()
-\item 
-\hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode_acea27b2dadadaa202ddefb69fb3a2cdf}{{\bfseries get\-Operand} ()}\label{classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode_acea27b2dadadaa202ddefb69fb3a2cdf}
+\begin{DoxyCompactList}\small\item\em Return the name of the function. \end{DoxyCompactList}\item 
+\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode_acea27b2dadadaa202ddefb69fb3a2cdf}{get\-Operand} ()
+\begin{DoxyCompactList}\small\item\em Return the operand. \end{DoxyCompactList}\item 
+\hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode_a9796a0fdaf49525adc9ea539b4291835}{\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode_a9796a0fdaf49525adc9ea539b4291835}{accept} (\hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor}{Visitor} \$visitor)}\label{classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode_a9796a0fdaf49525adc9ea539b4291835}
 
-\item 
-\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode_a9796a0fdaf49525adc9ea539b4291835}{accept} (\hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor}{Visitor} \$visitor)
-\begin{DoxyCompactList}\small\item\em Single function in the Visitable interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Implementing the Visitable interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -32,29 +37,12 @@ Inheritance diagram for Math\-Parser\textbackslash{}Parsing\textbackslash{}Nodes
 \subsection*{Additional Inherited Members}
 
 
+\subsection{Detailed Description}
+A\-S\-T node representing a function applications (e.\-g. 
+
+sin(...)) 
+
 \subsection{Member Function Documentation}
-\hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode_a9796a0fdaf49525adc9ea539b4291835}{\index{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Function\-Node@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Function\-Node}!accept@{accept}}
-\index{accept@{accept}!MathParser::Parsing::Nodes::FunctionNode@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Function\-Node}}
-\subsubsection[{accept}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Function\-Node\-::accept (
-\begin{DoxyParamCaption}
-\item[{{\bf Visitor}}]{\$visitor}
-\end{DoxyParamCaption}
-)}}\label{classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode_a9796a0fdaf49525adc9ea539b4291835}
-
-
-Single function in the Visitable interface. 
-
-Calling the \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode_a9796a0fdaf49525adc9ea539b4291835}{accept()} function on a Visitable class, i.\-e. a \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1Node}{Node} (or subclass thereof) causes the supplied Visitor to traverse the A\-S\-T.
-
-
-\begin{DoxyParams}[1]{Parameters}
-Visitor & {\em \$visitor} & \\
-\hline
-\end{DoxyParams}
-
-
-Implements \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitable_a44418d4bae6a68865102c09dc167409f}{Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Visitors\textbackslash{}\-Visitable}.
-
 \hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode_a797c638dc3ef116100b5db449e7fb231}{\index{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Function\-Node@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Function\-Node}!get\-Name@{get\-Name}}
 \index{get\-Name@{get\-Name}!MathParser::Parsing::Nodes::FunctionNode@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Function\-Node}}
 \subsubsection[{get\-Name}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Function\-Node\-::get\-Name (
@@ -63,8 +51,28 @@ Implements \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitab
 \end{DoxyParamCaption}
 )}}\label{classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode_a797c638dc3ef116100b5db449e7fb231}
 
+
+Return the name of the function. 
+
+
 \begin{DoxyRetVals}{Return values}
-{\em mixed} & \\
+{\em string} & \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode_acea27b2dadadaa202ddefb69fb3a2cdf}{\index{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Function\-Node@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Function\-Node}!get\-Operand@{get\-Operand}}
+\index{get\-Operand@{get\-Operand}!MathParser::Parsing::Nodes::FunctionNode@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Function\-Node}}
+\subsubsection[{get\-Operand}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Function\-Node\-::get\-Operand (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode_acea27b2dadadaa202ddefb69fb3a2cdf}
+
+
+Return the operand. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1Node}{Node}} & \\
 \hline
 \end{DoxyRetVals}
 

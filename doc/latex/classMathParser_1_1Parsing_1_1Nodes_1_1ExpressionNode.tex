@@ -1,6 +1,11 @@
 \hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode}{\section{Math\-Parser\textbackslash{}Parsing\textbackslash{}Nodes\textbackslash{}Expression\-Node Class Reference}
 \label{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode}\index{Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Expression\-Node@{Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Expression\-Node}}
 }
+
+
+A\-S\-T node representing a binary operator.  
+
+
 Inheritance diagram for Math\-Parser\textbackslash{}Parsing\textbackslash{}Nodes\textbackslash{}Expression\-Node\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,26 +15,17 @@ Inheritance diagram for Math\-Parser\textbackslash{}Parsing\textbackslash{}Nodes
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_ad225055b7e075eabc33c0f7bfd4253cb}{{\bfseries \-\_\-\-\_\-construct} (\$left, \$operator=null, \$right=null)}\label{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_ad225055b7e075eabc33c0f7bfd4253cb}
-
-\item 
+\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_ad225055b7e075eabc33c0f7bfd4253cb}{\-\_\-\-\_\-construct} (\$left, \$operator=null, \$right=null)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_a8e50a23c59679015c5e45b723d7bcb7d}{get\-Left} ()
-\item 
-\hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_ac80c6f5b4094d659e1ac5fb20e81aa82}{{\bfseries set\-Left} (\$node)}\label{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_ac80c6f5b4094d659e1ac5fb20e81aa82}
-
-\item 
+\begin{DoxyCompactList}\small\item\em Return the first (left) operand. \end{DoxyCompactList}\item 
 \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_afeb588203d9912983be68c68aaad8a87}{get\-Operator} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Return the operator. \end{DoxyCompactList}\item 
 \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_af0a80f6914435eee930199efb29579dd}{get\-Right} ()
-\item 
-\hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_a59bc32c91eb22d0ba11be9ed63ed3c0f}{{\bfseries set\-Right} ()}\label{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_a59bc32c91eb22d0ba11be9ed63ed3c0f}
+\begin{DoxyCompactList}\small\item\em Return the second (right) operand. \end{DoxyCompactList}\item 
+\hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_a3794b9185ed7928df1f39ec42c557106}{\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_a3794b9185ed7928df1f39ec42c557106}{accept} (\hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor}{Visitor} \$visitor)}\label{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_a3794b9185ed7928df1f39ec42c557106}
 
-\item 
-\hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_a4b2cecccf464f7941fe87f66fd3dd9f1}{{\bfseries get\-Precedence} ()}\label{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_a4b2cecccf464f7941fe87f66fd3dd9f1}
-
-\item 
-\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_a3794b9185ed7928df1f39ec42c557106}{accept} (\hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor}{Visitor} \$visitor)
-\begin{DoxyCompactList}\small\item\em Single function in the Visitable interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Implementing the Visitable interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -41,36 +37,43 @@ Inheritance diagram for Math\-Parser\textbackslash{}Parsing\textbackslash{}Nodes
 \item 
 \hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_a6698fe89d391cd7b7dc84e4f1a06d2f4}{{\bfseries \$right}}\label{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_a6698fe89d391cd7b7dc84e4f1a06d2f4}
 
-\item 
-\hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_a9fb3d0c137cafcbe6e0fad1228717578}{{\bfseries \$precedence}}\label{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_a9fb3d0c137cafcbe6e0fad1228717578}
-
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
 
-\subsection{Member Function Documentation}
-\hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_a3794b9185ed7928df1f39ec42c557106}{\index{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Expression\-Node@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Expression\-Node}!accept@{accept}}
-\index{accept@{accept}!MathParser::Parsing::Nodes::ExpressionNode@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Expression\-Node}}
-\subsubsection[{accept}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Expression\-Node\-::accept (
+\subsection{Detailed Description}
+A\-S\-T node representing a binary operator. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_ad225055b7e075eabc33c0f7bfd4253cb}{\index{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Expression\-Node@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Expression\-Node}!\-\_\-\-\_\-construct@{\-\_\-\-\_\-construct}}
+\index{\-\_\-\-\_\-construct@{\-\_\-\-\_\-construct}!MathParser::Parsing::Nodes::ExpressionNode@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Expression\-Node}}
+\subsubsection[{\-\_\-\-\_\-construct}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Expression\-Node\-::\-\_\-\-\_\-construct (
 \begin{DoxyParamCaption}
-\item[{{\bf Visitor}}]{\$visitor}
+\item[{}]{\$left, }
+\item[{}]{\$operator = {\ttfamily null}, }
+\item[{}]{\$right = {\ttfamily null}}
 \end{DoxyParamCaption}
-)}}\label{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_a3794b9185ed7928df1f39ec42c557106}
+)}}\label{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_ad225055b7e075eabc33c0f7bfd4253cb}
 
 
-Single function in the Visitable interface. 
+Constructor. 
 
-Calling the \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_a3794b9185ed7928df1f39ec42c557106}{accept()} function on a Visitable class, i.\-e. a \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1Node}{Node} (or subclass thereof) causes the supplied Visitor to traverse the A\-S\-T.
+Construct a binary operator node from (one or) two operands and an operator.
+
+For convenience, the constructor accept int or float as operands, automatically converting these to Number\-Nodes
 
 
 \begin{DoxyParams}[1]{Parameters}
-Visitor & {\em \$visitor} & \\
+\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1Node}{Node} | null | int | float & {\em \$left} & First operand \\
+\hline
+ & {\em string} & operator Name of operator \\
+\hline
+\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1Node}{Node} | null | int | float & {\em \$right} & Second operand \\
 \hline
 \end{DoxyParams}
 
 
-Implements \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitable_a44418d4bae6a68865102c09dc167409f}{Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Visitors\textbackslash{}\-Visitable}.
-
+\subsection{Member Function Documentation}
 \hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_a8e50a23c59679015c5e45b723d7bcb7d}{\index{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Expression\-Node@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Expression\-Node}!get\-Left@{get\-Left}}
 \index{get\-Left@{get\-Left}!MathParser::Parsing::Nodes::ExpressionNode@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Expression\-Node}}
 \subsubsection[{get\-Left}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Expression\-Node\-::get\-Left (
@@ -79,8 +82,12 @@ Implements \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitab
 \end{DoxyParamCaption}
 )}}\label{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_a8e50a23c59679015c5e45b723d7bcb7d}
 
+
+Return the first (left) operand. 
+
+
 \begin{DoxyRetVals}{Return values}
-{\em \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1NumberNode}{Number\-Node}} & \\
+{\em Node$\vert$null} & \\
 \hline
 \end{DoxyRetVals}
 \hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_afeb588203d9912983be68c68aaad8a87}{\index{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Expression\-Node@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Expression\-Node}!get\-Operator@{get\-Operator}}
@@ -91,8 +98,12 @@ Implements \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitab
 \end{DoxyParamCaption}
 )}}\label{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_afeb588203d9912983be68c68aaad8a87}
 
+
+Return the operator. 
+
+
 \begin{DoxyRetVals}{Return values}
-{\em mixed} & \\
+{\em string} & \\
 \hline
 \end{DoxyRetVals}
 \hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_af0a80f6914435eee930199efb29579dd}{\index{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Expression\-Node@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Expression\-Node}!get\-Right@{get\-Right}}
@@ -103,8 +114,12 @@ Implements \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitab
 \end{DoxyParamCaption}
 )}}\label{classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode_af0a80f6914435eee930199efb29579dd}
 
+
+Return the second (right) operand. 
+
+
 \begin{DoxyRetVals}{Return values}
-{\em \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1NumberNode}{Number\-Node}} & \\
+{\em Node$\vert$null} & \\
 \hline
 \end{DoxyRetVals}
 

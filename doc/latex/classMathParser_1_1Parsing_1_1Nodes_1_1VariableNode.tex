@@ -1,6 +1,11 @@
 \hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode}{\section{Math\-Parser\textbackslash{}Parsing\textbackslash{}Nodes\textbackslash{}Variable\-Node Class Reference}
 \label{classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode}\index{Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Variable\-Node@{Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Variable\-Node}}
 }
+
+
+A\-S\-T node representing a variable.  
+
+
 Inheritance diagram for Math\-Parser\textbackslash{}Parsing\textbackslash{}Nodes\textbackslash{}Variable\-Node\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -14,9 +19,10 @@ Inheritance diagram for Math\-Parser\textbackslash{}Parsing\textbackslash{}Nodes
 
 \item 
 \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode_abab1fcd4af04ba2981749368d854cfc3}{get\-Name} ()
-\item 
-\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode_a1c41ef12cc6469a2de9c2de325cf6258}{accept} (\hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor}{Visitor} \$visitor)
-\begin{DoxyCompactList}\small\item\em Single function in the Visitable interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Return the name of the variable. \end{DoxyCompactList}\item 
+\hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode_a1c41ef12cc6469a2de9c2de325cf6258}{\hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode_a1c41ef12cc6469a2de9c2de325cf6258}{accept} (\hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor}{Visitor} \$visitor)}\label{classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode_a1c41ef12cc6469a2de9c2de325cf6258}
+
+\begin{DoxyCompactList}\small\item\em Implementing the Visitable interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -26,29 +32,10 @@ Inheritance diagram for Math\-Parser\textbackslash{}Parsing\textbackslash{}Nodes
 \subsection*{Additional Inherited Members}
 
 
+\subsection{Detailed Description}
+A\-S\-T node representing a variable. 
+
 \subsection{Member Function Documentation}
-\hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode_a1c41ef12cc6469a2de9c2de325cf6258}{\index{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Variable\-Node@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Variable\-Node}!accept@{accept}}
-\index{accept@{accept}!MathParser::Parsing::Nodes::VariableNode@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Variable\-Node}}
-\subsubsection[{accept}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Variable\-Node\-::accept (
-\begin{DoxyParamCaption}
-\item[{{\bf Visitor}}]{\$visitor}
-\end{DoxyParamCaption}
-)}}\label{classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode_a1c41ef12cc6469a2de9c2de325cf6258}
-
-
-Single function in the Visitable interface. 
-
-Calling the \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode_a1c41ef12cc6469a2de9c2de325cf6258}{accept()} function on a Visitable class, i.\-e. a \hyperlink{classMathParser_1_1Parsing_1_1Nodes_1_1Node}{Node} (or subclass thereof) causes the supplied Visitor to traverse the A\-S\-T.
-
-
-\begin{DoxyParams}[1]{Parameters}
-Visitor & {\em \$visitor} & \\
-\hline
-\end{DoxyParams}
-
-
-Implements \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitable_a44418d4bae6a68865102c09dc167409f}{Math\-Parser\textbackslash{}\-Interpreting\textbackslash{}\-Visitors\textbackslash{}\-Visitable}.
-
 \hypertarget{classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode_abab1fcd4af04ba2981749368d854cfc3}{\index{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Variable\-Node@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Variable\-Node}!get\-Name@{get\-Name}}
 \index{get\-Name@{get\-Name}!MathParser::Parsing::Nodes::VariableNode@{Math\-Parser\-::\-Parsing\-::\-Nodes\-::\-Variable\-Node}}
 \subsubsection[{get\-Name}]{\setlength{\rightskip}{0pt plus 5cm}Math\-Parser\textbackslash{}\-Parsing\textbackslash{}\-Nodes\textbackslash{}\-Variable\-Node\-::get\-Name (
@@ -57,8 +44,12 @@ Implements \hyperlink{interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitab
 \end{DoxyParamCaption}
 )}}\label{classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode_abab1fcd4af04ba2981749368d854cfc3}
 
+
+Return the name of the variable. 
+
+
 \begin{DoxyRetVals}{Return values}
-{\em mixed} & \\
+{\em string} & \\
 \hline
 \end{DoxyRetVals}
 

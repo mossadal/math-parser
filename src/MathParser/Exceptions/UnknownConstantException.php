@@ -9,7 +9,13 @@
 
  namespace MathParser\Exceptions;
 
-class UnknownConstantException extends \Exception
+ /**
+  * Exception thrown when parsing or evaluating expressions containing an
+  * unknown constant.
+  *
+  * This should not happen under normal circumstances.
+  */
+class UnknownConstantException extends MathParserException
 {
     public function __construct($operator)
     {

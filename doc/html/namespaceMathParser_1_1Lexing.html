@@ -54,7 +54,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li>
@@ -85,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -107,7 +106,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html" title="Generic very simple lexer, capable of matching tokens defined by regular expressions. ">Lexer</a> and <a class="el" href="classMathParser_1_1Lexing_1_1Token.html">Token</a> related classes.  
+<p><a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html" title="Generic very simple lexer, capable of matching tokens defined by regular expressions. ">Lexer</a> and <a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> related classes.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -119,18 +118,23 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html" title="Generic very simple lexer, capable of matching tokens defined by regular expressions. ">Lexer</a> capable of recognizing all standard mathematical expressions.  <a href="classMathParser_1_1Lexing_1_1StdMathLexer.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Lexing_1_1Token.html">Token</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> class.  <a href="classMathParser_1_1Lexing_1_1Token.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Lexing_1_1TokenAssociativity.html">TokenAssociativity</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defining associativity of tokens.  <a href="classMathParser_1_1Lexing_1_1TokenAssociativity.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Lexing_1_1TokenDefinition.html">TokenDefinition</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> definitions using regular expressions to match input.  <a href="classMathParser_1_1Lexing_1_1TokenDefinition.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Lexing_1_1TokenPrecedence.html">TokenPrecedence</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> precedence definitions.  <a href="classMathParser_1_1Lexing_1_1TokenPrecedence.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Lexing_1_1TokenType.html">TokenType</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> type values.  <a href="classMathParser_1_1Lexing_1_1TokenType.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html" title="Generic very simple lexer, capable of matching tokens defined by regular expressions. ">Lexer</a> and <a class="el" href="classMathParser_1_1Lexing_1_1Token.html">Token</a> related classes. </p>
+<div class="textblock"><p><a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html" title="Generic very simple lexer, capable of matching tokens defined by regular expressions. ">Lexer</a> and <a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> related classes. </p>
 <p><a href="https://en.wikipedia.org/wiki/Lexical_analysis">Lexical analysis</a> or <em>lexing</em> is the process of converting an input string into a sequence of tokens, representing discrete parts of the input each carrying certain meaning. </p>
 </div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
@@ -141,7 +145,7 @@ Classes</h2></td></tr>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jan 1 2016 01:43:29 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 2 2016 22:29:58 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

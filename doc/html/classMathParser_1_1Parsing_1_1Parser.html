@@ -54,7 +54,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li>
@@ -88,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -99,43 +98,53 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>MathParser</b></li><li class="navelem"><b>Parsing</b></li><li class="navelem"><a class="el" href="classMathParser_1_1Parsing_1_1Parser.html">Parser</a></li>  </ul>
+<li class="navelem"><b>MathParser</b></li><li class="navelem"><a class="el" href="namespaceMathParser_1_1Parsing.html">Parsing</a></li><li class="navelem"><a class="el" href="classMathParser_1_1Parsing_1_1Parser.html">Parser</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
-<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classMathParser_1_1Parsing_1_1Parser-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">MathParser\Parsing\Parser Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Mathematical expression parser, based on the shunting yard algorithm.  
+ <a href="classMathParser_1_1Parsing_1_1Parser.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a556c64ee108e141b442badafbd3b1164"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a556c64ee108e141b442badafbd3b1164"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>parse</b> (array $tokens)</td></tr>
+<tr class="memitem:a556c64ee108e141b442badafbd3b1164"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Parsing_1_1Parser.html#a556c64ee108e141b442badafbd3b1164">parse</a> (array $tokens)</td></tr>
+<tr class="memdesc:a556c64ee108e141b442badafbd3b1164"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse list of tokens.  <a href="#a556c64ee108e141b442badafbd3b1164">More...</a><br/></td></tr>
 <tr class="separator:a556c64ee108e141b442badafbd3b1164"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
-Private Member Functions</h2></td></tr>
-<tr class="memitem:a5e95881d4b53730565bf2205fa621086"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5e95881d4b53730565bf2205fa621086"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ShuntingYard</b> (array $tokens)</td></tr>
-<tr class="separator:a5e95881d4b53730565bf2205fa621086"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2572d3c71a4fd638bb0e9188c2e7f7e9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2572d3c71a4fd638bb0e9188c2e7f7e9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>handleExpression</b> ($token)</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a2572d3c71a4fd638bb0e9188c2e7f7e9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Parsing_1_1Parser.html#a2572d3c71a4fd638bb0e9188c2e7f7e9">handleExpression</a> ($token)</td></tr>
+<tr class="memdesc:a2572d3c71a4fd638bb0e9188c2e7f7e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an appropriate Node from the corresponding token.  <a href="#a2572d3c71a4fd638bb0e9188c2e7f7e9">More...</a><br/></td></tr>
 <tr class="separator:a2572d3c71a4fd638bb0e9188c2e7f7e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0896b00bcb6831560faea77f5ff7831c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0896b00bcb6831560faea77f5ff7831c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>filterTokens</b> (array $tokens)</td></tr>
+<tr class="memitem:a0896b00bcb6831560faea77f5ff7831c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Parsing_1_1Parser.html#a0896b00bcb6831560faea77f5ff7831c">filterTokens</a> (array $tokens)</td></tr>
+<tr class="memdesc:a0896b00bcb6831560faea77f5ff7831c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove Whitespace from the token list.  <a href="#a0896b00bcb6831560faea77f5ff7831c">More...</a><br/></td></tr>
 <tr class="separator:a0896b00bcb6831560faea77f5ff7831c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74e79e5a38c1edbc919cd66c50712cd8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Parsing_1_1Parser.html#a74e79e5a38c1edbc919cd66c50712cd8">parseImplicitMultiplication</a> (array $tokens)</td></tr>
+<tr class="memdesc:a74e79e5a38c1edbc919cd66c50712cd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert multiplication tokens where needed (taking care of implicit mulitplication).  <a href="#a74e79e5a38c1edbc919cd66c50712cd8">More...</a><br/></td></tr>
+<tr class="separator:a74e79e5a38c1edbc919cd66c50712cd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
-Private Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:ab559cd696a23ad1eeddb69eb6a56a067"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Parsing_1_1Parser.html#ab559cd696a23ad1eeddb69eb6a56a067">allowImplicitMultiplication</a> ()</td></tr>
+<tr class="memdesc:ab559cd696a23ad1eeddb69eb6a56a067"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine if the parser allows implicit multiplication.  <a href="#ab559cd696a23ad1eeddb69eb6a56a067">More...</a><br/></td></tr>
+<tr class="separator:ab559cd696a23ad1eeddb69eb6a56a067"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
 <tr class="memitem:ab20fd2f0971594016b8b631d29532284"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab20fd2f0971594016b8b631d29532284"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Parsing_1_1Parser.html#ab20fd2f0971594016b8b631d29532284">$tokens</a></td></tr>
-<tr class="memdesc:ab20fd2f0971594016b8b631d29532284"><td class="mdescLeft">&#160;</td><td class="mdescRight">[] <br/></td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>$tokens</b></td></tr>
 <tr class="separator:ab20fd2f0971594016b8b631d29532284"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a691e6b115de82b04fa5b2fc828721b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6a691e6b115de82b04fa5b2fc828721b"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>$operatorStack</b></td></tr>
@@ -143,7 +152,259 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a761f3ca46141d5e39e620520a2a876fa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a761f3ca46141d5e39e620520a2a876fa"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>$operandStack</b></td></tr>
 <tr class="separator:a761f3ca46141d5e39e620520a2a876fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a5e95881d4b53730565bf2205fa621086"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Parsing_1_1Parser.html#a5e95881d4b53730565bf2205fa621086">ShuntingYard</a> (array $tokens)</td></tr>
+<tr class="memdesc:a5e95881d4b53730565bf2205fa621086"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of the shunting yard parsing algorithm.  <a href="#a5e95881d4b53730565bf2205fa621086">More...</a><br/></td></tr>
+<tr class="separator:a5e95881d4b53730565bf2205fa621086"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Mathematical expression parser, based on the shunting yard algorithm. </p>
+<p>Parse a token string into an abstract syntax tree (AST).</p>
+<p>As the parser loops over the individual tokens, two stacks are kept up to date. One stack ($operatorStack) consists of hitherto unhandled tokens corresponding to ''operators'' (unary and binary operators, function applications and parenthesis) and a stack of parsed sub-expressions (the $operandStack).</p>
+<p>If the current token is a terminal token (number, variable or constant), a corresponding node is pushed onto the operandStack.</p>
+<p>Otherwise, the precedence of the current token is compared to the top element(t) on the operatorStack, and as long as the current token has lower precedence, we keep popping operators from the stack to constuct more complicated subexpressions together with the top items on the operandStack.</p>
+<p>Once the token list is empty, we pop the remaining operators as above, and if the formula was well-formed, the only thing remaining on the operandStack is a completely parsed AST, which we return. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ab559cd696a23ad1eeddb69eb6a56a067"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Parsing\Parser::allowImplicitMultiplication </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Determine if the parser allows implicit multiplication. </p>
+<p>Create a subclass of <a class="el" href="classMathParser_1_1Parsing_1_1Parser.html" title="Mathematical expression parser, based on the shunting yard algorithm. ">Parser</a>, overriding this function, returning false instead to diallow implicit multiplication.</p>
+<h3>Example:</h3>
+<div class="fragment"><div class="line"><span class="keyword">class </span>ParserWithoutImplictMultiplication <span class="keyword">extends</span> Parser {</div>
+<div class="line">  <span class="keyword">protected</span> <span class="keyword">function</span> <a class="code" href="classMathParser_1_1Parsing_1_1Parser.html#ab559cd696a23ad1eeddb69eb6a56a067">allowImplicitMultiplication</a>() {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line">$lexer = <span class="keyword">new</span> StdMathLexer();</div>
+<div class="line">$tokens = $lexer-&gt;tokenize(<span class="stringliteral">&#39;2x&#39;</span>);</div>
+<div class="line">$parser = <span class="keyword">new</span> ParserWithoutImplicitMultiplication();</div>
+<div class="line">$node = $parser-&gt;parse($tokens); <span class="comment">// Throws a SyntaxErrorException</span></div>
+</div><!-- fragment --><dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">boolean</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a0896b00bcb6831560faea77f5ff7831c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Parsing\Parser::filterTokens </td>
+          <td>(</td>
+          <td class="paramtype">array&#160;</td>
+          <td class="paramname"><em>$tokens</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Remove Whitespace from the token list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Token[]</td><td>$tokens Input list of tokens </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Token[]</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a2572d3c71a4fd638bb0e9188c2e7f7e9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Parsing\Parser::handleExpression </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$token</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create an appropriate Node from the corresponding token. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">Token</td><td class="paramname">$token</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Node</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">SyntaxErrorException</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a556c64ee108e141b442badafbd3b1164"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Parsing\Parser::parse </td>
+          <td>(</td>
+          <td class="paramtype">array&#160;</td>
+          <td class="paramname"><em>$tokens</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parse list of tokens. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Token[]</td><td>$tokens </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Node</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a74e79e5a38c1edbc919cd66c50712cd8"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Parsing\Parser::parseImplicitMultiplication </td>
+          <td>(</td>
+          <td class="paramtype">array&#160;</td>
+          <td class="paramname"><em>$tokens</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Insert multiplication tokens where needed (taking care of implicit mulitplication). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Token[]</td><td>$tokens Input list of tokens </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Token[]</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a5e95881d4b53730565bf2205fa621086"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Parsing\Parser::ShuntingYard </td>
+          <td>(</td>
+          <td class="paramtype">array&#160;</td>
+          <td class="paramname"><em>$tokens</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implementation of the shunting yard parsing algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Token[]</td><td>$tokens </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Node</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">SyntaxErrorException</td><td></td></tr>
+    <tr><td class="paramname">ParenthesisMismatchException</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/MathParser/Parsing/Parser.php</li>
 </ul>
@@ -156,7 +417,7 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jan 1 2016 01:43:29 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 2 2016 22:29:58 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

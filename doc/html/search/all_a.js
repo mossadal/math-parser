@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['latexprinter',['LaTeXPrinter',['../classMathParser_1_1Interpreting_1_1LaTeXPrinter.html',1,'MathParser::Interpreting']]],
-  ['lexer',['Lexer',['../classMathParser_1_1Lexing_1_1Lexer.html',1,'MathParser::Lexing']]]
+  ['isoperator',['isOperator',['../classMathParser_1_1Lexing_1_1Token.html#aa75fbfc8c2131200c664a6f9ab724915',1,'MathParser::Lexing::Token']]]
 ];

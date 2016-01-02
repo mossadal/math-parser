@@ -1,6 +1,11 @@
 \hypertarget{classMathParser_1_1Lexing_1_1TokenDefinition}{\section{Math\-Parser\textbackslash{}Lexing\textbackslash{}Token\-Definition Class Reference}
 \label{classMathParser_1_1Lexing_1_1TokenDefinition}\index{Math\-Parser\textbackslash{}\-Lexing\textbackslash{}\-Token\-Definition@{Math\-Parser\textbackslash{}\-Lexing\textbackslash{}\-Token\-Definition}}
 }
+
+
+\hyperlink{classMathParser_1_1Lexing_1_1Token}{Token} definitions using regular expressions to match input.  
+
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -29,6 +34,25 @@
 
 \end{DoxyCompactItemize}
 
+
+\subsection{Detailed Description}
+\hyperlink{classMathParser_1_1Lexing_1_1Token}{Token} definitions using regular expressions to match input. 
+
+To get the \hyperlink{classMathParser_1_1Lexing_1_1Lexer}{Lexer} to recognize tokens, they need to be defined. This is the task of the \hyperlink{classMathParser_1_1Lexing_1_1TokenDefinition}{Token\-Definition} class. Each \hyperlink{classMathParser_1_1Lexing_1_1TokenDefinition}{Token\-Definition} consists of a regular expression used to match the input string, a corresponding token type and an optional token value (making it possible to standarize the token value for synonyms, e.\-g. both ln and log can be tokenized into the same token with value 'log'.)
+
+\paragraph*{Example usage (excerpt from \hyperlink{classMathParser_1_1Lexing_1_1StdMathLexer}{Std\-Math\-Lexer})\-:}
+
+
+\begin{DoxyCode}
+$lexer = \textcolor{keyword}{new} Lexer();
+$lexer->add(\textcolor{keyword}{new} TokenDefinition(\textcolor{stringliteral}{'/\(\backslash\)d+\(\backslash\).\(\backslash\)d+/'}, TokenType::RealNumber));
+$lexer->add(\textcolor{keyword}{new} TokenDefinition(\textcolor{stringliteral}{'/\(\backslash\)d+/'}, TokenType::PosInt));
+$lexer->add(\textcolor{keyword}{new} TokenDefinition(\textcolor{stringliteral}{'/sin/'}, TokenType::FunctionName));
+$lexer->add(\textcolor{keyword}{new} TokenDefinition(\textcolor{stringliteral}{'/arcsin|asin/'}, TokenType::FunctionName, \textcolor{stringliteral}{'arcsin'}));
+$lexer->add(\textcolor{keyword}{new} TokenDefinition(\textcolor{stringliteral}{'/\(\backslash\)+/'}, TokenType::AdditionOperator));
+$lexer->add(\textcolor{keyword}{new} TokenDefinition(\textcolor{stringliteral}{'/\(\backslash\)-/'}, TokenType::SubtractionOperator));
+\end{DoxyCode}
+ 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 

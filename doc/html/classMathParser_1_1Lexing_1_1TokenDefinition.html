@@ -54,7 +54,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li>
@@ -88,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -112,6 +111,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">MathParser\Lexing\TokenDefinition Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> definitions using regular expressions to match input.  
+ <a href="classMathParser_1_1Lexing_1_1TokenDefinition.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -140,7 +142,18 @@ Private Attributes</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>$tokenType</b></td></tr>
 <tr class="separator:ae5dacb8bc549085fd49a815fb2a07bc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> definitions using regular expressions to match input. </p>
+<p>To get the <a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html" title="Generic very simple lexer, capable of matching tokens defined by regular expressions. ">Lexer</a> to recognize tokens, they need to be defined. This is the task of the <a class="el" href="classMathParser_1_1Lexing_1_1TokenDefinition.html" title="Token definitions using regular expressions to match input. ">TokenDefinition</a> class. Each <a class="el" href="classMathParser_1_1Lexing_1_1TokenDefinition.html" title="Token definitions using regular expressions to match input. ">TokenDefinition</a> consists of a regular expression used to match the input string, a corresponding token type and an optional token value (making it possible to standarize the token value for synonyms, e.g. both ln and log can be tokenized into the same token with value 'log'.)</p>
+<h3>Example usage (excerpt from <a class="el" href="classMathParser_1_1Lexing_1_1StdMathLexer.html" title="Lexer capable of recognizing all standard mathematical expressions. ">StdMathLexer</a>):</h3>
+<div class="fragment"><div class="line">$lexer = <span class="keyword">new</span> Lexer();</div>
+<div class="line">$lexer-&gt;add(<span class="keyword">new</span> TokenDefinition(<span class="stringliteral">&#39;/\d+\.\d+/&#39;</span>, TokenType::RealNumber));</div>
+<div class="line">$lexer-&gt;add(<span class="keyword">new</span> TokenDefinition(<span class="stringliteral">&#39;/\d+/&#39;</span>, TokenType::PosInt));</div>
+<div class="line">$lexer-&gt;add(<span class="keyword">new</span> TokenDefinition(<span class="stringliteral">&#39;/sin/&#39;</span>, TokenType::FunctionName));</div>
+<div class="line">$lexer-&gt;add(<span class="keyword">new</span> TokenDefinition(<span class="stringliteral">&#39;/arcsin|asin/&#39;</span>, TokenType::FunctionName, <span class="stringliteral">&#39;arcsin&#39;</span>));</div>
+<div class="line">$lexer-&gt;add(<span class="keyword">new</span> TokenDefinition(<span class="stringliteral">&#39;/\+/&#39;</span>, TokenType::AdditionOperator));</div>
+<div class="line">$lexer-&gt;add(<span class="keyword">new</span> TokenDefinition(<span class="stringliteral">&#39;/\-/&#39;</span>, TokenType::SubtractionOperator));</div>
+</div><!-- fragment --> </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/MathParser/Lexing/TokenDefinition.php</li>
 </ul>
 </div><!-- contents -->
@@ -152,7 +165,7 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jan 1 2016 01:43:29 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 2 2016 22:29:58 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -54,7 +54,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li>
@@ -88,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -126,7 +125,7 @@ Inheritance diagram for MathParser\Lexing\StdMathLexer:</div>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_methods_classMathParser_1_1Lexing_1_1Lexer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classMathParser_1_1Lexing_1_1Lexer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html">MathParser\Lexing\Lexer</a></td></tr>
 <tr class="memitem:aa95d42b7a757af15348f0103e2db3787 inherit pub_methods_classMathParser_1_1Lexing_1_1Lexer"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html#aa95d42b7a757af15348f0103e2db3787">add</a> (<a class="el" href="classMathParser_1_1Lexing_1_1TokenDefinition.html">TokenDefinition</a> $tokenDefinition)</td></tr>
-<tr class="memdesc:aa95d42b7a757af15348f0103e2db3787 inherit pub_methods_classMathParser_1_1Lexing_1_1Lexer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a <a class="el" href="classMathParser_1_1Lexing_1_1Token.html">Token</a> to the list of tokens recognized by the <a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html" title="Generic very simple lexer, capable of matching tokens defined by regular expressions. ">Lexer</a>.  <a href="#aa95d42b7a757af15348f0103e2db3787">More...</a><br/></td></tr>
+<tr class="memdesc:aa95d42b7a757af15348f0103e2db3787 inherit pub_methods_classMathParser_1_1Lexing_1_1Lexer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a <a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> to the list of tokens recognized by the <a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html" title="Generic very simple lexer, capable of matching tokens defined by regular expressions. ">Lexer</a>.  <a href="#aa95d42b7a757af15348f0103e2db3787">More...</a><br/></td></tr>
 <tr class="separator:aa95d42b7a757af15348f0103e2db3787 inherit pub_methods_classMathParser_1_1Lexing_1_1Lexer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28038b866d03c73744dd9183326a4ae3 inherit pub_methods_classMathParser_1_1Lexing_1_1Lexer"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html#a28038b866d03c73744dd9183326a4ae3">tokenize</a> ($input)</td></tr>
 <tr class="memdesc:a28038b866d03c73744dd9183326a4ae3 inherit pub_methods_classMathParser_1_1Lexing_1_1Lexer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an input string to a list of tokens.  <a href="#a28038b866d03c73744dd9183326a4ae3">More...</a><br/></td></tr>
@@ -134,7 +133,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html" title="Generic very simple lexer, capable of matching tokens defined by regular expressions. ">Lexer</a> capable of recognizing all standard mathematical expressions. </p>
-<p>Subclass of the generic <a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html" title="Generic very simple lexer, capable of matching tokens defined by regular expressions. ">Lexer</a>, with <a class="el" href="classMathParser_1_1Lexing_1_1TokenDefinition.html">TokenDefinition</a> patterns for numbers, elementary functions, arithmetic operations and variables.</p>
+<p>Subclass of the generic <a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html" title="Generic very simple lexer, capable of matching tokens defined by regular expressions. ">Lexer</a>, with <a class="el" href="classMathParser_1_1Lexing_1_1TokenDefinition.html" title="Token definitions using regular expressions to match input. ">TokenDefinition</a> patterns for numbers, elementary functions, arithmetic operations and variables.</p>
 <h3>Recognized tokens</h3>
 <ul>
 <li><code>/?\d+/</code> matching integers matching</li>
@@ -183,7 +182,7 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jan 1 2016 01:43:29 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 2 2016 22:29:58 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

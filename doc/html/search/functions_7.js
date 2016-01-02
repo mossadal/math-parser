@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['setvariables',['setVariables',['../classMathParser_1_1Interpreting_1_1Evaluator.html#ada67630eccaad9b2c496eaf320b9303c',1,'MathParser::Interpreting::Evaluator']]]
+  ['handleexpression',['handleExpression',['../classMathParser_1_1Parsing_1_1Parser.html#a2572d3c71a4fd638bb0e9188c2e7f7e9',1,'MathParser::Parsing::Parser']]]
 ];

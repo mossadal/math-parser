@@ -11,6 +11,9 @@ namespace MathParser\Parsing\Nodes;
 
 use MathParser\Interpreting\Visitors\Visitor;
 
+/**
+ * AST node representing a variable
+ */
 class VariableNode extends Node
 {
     private $name;
@@ -21,13 +24,17 @@ class VariableNode extends Node
     }
 
     /**
-     * @return mixed
+     * Return the name of the variable
+     * @return string
      */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * Implementing the Visitable interface.
+     */
     public function accept(Visitor $visitor)
     {
         return $visitor->visitVariableNode($this);

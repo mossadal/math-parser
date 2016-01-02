@@ -54,7 +54,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li>
@@ -88,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -99,7 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>MathParser</b></li><li class="navelem"><b>Parsing</b></li><li class="navelem"><b>Nodes</b></li><li class="navelem"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode.html">VariableNode</a></li>  </ul>
+<li class="navelem"><b>MathParser</b></li><li class="navelem"><a class="el" href="namespaceMathParser_1_1Parsing.html">Parsing</a></li><li class="navelem"><a class="el" href="namespaceMathParser_1_1Parsing_1_1Nodes.html">Nodes</a></li><li class="navelem"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode.html">VariableNode</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -113,8 +112,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>$name</b> (defined in <a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode.html">MathParser\Parsing\Nodes\VariableNode</a>)</td><td class="entry"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode.html">MathParser\Parsing\Nodes\VariableNode</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr bgcolor="#f0f0f0"><td class="entry"><b>__construct</b>($name) (defined in <a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode.html">MathParser\Parsing\Nodes\VariableNode</a>)</td><td class="entry"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode.html">MathParser\Parsing\Nodes\VariableNode</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode.html#a1c41ef12cc6469a2de9c2de325cf6258">accept</a>(Visitor $visitor)</td><td class="entry"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode.html">MathParser\Parsing\Nodes\VariableNode</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>compareNodes</b>($node1, $node2) (defined in <a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1Node.html">MathParser\Parsing\Nodes\Node</a>)</td><td class="entry"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1Node.html">MathParser\Parsing\Nodes\Node</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>complexity</b>() (defined in <a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1Node.html">MathParser\Parsing\Nodes\Node</a>)</td><td class="entry"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1Node.html">MathParser\Parsing\Nodes\Node</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1Node.html#a9d672f21f7fa25a3cfe0a940d3643b97">compareNodes</a>($node1, $node2)</td><td class="entry"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1Node.html">MathParser\Parsing\Nodes\Node</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1Node.html#a607d20250ecf48ac6842531cde46daff">complexity</a>()</td><td class="entry"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1Node.html">MathParser\Parsing\Nodes\Node</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1Node.html#aa365c3dd42885fc67f00f88578994788">evaluate</a>($variables)</td><td class="entry"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1Node.html">MathParser\Parsing\Nodes\Node</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>factory</b>(Token $token) (defined in <a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1Node.html">MathParser\Parsing\Nodes\Node</a>)</td><td class="entry"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1Node.html">MathParser\Parsing\Nodes\Node</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
   <tr><td class="entry"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode.html#abab1fcd4af04ba2981749368d854cfc3">getName</a>()</td><td class="entry"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode.html">MathParser\Parsing\Nodes\VariableNode</a></td><td class="entry"></td></tr>
@@ -127,7 +126,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jan 1 2016 01:43:30 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 2 2016 22:29:58 for math-parser by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

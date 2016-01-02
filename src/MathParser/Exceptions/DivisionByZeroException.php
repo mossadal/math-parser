@@ -7,9 +7,12 @@
  *
  */
 
- namespace MathParser\Exceptions;
+namespace MathParser\Exceptions;
 
-class DivisionByZeroException extends \Exception
+/**
+ * Exception thrown when evaluating expressions containing a division by zero.
+ */
+class DivisionByZeroException extends MathParserException
 {
     public function __construct()
     {
