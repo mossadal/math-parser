@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['exceptions',['Exceptions',['../namespaceMathParser_1_1Exceptions.html',1,'MathParser']]],
   ['interpreting',['Interpreting',['../namespaceMathParser_1_1Interpreting.html',1,'MathParser']]],
   ['lexing',['Lexing',['../namespaceMathParser_1_1Lexing.html',1,'MathParser']]],
   ['mathparserexception',['MathParserException',['../classMathParser_1_1Exceptions_1_1MathParserException.html',1,'MathParser::Exceptions']]],

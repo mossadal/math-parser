@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
         <meta name="generator" content="Doxygen 1.8.6"/>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <title>math-parser: MathParser\Lexing Namespace Reference</title>
+        <title>math-parser: MathParser\Exceptions Namespace Reference</title>
         <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
         <script type="text/javascript" src="dynsections.js"></script>
         <link href="search/search.css" rel="stylesheet" type="text/css"/>
@@ -84,47 +84,55 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>MathParser</b></li><li class="navelem"><a class="el" href="namespaceMathParser_1_1Lexing.html">Lexing</a></li>  </ul>
+<li class="navelem"><b>MathParser</b></li><li class="navelem"><a class="el" href="namespaceMathParser_1_1Exceptions.html">Exceptions</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle">
-<div class="title">MathParser\Lexing Namespace Reference</div>  </div>
+<div class="title">MathParser\Exceptions Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html" title="Generic very simple lexer, capable of matching tokens defined by regular expressions. ">Lexer</a> and <a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> related classes.  
+<p><a class="el" href="namespaceMathParser_1_1Exceptions.html" title="Exceptions thrown by the MathParser library. ">Exceptions</a> thrown by the MathParser library.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html">Lexer</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic very simple lexer, capable of matching tokens defined by regular expressions.  <a href="classMathParser_1_1Lexing_1_1Lexer.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Exceptions_1_1DivisionByZeroException.html">DivisionByZeroException</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exception thrown when evaluating expressions containing a division by zero.  <a href="classMathParser_1_1Exceptions_1_1DivisionByZeroException.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Lexing_1_1StdMathLexer.html">StdMathLexer</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html" title="Generic very simple lexer, capable of matching tokens defined by regular expressions. ">Lexer</a> capable of recognizing all standard mathematical expressions.  <a href="classMathParser_1_1Lexing_1_1StdMathLexer.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Exceptions_1_1MathParserException.html">MathParserException</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for the exceptions thrown by the MathParser library.  <a href="classMathParser_1_1Exceptions_1_1MathParserException.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Lexing_1_1Token.html">Token</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> class.  <a href="classMathParser_1_1Lexing_1_1Token.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Exceptions_1_1ParenthesisMismatchException.html">ParenthesisMismatchException</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exception thrown when parsing expressions having non-matching left and right parentheses.  <a href="classMathParser_1_1Exceptions_1_1ParenthesisMismatchException.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Lexing_1_1TokenAssociativity.html">TokenAssociativity</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defining associativity of tokens.  <a href="classMathParser_1_1Lexing_1_1TokenAssociativity.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Exceptions_1_1SyntaxErrorException.html">SyntaxErrorException</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exception thrown when parsing expressions that are not well-formed.  <a href="classMathParser_1_1Exceptions_1_1SyntaxErrorException.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Lexing_1_1TokenDefinition.html">TokenDefinition</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> definitions using regular expressions to match input.  <a href="classMathParser_1_1Lexing_1_1TokenDefinition.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Exceptions_1_1UnknownConstantException.html">UnknownConstantException</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exception thrown when parsing or evaluating expressions containing an unknown constant.  <a href="classMathParser_1_1Exceptions_1_1UnknownConstantException.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Lexing_1_1TokenPrecedence.html">TokenPrecedence</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> precedence definitions.  <a href="classMathParser_1_1Lexing_1_1TokenPrecedence.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Exceptions_1_1UnknownFunctionException.html">UnknownFunctionException</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exception thrown when parsing or evaluating expressions containing an unknown function symbol.  <a href="classMathParser_1_1Exceptions_1_1UnknownFunctionException.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Lexing_1_1TokenType.html">TokenType</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> type values.  <a href="classMathParser_1_1Lexing_1_1TokenType.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Exceptions_1_1UnknownNodeException.html">UnknownNodeException</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exception thrown when parsing or evaluating expressions containing an unknown node type.  <a href="classMathParser_1_1Exceptions_1_1UnknownNodeException.html#details">More...</a><br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Exceptions_1_1UnknownOperatorException.html">UnknownOperatorException</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exception thrown when parsing or evaluating expressions containing an unknown oprator.  <a href="classMathParser_1_1Exceptions_1_1UnknownOperatorException.html#details">More...</a><br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Exceptions_1_1UnknownTokenException.html">UnknownTokenException</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exception thrown when tokenizing expressions containing illegal characters.  <a href="classMathParser_1_1Exceptions_1_1UnknownTokenException.html#details">More...</a><br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Exceptions_1_1UnknownVariableException.html">UnknownVariableException</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exception thrown when parsing or evaluating expressions containing an unknown or undefined variable.  <a href="classMathParser_1_1Exceptions_1_1UnknownVariableException.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html" title="Generic very simple lexer, capable of matching tokens defined by regular expressions. ">Lexer</a> and <a class="el" href="classMathParser_1_1Lexing_1_1Token.html" title="Token class. ">Token</a> related classes. </p>
-<p><a href="https://en.wikipedia.org/wiki/Lexical_analysis">Lexical analysis</a> or <em>lexing</em> is the process of converting an input string into a sequence of tokens, representing discrete parts of the input each carrying certain meaning. </p>
+<div class="textblock"><p><a class="el" href="namespaceMathParser_1_1Exceptions.html" title="Exceptions thrown by the MathParser library. ">Exceptions</a> thrown by the MathParser library. </p>
 </div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->

@@ -4,5 +4,4 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-UnknownVariableException	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownVariableException.php	/^class UnknownVariableException extends MathParserException$/;"	class	line:16
-__construct	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownVariableException.php	/^    public function __construct($variable)$/;"	function	line:18
+getOriginalWidthOfImg	/Users/frankw/Sites/math-parser/doc/html/doxy-boot.js	/^	function getOriginalWidthOfImg(img_element) {$/;"	function	line:83

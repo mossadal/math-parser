@@ -2,18 +2,14 @@ h1, .h1, h2, .h2, h3, .h3{
     font-weight: 200 !important;
 }
 
-#navrow1, #navrow2, #navrow3, #navrow4, #navrow5{
-    border-bottom: 1px solid #EEEEEE;
-}
-
 .adjust-right {
 margin-left: 30px !important;
 font-size: 1.15em !important;
 }
-.navbar{
- border: 0px solid #222 !important;
-}
 
+nav {
+    background: #f0f0f0;
+}
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -253,3 +249,19 @@ blockquote {
     padding: 0 12px 0 16px;
 }
 
+.menu-divider {
+    height: 50px;
+    margin: 0 9px !important;
+    border-right: 1px solid #222222;
+    border-left: 1px solid #111111;
+}
+
+@media (max-width: 767px) {
+    .navbar-collapse .nav > .divider-vertical {
+        display: none;
+     }
+}
+
+li.subactive a span {
+    border-bottom: 2px solid #808080;
+}

@@ -1,27 +1,3 @@
-html	/Users/frankw/Sites/math-parser/doxygen/header.html	/^<html xmlns="http:\/\/www.w3.org\/1999\/xhtml">$/;"	function	line:3
-head	/Users/frankw/Sites/math-parser/doxygen/header.html	/^    <head>$/;"	function	line:4
-meta	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <meta http-equiv="X-UA-Compatible" content="IE=edge">$/;"	function	line:5
-meta	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <meta name="viewport" content="width=device-width, initial-scale=1">$/;"	function	line:7
-meta	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <meta http-equiv="Content-Type" content="text\/xhtml;charset=UTF-8"\/>$/;"	function	line:9
-meta	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <meta name="generator" content="Doxygen $doxygenversion"\/>$/;"	function	line:10
-script	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <script type="text\/javascript" src="https:\/\/code.jquery.com\/jquery-2.1.1.min.js"><\/script>$/;"	function	line:12
-script	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <script type="text\/javascript" src="$relpath^dynsections.js"><\/script>$/;"	function	line:17
-link	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <link href="$relpath^$stylesheet" rel="stylesheet" type="text\/css" \/>$/;"	function	line:21
-link	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <link rel="stylesheet" href="https:\/\/maxcdn.bootstrapcdn.com\/bootstrap\/3.3.6\/css\/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">$/;"	function	line:25
-link	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <link rel="stylesheet" href="https:\/\/maxcdn.bootstrapcdn.com\/bootstrap\/3.3.6\/css\/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l\/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">$/;"	function	line:28
-script	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <script src="https:\/\/maxcdn.bootstrapcdn.com\/bootstrap\/3.3.6\/js\/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"><\/script>$/;"	function	line:31
-script	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <script type="text\/javascript" src="$relpath^doxy-boot.js"><\/script>$/;"	function	line:32
-body	/Users/frankw/Sites/math-parser/doxygen/header.html	/^    <body>$/;"	function	line:34
-nav	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <nav class="navbar navbar-default" role="navigation">$/;"	function	line:35
-div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^            <div class="container">$/;"	function	line:36
-div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^                <div class="navbar-header">$/;"	function	line:37
-a	/Users/frankw/Sites/math-parser/doxygen/header.html	/^                    <a class="navbar-brand">$projectname $projectnumber<\/a>$/;"	function	line:38
-div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <div id="top"><!-- do not remove this div, it is closed by doxygen! -->$/;"	function	line:42
-div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^            <div class="content" id="content">$/;"	function	line:43
-div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^                <div class="container">$/;"	function	line:44
-div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^                    <div class="row">$/;"	function	line:45
-div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^                        <div class="col-sm-12 panel panel-default" style="padding-bottom: 15px;">$/;"	function	line:46
-div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^                            <div style="margin-bottom: 15px;">$/;"	function	line:47
 getOriginalWidthOfImg	/Users/frankw/Sites/math-parser/doxygen/doxygen-bootstrapped/doxy-boot.js	/^	function getOriginalWidthOfImg(img_element) {$/;"	function	line:83
 specifies	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitor.php	/^ * Implemented by every interpreter. The interface specifies$/;"	interface	line:26
 Visitor	/Users/frankw/Sites/math-parser/src/MathParser/Interpreting/Visitors/Visitor.php	/^interface Visitor$/;"	interface	line:30
@@ -654,3 +630,77 @@ UnknownTokenException	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/
 __construct	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownTokenException.php	/^    public function __construct($name)$/;"	function	line:18
 UnknownVariableException	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownVariableException.php	/^class UnknownVariableException extends MathParserException$/;"	class	line:16
 __construct	/Users/frankw/Sites/math-parser/src/MathParser/Exceptions/UnknownVariableException.php	/^    public function __construct($variable)$/;"	function	line:18
+h1, .h1, h2, .h2, h3, .h3	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^h1, .h1, h2, .h2, h3, .h3{$/;"	function	line:1
+.adjust-right	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^.adjust-right {$/;"	function	line:5
+nav	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^nav {$/;"	function	line:10
+html	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^html,$/;"	function	line:16
+body	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^body {$/;"	function	line:17
+#wrap	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^#wrap {$/;"	function	line:23
+#footer	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^#footer {$/;"	function	line:33
+.footer-row	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^.footer-row {$/;"	function	line:39
+#footer > .container	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^#footer > .container {$/;"	function	line:43
+.footer-follow-icon	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^.footer-follow-icon {$/;"	function	line:48
+.footer-follow-icon img	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^.footer-follow-icon img {$/;"	function	line:53
+.footer-link	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^.footer-link {$/;"	function	line:57
+.footer-copyright	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^.footer-copyright {$/;"	function	line:64
+@media (min-width: 992px)	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^@media (min-width: 992px) {$/;"	function	line:69
+.footer-row	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^    .footer-row {$/;"	function	line:70
+.footer-icons	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^    .footer-icons {$/;"	function	line:74
+@media (max-width: 991px)	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^@media (max-width: 991px) {$/;"	function	line:78
+.footer-row	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^    .footer-row {$/;"	function	line:79
+.footer-icons	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^    .footer-icons {$/;"	function	line:83
+a.qindex	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^a.qindex {$/;"	function	line:92
+a.qindexHL	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^a.qindexHL {$/;"	function	line:96
+.contents a.qindexHL:visited	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^.contents a.qindexHL:visited {$/;"	function	line:103
+a.code, a.code:visited, a.line, a.line:visited	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^a.code, a.code:visited, a.line, a.line:visited {$/;"	function	line:107
+a.codeRef, a.codeRef:visited, a.lineRef, a.lineRef:visited	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^a.codeRef, a.codeRef:visited, a.lineRef, a.lineRef:visited {$/;"	function	line:111
+dl.el	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^dl.el {$/;"	function	line:117
+pre.fragment	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^pre.fragment {$/;"	function	line:121
+div.fragment	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^div.fragment {$/;"	function	line:134
+div.line	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^div.line {$/;"	function	line:140
+div.line.glow	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^div.line.glow {$/;"	function	line:167
+span.lineno	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^span.lineno {$/;"	function	line:173
+span.lineno a	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^span.lineno a {$/;"	function	line:180
+span.lineno a:hover	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^span.lineno a:hover {$/;"	function	line:184
+div.groupHeader	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^div.groupHeader {$/;"	function	line:188
+div.groupText	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^div.groupText {$/;"	function	line:194
+span.keyword	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^span.keyword {$/;"	function	line:201
+span.keywordtype	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^span.keywordtype {$/;"	function	line:205
+span.keywordflow	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^span.keywordflow {$/;"	function	line:209
+span.comment	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^span.comment {$/;"	function	line:213
+span.preprocessor	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^span.preprocessor {$/;"	function	line:217
+span.stringliteral	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^span.stringliteral {$/;"	function	line:221
+span.charliteral	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^span.charliteral {$/;"	function	line:225
+span.vhdldigit	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^span.vhdldigit {$/;"	function	line:229
+span.vhdlchar	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^span.vhdlchar {$/;"	function	line:233
+span.vhdlkeyword	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^span.vhdlkeyword {$/;"	function	line:237
+span.vhdllogic	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^span.vhdllogic {$/;"	function	line:241
+blockquote	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^blockquote {$/;"	function	line:245
+.menu-divider	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^.menu-divider {$/;"	function	line:252
+@media (max-width: 767px)	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^@media (max-width: 767px) {$/;"	function	line:259
+.navbar-collapse .nav > .divider-vertical	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^    .navbar-collapse .nav > .divider-vertical {$/;"	function	line:260
+li.subactive a span	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^li.subactive a span {$/;"	function	line:265
+html	/Users/frankw/Sites/math-parser/doxygen/header.html	/^<html xmlns="http:\/\/www.w3.org\/1999\/xhtml">$/;"	function	line:3
+head	/Users/frankw/Sites/math-parser/doxygen/header.html	/^    <head>$/;"	function	line:4
+meta	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <meta http-equiv="X-UA-Compatible" content="IE=edge">$/;"	function	line:5
+meta	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <meta name="viewport" content="width=device-width, initial-scale=1">$/;"	function	line:7
+meta	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <meta http-equiv="Content-Type" content="text\/xhtml;charset=UTF-8"\/>$/;"	function	line:9
+meta	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <meta name="generator" content="Doxygen $doxygenversion"\/>$/;"	function	line:10
+script	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <script type="text\/javascript" src="https:\/\/code.jquery.com\/jquery-2.1.1.min.js"><\/script>$/;"	function	line:12
+script	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <script type="text\/javascript" src="$relpath^dynsections.js"><\/script>$/;"	function	line:17
+link	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <link href="$relpath^$stylesheet" rel="stylesheet" type="text\/css" \/>$/;"	function	line:21
+link	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <link rel="stylesheet" href="https:\/\/maxcdn.bootstrapcdn.com\/bootstrap\/3.3.6\/css\/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">$/;"	function	line:25
+link	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <link rel="stylesheet" href="https:\/\/maxcdn.bootstrapcdn.com\/bootstrap\/3.3.6\/css\/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l\/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">$/;"	function	line:28
+script	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <script src="https:\/\/maxcdn.bootstrapcdn.com\/bootstrap\/3.3.6\/js\/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"><\/script>$/;"	function	line:31
+script	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <script type="text\/javascript" src="$relpath^doxy-boot.js"><\/script>$/;"	function	line:32
+body	/Users/frankw/Sites/math-parser/doxygen/header.html	/^    <body>$/;"	function	line:34
+div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <div id="top"><!-- do not remove this div, it is closed by doxygen! -->$/;"	function	line:35
+div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^                <div class="container-fluid">$/;"	function	line:36
+div	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->$/;"	function	line:4
+ul	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^  <ul>$/;"	function	line:5
+li	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^    <li class="footer">$generatedby$/;"	function	line:7
+a	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^    <a href="http:\/\/www.doxygen.org\/index.html">$/;"	function	line:8
+img	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^    <img class="footer" src="$relpath^doxygen.png" alt="doxygen"\/><\/a> $doxygenversion <\/li>$/;"	function	line:9
+hr	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^<hr class="footer"\/><address class="footer"><small>$/;"	function	line:14
+a	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^<a href="http:\/\/www.doxygen.org\/index.html">doxygen<\/a> $doxygenversion$/;"	function	line:16
+getOriginalWidthOfImg	/Users/frankw/Sites/math-parser/doc/html/doxy-boot.js	/^	function getOriginalWidthOfImg(img_element) {$/;"	function	line:83
