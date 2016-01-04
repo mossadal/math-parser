@@ -257,11 +257,17 @@ blockquote {
 }
 
 @media (max-width: 767px) {
-    .navbar-collapse .nav > .divider-vertical {
+    .navbar-collapse .nav > .menu-divider {
         display: none;
      }
 }
 
 li.subactive a span {
     border-bottom: 2px solid #808080;
+}
+
+.navbar-brand img {
+    margin: -4px 0 0 0;
+    padding: 0;
+    height: 100%;
 }
