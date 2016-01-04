@@ -6,5 +6,6 @@ vendor
 composer.lock
 tests/log
 .DS_Store
+doc
 doc/html
 .tags*
