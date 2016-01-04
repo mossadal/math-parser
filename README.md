@@ -68,6 +68,11 @@ Note that implicit multiplication has the same precedence as explicit multiplica
 
 To make full use of implicit multiplication, the standard lexer only allows one-letter variables. (Otherwise, we wouldn't know if `xy` should be parsed as `x*y` or as the single variable `xy`).
 
+DOCUMENTATION
+-------------
+
+For complete documentation, see the [github.io project page](http://mossadal.github.io/math-parser/index.html)
+
 THANKS
 ------
 
