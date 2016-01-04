@@ -6,4 +6,4 @@ vendor
 composer.lock
 tests/log
 .DS_Store
-/docs
+/doc

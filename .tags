@@ -680,6 +680,14 @@ blockquote	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^blockquot
 @media (max-width: 767px)	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^@media (max-width: 767px) {$/;"	function	line:259
 .navbar-collapse .nav > .divider-vertical	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^    .navbar-collapse .nav > .divider-vertical {$/;"	function	line:260
 li.subactive a span	/Users/frankw/Sites/math-parser/doxygen/customdoxygen.css	/^li.subactive a span {$/;"	function	line:265
+div	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->$/;"	function	line:4
+ul	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^  <ul>$/;"	function	line:5
+li	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^    <li class="footer">$generatedby$/;"	function	line:7
+a	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^    <a href="http:\/\/www.doxygen.org\/index.html">$/;"	function	line:8
+img	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^    <img class="footer" src="$relpath^doxygen.png" alt="doxygen"\/><\/a> $doxygenversion <\/li>$/;"	function	line:9
+hr	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^<hr class="footer"\/><address class="footer"><small>$/;"	function	line:14
+a	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^<a href="http:\/\/www.doxygen.org\/index.html">doxygen<\/a> $doxygenversion$/;"	function	line:16
+getOriginalWidthOfImg	/Users/frankw/Sites/math-parser/doc/html/doxy-boot.js	/^	function getOriginalWidthOfImg(img_element) {$/;"	function	line:83
 html	/Users/frankw/Sites/math-parser/doxygen/header.html	/^<html xmlns="http:\/\/www.w3.org\/1999\/xhtml">$/;"	function	line:3
 head	/Users/frankw/Sites/math-parser/doxygen/header.html	/^    <head>$/;"	function	line:4
 meta	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <meta http-equiv="X-UA-Compatible" content="IE=edge">$/;"	function	line:5
@@ -696,11 +704,4 @@ script	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <script typ
 body	/Users/frankw/Sites/math-parser/doxygen/header.html	/^    <body>$/;"	function	line:34
 div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^        <div id="top"><!-- do not remove this div, it is closed by doxygen! -->$/;"	function	line:35
 div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^                <div class="container-fluid">$/;"	function	line:36
-div	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->$/;"	function	line:4
-ul	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^  <ul>$/;"	function	line:5
-li	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^    <li class="footer">$generatedby$/;"	function	line:7
-a	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^    <a href="http:\/\/www.doxygen.org\/index.html">$/;"	function	line:8
-img	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^    <img class="footer" src="$relpath^doxygen.png" alt="doxygen"\/><\/a> $doxygenversion <\/li>$/;"	function	line:9
-hr	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^<hr class="footer"\/><address class="footer"><small>$/;"	function	line:14
-a	/Users/frankw/Sites/math-parser/doxygen/footer.html	/^<a href="http:\/\/www.doxygen.org\/index.html">doxygen<\/a> $doxygenversion$/;"	function	line:16
-getOriginalWidthOfImg	/Users/frankw/Sites/math-parser/doc/html/doxy-boot.js	/^	function getOriginalWidthOfImg(img_element) {$/;"	function	line:83
+div	/Users/frankw/Sites/math-parser/doxygen/header.html	/^                    <div class="nav navbar-nav navbar-brand">$/;"	function	line:37
