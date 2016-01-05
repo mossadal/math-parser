@@ -20,11 +20,7 @@ use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\ConstantNode;
 
-use MathParser\Parsing\Nodes\Factories\AdditionNodeFactory;
-use MathParser\Parsing\Nodes\Factories\SubtractionNodeFactory;
-use MathParser\Parsing\Nodes\Factories\MultiplicationNodeFactory;
-use MathParser\Parsing\Nodes\Factories\DivisionNodeFactory;
-use MathParser\Parsing\Nodes\Factories\ExponentiationNodeFactory;
+use MathParser\Parsing\Nodes\Factories\ExpressionNodeFactory;
 
 use MathParser\Exceptions\UnknownFunctionException;
 use MathParser\Exceptions\UnknownOperatorException;
@@ -65,11 +61,8 @@ class Differentiator implements Visitor
      **/
     protected $variable;
 
-    protected $additionNodeFactory;
-    protected $subtractionNodeFactory;
-    protected $multiplicationNodeFactory;
-    protected $divisionNodeFactory;
-    protected $exponentiationNodeFactory;
+    protected $nodeFactory;
+
 
     /**
      * Class constructor
@@ -80,11 +73,7 @@ class Differentiator implements Visitor
     {
         $this->variable = $variable;
 
-        $this->additionNodeFactory = new AdditionNodeFactory();
-        $this->subtractionNodeFactory = new SubtractionNodeFactory();
-        $this->multiplicationNodeFactory = new MultiplicationNodeFactory();
-        $this->divisionNodeFactory = new DivisionNodeFactory();
-        $this->exponentiationNodeFactory = new ExponentiationNodeFactory();
+        $this->nodeFactory = new ExpressionNodeFactory();
     }
 
 
@@ -126,24 +115,24 @@ class Differentiator implements Visitor
         // Perform the right operation based on the operator
         switch ($operator) {
             case '+':
-                return $this->additionNodeFactory->makeNode($leftValue, $rightValue);
+                return $this->nodeFactory->addition($leftValue, $rightValue);
             case '-':
-                return $this->subtractionNodeFactory->makeNode($leftValue, $rightValue);
+                return $this->nodeFactory->subtraction($leftValue, $rightValue);
 
             // Product rule (fg)' = fg' + f'g
             case '*':
-                return $this->additionNodeFactory->makeNode(
-                    $this->multiplicationNodeFactory->makeNode($node->getLeft(), $rightValue),
-                    $this->multiplicationNodeFactory->makeNode($leftValue, $node->getRight())
+                return $this->nodeFactory->addition(
+                    $this->nodeFactory->multiplication($node->getLeft(), $rightValue),
+                    $this->nodeFactory->multiplication($leftValue, $node->getRight())
                 );
 
             // Quotient rule (f/g)' = (f'g - fg')/g^2
             case '/':
-                $term1 = $this->multiplicationNodeFactory->makeNode($leftValue, $node->getRight());
-                $term2 = $this->multiplicationNodeFactory->makeNode($node->getLeft(), $rightValue);
-                $numerator = $this->subtractionNodeFactory->makeNode($term1, $term2);
-                $denominator = $this->exponentiationNodeFactory->makeNode($node->getRight(), new NumberNode(2));
-                return $this->divisionNodeFactory->makeNode($numerator, $denominator);
+                $term1 = $this->nodeFactory->multiplication($leftValue, $node->getRight());
+                $term2 = $this->nodeFactory->multiplication($node->getLeft(), $rightValue);
+                $numerator = $this->nodeFactory->subtraction($term1, $term2);
+                $denominator = $this->nodeFactory->exponentiation($node->getRight(), new NumberNode(2));
+                return $this->nodeFactory->division($numerator, $denominator);
 
             // f^g = exp(g log(f)), so (f^g)' = f^g (g'log(f) + g/f)
             case '^':
@@ -152,14 +141,14 @@ class Differentiator implements Visitor
 
                 if ($exponent instanceof NumberNode) {
                     $power = $exponent->getValue();
-                    $fpow = $this->exponentiationNodeFactory->makeNode($base, $power-1);
-                    return $this->multiplicationNodeFactory->makeNode($power, $this->multiplicationNodeFactory->makeNode($fpow, $leftValue));
+                    $fpow = $this->nodeFactory->exponentiation($base, $power-1);
+                    return $this->nodeFactory->multiplication($power, $this->nodeFactory->multiplication($fpow, $leftValue));
                 } else {
-                    $term1 = $this->multiplicationNodeFactory->makeNode($rightValue, new FunctionNode('log', $node->getLeft()));
-                    $term2 = $this->divisionNodeFactory->makeNode($node->getRight(), $node->getLeft());
-                    $factor2 = $this->additionNodeFactory->makeNode($term1, $term2);
+                    $term1 = $this->nodeFactory->multiplication($rightValue, new FunctionNode('log', $node->getLeft()));
+                    $term2 = $this->nodeFactory->division($node->getRight(), $node->getLeft());
+                    $factor2 = $this->nodeFactory->addition($term1, $term2);
 
-                    return $this->multiplicationNodeFactory->makeNode($node, $factor2);
+                    return $this->nodeFactory->multiplication($node, $factor2);
                 }
 
             default:
@@ -250,45 +239,45 @@ class Differentiator implements Visitor
                 $df = $this->createUnaryMinusNode($sin);
                 break;
             case 'tan':
-                $tansquare = $this->exponentiationNodeFactory->makeNode($node, 2);
-                $df = $this->additionNodeFactory->makeNode(1, $tansquare);
+                $tansquare = $this->nodeFactory->exponentiation($node, 2);
+                $df = $this->nodeFactory->addition(1, $tansquare);
                 break;
             case 'cot':
-                $cotsquare = $this->exponentiationNodeFactory->makeNode($node, 2);
-                $df = $this->additionNodeFactory->makeNode($this->createUnaryMinusNode(1), $cotsquare);
+                $cotsquare = $this->nodeFactory->exponentiation($node, 2);
+                $df = $this->nodeFactory->addition($this->createUnaryMinusNode(1), $cotsquare);
                 break;
 
             case 'arcsin':
                 $denom = new FunctionNode('sqrt',
-                    $this->subtractionNodeFactory->makeNode(1, $this->exponentiationNodeFactory->makeNode($arg, 2)));
-                return $this->divisionNodeFactory->makeNode($inner, $denom);
+                    $this->nodeFactory->subtraction(1, $this->nodeFactory->exponentiation($arg, 2)));
+                return $this->nodeFactory->division($inner, $denom);
 
             case 'arccos':
                 $denom = new FunctionNode('sqrt',
-                    $this->subtractionNodeFactory->makeNode(1, $this->exponentiationNodeFactory->makeNode($arg, 2)));
-                return  $this->divisionNodeFactory->makeNode($this->createUnaryMinusNode($inner), $denom);
+                    $this->nodeFactory->subtraction(1, $this->nodeFactory->exponentiation($arg, 2)));
+                return  $this->nodeFactory->division($this->createUnaryMinusNode($inner), $denom);
 
             case 'arctan':
-                $denom = $this->additionNodeFactory->makeNode(1, $this->exponentiationNodeFactory->makeNode($arg, 2));
-                return $this->divisionNodeFactory->makeNode($inner, $denom);
+                $denom = $this->nodeFactory->addition(1, $this->nodeFactory->exponentiation($arg, 2));
+                return $this->nodeFactory->division($inner, $denom);
 
             case 'arccot':
-                $denom = $this->additionNodeFactory->makeNode(1, $this->exponentiationNodeFactory->makeNode($arg, 2));
-                $df = $this->createUnaryMinusNode($this->divisionNodeFactory->makeNode(1, $denom));
+                $denom = $this->nodeFactory->addition(1, $this->nodeFactory->exponentiation($arg, 2));
+                $df = $this->createUnaryMinusNode($this->nodeFactory->division(1, $denom));
                 break;
 
             case 'exp':
                 $df = new FunctionNode('exp', $arg);
                 break;
             case 'log':
-                return $this->divisionNodeFactory->makeNode($inner, $arg);
+                return $this->nodeFactory->division($inner, $arg);
             case 'lg':
-                $denominator = $this->multiplicationNodeFactory->makeNode(new FunctionNode('log', new NumberNode(10)), $arg);
-                return $this->divisionNodeFactory->makeNode($inner, $denominator);
+                $denominator = $this->nodeFactory->multiplication(new FunctionNode('log', new NumberNode(10)), $arg);
+                return $this->nodeFactory->division($inner, $denominator);
 
             case 'sqrt':
-                $denom = $this->multiplicationNodeFactory->makeNode(2, $node);
-                return $this->divisionNodeFactory->makeNode($inner, $denom);
+                $denom = $this->nodeFactory->multiplication(2, $node);
+                return $this->nodeFactory->division($inner, $denom);
 
             case 'sinh':
                 $df = new FunctionNode('cosh', $arg);
@@ -299,33 +288,33 @@ class Differentiator implements Visitor
                 break;
 
             case 'tanh':
-                $tanhsquare = $this->exponentiationNodeFactory->makeNode(new FunctionNode('tanh', $arg), 2);
-                $df = $this->subtractionNodeFactory->makeNode(1, $tanhsquare);
+                $tanhsquare = $this->nodeFactory->exponentiation(new FunctionNode('tanh', $arg), 2);
+                $df = $this->nodeFactory->subtraction(1, $tanhsquare);
                 break;
 
             case 'coth':
-                $cothsquare = $this->exponentiationNodeFactory->makeNode(new FunctionNode('coth', $arg), 2);
-                $df = $this->subtractionNodeFactory->makeNode(1, $cothsquare);
+                $cothsquare = $this->nodeFactory->exponentiation(new FunctionNode('coth', $arg), 2);
+                $df = $this->nodeFactory->subtraction(1, $cothsquare);
                 break;
 
             case 'arsinh':
-                $temp = $this->additionNodeFactory->makeNode($this->exponentiationNodeFactory->makeNode($arg, 2), 1);
-                return $this->divisionNodeFactory->makeNode($inner, new FunctionNode('sqrt', $temp));
+                $temp = $this->nodeFactory->addition($this->nodeFactory->exponentiation($arg, 2), 1);
+                return $this->nodeFactory->division($inner, new FunctionNode('sqrt', $temp));
 
             case 'arcosh':
-                $temp = $this->subtractionNodeFactory->makeNode($this->exponentiationNodeFactory->makeNode($arg, 2), 1);
-                return $this->divisionNodeFactory->makeNode($inner, new FunctionNode('sqrt', $temp));
+                $temp = $this->nodeFactory->subtraction($this->nodeFactory->exponentiation($arg, 2), 1);
+                return $this->nodeFactory->division($inner, new FunctionNode('sqrt', $temp));
 
             case 'artanh':
             case 'arcoth':
-                $denominator = $this->subtractionNodeFactory->makeNode(1, $this->exponentiationNodeFactory->makeNode($arg, 2));
-                return $this->divisionNodeFactory->makeNode($inner, $denominator);
+                $denominator = $this->nodeFactory->subtraction(1, $this->nodeFactory->exponentiation($arg, 2));
+                return $this->nodeFactory->division($inner, $denominator);
 
             default:
                 throw new UnknownFunctionException($node->getName());
         }
 
-        return $this->multiplicationNodeFactory->makeNode($inner, $df);
+        return $this->nodeFactory->multiplication($inner, $df);
     }
 
     /**
