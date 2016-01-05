@@ -20,11 +20,7 @@ use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\ConstantNode;
 
-<<<<<<< HEAD
 use MathParser\Parsing\Nodes\Factories\NodeFactory;
-=======
-use MathParser\Parsing\Nodes\Factories\ExpressionNodeFactory;
->>>>>>> 23b5bf57d4b617a9ef64a2fa4fb869bd01fb4237
 
 use MathParser\Exceptions\UnknownFunctionException;
 use MathParser\Exceptions\UnknownOperatorException;
