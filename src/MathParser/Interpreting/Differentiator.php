@@ -12,6 +12,7 @@
 namespace MathParser\Interpreting;
 
 use MathParser\Interpreting\Visitors\Visitor;
+
 use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\ExpressionNode;
 use MathParser\Parsing\Nodes\NumberNode;
@@ -19,6 +20,11 @@ use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\ConstantNode;
 
+use MathParser\Parsing\Nodes\Factories\AdditionNodeFactory;
+use MathParser\Parsing\Nodes\Factories\SubtractionNodeFactory;
+use MathParser\Parsing\Nodes\Factories\MultiplicationNodeFactory;
+use MathParser\Parsing\Nodes\Factories\DivisionNodeFactory;
+use MathParser\Parsing\Nodes\Factories\ExponentiationNodeFactory;
 
 use MathParser\Exceptions\UnknownFunctionException;
 use MathParser\Exceptions\UnknownOperatorException;
@@ -57,7 +63,13 @@ class Differentiator implements Visitor
      *
      * @var string $variable
      **/
-    private $variable;
+    protected $variable;
+
+    protected $additionNodeFactory;
+    protected $subtractionNodeFactory;
+    protected $multiplicationNodeFactory;
+    protected $divisionNodeFactory;
+    protected $exponentiationNodeFactory;
 
     /**
      * Class constructor
@@ -67,244 +79,15 @@ class Differentiator implements Visitor
     public function __construct($variable)
     {
         $this->variable = $variable;
+
+        $this->additionNodeFactory = new AdditionNodeFactory();
+        $this->subtractionNodeFactory = new SubtractionNodeFactory();
+        $this->multiplicationNodeFactory = new MultiplicationNodeFactory();
+        $this->divisionNodeFactory = new DivisionNodeFactory();
+        $this->exponentiationNodeFactory = new ExponentiationNodeFactory();
     }
 
-    /**
-     * Create a Node representing 'x+y'
-     *
-     * Using some simplification rules, create a NumberNode or ExpressionNode
-     * giving an AST correctly representing 'x+y'.
-     *
-     * ### Simplification rules:
-     *
-     * - To simplify the use of the function, convert integer params to NumberNodes
-     * - If $x and $y are both NumberNodes, return a single NumberNode containing their sum
-     * - If $x or $y are NumberNodes representing 0, return the other term unchanged
-     *
-     * @param Node|int $x First term
-     * @param Node|int $y Second term
-     * @return Node
-     */
-    private function createAdditionNode($x, $y)
-    {
-        if (is_int($x) || is_float($x)) $x = new NumberNode($x);
-        if (is_int($y) || is_float($y)) $y = new NumberNode($y);
 
-        if ($x instanceof NumberNode && $y instanceof NumberNode) {
-            return new NumberNode($x->getValue() + $y->getValue());
-        }
-
-        if ($x instanceof NumberNode && $x->getValue() == 0) {
-            return $y;
-        }
-        if ($y instanceof NumberNode && $y->getValue() == 0) {
-            return $x;
-        }
-
-        return new ExpressionNode($x, '+', $y);
-    }
-
-    /**
-     * Create a Node representing 'x-y'
-     *
-     * Using some simplification rules, create a NumberNode or ExpressionNode
-     * giving an AST correctly representing 'x-y'.
-     *
-     * ### Simplification rules:
-     *
-     * - To simplify the use of the function, convert integer params to NumberNodes
-     * - If $y is null, return a unary minus node '-x' instead
-     * - If $x and $y are both NumberNodes, return a single NumberNode containing their difference
-     * - If $y is a NumberNode representing 0, return $x unchanged
-     * - If $x and $y are equal, return '0'
-     *
-     * @param Node|int $x Minuend
-     * @param Node|int $y Subtrahend
-     * @return Node
-     */
-    private function createSubtractionNode($x, $y)
-    {
-        if ($y === null) return $this->createUnaryMinusNode($x);
-
-        if (is_int($x) || is_float($x)) $x = new NumberNode($x);
-        if (is_int($y) || is_float($y)) $y = new NumberNode($y);
-
-        if ($x instanceof NumberNode && $y instanceof NumberNode) {
-            return new NumberNode($x->getValue() + $y->getValue());
-        }
-
-        if ($y instanceof NumberNode && $y->getValue() == 0) {
-            return $x;
-        }
-
-        if (Node::compareNodes($x,$y)) {
-            return new NumberNode(0);
-        }
-
-        return new ExpressionNode($x, '-', $y);
-    }
-
-    /**
-     * Create a Node representing '-x'
-     *
-     * Using some simplification rules, create a NumberNode or ExpressionNode
-     * giving an AST correctly representing '-x'.
-     *
-     * ### Simplification rules:
-     *
-     * - To simplify the use of the function, convert integer params to NumberNodes
-     * - If $x is a NumberNodes, return a single NumberNode containing its negative
-     * - If $x already is a unary minus, 'x=-y', return y
-     *
-     * @param Node|int $x Operand
-     * @return Node
-     */
-    private function createUnaryMinusNode($x)
-    {
-        if (is_int($x) || is_float($x)) $x = new NumberNode($x);
-
-        if ($x instanceof NumberNode) {
-            return new NumberNode(-$x->getValue());
-        }
-
-        // --x => x
-        if ($x instanceof ExpressionNode && $x->getOperator() == '-' && $x->getRight() === null) {
-            return $x->getLeft();
-        }
-
-        return new ExpressionNode($x, '-', null);
-    }
-
-    /**
-     * Create a Node representing 'x*y'
-     *
-     * Using some simplification rules, create a NumberNode or ExpressionNode
-     * giving an AST correctly representing 'x*y'.
-     *
-     * ### Simplification rules:
-     *
-     * - To simplify the use of the function, convert integer params to NumberNodes
-     * - If $x and $y are both NumberNodes, return a single NumberNode containing their product
-     * - If $x or $y is a NumberNode representing 0, return '0'
-     * - If $x or $y is a NumberNode representing 1, return the other factor
-     *
-     * @param Node|int $x First factor
-     * @param Node|int $y Second factor
-     * @return Node
-     */
-    private function createMultiplicationNode($x, $y)
-    {
-        if (is_int($x) || is_float($x)) $x = new NumberNode($x);
-        if (is_int($y) || is_float($y)) $y = new NumberNode($y);
-
-        if ($x instanceof NumberNode && $y instanceof NumberNode) {
-            return new NumberNode($x->getValue() * $y->getValue());
-        }
-
-        if ($x instanceof NumberNode && $x->getValue() == 1) {
-            return $y;
-        }
-        if ($x instanceof NumberNode && $x->getValue() == 0) {
-            return new NumberNode(0);
-        }
-
-        if ($y instanceof NumberNode && $y->getValue() == 1) {
-            return $x;
-        }
-        if ($y instanceof NumberNode && $y->getValue() == 0) {
-            return new NumberNode(0);
-        }
-
-        return new ExpressionNode($x, '*', $y);
-    }
-
-    /**
-     * Create a Node representing 'x/y'
-     *
-     * Using some simplification rules, create a NumberNode or ExpressionNode
-     * giving an AST correctly representing 'x/y'.
-     *
-     * ### Simplification rules:
-     *
-     * - To simplify the use of the function, convert integer params to NumberNodes
-     * - If $x is a NumberNode representing 0, return 0
-     * - If $y is a NumberNode representing 1, return $x
-     * - If $x and $y are equal, return '1'
-     *
-     * @param Node|int $x Numerator
-     * @param Node|int $y Denominator
-     * @return Node
-     */
-    private function createDivisionNode($x, $y)
-    {
-        if (is_int($x) || is_float($x)) $x = new NumberNode($x);
-        if (is_int($y) || is_float($y)) $y = new NumberNode($y);
-
-        // Return rational number?
-        // if ($x instanceof NumberNode && $y instanceof NumberNode)
-        //    return new NumberNode($x->getValue() / $y->getValue());
-
-        if ($y instanceof NumberNode && $y->getValue() == 0) {
-            throw new DivisionByZeroException();
-        }
-
-        if ($y instanceof NumberNode && $y->getValue() == 1) {
-            return $x;
-        }
-        if ($x instanceof NumberNode && $x->getValue() == 0) {
-            return new NumberNode(0);
-        }
-
-        if (Node::compareNodes($x,$y)) {
-            return new NumberNode(1);
-        }
-
-        return new ExpressionNode($x, '/', $y);
-    }
-
-    /**
-     * Create a Node representing 'x^y'
-     *
-     * Using some simplification rules, create a NumberNode or ExpressionNode
-     * giving an AST correctly representing 'x^y'.
-     *
-     * ### Simplification rules:
-     *
-     * - To simplify the use of the function, convert integer params to NumberNodes
-     * - If $x and $y are both NumberNodes, return a single NumberNode containing x^y
-     * - If $y is a NumberNode representing 0, return '1'
-     * - If $y is a NumberNode representing 1, return $x
-     * - If $x is already a power x=a^b and $y is a NumberNode, return a^(b*y)
-     *
-     * @param Node|int $x Minuend
-     * @param Node|int $y Subtrahend
-     * @return Node
-     */
-    private function createExponentiationNode($x, $y)
-    {
-        if (is_int($x) || is_float($x)) $x = new NumberNode($x);
-        if (is_int($y) || is_float($y)) $y = new NumberNode($y);
-
-        if ($y instanceof NumberNode && $y->getValue() == 0) {
-            return new NumberNode(1);
-        }
-        if ($y instanceof NumberNode && $y->getValue() == 1) {
-            return $x;
-        }
-
-        if ($x instanceof NumberNode && $y instanceof NumberNode) {
-            return new NumberNode(pow($x->getValue(), $y->getValue()));
-        }
-
-        // (x^a)^b -> x^(ab) for a, b numbers
-        if ($x instanceof ExpressionNode && $x->getRight() instanceof NumberNode && $y instanceof NumberNode) {
-            $power = new NumberNode($x->getRight()->getValue() * $y->getValue());
-            $base = $x->getLeft();
-            return new ExpressionNode($base, '^', $power);
-        }
-
-        return new ExpressionNode($x, '^', $y);
-    }
 
     /**
      * Differentiate an ExpressionNode
@@ -343,24 +126,24 @@ class Differentiator implements Visitor
         // Perform the right operation based on the operator
         switch ($operator) {
             case '+':
-                return $this->createAdditionNode($leftValue, $rightValue);
+                return $this->additionNodeFactory->makeNode($leftValue, $rightValue);
             case '-':
-                return $this->createSubtractionNode($leftValue, $rightValue);
+                return $this->subtractionNodeFactory->makeNode($leftValue, $rightValue);
 
             // Product rule (fg)' = fg' + f'g
             case '*':
-                return $this->createAdditionNode(
-                    $this->createMultiplicationNode($node->getLeft(), $rightValue),
-                    $this->createMultiplicationNode($leftValue, $node->getRight())
+                return $this->additionNodeFactory->makeNode(
+                    $this->multiplicationNodeFactory->makeNode($node->getLeft(), $rightValue),
+                    $this->multiplicationNodeFactory->makeNode($leftValue, $node->getRight())
                 );
 
             // Quotient rule (f/g)' = (f'g - fg')/g^2
             case '/':
-                $term1 = $this->createMultiplicationNode($leftValue, $node->getRight());
-                $term2 = $this->createMultiplicationNode($node->getLeft(), $rightValue);
-                $numerator = $this->createSubtractionNode($term1, $term2);
-                $denominator = $this->createExponentiationNode($node->getRight(), new NumberNode(2));
-                return $this->createDivisionNode($numerator, $denominator);
+                $term1 = $this->multiplicationNodeFactory->makeNode($leftValue, $node->getRight());
+                $term2 = $this->multiplicationNodeFactory->makeNode($node->getLeft(), $rightValue);
+                $numerator = $this->subtractionNodeFactory->makeNode($term1, $term2);
+                $denominator = $this->exponentiationNodeFactory->makeNode($node->getRight(), new NumberNode(2));
+                return $this->divisionNodeFactory->makeNode($numerator, $denominator);
 
             // f^g = exp(g log(f)), so (f^g)' = f^g (g'log(f) + g/f)
             case '^':
@@ -369,14 +152,14 @@ class Differentiator implements Visitor
 
                 if ($exponent instanceof NumberNode) {
                     $power = $exponent->getValue();
-                    $fpow = $this->createExponentiationNode($base, $power-1);
-                    return $this->createMultiplicationNode($power, $this->createMultiplicationNode($fpow, $leftValue));
+                    $fpow = $this->exponentiationNodeFactory->makeNode($base, $power-1);
+                    return $this->multiplicationNodeFactory->makeNode($power, $this->multiplicationNodeFactory->makeNode($fpow, $leftValue));
                 } else {
-                    $term1 = $this->createMultiplicationNode($rightValue, new FunctionNode('log', $node->getLeft()));
-                    $term2 = $this->createDivisionNode($node->getRight(), $node->getLeft());
-                    $factor2 = $this->createAdditionNode($term1, $term2);
+                    $term1 = $this->multiplicationNodeFactory->makeNode($rightValue, new FunctionNode('log', $node->getLeft()));
+                    $term2 = $this->divisionNodeFactory->makeNode($node->getRight(), $node->getLeft());
+                    $factor2 = $this->additionNodeFactory->makeNode($term1, $term2);
 
-                    return $this->createMultiplicationNode($node, $factor2);
+                    return $this->multiplicationNodeFactory->makeNode($node, $factor2);
                 }
 
             default:
@@ -467,45 +250,45 @@ class Differentiator implements Visitor
                 $df = $this->createUnaryMinusNode($sin);
                 break;
             case 'tan':
-                $tansquare = $this->createExponentiationNode($node, 2);
-                $df = $this->createAdditionNode(1, $tansquare);
+                $tansquare = $this->exponentiationNodeFactory->makeNode($node, 2);
+                $df = $this->additionNodeFactory->makeNode(1, $tansquare);
                 break;
             case 'cot':
-                $cotsquare = $this->createExponentiationNode($node, 2);
-                $df = $this->createAdditionNode($this->createUnaryMinusNode(1), $cotsquare);
+                $cotsquare = $this->exponentiationNodeFactory->makeNode($node, 2);
+                $df = $this->additionNodeFactory->makeNode($this->createUnaryMinusNode(1), $cotsquare);
                 break;
 
             case 'arcsin':
                 $denom = new FunctionNode('sqrt',
-                    $this->createSubtractionNode(1, $this->createExponentiationNode($arg, 2)));
-                return $this->createDivisionNode($inner, $denom);
+                    $this->subtractionNodeFactory->makeNode(1, $this->exponentiationNodeFactory->makeNode($arg, 2)));
+                return $this->divisionNodeFactory->makeNode($inner, $denom);
 
             case 'arccos':
                 $denom = new FunctionNode('sqrt',
-                    $this->createSubtractionNode(1, $this->createExponentiationNode($arg, 2)));
-                return  $this->createDivisionNode($this->createUnaryMinusNode($inner), $denom);
+                    $this->subtractionNodeFactory->makeNode(1, $this->exponentiationNodeFactory->makeNode($arg, 2)));
+                return  $this->divisionNodeFactory->makeNode($this->createUnaryMinusNode($inner), $denom);
 
             case 'arctan':
-                $denom = $this->createAdditionNode(1, $this->createExponentiationNode($arg, 2));
-                return $this->createDivisionNode($inner, $denom);
+                $denom = $this->additionNodeFactory->makeNode(1, $this->exponentiationNodeFactory->makeNode($arg, 2));
+                return $this->divisionNodeFactory->makeNode($inner, $denom);
 
             case 'arccot':
-                $denom = $this->createAdditionNode(1, $this->createExponentiationNode($arg, 2));
-                $df = $this->createUnaryMinusNode($this->createDivisionNode(1, $denom));
+                $denom = $this->additionNodeFactory->makeNode(1, $this->exponentiationNodeFactory->makeNode($arg, 2));
+                $df = $this->createUnaryMinusNode($this->divisionNodeFactory->makeNode(1, $denom));
                 break;
 
             case 'exp':
                 $df = new FunctionNode('exp', $arg);
                 break;
             case 'log':
-                return $this->createDivisionNode($inner, $arg);
+                return $this->divisionNodeFactory->makeNode($inner, $arg);
             case 'lg':
-                $denominator = $this->createMultiplicationNode(new FunctionNode('log', new NumberNode(10)), $arg);
-                return $this->createDivisionNode($inner, $denominator);
+                $denominator = $this->multiplicationNodeFactory->makeNode(new FunctionNode('log', new NumberNode(10)), $arg);
+                return $this->divisionNodeFactory->makeNode($inner, $denominator);
 
             case 'sqrt':
-                $denom = $this->createMultiplicationNode(2, $node);
-                return $this->createDivisionNode($inner, $denom);
+                $denom = $this->multiplicationNodeFactory->makeNode(2, $node);
+                return $this->divisionNodeFactory->makeNode($inner, $denom);
 
             case 'sinh':
                 $df = new FunctionNode('cosh', $arg);
@@ -516,33 +299,33 @@ class Differentiator implements Visitor
                 break;
 
             case 'tanh':
-                $tanhsquare = $this->createExponentiationNode(new FunctionNode('tanh', $arg), 2);
-                $df = $this->createSubtractionNode(1, $tanhsquare);
+                $tanhsquare = $this->exponentiationNodeFactory->makeNode(new FunctionNode('tanh', $arg), 2);
+                $df = $this->subtractionNodeFactory->makeNode(1, $tanhsquare);
                 break;
 
             case 'coth':
-                $cothsquare = $this->createExponentiationNode(new FunctionNode('coth', $arg), 2);
-                $df = $this->createSubtractionNode(1, $cothsquare);
+                $cothsquare = $this->exponentiationNodeFactory->makeNode(new FunctionNode('coth', $arg), 2);
+                $df = $this->subtractionNodeFactory->makeNode(1, $cothsquare);
                 break;
 
             case 'arsinh':
-                $temp = $this->createAdditionNode($this->createExponentiationNode($arg, 2), 1);
-                return $this->createDivisionNode($inner, new FunctionNode('sqrt', $temp));
+                $temp = $this->additionNodeFactory->makeNode($this->exponentiationNodeFactory->makeNode($arg, 2), 1);
+                return $this->divisionNodeFactory->makeNode($inner, new FunctionNode('sqrt', $temp));
 
             case 'arcosh':
-                $temp = $this->createSubtractionNode($this->createExponentiationNode($arg, 2), 1);
-                return $this->createDivisionNode($inner, new FunctionNode('sqrt', $temp));
+                $temp = $this->subtractionNodeFactory->makeNode($this->exponentiationNodeFactory->makeNode($arg, 2), 1);
+                return $this->divisionNodeFactory->makeNode($inner, new FunctionNode('sqrt', $temp));
 
             case 'artanh':
             case 'arcoth':
-                $denominator = $this->createSubtractionNode(1, $this->createExponentiationNode($arg, 2));
-                return $this->createDivisionNode($inner, $denominator);
+                $denominator = $this->subtractionNodeFactory->makeNode(1, $this->exponentiationNodeFactory->makeNode($arg, 2));
+                return $this->divisionNodeFactory->makeNode($inner, $denominator);
 
             default:
                 throw new UnknownFunctionException($node->getName());
         }
 
-        return $this->createMultiplicationNode($inner, $df);
+        return $this->multiplicationNodeFactory->makeNode($inner, $df);
     }
 
     /**

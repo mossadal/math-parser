@@ -11,6 +11,9 @@
             "role": "Developer"
         }
     ],
+    "require": {
+        "php": ">=5.4.0"
+    },
     "require-dev": {
         "phpunit/phpunit": "5.1.*",
         "phpunit/php-code-coverage": "~3",
