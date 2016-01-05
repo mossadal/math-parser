@@ -11,11 +11,15 @@ namespace MathParser\Parsing\Nodes;
 
 use MathParser\Interpreting\Visitors\Visitor;
 
+use MathParser\Parsing\Nodes\Traits\Sanitize;
+
 /**
  * AST node representing a binary operator
  */
 class ExpressionNode extends Node
 {
+    use Sanitize;
+
     private $left;
     private $operator;
     private $right;
@@ -35,15 +39,9 @@ class ExpressionNode extends Node
      */
     function __construct($left, $operator = null, $right = null)
     {
-        if (is_int($left) || is_float($left)) $left = new NumberNode($left);
-        if (is_int($right) || is_float($right)) $right = new NumberNode($right);
-
-        $this->left = $left;
-
-        // $operator and $right are optional in case we have
-        // an expression consisting of a single NumberNode
+        $this->left = $this->sanitize($left);
         $this->operator = $operator;
-        $this->right = $right;
+        $this->right = $this->sanitize($right);
     }
 
     /**
