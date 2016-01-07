@@ -53,16 +53,8 @@ class DivisionNodeFactory implements ExpressionNodeFactory
         // if ($leftOperand instanceof NumberNode && $rightOperand instanceof NumberNode)
         //    return new NumberNode($leftOperand->getValue() / $rightOperand->getValue());
 
-        if ($rightOperand instanceof NumberNode && $rightOperand->getValue() == 0) {
-            throw new DivisionByZeroException();
-        }
-
-        if ($rightOperand instanceof NumberNode && $rightOperand->getValue() == 1) {
-            return $leftOperand;
-        }
-        if ($leftOperand instanceof NumberNode && $leftOperand->getValue() == 0) {
-            return new NumberNode(0);
-        }
+        $node = $this->numericFactors($leftOperand, $rightOperand);
+        if ($node) return $node;
 
         if ($leftOperand->compareTo($rightOperand)) {
             return new NumberNode(1);
@@ -71,4 +63,28 @@ class DivisionNodeFactory implements ExpressionNodeFactory
         return new ExpressionNode($leftOperand, '/', $rightOperand);
     }
 
+    /** Simplify division nodes when factors are numeric
+     * @param Node $leftOperand
+     * @param Node $rightOperand
+     * @retval Node|null
+     **/
+    protected function numericFactors($leftOperand, $rightOperand)
+    {
+        if ($rightOperand instanceof NumberNode) {
+            if ($rightOperand->getValue() == 0) {
+                throw new DivisionByZeroException();
+            }
+
+            if ($rightOperand->getValue() == 1) {
+                return $leftOperand;
+            }
+        }
+
+        if ($leftOperand instanceof NumberNode) {
+            if ($leftOperand->getValue() == 0) {
+                return new NumberNode(0);
+            }
+        }
+        return null;
+    }
 }

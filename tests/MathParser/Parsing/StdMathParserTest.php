@@ -4,7 +4,9 @@ use MathParser\Lexing\Token;
 use MathParser\Lexing\TokenType;
 use MathParser\Lexing\TokenPrecedence;
 use MathParser\StdMathParser;
+use MathParser\Lexing\StdMathLexer;
 
+use MathParser\Parsing\Parser;
 use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\ConstantNode;
 use MathParser\Parsing\Nodes\ExpressionNode;
@@ -19,6 +21,11 @@ use MathParser\Exceptions\UnexpectedOperatorException;
 use MathParser\Exceptions\ParenthesisMismatchException;
 use MathParser\Exceptions\UnknownNodeException;
 
+class ParserWithoutImplicitMultiplication extends Parser {
+    protected static function allowImplicitMultiplication() {
+        return false;
+    }
+}
 
 class StdMathParserTest extends PHPUnit_Framework_TestCase
 {
@@ -64,7 +71,7 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
         $this->assertCompareNodes("x+y");
         $this->assertCompareNodes("sin(x)");
         $this->assertCompareNodes("(x)");
-        $this->assertCompareNodes("1+2+3");
+        $this->assertCompareNodes("1+x+y");
 
         $node = new SubExpressionNode('%');
         $other = new NumberNode(1);
@@ -80,12 +87,12 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
 
     public function testCanGetTokenList()
     {
-        $node = $this->parser->parse("1+2");
+        $node = $this->parser->parse("x+y");
         $tokens = $this->parser->getTokenList();
 
-        $this->assertTokenEquals("1", TokenType::PosInt, $tokens[0]);
+        $this->assertTokenEquals("x", TokenType::Identifier, $tokens[0]);
         $this->assertTokenEquals("+", TokenType::AdditionOperator, $tokens[1]);
-        $this->assertTokenEquals("2", TokenType::PosInt, $tokens[2]);
+        $this->assertTokenEquals("y", TokenType::Identifier, $tokens[2]);
 
     }
 
@@ -215,16 +222,20 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
 
     public function testCanParseWithCorrectPrecedence()
     {
-        $node = $this->parser->parse("3+5*7");
+        $x = new VariableNode('x');
+        $y = new VariableNode('y');
+        $z = new VariableNode('z');
 
-        $factors = new ExpressionNode(new NumberNode(5), '*', new NumberNode(7));
-        $shouldBe = new ExpressionNode(new NumberNode(3), '+', $factors);
+        $node = $this->parser->parse("x+y*z");
+
+        $factors = new ExpressionNode($y, '*', $z);
+        $shouldBe = new ExpressionNode($x, '+', $factors);
 
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->parser->parse("3*5+7");
-        $factors = new ExpressionNode(new NumberNode(3), '*', new NumberNode(5));
-        $shouldBe = new ExpressionNode($factors, '+', new NumberNode(7));
+        $node = $this->parser->parse("x*y+z");
+        $factors = new ExpressionNode($x, '*', $y);
+        $shouldBe = new ExpressionNode($factors, '+', $z);
 
         $this->assertNodesEqual($node, $shouldBe);
     }
@@ -243,12 +254,12 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
         $shouldBe = $this->parser->parse("x+1");
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->parser->parse("(x*1)");
-        $shouldBe = $this->parser->parse("x*1");
+        $node = $this->parser->parse("(x*y)");
+        $shouldBe = $this->parser->parse("x*y");
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->parser->parse("(x^1)");
-        $shouldBe = $this->parser->parse("x^1");
+        $node = $this->parser->parse("(x^y)");
+        $shouldBe = $this->parser->parse("x^y");
         $this->assertNodesEqual($node, $shouldBe);
     }
 
@@ -388,6 +399,22 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
     {
         $f = $this->parser->parse('x+y');
         $this->assertEquals($f->evaluate([ 'x' => 1, 'y' => 2 ]), 3);
+    }
+
+    public function testCanCreateSubExpressionNode()
+    {
+        $node = new SubExpressionNode('%');
+        $this->assertEquals($node->getValue(), '%');
+        $this->assertNull($node->accept(new TreePrinter()));
+    }
+
+    public function testParserWithoutImplicitMultiplication()
+    {
+        $lexer = new StdMathLexer();
+        $tokens = $lexer->tokenize('2x');
+        $parser = new ParserWithoutImplicitMultiplication();
+        $this->setExpectedException(SyntaxErrorException::class);
+        $node = $parser->parse($tokens);
     }
 
 }

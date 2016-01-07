@@ -21,16 +21,16 @@ class ParserWithoutImplicitMultiplication extends Parser {
     }
 }
 
-$lexer = new StdMathLexer();
-$tokens = $lexer->tokenize($argv[1]);
-
-$parser = new ParserWithoutImplicitMultiplication();
-$tree = $parser->parse($tokens);
-
-$treeprinter = new TreePrinter();
-var_dump($tree->accept($treeprinter));
-
-die();
+// $lexer = new StdMathLexer();
+// $tokens = $lexer->tokenize($argv[1]);
+//
+// $parser = new ParserWithoutImplicitMultiplication();
+// $tree = $parser->parse($tokens);
+//
+// $treeprinter = new TreePrinter();
+// var_dump($tree->accept($treeprinter));
+//
+// die();
 
 
 $parser = new StdMathParser(true);

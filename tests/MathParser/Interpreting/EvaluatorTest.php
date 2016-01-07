@@ -71,14 +71,16 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function testCanEvaluateAdditiion()
     {
-        $this->assertResult('3+5', 8);
-        $this->assertResult('3+5+1', 9);
+        $x = $this->variables['x'];
+        $this->assertResult('3+x', 3+$x);
+        $this->assertResult('3+x+1', 3+$x+1);
     }
 
     public function testCanEvaluateSubtraction()
     {
-        $this->assertResult('3-5', -2);
-        $this->assertResult('3-5-1', -3);
+        $x = $this->variables['x'];
+        $this->assertResult('3-x', 3-$x);
+        $this->assertResult('3-x-1', 3-$x-1);
     }
 
     public function testCanEvaluateUnaryMinus()
@@ -88,19 +90,21 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function testCanEvaluateMultiplication()
     {
-        $this->assertResult('3*5', 15);
-        $this->assertResult('3*5*2', 30);
+        $x = $this->variables['x'];
+        $this->assertResult('3*x', 3*$x);
+        $this->assertResult('3*x*2', 3*$x*2);
     }
 
     public function testCanEvaluateDivision()
     {
-        $this->assertResult('3/5', 0.6);
-        $this->assertResult('20/2/5', 2);
+        $x = $this->variables['x'];
+        $this->assertResult('3/x', 3/$x);
+        $this->assertResult('20/x/5', 20/$x/5);
     }
 
     public function testCannotDivideByZero()
     {
-        $f = $this->parser->parse('3/0');
+        $f = new ExpressionNode(3, '/', 0);
 
         $this->setExpectedException(DivisionByZeroException::class);
         $value = $this->evaluate($f);
@@ -109,8 +113,9 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function testCanEvaluateExponentiation()
     {
-        $this->assertResult('2^3', 8);
-        $this->assertResult('2^3^2', 512);
+        $x = $this->variables['x'];
+        $this->assertResult('x^3', pow($x,3));
+        $this->assertResult('x^x^x', pow($x,pow($x,$x)));
         $this->assertResult('0^0', 1);
         $this->assertResult('(-1)^(-1)', -1);
     }
@@ -276,4 +281,18 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
 
     }
 
+    public function testCanCreateTemporaryUnaryMinusNode()
+    {
+        $node = new ExpressionNode(null, '~', null);
+        $this->assertEquals($node->getOperator(), '~');
+        $this->assertNull($node->getRight());
+        $this->assertNull($node->getLeft());
+        $this->assertEquals($node->getPrecedence(), 25);
+    }
+
+    public function testUnknownException()
+    {
+        $this->setExpectedException(UnknownOperatorException::class);
+        $node = new ExpressionNode(null, '%', null);
+    }
 }

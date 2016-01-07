@@ -1,4 +1,3 @@
-
 <?php
 /*
 * @package     Parsing
@@ -28,6 +27,7 @@ use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\ConstantNode;
 use MathParser\Parsing\Nodes\SubExpressionNode;
+use MathParser\Parsing\Nodes\Factories\NodeFactory;
 
 use MathParser\Parsing\Stack;
 
@@ -73,6 +73,18 @@ class Parser
     * Stack stack of operands waiting to process
     */
     protected $operandStack;
+    /**
+     * NodeFactory
+     */
+     protected $nodeFactory;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->nodeFactory = new NodeFactory();
+    }
 
     /**
     * Parse list of tokens
@@ -124,39 +136,7 @@ class Parser
 
             // Handle closing parentheses
             if ($token->getType() == TokenType::CloseParenthesis) {
-                // Flag, checking for mismatching parentheses
-                $clean = false;
-
-                // Pop operators off the operatorStack until its empty, or
-                // we find an opening parenthesis, building subexpressions
-                // on the operandStack as we go.
-                while ($popped = $this->operatorStack->pop()) {
-
-                    // ok, we have our matching opening parenthesis
-                    if ($popped instanceof SubExpressionNode) {
-                        $clean = true;
-                        break;
-                    } else {
-                        $node = $this->handleExpression($popped);
-                        $this->operandStack->push($node);
-                    }
-                }
-
-                // Throw an error if the parenthesis couldn't be matched
-                if (!$clean) {
-                    throw new ParenthesisMismatchException();
-                }
-
-                // Check to see if the parenthesis pair was in fact part
-                // of a function application. If so, create the corresponding
-                // FunctionNode and push it onto the operandStack.
-                $previous = $this->operatorStack->peek();
-                if ($previous instanceof FunctionNode) {
-                    $node = $this->operatorStack->pop();
-                    $operand = $this->operandStack->pop();
-                    $node->setOperand($operand);
-                    $this->operandStack->push($node);
-                }
+                $clean = $this->handleSubExpression();
             }
             // Push terminal tokens on the operandStack
             elseif ($node->isTerminal()) {
@@ -245,7 +225,7 @@ class Parser
             $node->setOperator('-');
             $node->setLeft($left);
 
-            return $node;
+            return $this->nodeFactory->simplify($node);
         }
 
         $right = $this->operandStack->pop();
@@ -257,7 +237,7 @@ class Parser
         $node->setLeft($left);
         $node->setRight($right);
 
-        return $node;
+        return $this->nodeFactory->simplify($node);
     }
 
     /**
@@ -349,6 +329,49 @@ class Parser
         if ($lastNode instanceof ExpressionNode && $lastNode->getOperator() == '~') return true;
 
         return false;
+    }
+
+    /** Handle a closing parenthesis, popping operators off the
+     * operator stack until we find a matching opening parenthesis.
+     *
+     * @throws ParenthesisMismatchException
+     */
+    protected function handleSubExpression()
+    {
+        // Flag, checking for mismatching parentheses
+        $clean = false;
+
+        // Pop operators off the operatorStack until its empty, or
+        // we find an opening parenthesis, building subexpressions
+        // on the operandStack as we go.
+        while ($popped = $this->operatorStack->pop()) {
+
+            // ok, we have our matching opening parenthesis
+            if ($popped instanceof SubExpressionNode) {
+                $clean = true;
+                break;
+            } else {
+                $node = $this->handleExpression($popped);
+                $this->operandStack->push($node);
+            }
+        }
+
+        // Throw an error if the parenthesis couldn't be matched
+        if (!$clean) {
+            throw new ParenthesisMismatchException();
+        }
+
+
+        // Check to see if the parenthesis pair was in fact part
+        // of a function application. If so, create the corresponding
+        // FunctionNode and push it onto the operandStack.
+        $previous = $this->operatorStack->peek();
+        if ($previous instanceof FunctionNode) {
+            $node = $this->operatorStack->pop();
+            $operand = $this->operandStack->pop();
+            $node->setOperand($operand);
+            $this->operandStack->push($node);
+        }
     }
 
 }

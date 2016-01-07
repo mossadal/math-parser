@@ -45,17 +45,36 @@ class AdditionNodeFactory implements ExpressionNodeFactory
         $leftOperand = $this->sanitize($leftOperand);
         $rightOperand = $this->sanitize($rightOperand);
 
-        if ($leftOperand instanceof NumberNode && $rightOperand instanceof NumberNode) {
-            return new NumberNode($leftOperand->getValue() + $rightOperand->getValue());
-        }
-
-        if ($leftOperand instanceof NumberNode && $leftOperand->getValue() == 0) {
-            return $rightOperand;
-        }
-        if ($rightOperand instanceof NumberNode && $rightOperand->getValue() == 0) {
-            return $leftOperand;
-        }
+        $node = $this->numericTerms($leftOperand, $rightOperand);
+        if ($node) return $node;
 
         return new ExpressionNode($leftOperand, '+', $rightOperand);
     }
+
+    /** Simplify addition node when operands are numeric
+     *
+     * @param Node $leftOperand
+     * @param Node $rightOperand
+     * @retval Node|null
+     */
+     protected function numericTerms($leftOperand, $rightOperand)
+     {
+         if ($leftOperand instanceof NumberNode) {
+             if ($rightOperand instanceof NumberNode) {
+                 return new NumberNode($leftOperand->getValue() + $rightOperand->getValue());
+             }
+             if ($leftOperand->getValue() == 0) {
+                 return $rightOperand;
+             }
+         }
+
+
+         if ($rightOperand instanceof NumberNode) {
+             if ($rightOperand->getValue() == 0) {
+                 return $leftOperand;
+             }
+         }
+
+         return null;
+     }
 }

@@ -122,7 +122,7 @@ abstract class Node implements Visitable
             }
 
 
-            throw new UnknownNodeException($this);
+            throw new UnknownNodeException();
     }
 
     /**

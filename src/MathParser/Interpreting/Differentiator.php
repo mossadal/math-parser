@@ -185,9 +185,8 @@ class Differentiator implements Visitor
         if ($node->getName() == $this->variable) {
             return new NumberNode(1);
         }
-        else {
-            return new NumberNode(0);
-        }
+
+        return new NumberNode(0);
     }
 
     /**

@@ -163,7 +163,8 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
         $this->assertResult('x/1', '1');
 
 
-        $f = $this->parser->parse('x/0');
+        // The parser catches 'x/0', so create the test AST directly
+        $f = new ExpressionNode(new VariableNode('x'), '/', 0);
         $this->setExpectedException(DivisionByZeroException::class);
         $this->diff($f);
     }

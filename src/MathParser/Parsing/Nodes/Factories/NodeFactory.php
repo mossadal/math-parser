@@ -21,6 +21,7 @@ use MathParser\Parsing\Nodes\Factories\MultiplicationNodeFactory;
 use MathParser\Parsing\Nodes\Factories\DivisionNodeFactory;
 use MathParser\Parsing\Nodes\Factories\ExponentiationNodeFactory;
 use MathParser\Parsing\Nodes\Factories\UnaryMinusNodeFactory;
+use MathParser\Parsing\Nodes\ExpressionNode;
 
 /**
  * Helper class for creating ExpressionNodes.
@@ -155,12 +156,29 @@ class NodeFactory {
      * Create a unary minus node representing '-$operand'.
      *
      * @param mixed $operand
-     * @retval ExpressionNode 
+     * @retval ExpressionNode
      *
      */
     public function unaryMinus($operand)
     {
         return $this->subtractionFactory->createUnaryMinusNode($operand);
+    }
+
+    /**
+     * Simplify the given ExpressionNode, using the appropriate factory.
+     *
+     * @param ExpressionNode $node
+     * @retval Node Simplified version of the input
+     */
+    public function simplify(ExpressionNode $node)
+    {
+        switch($node->getOperator()) {
+            case '+': return $this->addition($node->getLeft(), $node->getRight());
+            case '-': return $this->subtraction($node->getLeft(), $node->getRight());
+            case '*': return $this->multiplication($node->getLeft(), $node->getRight());
+            case '/': return $this->division($node->getLeft(), $node->getRight());
+            case '^': return $this->exponentiation($node->getLeft(), $node->getRight());
+        }
     }
 
 }

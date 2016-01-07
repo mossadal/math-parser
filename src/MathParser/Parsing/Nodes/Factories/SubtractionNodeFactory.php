@@ -50,19 +50,32 @@ class SubtractionNodeFactory implements ExpressionNodeFactory
         $leftOperand = $this->sanitize($leftOperand);
         $rightOperand = $this->sanitize($rightOperand);
 
-        if ($leftOperand instanceof NumberNode && $rightOperand instanceof NumberNode) {
-            return new NumberNode($leftOperand->getValue() + $rightOperand->getValue());
-        }
-
-        if ($rightOperand instanceof NumberNode && $rightOperand->getValue() == 0) {
-            return $leftOperand;
-        }
+        $node = $this->numericTerms($leftOperand, $rightOperand);
+        if ($node) return $node;
 
         if ($leftOperand->compareTo($rightOperand)) {
             return new NumberNode(0);
         }
 
         return new ExpressionNode($leftOperand, '-', $rightOperand);
+    }
+
+    /** Simplify subtraction nodes for numeric operands
+     * @param Node $leftOperand
+     * @param Node $rightOperand
+     * @retval Node|null
+     */
+    protected function numericTerms($leftOperand, $rightOperand)
+    {
+        if ($leftOperand instanceof NumberNode && $rightOperand instanceof NumberNode) {
+            return new NumberNode($leftOperand->getValue() - $rightOperand->getValue());
+        }
+
+        if ($rightOperand instanceof NumberNode && $rightOperand->getValue() == 0) {
+            return $leftOperand;
+        }
+
+        return null;
     }
 
     /**

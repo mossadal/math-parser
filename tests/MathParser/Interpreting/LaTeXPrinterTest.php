@@ -78,10 +78,10 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($output, '\pi');
 
-        $node = $this->parser->parse('1+1');
+        $node = $this->parser->parse('x+1');
         $output = $this->printer->bracesNeeded($node);
 
-        $this->assertEquals($output, '{1+1}');
+        $this->assertEquals($output, '{x+1}');
     }
 
     public function testCanPrintDivision()
@@ -91,10 +91,10 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
 
     public function testCanPrintMultiplication()
     {
-        $this->assertResult('2*3', '2\cdot 3');
-        $this->assertResult('2*x', '2x');
-        $this->assertResult('2*3^2', '2\cdot 3^2');
-        $this->assertResult('2*(3+4)', '2\cdot (3+4)');
+        //$this->assertResult('2*3', '2\cdot 3');
+        //$this->assertResult('2*x', '2x');
+        //$this->assertResult('2*3^2', '2\cdot 3^2');
+        $this->assertResult('sin(x)*x', '\sin x\cdot x');
         $this->assertResult('2*(x+4)', '2(x+4)');
         $this->assertResult('(x+1)*(x+2)', '(x+1)(x+2)');
     }
