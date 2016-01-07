@@ -48,17 +48,46 @@ class ExponentiationNodeFactory implements ExpressionNodeFactory
         $leftOperand = $this->sanitize($leftOperand);
         $rightOperand = $this->sanitize($rightOperand);
 
-        if ($rightOperand instanceof NumberNode && $rightOperand->getValue() == 0) {
-            return new NumberNode(1);
-        }
-        if ($rightOperand instanceof NumberNode && $rightOperand->getValue() == 1) {
-            return $leftOperand;
+        // Simplification if the exponent is a number.
+        if ($rightOperand instanceof NumberNode) {
+            $node = $this->numericExponent($leftOperand, $rightOperand);
+            if ($node) return $node;
         }
 
-        if ($leftOperand instanceof NumberNode && $rightOperand instanceof NumberNode) {
+        $node = $this->doubleExponentiation($leftOperand, $rightOperand);
+        if ($node) return $node;
+
+        return new ExpressionNode($leftOperand, '^', $rightOperand);
+    }
+
+    /** Simplify an expression x^y, when y is numeric.
+     *
+     * @param Node $leftOperand
+     * @param Node $rightOperand
+     * @retval Node|null
+     */
+    private function numericExponent($leftOperand, $rightOperand)
+    {
+        // x^0 = 1
+        if ($rightOperand->getValue() == 0) return new NumberNode(1);
+        // x^1 = x
+        if ($rightOperand->getValue() == 1) return $leftOperand;
+        // Compute x^y if both are numbers.
+        if ($leftOperand instanceof NumberNode) {
             return new NumberNode(pow($leftOperand->getValue(), $rightOperand->getValue()));
         }
 
+        // No simplification found
+        return null;
+    }
+
+    /** Simplify (x^a)^b when a and b are both numeric.
+     * @param Node $leftOperand
+     * @param Node $rightOperand
+     * @retval Node|null
+     */
+    private function doubleExponentiation($leftOperand, $rightOperand)
+    {
         // (x^a)^b -> x^(ab) for a, b numbers
         if ($leftOperand instanceof ExpressionNode && $leftOperand->getRight() instanceof NumberNode && $rightOperand instanceof NumberNode) {
             $power = new NumberNode($leftOperand->getRight()->getValue() * $rightOperand->getValue());
@@ -66,7 +95,8 @@ class ExponentiationNodeFactory implements ExpressionNodeFactory
             return new ExpressionNode($base, '^', $power);
         }
 
-        return new ExpressionNode($leftOperand, '^', $rightOperand);
+        // No simplification found
+        return null;
     }
 
 }

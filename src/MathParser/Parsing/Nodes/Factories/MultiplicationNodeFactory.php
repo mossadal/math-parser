@@ -15,11 +15,11 @@ use MathParser\Parsing\Nodes\ExpressionNode;
 use MathParser\Parsing\Nodes\Traits\Sanitize;
 
 /**
- * Factory for creating an ExpressionNode representing '*'.
- *
- * Some basic simplification is applied to the resulting Node.
- *
- */
+* Factory for creating an ExpressionNode representing '*'.
+*
+* Some basic simplification is applied to the resulting Node.
+*
+*/
 class MultiplicationNodeFactory implements ExpressionNodeFactory
 {
     use Sanitize;
@@ -46,25 +46,41 @@ class MultiplicationNodeFactory implements ExpressionNodeFactory
         $leftOperand = $this->sanitize($leftOperand);
         $rightOperand = $this->sanitize($rightOperand);
 
-        if ($leftOperand instanceof NumberNode && $rightOperand instanceof NumberNode) {
-            return new NumberNode($leftOperand->getValue() * $rightOperand->getValue());
-        }
-
-        if ($leftOperand instanceof NumberNode && $leftOperand->getValue() == 1) {
-            return $rightOperand;
-        }
-        if ($leftOperand instanceof NumberNode && $leftOperand->getValue() == 0) {
-            return new NumberNode(0);
-        }
-
-        if ($rightOperand instanceof NumberNode && $rightOperand->getValue() == 1) {
-            return $leftOperand;
-        }
-        if ($rightOperand instanceof NumberNode && $rightOperand->getValue() == 0) {
-            return new NumberNode(0);
-        }
+        $node = $this->numericFactors($leftOperand, $rightOperand);
+        if ($node) return $node;
 
         return new ExpressionNode($leftOperand, '*', $rightOperand);
     }
 
+    /**
+    * Simplify a*b when a or b are certain numeric values
+    *
+    * @param Node $leftOperand
+    * @param Node $rightOperand
+    * @retval Node|null
+    **/
+    private function numericFactors($leftOperand, $rightOperand)
+    {
+        if ($leftOperand instanceof NumberNode) {
+            if ($rightOperand instanceof NumberNode) {
+                return new NumberNode($leftOperand->getValue() * $rightOperand->getValue());
+            }
+            if ($leftOperand->getValue() == 1) {
+                return $rightOperand;
+            }
+            if ($leftOperand->getValue() == 0) {
+                return new NumberNode(0);
+            }
+        }
+        
+        if ($rightOperand instanceof NumberNode) {
+            if ($rightOperand->getValue() == 1) {
+                return $leftOperand;
+            }
+            if ($rightOperand->getValue() == 0) {
+                return new NumberNode(0);
+            }
+        }
+        return null;
+    }
 }
