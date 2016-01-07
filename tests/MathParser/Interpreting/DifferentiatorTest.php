@@ -9,6 +9,7 @@ use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\Parsing\Nodes\ExpressionNode;
 use MathParser\Parsing\Nodes\NumberNode;
+use MathParser\Interpreting\TreePrinter;
 
 use MathParser\Exceptions\UnknownFunctionException;
 use MathParser\Exceptions\UnknownOperatorException;
@@ -34,9 +35,10 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
 
     private function assertNodesEqual($node1, $node2)
     {
-        $message = "Node1: ".var_export($node1,true)."\nNode 2: ".var_export($node2, true)."\n";
+        $printer = new TreePrinter();
+        $message = "Node1: ".$node1->accept($printer)."\nNode 2: ".$node2->accept($printer)."\n";
 
-        $this->assertTrue(Node::compareNodes($node1, $node2), $message);
+        $this->assertTrue($node1->compareTo($node2), $message);
     }
 
     private function assertResult($f, $df)
@@ -109,7 +111,7 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
 
     public function testCanDifferentiateArccos()
     {
-        $this->assertResult('arccos(x)', '-1/sqrt(1-x^2)');
+        $this->assertResult('arccos(x)', '(-1)/sqrt(1-x^2)');
     }
 
     public function testCanDifferentiateArctan()
@@ -188,7 +190,10 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
 
     public function testCannotDifferentiateUnknownOperator()
     {
-        $node = new ExpressionNode(new NumberNode(1), '%', new VariableNode('x'));
+        $node = new ExpressionNode(new NumberNode(1), '+', new VariableNode('x'));
+        // We need to cheat here, since the ExpressionNode contructor already
+        // throws an UnknownOperatorException when called with, say '%'
+        $node->setOperator('%');
         $this->setExpectedException(UnknownOperatorException::class);
 
         $this->diff($node);

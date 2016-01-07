@@ -10,11 +10,15 @@ use MathParser\Parsing\Nodes\ConstantNode;
 use MathParser\Parsing\Nodes\ExpressionNode;
 use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\NumberNode;
+use MathParser\Parsing\Nodes\SubExpressionNode;
 use MathParser\Parsing\Nodes\VariableNode;
+use MathParser\Interpreting\TreePrinter;
 
 use MathParser\Exceptions\SyntaxErrorException;
 use MathParser\Exceptions\UnexpectedOperatorException;
 use MathParser\Exceptions\ParenthesisMismatchException;
+use MathParser\Exceptions\UnknownNodeException;
+
 
 class StdMathParserTest extends PHPUnit_Framework_TestCase
 {
@@ -27,9 +31,10 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
 
     private function assertNodesEqual($node1, $node2)
     {
-        $message = "Node1: ".var_export($node1,true)."\nNode 2: ".var_export($node2, true)."\n";
+        $printer = new TreePrinter();
+        $message = "Node1: ".$node1->accept($printer)."\nNode 2: ".$node2->accept($printer)."\n";
 
-        $this->assertTrue(Node::compareNodes($node1, $node2), $message);
+        $this->assertTrue($node1->compareTo($node2), $message);
     }
 
     private function assertNumberNode($node, $value)
@@ -60,6 +65,11 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
         $this->assertCompareNodes("sin(x)");
         $this->assertCompareNodes("(x)");
         $this->assertCompareNodes("1+2+3");
+
+        $node = new SubExpressionNode('%');
+        $other = new NumberNode(1);
+        $this->setExpectedException(UnknownNodeException::class);
+        $node->compareTo($other);
     }
 
     private function assertTokenEquals($value, $type, Token $token)
@@ -89,10 +99,13 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
     public function testCanParseSingleNumberExpression()
     {
         $node = $this->parser->parse("3");
-
         $shouldBe = new NumberNode(3);
-
         $this->assertNodesEqual($node, $shouldBe);
+
+        $node = $this->parser->parse("3.5");
+        $shouldBe = new NumberNode(3.5);
+        $this->assertNodesEqual($node, $shouldBe);
+
     }
 
     public function testCanParseSingleVariable()
@@ -121,75 +134,80 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
 
         $node = $this->parser->parse('((pi))');
         $this->assertNodesEqual($node, $shouldBe);
+
+        $node = $this->parser->parse('e');
+        $shouldBe = new ConstantNode('e');
+
+        $this->assertNodesEqual($node, $shouldBe);
     }
 
     public function testCanParseBinaryExpression()
     {
-        $node = $this->parser->parse("3+5");
-        $shouldBe = new ExpressionNode(new NumberNode(3), '+', new NumberNode(5));
+        $node = $this->parser->parse("x+y");
+        $shouldBe = new ExpressionNode(new VariableNode('x'), '+', new VariableNode('y'));
 
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->parser->parse("3-5");
-        $shouldBe = new ExpressionNode(new NumberNode(3), '-', new NumberNode(5));
+        $node = $this->parser->parse("x-y");
+        $shouldBe = new ExpressionNode(new VariableNode('x'), '-', new VariableNode('y'));
 
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->parser->parse("3*5");
-        $shouldBe = new ExpressionNode(new NumberNode(3), '*', new NumberNode(5));
+        $node = $this->parser->parse("x*y");
+        $shouldBe = new ExpressionNode(new VariableNode('x'), '*', new VariableNode('y'));
 
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->parser->parse("3/5");
-        $shouldBe = new ExpressionNode(new NumberNode(3), '/', new NumberNode(5));
+        $node = $this->parser->parse("x/y");
+        $shouldBe = new ExpressionNode(new VariableNode('x'), '/', new VariableNode('y'));
 
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->parser->parse("3^5");
-        $shouldBe = new ExpressionNode(new NumberNode(3), '^', new NumberNode(5));
+        $node = $this->parser->parse("x^y");
+        $shouldBe = new ExpressionNode(new VariableNode('x'), '^', new VariableNode('y'));
 
         $this->assertNodesEqual($node, $shouldBe);
     }
 
     public function testCanParseWithCorrectAssociativity()
     {
-        $node = $this->parser->parse("1+2+3");
+        $node = $this->parser->parse("x+y+z");
         $shouldBe = new ExpressionNode(
-            new ExpressionNode(new NumberNode(1), '+', new NumberNode(2)),
+            new ExpressionNode(new VariableNode('x'), '+', new VariableNode('y')),
             '+',
-            new NumberNode(3)
+            new VariableNode('z')
         );
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->parser->parse("1-2-3");
+        $node = $this->parser->parse("x-y-z");
         $shouldBe = new ExpressionNode(
-            new ExpressionNode(new NumberNode(1), '-', new NumberNode(2)),
+            new ExpressionNode(new VariableNode('x'), '-', new VariableNode('y')),
             '-',
-            new NumberNode(3)
+            new VariableNode('z')
         );
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->parser->parse("1*2*3");
+        $node = $this->parser->parse("x*y*z");
         $shouldBe = new ExpressionNode(
-            new ExpressionNode(new NumberNode(1), '*', new NumberNode(2)),
+            new ExpressionNode(new VariableNode('x'), '*', new VariableNode('y')),
             '*',
-            new NumberNode(3)
+            new VariableNode('z')
         );
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->parser->parse("1/2/3");
+        $node = $this->parser->parse("x/y/z");
         $shouldBe = new ExpressionNode(
-            new ExpressionNode(new NumberNode(1), '/', new NumberNode(2)),
+            new ExpressionNode(new VariableNode('x'), '/', new VariableNode('y')),
             '/',
-            new NumberNode(3)
+            new VariableNode('z')
         );
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->parser->parse("1^2^3");
+        $node = $this->parser->parse("x^y^z");
         $shouldBe = new ExpressionNode(
-            new NumberNode(1),
+            new VariableNode('x'),
             '^',
-            new ExpressionNode(new NumberNode(2), '+', new NumberNode(3))
+            new ExpressionNode(new VariableNode('y'), '+', new VariableNode('z'))
         );
         $this->assertNodesEqual($node, $shouldBe);
 
@@ -285,7 +303,7 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
         $this->assertNodesEqual($node, $shouldBe);
 
         $node = $this->parser->parse("-x*y");
-        $shouldBe = $this->parser->parse("(-x)*y");
+        $shouldBe = $this->parser->parse("-(x*y)");
         $this->assertNodesEqual($node, $shouldBe);
 
         $node = $this->parser->parse("-x^y");
@@ -307,9 +325,18 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(SyntaxErrorException::class);
         $this->parser->parse('1+');
+    }
 
+    public function testSyntaxErrorException2()
+    {
         $this->setExpectedException(SyntaxErrorException::class);
         $this->parser->parse('**3');
+    }
+
+    public function testSyntaxErrorException3()
+    {
+        $this->setExpectedException(SyntaxErrorException::class);
+        $this->parser->parse('-');
     }
 
     public function testParenthesisMismatchException()
@@ -320,4 +347,47 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException(ParenthesisMismatchException::class);
         $this->parser->parse('(1+1');
     }
+
+    public function testCanComputeComplexity()
+    {
+        $node = new NumberNode(1);
+        $this->assertEquals($node->complexity(), 1);
+
+        $node = new VariableNode('x');
+        $this->assertEquals($node->complexity(), 1);
+
+        $node = new ConstantNode('pi');
+        $this->assertEquals($node->complexity(), 1);
+
+        $f = $this->parser->parse('x+y');
+        $this->assertEquals($f->complexity(), 4);
+
+        $f = $this->parser->parse('x-y');
+        $this->assertEquals($f->complexity(), 4);
+
+        $f = $this->parser->parse('x*y');
+        $this->assertEquals($f->complexity(), 4);
+
+        $f = $this->parser->parse('x/y');
+        $this->assertEquals($f->complexity(), 6);
+
+        $f = $this->parser->parse('x^y');
+        $this->assertEquals($f->complexity(), 10);
+
+        $f = $this->parser->parse('sin(x)');
+        $this->assertEquals($f->complexity(), 6);
+
+        $f = $this->parser->parse('x + sin(x^2)');
+        $this->assertEquals($f->complexity(), 18);
+
+        $node = new SubExpressionNode('(');
+        $this->assertEquals($node->complexity(), 1000);
+    }
+
+    public function testCanEvaluateNode()
+    {
+        $f = $this->parser->parse('x+y');
+        $this->assertEquals($f->evaluate([ 'x' => 1, 'y' => 2 ]), 3);
+    }
+
 }

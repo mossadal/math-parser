@@ -14,7 +14,14 @@ use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\ExpressionNode;
 use MathParser\Parsing\Nodes\Traits\Sanitize;
 use MathParser\Parsing\Nodes\Node;
+use MathParser\Exceptions\DivisionByZeroException;
 
+/**
+ * Factory for creating an ExpressionNode representing '/'.
+ *
+ * Some basic simplification is applied to the resulting Node.
+ *
+ */
 class DivisionNodeFactory implements ExpressionNodeFactory
 {
     use Sanitize;
@@ -35,7 +42,7 @@ class DivisionNodeFactory implements ExpressionNodeFactory
     *
     * @param Node|int $leftOperand Numerator
     * @param Node|int $rightOperand Denominator
-    * @return Node
+    * @retval Node
     */
     public function makeNode($leftOperand, $rightOperand)
     {
@@ -57,7 +64,7 @@ class DivisionNodeFactory implements ExpressionNodeFactory
             return new NumberNode(0);
         }
 
-        if (Node::compareNodes($leftOperand,$rightOperand)) {
+        if ($leftOperand->compareTo($rightOperand)) {
             return new NumberNode(1);
         }
 

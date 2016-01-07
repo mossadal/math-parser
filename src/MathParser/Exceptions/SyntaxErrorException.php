@@ -14,6 +14,7 @@
   */
 class SyntaxErrorException extends MathParserException
 {
+    /** Constructor. Create a SyntaxErrorException */
     public function __construct()
     {
         parent::__construct("Syntax error.");

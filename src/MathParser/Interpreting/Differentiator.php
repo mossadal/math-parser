@@ -61,6 +61,7 @@ class Differentiator implements Visitor
      **/
     protected $variable;
 
+    /** NodeFactory $nodeFactory used for building the resulting AST. */
     protected $nodeFactory;
 
 
@@ -98,7 +99,7 @@ class Differentiator implements Visitor
      *      `+`, `-`, `*`, `/` or `^`
      *
      * @param ExpressionNode $node AST to be differentiated
-     * @return Node
+     * @retval Node
      */
     public function visitExpressionNode(ExpressionNode $node)
     {
@@ -163,7 +164,7 @@ class Differentiator implements Visitor
      * a constant is indentically 0).
      *
      * @param NumberNode $node AST to be differentiated
-     * @return Node
+     * @retval Node
      */
     public function visitNumberNode(NumberNode $node)
     {
@@ -177,7 +178,7 @@ class Differentiator implements Visitor
      * the differetiation variable.
      *
      * @param NumberNode $node AST to be differentiated
-     * @return Node
+     * @retval Node
      */
     public function visitVariableNode(VariableNode $node)
     {
@@ -222,7 +223,7 @@ class Differentiator implements Visitor
      *          one of the above
      *
      * @param FunctionNode $node AST to be differentiated
-     * @return Node
+     * @retval Node
      */
     public function visitFunctionNode(FunctionNode $node)
     {
@@ -236,7 +237,7 @@ class Differentiator implements Visitor
                 break;
             case 'cos':
                 $sin = new FunctionNode('sin', $arg);
-                $df = $this->createUnaryMinusNode($sin);
+                $df = $this->nodeFactory->unaryMinus($sin);
                 break;
             case 'tan':
                 $tansquare = $this->nodeFactory->exponentiation($node, 2);
@@ -244,7 +245,7 @@ class Differentiator implements Visitor
                 break;
             case 'cot':
                 $cotsquare = $this->nodeFactory->exponentiation($node, 2);
-                $df = $this->nodeFactory->addition($this->createUnaryMinusNode(1), $cotsquare);
+                $df = $this->nodeFactory->addition($this->nodeFactory->unaryMinus(1), $cotsquare);
                 break;
 
             case 'arcsin':
@@ -255,7 +256,7 @@ class Differentiator implements Visitor
             case 'arccos':
                 $denom = new FunctionNode('sqrt',
                     $this->nodeFactory->subtraction(1, $this->nodeFactory->exponentiation($arg, 2)));
-                return  $this->nodeFactory->division($this->createUnaryMinusNode($inner), $denom);
+                return  $this->nodeFactory->division($this->nodeFactory->unaryMinus($inner), $denom);
 
             case 'arctan':
                 $denom = $this->nodeFactory->addition(1, $this->nodeFactory->exponentiation($arg, 2));
@@ -263,7 +264,7 @@ class Differentiator implements Visitor
 
             case 'arccot':
                 $denom = $this->nodeFactory->addition(1, $this->nodeFactory->exponentiation($arg, 2));
-                $df = $this->createUnaryMinusNode($this->nodeFactory->division(1, $denom));
+                $df = $this->nodeFactory->unaryMinus($this->nodeFactory->division(1, $denom));
                 break;
 
             case 'exp':
@@ -324,7 +325,7 @@ class Differentiator implements Visitor
      * a constant is indentically 0).
      *
      * @param ConstantNode $node AST to be differentiated
-     * @return Node
+     * @retval Node
      */
     public function visitConstantNode(ConstantNode $node)
     {

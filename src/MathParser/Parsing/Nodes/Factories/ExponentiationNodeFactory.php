@@ -15,6 +15,12 @@ use MathParser\Parsing\Nodes\ExpressionNode;
 use MathParser\Parsing\Nodes\Traits\Sanitize;
 use MathParser\Parsing\Nodes\Node;
 
+/**
+ * Factory for creating an ExpressionNode representing '^'.
+ *
+ * Some basic simplification is applied to the resulting Node.
+ *
+ */
 class ExponentiationNodeFactory implements ExpressionNodeFactory
 {
     use Sanitize;
@@ -35,7 +41,7 @@ class ExponentiationNodeFactory implements ExpressionNodeFactory
     *
     * @param Node|int $leftOperand Minuend
     * @param Node|int $rightOperand Subtrahend
-    * @return Node
+    * @retval Node
     */
     public function makeNode($leftOperand, $rightOperand)
     {

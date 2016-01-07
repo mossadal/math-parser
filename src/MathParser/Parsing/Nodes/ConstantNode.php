@@ -16,8 +16,23 @@ use MathParser\Interpreting\Visitors\Visitor;
  */
 class ConstantNode extends Node
 {
+    /**
+     * Name of the constant, e.g. 'pi' or 'e'.
+     *
+     * string $value
+     **/
     private $value;
 
+    /**
+     * Constructor.
+     *
+     * ### Example
+     *
+     * ~~~{.php}
+     * $node = new ConstantNode('pi');
+     * ~~~
+     *
+     */
     function __construct($value)
     {
         $this->value = $value;
@@ -27,7 +42,7 @@ class ConstantNode extends Node
     * @property getName
     *
     * Returns the name of the constant
-    * @return string
+    * @retval string
     */
     public function getName()
     {

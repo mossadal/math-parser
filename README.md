@@ -1,9 +1,9 @@
-math-parser
-===========
+# math-parser
 
+[![Latest Stable Version](https://poser.pugx.org/mossadal/math-parser/v/stable)](https://packagist.org/packages/mossadal/math-parser) [![Total Downloads](https://poser.pugx.org/mossadal/math-parser/downloads)](https://packagist.org/packages/mossadal/math-parser)  [![License](https://poser.pugx.org/mossadal/math-parser/license)](https://packagist.org/packages/mossadal/math-parser)
+[![Code Climate](https://codeclimate.com/github/cloudfoundry/membrane.png)](https://codeclimate.com/github/cloudfoundry/membrane)
 
-DESCRIPTION
------------
+## DESCRIPTION
 
 PHP parser and evaluator library for mathematical expressions.
 
@@ -16,8 +16,7 @@ The lexer and parser produces an abstract syntax tree (AST) that can be traverse
 * a rudimentary LaTeX output generator, useful for pretty printing expressions using MathJax
 
 
-EXAMPLES
---------
+## EXAMPLES
 
 It is possible to fine-tune the lexer and parser, but the library ships with a StdMathParser class, capable of tokenizing and parsing standard mathematical expressions, including aritmethical operations as well as elementary functions.
 
@@ -68,13 +67,11 @@ Note that implicit multiplication has the same precedence as explicit multiplica
 
 To make full use of implicit multiplication, the standard lexer only allows one-letter variables. (Otherwise, we wouldn't know if `xy` should be parsed as `x*y` or as the single variable `xy`).
 
-DOCUMENTATION
--------------
+## DOCUMENTATION
 
 For complete documentation, see the [github.io project page](http://mossadal.github.io/math-parser/index.html)
 
-THANKS
-------
+## THANKS
 
 The Lexer is based on the lexer described by Marc-Oliver Fiset in his [blog](http://marcofiset.com/programming-language-implementation-part-1-lexer/).
 

@@ -17,8 +17,9 @@ namespace MathParser\Exceptions;
  */
 class UnknownNodeException extends MathParserException
 {
+    /** Constructor. Create a UnknownNodeException */
     public function __construct($node)
     {
-        parent::__construct("Unknown node: $node");
+        parent::__construct("Unknown node.");
     }
 }

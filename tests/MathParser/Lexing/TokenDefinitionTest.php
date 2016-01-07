@@ -2,7 +2,6 @@
 
 use MathParser\Lexing\TokenDefinition;
 use MathParser\Lexing\TokenType;
-use MathParser\Lexing\TokenPrecedence;
 
 class TokenDefinitionTest extends PHPUnit_Framework_TestCase
 {

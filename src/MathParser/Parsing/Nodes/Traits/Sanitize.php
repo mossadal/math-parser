@@ -7,14 +7,26 @@
 *
 */
 
+/** @namespace MathParser::Parsing::Nodes::Traits
+ *
+ * Traits for Nodes
+ */
 namespace MathParser\Parsing\Nodes\Traits;
 
+use MathParser\Parsing\Nodes\NumberNode;
+
+/**
+ * Trait for upgrading numbers (ints and floats) to NumberNode,
+ * making it possible to call the Node constructors directly
+ * with numbers, making the code cleaner.
+ *
+ */
 trait Sanitize {
     /**
     * Convert ints and floats to NumberNodes
     *
     * @param Node|int|float $operand
-    * @return Node
+    * @retval Node
     **/
     protected function sanitize($operand)
     {

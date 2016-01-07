@@ -14,6 +14,12 @@ use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\ExpressionNode;
 use MathParser\Parsing\Nodes\Traits\Sanitize;
 
+/**
+ * Factory for creating an ExpressionNode representing '*'.
+ *
+ * Some basic simplification is applied to the resulting Node.
+ *
+ */
 class MultiplicationNodeFactory implements ExpressionNodeFactory
 {
     use Sanitize;
@@ -33,7 +39,7 @@ class MultiplicationNodeFactory implements ExpressionNodeFactory
     *
     * @param Node|int $leftOperand First factor
     * @param Node|int $rightOperand Second factor
-    * @return Node
+    * @retval Node
     */
     public function makeNode($leftOperand, $rightOperand)
     {

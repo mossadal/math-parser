@@ -18,9 +18,10 @@ use MathParser\Interpreting\Visitors\Visitable;
 use MathParser\Lexing\Token;
 use MathParser\Lexing\TokenType;
 use MathParser\Lexing\TokenPrecedence;
-
+use MathParser\Interpreting\Evaluator;
 
 use MathParser\Exceptions\UnknownNodeException;
+use MathParser\Exceptions\UnknownOperatorException;
 
 /**
  * Abstract base class for nodes in the abstract syntax tree
@@ -29,7 +30,7 @@ use MathParser\Exceptions\UnknownNodeException;
  */
 abstract class Node implements Visitable
 {
-    /*
+    /**
      * Node factory, creating an appropriate Node from a Token.
      *
      * Based on the provided Token, returns a TerminalNode if the
@@ -37,7 +38,7 @@ abstract class Node implements Visitable
      * otherwise returns null.
      *
      * @param Token $token Provided token
-     * @return Node|null
+     * @retval Node|null
      */
     public static function factory(Token $token)
     {
@@ -45,62 +46,83 @@ abstract class Node implements Visitable
             case TokenType::PosInt:
             case TokenType::Integer:
                 $x = intval($token->getValue());
-                $node = new NumberNode($x);
-                break;
+                return new NumberNode($x);
             case TokenType::RealNumber:
                 $x = floatval($token->getValue());
-                $node = new NumberNode($x);
-                break;
+                return new NumberNode($x);
             case TokenType::Identifier:
-                $node = new VariableNode($token->getValue());
-                break;
+                return new VariableNode($token->getValue());
             case TokenType::Constant:
-                $node = new ConstantNode($token->getValue());
-                break;
+                return new ConstantNode($token->getValue());
+
+            case TokenType::FunctionName:
+                return new FunctionNode($token->getValue(), null);
+            case TokenType::OpenParenthesis:
+                return new SubExpressionNode($token->getValue());
+
+            case TokenType::AdditionOperator:
+            case TokenType::SubtractionOperator:
+            case TokenType::MultiplicationOperator:
+            case TokenType::DivisionOperator:
+            case TokenType::ExponentiationOperator:
+                return new ExpressionNode(null, $token->getValue(), null);
+
             default:
-                $node = null;
-                break;
+                // echo "Node factory returning null on $token\n";
+                return null;
         }
 
-        return $node;
     }
 
     /**
      * Helper function, comparing two ASTs. Useful for testing
      * and also for some AST transformers.
      *
-     * @param Node|null $node1 First tree
-     * @param Node|null $node2 Second tree
-     * @return boolean
+     * @param Node $other Compare to this tree
+     * @retval boolean
      */
-    public static function compareNodes($node1, $node2)
+    public function compareTo($other)
     {
-            if ($node1 === null && $node2 === null) return true;
-            if ($node1 === null || $node2 === null) return false;
+            if ($other === null) return false;
 
-            if ($node1 instanceof ConstantNode) {
-                if (!($node2 instanceof ConstantNode)) return false;
-                return $node1->getName() == $node2->getName();
+            if ($this instanceof ConstantNode) {
+                if (!($other instanceof ConstantNode)) return false;
+                return $this->getName() == $other->getName();
             }
-            if ($node1 instanceof ExpressionNode) {
-                if (!($node2 instanceof ExpressionNode)) return false;
-                return self::compareNodes($node1->getRight(), $node2->getRight()) && self::compareNodes($node1->getLeft(), $node2->getLeft());
+            if ($this instanceof ExpressionNode) {
+                if (!($other instanceof ExpressionNode)) return false;
+
+                $thisLeft = $this->getLeft();
+                $otherLeft = $other->getLeft();
+                if ($thisLeft === null) return ($otherLeft === null);
+
+                $thisRight = $this->getRight();
+                $otherRight = $other->getRight();
+                if ($thisRight === null) return ($otherRight === null);
+
+                return $thisLeft->compareTo($otherLeft) && $thisRight->compareTo($otherRight);
             }
-            if ($node1 instanceof FunctionNode) {
-                if (!($node2 instanceof FunctionNode)) return false;
-                return self::compareNodes($node1->getOperand(), $node2->getOperand());
+            if ($this instanceof FunctionNode) {
+                if (!($other instanceof FunctionNode)) return false;
+
+                $thisOperand = $this->getOperand();
+                $otherOperand = $other->getOperand();
+
+                if ($thisOperand === null) return ($otherOperand === null);
+
+                return $thisOperand->compareTo($otherOperand);;
             }
-            if ($node1 instanceof NumberNode) {
-                if (!($node2 instanceof NumberNode)) return false;
-                return $node1->getValue() == $node2->getValue();
+            if ($this instanceof NumberNode) {
+                if (!($other instanceof NumberNode)) return false;
+                return $this->getValue() == $other->getValue();
             }
-            if ($node1 instanceof VariableNode) {
-                if (!($node2 instanceof VariableNode)) return false;
-                return $node1->getName() == $node2->getName();
+            if ($this instanceof VariableNode) {
+                if (!($other instanceof VariableNode)) return false;
+                return $this->getName() == $other->getName();
             }
 
 
-            throw new UnknownNodeException($node1);
+            throw new UnknownNodeException($this);
     }
 
     /**
@@ -116,7 +138,7 @@ abstract class Node implements Visitable
      * ~~~
      *
      * @param array $variables key-value array of variable values
-     * @return floatval
+     * @retval floatval
      **/
     public function evaluate($variables)
     {
@@ -136,7 +158,8 @@ abstract class Node implements Visitable
      *
      * * NumberNodes, VariableNodes and ConstantNodes have complexity 1,
      * * FunctionNodes have complexity 5 (plus the complexity of its operand),
-     * * ExpressionNodes have complexity 2 (for `+`, `-`, `*` and `/`) or 5 (for `^`)
+     * * ExpressionNodes have complexity 2 (for `+`, `-`, `*`), 4 (for `/`),
+     *  or 8 (for `^`)
      *
      */
     public function complexity()
@@ -152,21 +175,34 @@ abstract class Node implements Visitable
             switch ($operator) {
                 case '+':
                 case '-':
+                case '*':
                     return 2 + $left->complexity() + (($right === null) ? 0 : $right->complexity());
 
-                case '*':
                 case '/':
-                    return 2 + $left->complexity() + (($right === null) ? 0 : $right->complexity());
+                    return 4 + $left->complexity() + (($right === null) ? 0 : $right->complexity());
 
                 case '^':
                     return 8 + $left->complexity() + (($right === null) ? 0 : $right->complexity());
 
-                default:
-                    return -1;
             }
-        } else {
-            return 1000;
         }
+        // This shouldn't happen under normal circumstances
+        return 1000;
+    }
+
+    /**
+     * Returns true if the node is a terminal node, i.e.
+     * a NumerNode, VariableNode or ConstantNode.
+     *
+     * @retval boolean
+     **/
+    public function isTerminal()
+    {
+        if ($this instanceof NumberNode) return true;
+        if ($this instanceof VariableNode) return true;
+        if ($this instanceof ConstantNode) return true;
+
+        return false;
     }
 
 }

@@ -14,6 +14,7 @@ namespace MathParser\Exceptions;
  */
 class DivisionByZeroException extends MathParserException
 {
+    /** Constructor. Create a DivisionByZeroException */
     public function __construct()
     {
         parent::__construct("Division by zero.");

@@ -14,7 +14,8 @@ namespace MathParser\Parsing;
  * Utility class, implementing a simple FIFO stack
  */
 class Stack {
-    public $data = array();
+    /** mixed[] $data internal storage of data on the stack. */
+    protected $data = array();
 
     /**
      * Push an element onto the stack.
@@ -26,7 +27,7 @@ class Stack {
 
     /**
      * Return the top element (without popping it)
-     * @return mixed
+     * @retval mixed
      */
     public function peek() {
         return end($this->data);
@@ -34,7 +35,7 @@ class Stack {
 
     /**
      * Return the top element and remove it from the stack.
-     * @return mixed
+     * @retval mixed
      */
     public function pop() {
         return array_pop($this->data);
@@ -42,10 +43,20 @@ class Stack {
 
     /**
      * Return the current number of elements in the stack.
-     * @return int
+     * @retval int
      */
     public function count() {
         return count($this->data);
+    }
+
+    /**
+     * Returns true if the stack is empty
+     *
+     * @retval boolean
+     **/
+    public function isEmpty()
+    {
+        return $this->count() == 0;
     }
 
 }

@@ -179,11 +179,4 @@ class StdMathLexerTest extends PHPUnit_Framework_TestCase
         $this->assertTokenEquals('arctan', TokenType::FunctionName, $tokens[0]);
     }
 
-    public function testIsOperator()
-    {
-        $tokens = $this->lexer->tokenize('+0');
-        $this->assertTrue($tokens[0]->isOperator());
-        $this->assertFalse($tokens[1]->isOperator());
-
-    }
 }

@@ -33,6 +33,11 @@ use MathParser\Parsing\Nodes\ConstantNode;
  */
 class TreePrinter implements Visitor
 {
+    /**
+     * Print an ExpressionNode.
+     *
+     * @param ExpressionNode $node
+     */
     public function visitExpressionNode(ExpressionNode $node)
     {
         $leftValue = $node->getLeft()->accept($this);
@@ -53,17 +58,32 @@ class TreePrinter implements Visitor
 
     }
 
+    /**
+     * Print a NumberNode.
+     *
+     * @param NumerNode $node
+     */
     public function visitNumberNode(NumberNode $node)
     {
         $val = $node->getValue();
         return "$val";
     }
 
+    /**
+     * Print a VariableNode.
+     *
+     * @param VariableNode $node
+     */
     public function visitVariableNode(VariableNode $node)
     {
         return $node->getName();
     }
 
+    /**
+     * Print a FunctionNode.
+     *
+     * @param FunctionNode $node
+     */
     public function visitFunctionNode(FunctionNode $node)
     {
         $functionName = $node->getName();
@@ -72,6 +92,11 @@ class TreePrinter implements Visitor
         return "$functionName($operand)";
     }
 
+    /**
+     * Print a ConstantNode. 
+     *
+     * @param ConstantNode $node
+     */
     public function visitConstantNode(ConstantNode $node)
     {
         return $node->getName();

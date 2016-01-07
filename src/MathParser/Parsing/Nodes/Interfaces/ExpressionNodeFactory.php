@@ -7,10 +7,21 @@
 *
 */
 
+/**
+ * @namespace MathParser::Parsing::Nodes::Interfaces
+ *
+ * Interfaces for Nodes, in particular Node factories.
+ */
 namespace MathParser\Parsing\Nodes\Interfaces;
 
 use MathParser\Parsing\Nodes\NumberNode;
 
+/**
+ * Interface for construction of ExpressionNode, the
+ * implementations of the interface, usually involves
+ * some simplification of the operands.
+ *
+ */
 interface ExpressionNodeFactory
 {
     /**
@@ -18,7 +29,7 @@ interface ExpressionNodeFactory
     *
     * @param mixed $leftOperand
     * @param mixed $rightOperand
-    * @return ExpressionNode|NumberNode
+    * @retval ExpressionNode|NumberNode
     */
     public function makeNode($leftOperand, $rightOperand);
 }

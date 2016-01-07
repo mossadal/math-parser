@@ -16,8 +16,10 @@ use MathParser\Interpreting\Visitors\Visitor;
  */
 class VariableNode extends Node
 {
+    /** string $name Name of represented variable, e.g. 'x' */
     private $name;
 
+    /** Constructor. Create a VariableNode with a given variable name. */
     function __construct($name)
     {
         $this->name = $name;
@@ -25,7 +27,7 @@ class VariableNode extends Node
 
     /**
      * Return the name of the variable
-     * @return string
+     * @retval string
      */
     public function getName()
     {

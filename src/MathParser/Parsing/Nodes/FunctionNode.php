@@ -16,9 +16,12 @@ use MathParser\Interpreting\Visitors\Visitor;
  */
 class FunctionNode extends Node
 {
+    /** string $name Function name, e.g. 'sin' */
     private $name;
+    /** Node $operand AST of function operand */
     private $operand;
 
+    /** Constructor, create a FunctionNode with given name and operand */
     function __construct($name, $operand)
     {
         $this->name = $name;
@@ -28,7 +31,7 @@ class FunctionNode extends Node
 
     /**
      * Return the name of the function
-     * @return string
+     * @retval string
      */
     public function getName()
     {
@@ -37,11 +40,20 @@ class FunctionNode extends Node
 
     /**
      * Return the operand
-     * @return Node
+     * @retval Node
      */
     public function getOperand()
     {
         return $this->operand;
+    }
+
+    /**
+     * Set the operand
+     * @retval void
+     */
+    public function setOperand($operand)
+    {
+        return $this->operand = $operand;
     }
 
     /**

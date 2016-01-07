@@ -5,7 +5,7 @@
  *
  * It optimize the documention like:
  * - rewrites php namespaces to use :: instead of \
- * - replaces \@return with \@retval
+ * - replaces \@retval with \@retval
  * - appends variable names to \@var commands
  * - remove unused annotations
  *   \@codeCoverageIgnore
@@ -44,8 +44,8 @@ foreach ($tokens as $token) {
             case T_DOC_COMMENT :
                 // remove @codeCoverageIgnore
 		$text = preg_replace('#\*\s*@(codeCoverageIgnore)(\s[^\n\r]*)?\s+#', '', $text);
-                // replace @return with @retval
-		$text = preg_replace('#@return\s#', '@retval ', $text);
+                // replace @retval with @retval
+		$text = preg_replace('#@retval\s#', '@retval ', $text);
                 // replace starting namespace separator
 		$text = preg_replace('#(\s)\\\\([A-Z]\w+)#ms', '$1$2', $text);
 		do {

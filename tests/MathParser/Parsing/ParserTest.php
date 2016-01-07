@@ -4,6 +4,20 @@ use MathParser\Lexing\Token;
 use MathParser\Lexing\TokenType;
 use MathParser\Lexing\TokenPrecedence;
 use MathParser\Parsing\Parser;
+use MathParser\Lexing\StdMathLexer;
+use MathParser\Parsing\Nodes\ExpressionNode;
+use MathParser\Parsing\Nodes\SubExpressionNode;
+
+use MathParser\Interpreting\TreePrinter;
+
+use MathParser\Exceptions\SyntaxErrorException;
+use MathParser\Exceptions\UnknownOperatorException;
+
+class ParserWithoutImplicitMultiplication extends Parser {
+    protected static function allowImplicitMultiplication() {
+        return false;
+    }
+}
 
 class ParserTest extends PHPUnit_Framework_TestCase
 {
@@ -153,5 +167,39 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('*', $node->getOperator());
         $this->assertVariableNode($node->getLeft(), 'x');
         $this->assertVariableNode($node->getRight(), 'y');
+    }
+
+    public function testParserWithoutImplicitMultiplication()
+    {
+        $lexer = new StdMathLexer();
+        $tokens = $lexer->tokenize('2x');
+
+        $parser = new ParserWithoutImplicitMultiplication();
+
+        $this->setExpectedException(SyntaxErrorException::class);
+        $node = $parser->parse($tokens);
+    }
+
+    public function testUnknownException()
+    {
+        $this->setExpectedException(UnknownOperatorException::class);
+        $node = new ExpressionNode(null, '%', null);
+    }
+
+    public function testCanCreateTemporaryUnaryMinusNode()
+    {
+        $node = new ExpressionNode(null, '~', null);
+        $this->assertEquals($node->getOperator(), '~');
+        $this->assertNull($node->getRight());
+        $this->assertNull($node->getLeft());
+        $this->assertEquals($node->getPrecedence(), 25);
+    }
+
+    public function testCanCreateSubExpressionNode()
+    {
+        $node = new SubExpressionNode('%');
+        $this->assertEquals($node->getValue(), '%');
+
+        $this->assertNull($node->accept(new TreePrinter()));
     }
 }

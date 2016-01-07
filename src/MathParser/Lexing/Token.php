@@ -20,18 +20,15 @@ use MathParser\Lexing\TokenAssociativity;
  * Class to handle tokens, i.e. discrete pieces of the input string
  * that has specific meaning.
  *
- * Each token has a type as well as a precedence (priority) and a
- * specified associativity (left or right). Perhaps it would be
- * more natural to handle precedence and associativity at the parser
- * level, but for now it seems like the code is slightly more readable
- * this way. This may change in the future.
  */
 class Token
 {
+
+    /** string $value (Standadized) value of token. */
     private $value;
+    /** int $type Token type as defined in TokenType class */
     private $type;
-    private $precedence;
-    private $associativity;
+    /** string $match The actual string matched in the input. */
     private $match;
 
     /**
@@ -42,9 +39,6 @@ class Token
      * matching the token definition. Most of the time, $value
      * and $match are the same, but in order to handle token synonyms,
      * they may be different.
-     *
-     * With the current implementation, the precedence and associativity
-     * are inferred automatically from the type.
      *
      * As an example illustrating the above, the natural logarithm can
      * be denoted ln() as well as log(). In order to standardize the
@@ -62,8 +56,6 @@ class Token
     {
         $this->value = $value;
         $this->type = $type;
-        $this->precedence = TokenPrecedence::get($type);
-        $this->associativity = TokenAssociativity::get($type);
         $this->match = $match ? $match : $value;
     }
 
@@ -71,7 +63,7 @@ class Token
      * @property length
      * Length of the input string matching the token.
      *
-     * @return int length of string matching the token.
+     * @retval int length of string matching the token.
      */
     public function length()
     {
@@ -83,7 +75,7 @@ class Token
      * Standarized value/name of the Token, usually the same as
      * what was matched in the the input string.
      *
-     * @return string value of token
+     * @retval string value of token
      */
     public function getValue()
     {
@@ -94,7 +86,7 @@ class Token
      * @property getType
      * Returns the type of the token, as defined in the TokenType class.
      *
-     * @return int token type (as defined by TokenType)
+     * @retval int token type (as defined by TokenType)
      */
     public function getType()
     {
@@ -102,82 +94,9 @@ class Token
     }
 
     /**
-     * @property getPrecedence
-     * Returns the precedence/priority of the token, as defined by the
-     * TokenPrecedence class.
-     *
-     * Tokens with higher precedence "bind harder", affecting the parsing,
-     * for example, the input string "2+3*4" should be parsed as (+ 2 (* 3 4))
-     * whereas the input string "2*3+4" should be parsed as (+ (* 2 3) 4).
-     *
-     * @return int precedence
-     */
-    public function getPrecedence()
-    {
-        return $this->precedence;
-    }
-
-    /**
-     * @property getAssociativity
-     * Returns the associativity (left or right) of the token.
-     *
-     * Token associativity is used to specify how tokens of the same precedence
-     * should be parsed. Most operators are left associative. For some (addition
-     * and multiplciation) it doesn't really matter, but for others (subtration
-     * and division) it does. Input such as "1+2+3" and "3-2-1" should be parsed
-     * as (+ (+ 1 2) 3) and (- (- 3 2) 1) respectively.
-     *
-     * The exponentiation operator on the other hand is right associative, and
-     * the input "x^2^3" should be parsed as (^ x (^ 2 3)).
-     *
-     * @return int associativity, as defined by the TokenAssociativity class.
-     */
-    public function getAssociativity()
-    {
-        return $this->associativity;
-    }
-
-    /**
-     * Helper function, returning the arity (i.e. the number of operands) the token takes.
-     *
-     * Arity is the number of operands that a token/operator takes. Some tokens
-     * act as nullary, for example numbers, constants and variables.
-     * Some are unary, in particular unary minus, and function applications,
-     * whereas the standard arithmetic operators are binary, taking two operands.
-     *
-     * @return int arity of token
-     */
-    public function getArity()
-    {
-        switch($this->type) {
-            case TokenType::UnaryMinus:
-            case TokenType::FunctionName:
-                return 1;
-            case TokenType::PosInt:
-            case TokenType::Integer:
-            case TokenType::RealNumber:
-            case TokenType::Constant:
-            case TokenType::Identifier:
-                return 0;
-            default:
-                return 2;
-        }
-    }
-
-    /**
-     * Helper function, returning true if the token represents a binary operator.
-     *
-     * @return boolean
-     */
-    public function isOperator()
-    {
-        return $this->getArity() == 2;
-    }
-
-    /**
      * Helper function, converting the Token to a printable string.
      *
-     * @return string
+     * @retval string
      */
     public function __toString()
     {
@@ -195,7 +114,7 @@ class Token
      * or an opening parenthesis. (Unless the first token is a a function name,
      * and the second is an opening parentheis.)
      *
-     * @return boolean
+     * @retval boolean
      */
     public static function canFactorsInImplicitMultiplication($token1, $token2)
     {

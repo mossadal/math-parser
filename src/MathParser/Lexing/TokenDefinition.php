@@ -36,10 +36,14 @@ use MathParser\Lexing\TokenAssociativity;
  */
 class TokenDefinition
 {
+    /** string $pattern Regular expression defining the rule for matching a token. */
     private $pattern;
+    /** string $value Standarized value of token */
     private $value;
+    /** inst $tokenType Type of token, as defined in TokenType class. */
     private $tokenType;
 
+    /** Constructor. Create a TokenDefinition with given pattern and type. */
     public function __construct($pattern, $tokenType, $value=null)
     {
         $this->pattern = $pattern;
@@ -47,6 +51,12 @@ class TokenDefinition
         $this->tokenType = $tokenType;
     }
 
+    /**
+     * Try to match the given input to the current TokenDefinition.
+     *
+     * @param string $input Input string
+     * @retval Token|null Token matching the regular expression defining the TokenDefinition
+     */
     public function match($input)
     {
         // Match the input with the regex pattern, storing any match found into the $matches variable,
@@ -64,6 +74,12 @@ class TokenDefinition
         return $this->getTokenFromMatch($matches[0]);
     }
 
+    /**
+     * Convert matching string to an actual Token.
+     *
+     * @param string $match Matching text.
+     * @retval Token Corresponding token.
+     */
     private function getTokenFromMatch($match)
     {
         $value = $match[0];

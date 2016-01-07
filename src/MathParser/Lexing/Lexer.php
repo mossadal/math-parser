@@ -36,6 +36,7 @@ use MathParser\Exceptions\UnknownTokenException;
   */
 class Lexer
 {
+    /** TokenDefinition[] $tokenDefinition list of tokens recognized by the Lexer. */
     private $tokenDefinitions = [];
 
     /** Add a Token to the list of tokens recognized by the Lexer.
@@ -44,7 +45,7 @@ class Lexer
       * tokens.
       *
       * @param TokenDefinition $tokenDefinition token to add to the list of known tokens.
-      * @return void
+      * @retval void
       */
     public function add(TokenDefinition $tokenDefinition)
     {
@@ -60,7 +61,7 @@ class Lexer
      * never match a `sinh`.
      *
      * @param string $input String to tokenize.
-     * @return Token[] sequence of recognize tokens
+     * @retval Token[] sequence of recognized tokens
      * @throws UnknownTokenException throwns when encountering characters in the input string
      *      that doesn't match any knwon token.
      */
@@ -94,6 +95,12 @@ class Lexer
         return $tokens;
     }
 
+    /**
+     * Find a matching token at the begining of the provided input.
+     *
+     * @param string $input
+     * @retval Token|null Matched token
+     */
     private function findMatchingToken($input)
     {
         // Check with all tokenDefinitions

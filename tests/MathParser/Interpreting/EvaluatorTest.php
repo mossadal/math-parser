@@ -6,6 +6,7 @@ use MathParser\Interpreting\Evaluator;
 use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\ConstantNode;
 use MathParser\Parsing\Nodes\NumberNode;
+use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\ExpressionNode;
 
@@ -78,6 +79,11 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
     {
         $this->assertResult('3-5', -2);
         $this->assertResult('3-5-1', -3);
+    }
+
+    public function testCanEvaluateUnaryMinus()
+    {
+        $this->assertResult('-x', -$this->variables['x']);
     }
 
     public function testCanEvaluateMultiplication()
@@ -249,7 +255,7 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
         $this->assertResult('arcoth(3)', atanh(1/3));
     }
 
-    public function testCanIdentifyUnknownFunction()
+    public function testCannotEvalauateUnknownFunction()
     {
         $f = new FunctionNode('sdf', new NumberNode(1));
 
@@ -258,12 +264,16 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
 
     }
 
-    public function testCanIdentifyUnknownOperator()
+    public function testCannotEvaluateUnknownOperator()
     {
-        $f = new ExpressionNode(new NumberNode(2), '@', new NumberNode(1));
-
+        $node = new ExpressionNode(new NumberNode(1), '+', new VariableNode('x'));
+        // We need to cheat here, since the ExpressionNode contructor already
+        // throws an UnknownOperatorException when called with, say '%'
+        $node->setOperator('%');
         $this->setExpectedException(UnknownOperatorException::class);
-        $value = $this->evaluate($f);
+
+        $this->evaluate($node);
 
     }
+
 }

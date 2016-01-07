@@ -14,6 +14,12 @@ use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\ExpressionNode;
 use MathParser\Parsing\Nodes\Traits\Sanitize;
 
+/**
+ * Factory for creating an ExpressionNode representing '+'.
+ *
+ * Some basic simplification is applied to the resulting Node.
+ *
+ */
 class AdditionNodeFactory implements ExpressionNodeFactory
 {
     use Sanitize;
@@ -32,7 +38,7 @@ class AdditionNodeFactory implements ExpressionNodeFactory
     *
     * @param Node|int $leftOperand First term
     * @param Node|int $rightOperand Second term
-    * @return Node
+    * @retval Node
     */
     public function makeNode($leftOperand, $rightOperand)
     {

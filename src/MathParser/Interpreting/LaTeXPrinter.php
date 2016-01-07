@@ -44,9 +44,10 @@ use MathParser\Exceptions\UnknownConstantException;
  */
 class LaTeXPrinter implements Visitor
 {
-    /** @var StdMathLexer $lexer */
+    /** StdMathLexer $lexer */
     private $lexer;
 
+    /** Constructor. Create a LaTeXPrinter. */
     public function __construct()
     {
         $this->lexer = new StdMathLexer();
@@ -71,12 +72,12 @@ class LaTeXPrinter implements Visitor
      * - Exponentiation adds braces around the power when needed.
      *
      * @param ExpressionNode $node AST to be typeset
-     * @return string
+     * @retval string
      */
     public function visitExpressionNode(ExpressionNode $node)
     {
         $left = $node->getLeft();
-        $leftValue = $this->parenthesize($left, $node->getOperator());
+        $leftValue = $this->parenthesize($left, $node);
         $operator = $node->getOperator();
 
         $right = $node->getRight();
@@ -89,7 +90,7 @@ class LaTeXPrinter implements Visitor
         }
 
         if ($right) {
-            $rightValue = $this->parenthesize($right, $node->getOperator());
+            $rightValue = $this->parenthesize($right, $node);
 
             switch($operator) {
                 case '/':
@@ -114,7 +115,7 @@ class LaTeXPrinter implements Visitor
      * there is no special formatting of numbers.
      *
      * @param NumberNode $node AST to be typeset
-     * @return string
+     * @retval string
      */
     public function visitNumberNode(NumberNode $node)
     {
@@ -129,7 +130,7 @@ class LaTeXPrinter implements Visitor
      * there is no special formatting of variables.
      *
      * @param VariableNode $node AST to be typeset
-     * @return string
+     * @retval string
      */
     public function visitVariableNode(VariableNode $node)
     {
@@ -149,13 +150,14 @@ class LaTeXPrinter implements Visitor
      *
      * TODO Non-standard functions should be typeset using \operatorname
      * @param FunctionNode $node AST to be typeset
-     * @return string
+     * @retval string
      */
 
     public function visitFunctionNode(FunctionNode $node)
     {
         $functionName = $node->getName();
-        $operand = $this->parenthesize($node->getOperand(), '*', true);
+
+        $operand = $this->parenthesize($node->getOperand(), new ExpressionNode(null,'*',null), true);
 
         switch($functionName) {
             case 'sqrt': return "\\$functionName{".$node->getOperand()->accept($this).'}';
@@ -180,7 +182,7 @@ class LaTeXPrinter implements Visitor
      *
      * @throws UnknownConstantException for nodes representing other constants.
      * @param ConstantNode $node AST to be typeset
-     * @return string
+     * @retval string
      */
     public function visitConstantNode(ConstantNode $node)
     {
@@ -196,25 +198,20 @@ class LaTeXPrinter implements Visitor
      *
      *
      * @param Node $node        The AST to typeset
-     * @param string $cutoff    A token representing the precedence of the parent
+     * @param ExpressionNode $cutoff    A token representing the precedence of the parent
      *                          node. Operands with a lower precedence have parentheses
      *                          added.
      * @param bool $addSpace    Flag determining whether an additional space should
      *                          be added at the beginning of the returned string.
-     * @return string
+     * @retval string
      */
-    public function parenthesize(Node $node, $cutoff='*', $addSpace=false)
+    public function parenthesize(Node $node, ExpressionNode $cutoff, $addSpace=false)
     {
-        $cutoffToken = $this->lexer->tokenize($cutoff);
-
         $text = $node->accept($this);
 
         if ($node instanceof ExpressionNode) {
-            $thisToken = $this->lexer->tokenize($node->getOperator());
 
-            if ($thisToken[0]->getPrecedence() < $cutoffToken[0]->getPrecedence() ||
-                ($thisToken[0]->getPrecedence() == $cutoffToken[0]->getPrecedence() && $thisToken[0]->getAssociativity() == TokenAssociativity::Left)
-               ) {
+            if ($node->lowerPrecedenceThan($cutoff)) {
                 return "($text)";
             }
         }
@@ -230,7 +227,7 @@ class LaTeXPrinter implements Visitor
      * are returned as-is. Other Nodes get curly braces around their LaTeX code.
      *
      * @param Node $node    AST to parse
-     * @return string
+     * @retval string
      */
     public function bracesNeeded(Node $node)
     {
