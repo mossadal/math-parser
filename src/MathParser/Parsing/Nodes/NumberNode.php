@@ -41,4 +41,18 @@ class NumberNode extends Node
     {
         return $visitor->visitNumberNode($this);
     }
+
+    /** Implementing the compareTo abstract method. */
+    public function compareTo($other)
+    {
+        if ($other === null) {
+            return false;
+        }
+        if (!($other instanceof NumberNode)) {
+            return false;
+        }
+
+        return $this->getValue() == $other->getValue();
+    }
+
 }

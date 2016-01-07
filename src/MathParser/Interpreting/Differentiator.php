@@ -200,7 +200,7 @@ class Differentiator implements Visitor
      * * \\( \\sin(f(x))' = f'(x)  \\cos(f(x)) \\)
      * * \\( \\cos(f(x))' = -f'(x)  \\sin(f(x)) \\)
      * * \\( \\tan(f(x))' = f'(x) (1 + \\tan(f(x))^2 \\)
-     * * \\( \\operatorname{cot}(f(x))' = f'(x) (-1 + \\operatorname{cot}(f(x))^2 \\)
+     * * \\( \\operatorname{cot}(f(x))' = f'(x) (-1 - \\operatorname{cot}(f(x))^2 \\)
      * * \\( \\arcsin(f(x))' = f'(x) / \\sqrt{1-f(x)^2} \\)
      * * \\( \\arccos(f(x))' = -f'(x) / \\sqrt{1-f(x)^2} \\)
      * * \\( \\arctan(f(x))' = f'(x) / (1+f(x)^2) \\)
@@ -244,7 +244,7 @@ class Differentiator implements Visitor
                 break;
             case 'cot':
                 $cotsquare = $this->nodeFactory->exponentiation($node, 2);
-                $df = $this->nodeFactory->addition($this->nodeFactory->unaryMinus(1), $cotsquare);
+                $df = $this->nodeFactory->subtraction($this->nodeFactory->unaryMinus(1), $cotsquare);
                 break;
 
             case 'arcsin':

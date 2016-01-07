@@ -63,4 +63,21 @@ class FunctionNode extends Node
     {
         return $visitor->visitFunctionNode($this);
     }
+
+    /** Implementing the compareTo abstract method. */
+    public function compareTo($other)
+    {
+        if ($other === null) {
+            return false;
+        }
+        if (!($other instanceof FunctionNode)) {
+            return false;
+        }
+
+        $thisOperand = $this->getOperand();
+        $otherOperand = $other->getOperand();
+
+        return $this->getName() == $other->getName() && $thisOperand->compareTo($otherOperand);
+    }
+
 }

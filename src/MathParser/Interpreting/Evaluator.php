@@ -145,13 +145,13 @@ class Evaluator implements Visitor
     */
     public function visitVariableNode(VariableNode $node)
     {
-        $x = $node->getName();
+        $name = $node->getName();
 
-        if (array_key_exists($x, $this->variables)) {
-            return $this->variables[$x];
+        if (array_key_exists($name, $this->variables)) {
+            return $this->variables[$name];
         }
 
-        throw new UnknownVariableException($x);
+        throw new UnknownVariableException($name);
     }
 
 

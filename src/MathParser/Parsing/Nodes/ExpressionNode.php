@@ -204,4 +204,30 @@ class ExpressionNode extends Node
         return false;
 
     }
+
+    /** Implementing the compareTo abstract method. */
+    public function compareTo($other)
+    {
+        if ($other === null) {
+            return false;
+        }
+        if (!($other instanceof ExpressionNode)) {
+            return false;
+        }
+
+        $thisLeft = $this->getLeft();
+        $otherLeft = $other->getLeft();
+        if ($thisLeft === null) {
+            return ($otherLeft === null);
+        }
+
+        $thisRight = $this->getRight();
+        $otherRight = $other->getRight();
+        if ($thisRight === null) {
+            return ($otherRight === null);
+        }
+
+        return $this->getOperator() == $other->getOperator() && $thisLeft->compareTo($otherLeft) && $thisRight->compareTo($otherRight);
+    }
+
 }

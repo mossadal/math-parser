@@ -78,52 +78,11 @@ abstract class Node implements Visitable
      * Helper function, comparing two ASTs. Useful for testing
      * and also for some AST transformers.
      *
-     * @param Node $other Compare to this tree
+     * @param Node|null $other Compare to this tree
      * @retval boolean
      */
-    public function compareTo($other)
-    {
-            if ($other === null) return false;
+     abstract public function compareTo($other);
 
-            if ($this instanceof ConstantNode) {
-                if (!($other instanceof ConstantNode)) return false;
-                return $this->getName() == $other->getName();
-            }
-            if ($this instanceof ExpressionNode) {
-                if (!($other instanceof ExpressionNode)) return false;
-
-                $thisLeft = $this->getLeft();
-                $otherLeft = $other->getLeft();
-                if ($thisLeft === null) return ($otherLeft === null);
-
-                $thisRight = $this->getRight();
-                $otherRight = $other->getRight();
-                if ($thisRight === null) return ($otherRight === null);
-
-                return $thisLeft->compareTo($otherLeft) && $thisRight->compareTo($otherRight);
-            }
-            if ($this instanceof FunctionNode) {
-                if (!($other instanceof FunctionNode)) return false;
-
-                $thisOperand = $this->getOperand();
-                $otherOperand = $other->getOperand();
-
-                if ($thisOperand === null) return ($otherOperand === null);
-
-                return $thisOperand->compareTo($otherOperand);;
-            }
-            if ($this instanceof NumberNode) {
-                if (!($other instanceof NumberNode)) return false;
-                return $this->getValue() == $other->getValue();
-            }
-            if ($this instanceof VariableNode) {
-                if (!($other instanceof VariableNode)) return false;
-                return $this->getName() == $other->getName();
-            }
-
-
-            throw new UnknownNodeException();
-    }
 
     /**
      * Convenience function for evaluating a tree, using

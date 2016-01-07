@@ -43,4 +43,18 @@ class SubExpressionNode extends Node
     {
         return null;
     }
+
+    /** Implementing the compareTo abstract method. */
+    public function compareTo($other)
+    {
+        if ($other === null) {
+            return false;
+        }
+        if (!($other instanceof SubExpressionNode)) {
+            return false;
+        }
+
+        return $this->getValue() == $other->getValue();
+    }
+
 }

@@ -102,9 +102,9 @@ class LaTeXPrinter implements Visitor
                     return "$leftValue$operator$rightValue";
             }
 
-        } else {
-            return "$operator$leftValue";
         }
+
+        return "$operator$leftValue";
 
     }
 
@@ -148,7 +148,6 @@ class LaTeXPrinter implements Visitor
      * - `exp(op)` is either typeset as `e^{op}`, if `op` is a simple
      *      expression or as `\exp(op)` for more complicated operands.
      *
-     * TODO Non-standard functions should be typeset using \operatorname
      * @param FunctionNode $node AST to be typeset
      * @retval string
      */
@@ -157,7 +156,7 @@ class LaTeXPrinter implements Visitor
     {
         $functionName = $node->getName();
 
-        $operand = $this->parenthesize($node->getOperand(), new ExpressionNode(null,'*',null), true);
+        $operand = $this->parenthesize($node->getOperand(), new ExpressionNode(null,'*',null), ' ');
 
         switch($functionName) {
             case 'sqrt': return "\\$functionName{".$node->getOperand()->accept($this).'}';
@@ -166,9 +165,20 @@ class LaTeXPrinter implements Visitor
 
                 if ($operand->complexity() < 6) {
                     return 'e^'.$this->bracesNeeded($operand);
-                } else {
-                    return '\exp('.$operand->accept($this).')';
                 }
+                // Operand is complex, typset using \exp instead
+                return '\exp('.$operand->accept($this).')';
+            case 'sin':
+            case 'cos':
+            case 'tan':
+            case 'log':
+            case 'arcsin':
+            case 'arccos':
+            case 'arctan':
+                break;
+
+            default:
+                $functionName = 'operatorname{'.$functionName.'}';
         }
 
         return "\\$functionName$operand";
@@ -205,7 +215,7 @@ class LaTeXPrinter implements Visitor
      *                          be added at the beginning of the returned string.
      * @retval string
      */
-    public function parenthesize(Node $node, ExpressionNode $cutoff, $addSpace=false)
+    public function parenthesize(Node $node, ExpressionNode $cutoff, $prepend='')
     {
         $text = $node->accept($this);
 
@@ -216,8 +226,8 @@ class LaTeXPrinter implements Visitor
             }
         }
 
-        if ($addSpace) return " $text";
-        else return $text;
+        return "$prepend$text";
+
     }
 
     /**

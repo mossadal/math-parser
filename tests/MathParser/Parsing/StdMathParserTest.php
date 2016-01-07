@@ -72,12 +72,8 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
         $this->assertCompareNodes("sin(x)");
         $this->assertCompareNodes("(x)");
         $this->assertCompareNodes("1+x+y");
-
-        $node = new SubExpressionNode('%');
-        $other = new NumberNode(1);
-        $this->setExpectedException(UnknownNodeException::class);
-        $node->compareTo($other);
     }
+
 
     private function assertTokenEquals($value, $type, Token $token)
     {
@@ -214,7 +210,7 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
         $shouldBe = new ExpressionNode(
             new VariableNode('x'),
             '^',
-            new ExpressionNode(new VariableNode('y'), '+', new VariableNode('z'))
+            new ExpressionNode(new VariableNode('y'), '^', new VariableNode('z'))
         );
         $this->assertNodesEqual($node, $shouldBe);
 
@@ -359,53 +355,11 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
         $this->parser->parse('(1+1');
     }
 
-    public function testCanComputeComplexity()
-    {
-        $node = new NumberNode(1);
-        $this->assertEquals($node->complexity(), 1);
-
-        $node = new VariableNode('x');
-        $this->assertEquals($node->complexity(), 1);
-
-        $node = new ConstantNode('pi');
-        $this->assertEquals($node->complexity(), 1);
-
-        $f = $this->parser->parse('x+y');
-        $this->assertEquals($f->complexity(), 4);
-
-        $f = $this->parser->parse('x-y');
-        $this->assertEquals($f->complexity(), 4);
-
-        $f = $this->parser->parse('x*y');
-        $this->assertEquals($f->complexity(), 4);
-
-        $f = $this->parser->parse('x/y');
-        $this->assertEquals($f->complexity(), 6);
-
-        $f = $this->parser->parse('x^y');
-        $this->assertEquals($f->complexity(), 10);
-
-        $f = $this->parser->parse('sin(x)');
-        $this->assertEquals($f->complexity(), 6);
-
-        $f = $this->parser->parse('x + sin(x^2)');
-        $this->assertEquals($f->complexity(), 18);
-
-        $node = new SubExpressionNode('(');
-        $this->assertEquals($node->complexity(), 1000);
-    }
 
     public function testCanEvaluateNode()
     {
         $f = $this->parser->parse('x+y');
         $this->assertEquals($f->evaluate([ 'x' => 1, 'y' => 2 ]), 3);
-    }
-
-    public function testCanCreateSubExpressionNode()
-    {
-        $node = new SubExpressionNode('%');
-        $this->assertEquals($node->getValue(), '%');
-        $this->assertNull($node->accept(new TreePrinter()));
     }
 
     public function testParserWithoutImplicitMultiplication()

@@ -1,7 +1,7 @@
 # math-parser
 
 [![Latest Stable Version](https://poser.pugx.org/mossadal/math-parser/v/stable)](https://packagist.org/packages/mossadal/math-parser) [![Total Downloads](https://poser.pugx.org/mossadal/math-parser/downloads)](https://packagist.org/packages/mossadal/math-parser)  [![License](https://poser.pugx.org/mossadal/math-parser/license)](https://packagist.org/packages/mossadal/math-parser)
-[![Code Climate](https://codeclimate.com/github/cloudfoundry/membrane.png)](https://codeclimate.com/github/cloudfoundry/membrane)
+[![Code Climate](https://codeclimate.com/github/mossadal/math-parser/badges/gpa.svg)](https://codeclimate.com/github/mossadal/math-parser)
 
 ## DESCRIPTION
 

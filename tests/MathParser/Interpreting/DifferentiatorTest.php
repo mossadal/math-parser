@@ -101,7 +101,6 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
     public function testCanDifferentiateCot()
     {
         $this->assertResult('cot(x)', '-1-cot(x)^2');
-;
     }
 
     public function testCanDifferentiateArcsin()
@@ -139,7 +138,7 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
 
     public function testCanDifferentiateDifference()
     {
-        $this->assertResult('x+sin(x)', '1-cos(x)');
+        $this->assertResult('x-sin(x)', '1-cos(x)');
         $this->assertResult('sin(x)-y', 'cos(x)');
         $this->assertResult('sin(x)-sin(x)', '0');
     }

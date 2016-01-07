@@ -118,6 +118,7 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('sqrt(x^2)', '\sqrt{x^2}');
 
         $this->assertResult('asin(x)', '\arcsin x');
+        $this->assertResult('arsinh(x)', '\operatorname{arsinh} x');
     }
 
     public function testCanPrintConstant()

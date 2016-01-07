@@ -105,7 +105,7 @@ class Parser
         $this->tokens = $tokens;
 
         // Perform the actual parsing
-        return $this->ShuntingYard($tokens);
+        return $this->shuntingYard($tokens);
     }
 
     /**
@@ -116,7 +116,7 @@ class Parser
     * @throws SyntaxErrorException
     * @throws ParenthesisMismatchException
     */
-    private function ShuntingYard(array $tokens)
+    private function shuntingYard(array $tokens)
     {
         // Clear the oepratorStack
         $this->operatorStack = new Stack();
@@ -136,7 +136,7 @@ class Parser
 
             // Handle closing parentheses
             if ($token->getType() == TokenType::CloseParenthesis) {
-                $clean = $this->handleSubExpression();
+                $this->handleSubExpression();
             }
             // Push terminal tokens on the operandStack
             elseif ($node->isTerminal()) {
@@ -350,10 +350,11 @@ class Parser
             if ($popped instanceof SubExpressionNode) {
                 $clean = true;
                 break;
-            } else {
-                $node = $this->handleExpression($popped);
-                $this->operandStack->push($node);
             }
+
+            $node = $this->handleExpression($popped);
+            $this->operandStack->push($node);
+            
         }
 
         // Throw an error if the parenthesis couldn't be matched
