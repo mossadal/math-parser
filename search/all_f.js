@@ -1,9 +1,12 @@
 var searchData=
 [
-  ['setvariables',['setVariables',['../classMathParser_1_1Interpreting_1_1Evaluator.html#ada67630eccaad9b2c496eaf320b9303c',1,'MathParser::Interpreting::Evaluator']]],
-  ['shuntingyard',['ShuntingYard',['../classMathParser_1_1Parsing_1_1Parser.html#a5e95881d4b53730565bf2205fa621086',1,'MathParser::Parsing::Parser']]],
-  ['stack',['Stack',['../classMathParser_1_1Parsing_1_1Stack.html',1,'MathParser::Parsing']]],
-  ['stdmathlexer',['StdMathLexer',['../classMathParser_1_1Lexing_1_1StdMathLexer.html',1,'MathParser::Lexing']]],
-  ['stdmathparser',['StdMathParser',['../classMathParser_1_1StdMathParser.html',1,'MathParser']]],
-  ['syntaxerrorexception',['SyntaxErrorException',['../classMathParser_1_1Exceptions_1_1SyntaxErrorException.html',1,'MathParser::Exceptions']]]
+  ['parenthesismismatchexception',['ParenthesisMismatchException',['../classMathParser_1_1Exceptions_1_1ParenthesisMismatchException.html',1,'MathParser::Exceptions']]],
+  ['parenthesize',['parenthesize',['../classMathParser_1_1Interpreting_1_1LaTeXPrinter.html#aff36e4aa9ebdb8b53210e4571b69b7c8',1,'MathParser::Interpreting::LaTeXPrinter']]],
+  ['parse',['parse',['../classMathParser_1_1Parsing_1_1Parser.html#a556c64ee108e141b442badafbd3b1164',1,'MathParser\Parsing\Parser\parse()'],['../classMathParser_1_1StdMathParser.html#a8eb08ff6c902fc7c1d01cf5ec14c67a5',1,'MathParser\StdMathParser\parse()']]],
+  ['parseimplicitmultiplication',['parseImplicitMultiplication',['../classMathParser_1_1Parsing_1_1Parser.html#a74e79e5a38c1edbc919cd66c50712cd8',1,'MathParser::Parsing::Parser']]],
+  ['parser',['Parser',['../classMathParser_1_1Parsing_1_1Parser.html',1,'MathParser::Parsing']]],
+  ['peek',['peek',['../classMathParser_1_1Parsing_1_1Stack.html#a13b5dc80388b7900af165e0822ebec93',1,'MathParser::Parsing::Stack']]],
+  ['pop',['pop',['../classMathParser_1_1Parsing_1_1Stack.html#a23eff250a1077d7a9838a88e6755a84a',1,'MathParser::Parsing::Stack']]],
+  ['posint',['PosInt',['../classMathParser_1_1Lexing_1_1TokenType.html#a7312d065593448cb9e873b1d88132749',1,'MathParser::Lexing::TokenType']]],
+  ['push',['push',['../classMathParser_1_1Parsing_1_1Stack.html#a50f3a135fdf9401b17494c50652b152a',1,'MathParser::Parsing::Stack']]]
 ];

@@ -1,13 +1,9 @@
 var searchData=
 [
+  ['canbeunary',['canBeUnary',['../classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode.html#ae53ec3508876648b29228c5cdf54a464',1,'MathParser::Parsing::Nodes::ExpressionNode']]],
   ['canfactorsinimplicitmultiplication',['canFactorsInImplicitMultiplication',['../classMathParser_1_1Lexing_1_1Token.html#aeb8c3be1afc671d5046624be0fd83377',1,'MathParser::Lexing::Token']]],
-  ['comparenodes',['compareNodes',['../classMathParser_1_1Parsing_1_1Nodes_1_1Node.html#a9d672f21f7fa25a3cfe0a940d3643b97',1,'MathParser::Parsing::Nodes::Node']]],
+  ['compareto',['compareTo',['../classMathParser_1_1Parsing_1_1Nodes_1_1ConstantNode.html#a316120b28d2d4d7297a7535200063b32',1,'MathParser\Parsing\Nodes\ConstantNode\compareTo()'],['../classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode.html#a5b9d9196af6224a67c3c0ede80c5808b',1,'MathParser\Parsing\Nodes\ExpressionNode\compareTo()'],['../classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode.html#af96417445c2b7498e29949980ffef5ec',1,'MathParser\Parsing\Nodes\FunctionNode\compareTo()'],['../classMathParser_1_1Parsing_1_1Nodes_1_1Node.html#a6e3ef9bed0d10eb4c84fd99da9fb8260',1,'MathParser\Parsing\Nodes\Node\compareTo()'],['../classMathParser_1_1Parsing_1_1Nodes_1_1NumberNode.html#a7a88de22c3d3612118e3add9a61db0d3',1,'MathParser\Parsing\Nodes\NumberNode\compareTo()'],['../classMathParser_1_1Parsing_1_1Nodes_1_1SubExpressionNode.html#a626acf6cd9ba7d59eb79c891977c42bb',1,'MathParser\Parsing\Nodes\SubExpressionNode\compareTo()'],['../classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode.html#a125ceab48ff07816984d3c780b6e613f',1,'MathParser\Parsing\Nodes\VariableNode\compareTo()']]],
   ['complexity',['complexity',['../classMathParser_1_1Parsing_1_1Nodes_1_1Node.html#a607d20250ecf48ac6842531cde46daff',1,'MathParser::Parsing::Nodes::Node']]],
   ['count',['count',['../classMathParser_1_1Parsing_1_1Stack.html#ad85713b07820a24a6e781b32e18271e6',1,'MathParser::Parsing::Stack']]],
-  ['createadditionnode',['createAdditionNode',['../classMathParser_1_1Interpreting_1_1Differentiator.html#a0ca77a885d67637f3858e524fe25f94f',1,'MathParser::Interpreting::Differentiator']]],
-  ['createdivisionnode',['createDivisionNode',['../classMathParser_1_1Interpreting_1_1Differentiator.html#a5ba6c413896c0e4d05f579898df23204',1,'MathParser::Interpreting::Differentiator']]],
-  ['createexponentiationnode',['createExponentiationNode',['../classMathParser_1_1Interpreting_1_1Differentiator.html#ac58a93d3f4696e2adbd152f2f78d65c6',1,'MathParser::Interpreting::Differentiator']]],
-  ['createmultiplicationnode',['createMultiplicationNode',['../classMathParser_1_1Interpreting_1_1Differentiator.html#a76e94a286700f2913e1f69b985ccd110',1,'MathParser::Interpreting::Differentiator']]],
-  ['createsubtractionnode',['createSubtractionNode',['../classMathParser_1_1Interpreting_1_1Differentiator.html#aad54652f37938c29c9a426fd568746c8',1,'MathParser::Interpreting::Differentiator']]],
-  ['createunaryminusnode',['createUnaryMinusNode',['../classMathParser_1_1Interpreting_1_1Differentiator.html#a08a7721f2512b45848054ff53ff0a3a5',1,'MathParser::Interpreting::Differentiator']]]
+  ['createunaryminusnode',['createUnaryMinusNode',['../classMathParser_1_1Parsing_1_1Nodes_1_1Factories_1_1SubtractionNodeFactory.html#ab61980db1490d41475f4bb0b8442edc5',1,'MathParser::Parsing::Nodes::Factories::SubtractionNodeFactory']]]
 ];

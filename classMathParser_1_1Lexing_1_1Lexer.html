@@ -129,14 +129,14 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:aa6f493838012b4ca4a3a3d6ab447c8d8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa6f493838012b4ca4a3a3d6ab447c8d8"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>findMatchingToken</b> ($input)</td></tr>
+<tr class="memitem:aa6f493838012b4ca4a3a3d6ab447c8d8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html#aa6f493838012b4ca4a3a3d6ab447c8d8">findMatchingToken</a> ($input)</td></tr>
+<tr class="memdesc:aa6f493838012b4ca4a3a3d6ab447c8d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find a matching token at the begining of the provided input.  <a href="#aa6f493838012b4ca4a3a3d6ab447c8d8">More...</a><br/></td></tr>
 <tr class="separator:aa6f493838012b4ca4a3a3d6ab447c8d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a3b723949c7cebb254b1c818f20e34541"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b723949c7cebb254b1c818f20e34541"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>$tokenDefinitions</b> = []</td></tr>
+<tr class="memitem:a3b723949c7cebb254b1c818f20e34541"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html#a3b723949c7cebb254b1c818f20e34541">$tokenDefinitions</a> = []</td></tr>
+<tr class="memdesc:a3b723949c7cebb254b1c818f20e34541"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMathParser_1_1Lexing_1_1TokenDefinition.html" title="Token definitions using regular expressions to match input. ">TokenDefinition</a>[] $tokenDefinition list of tokens recognized by the <a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html" title="Generic very simple lexer, capable of matching tokens defined by regular expressions. ">Lexer</a>.  <a href="#a3b723949c7cebb254b1c818f20e34541">More...</a><br/></td></tr>
 <tr class="separator:a3b723949c7cebb254b1c818f20e34541"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -176,6 +176,44 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aa6f493838012b4ca4a3a3d6ab447c8d8"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Lexing\Lexer::findMatchingToken </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$input</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Find a matching token at the begining of the provided input. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$input</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Token|null</td><td>Matched token </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="a28038b866d03c73744dd9183326a4ae3"></a>
 <div class="memitem">
 <div class="memproto">
@@ -200,7 +238,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">Token[]</td><td>sequence of recognize tokens </td></tr>
+    <tr><td class="paramname">Token[]</td><td>sequence of recognized tokens </td></tr>
   </table>
   </dd>
 </dl>
@@ -213,6 +251,29 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a3b723949c7cebb254b1c818f20e34541"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Lexing\Lexer::$tokenDefinitions = []</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classMathParser_1_1Lexing_1_1TokenDefinition.html" title="Token definitions using regular expressions to match input. ">TokenDefinition</a>[] $tokenDefinition list of tokens recognized by the <a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html" title="Generic very simple lexer, capable of matching tokens defined by regular expressions. ">Lexer</a>. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/MathParser/Lexing/Lexer.php</li>
 </ul>
@@ -220,7 +281,7 @@ Private Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 4 2016 16:11:23 for math-parser by
+Generated on Thu Jan 7 2016 23:29:57 for math-parser by
 <a href="http://www.doxygen.org/index.html">doxygen</a> 1.8.6
 </small></address>
 </body>

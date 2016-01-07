@@ -119,8 +119,8 @@ Inheritance diagram for MathParser\Interpreting\Evaluator:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa41d08bd9b0d8b204c3ad8d04ce0ca9e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa41d08bd9b0d8b204c3ad8d04ce0ca9e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>__construct</b> ($variables=null)</td></tr>
+<tr class="memitem:aa41d08bd9b0d8b204c3ad8d04ce0ca9e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Interpreting_1_1Evaluator.html#aa41d08bd9b0d8b204c3ad8d04ce0ca9e">__construct</a> ($variables=null)</td></tr>
+<tr class="memdesc:aa41d08bd9b0d8b204c3ad8d04ce0ca9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#aa41d08bd9b0d8b204c3ad8d04ce0ca9e">More...</a><br/></td></tr>
 <tr class="separator:aa41d08bd9b0d8b204c3ad8d04ce0ca9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada67630eccaad9b2c496eaf320b9303c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Interpreting_1_1Evaluator.html#ada67630eccaad9b2c496eaf320b9303c">setVariables</a> ($variables)</td></tr>
 <tr class="memdesc:ada67630eccaad9b2c496eaf320b9303c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the variables used for evaluating.  <a href="#ada67630eccaad9b2c496eaf320b9303c">More...</a><br/></td></tr>
@@ -144,7 +144,8 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:ac43d7a3d54117fba595e227fef653e5d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac43d7a3d54117fba595e227fef653e5d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>$variables</b></td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Interpreting_1_1Evaluator.html#ac43d7a3d54117fba595e227fef653e5d">$variables</a></td></tr>
+<tr class="memdesc:ac43d7a3d54117fba595e227fef653e5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">mixed[] $variables Key/value pair holding current values of the variables used for evaluating. <br/></td></tr>
 <tr class="separator:ac43d7a3d54117fba595e227fef653e5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -158,7 +159,33 @@ Private Attributes</h2></td></tr>
 <div class="line">$evaluator-&gt;setVariables([ <span class="charliteral">&#39;x&#39;</span> =&gt; 1, <span class="charliteral">&#39;y&#39;</span> =&gt; <span class="stringliteral">&#39;-1&#39;</span> ]);</div>
 <div class="line">result = $f-&gt;accept($evaluator);    <span class="comment">// Evaluate $f using x=1, y=-1</span></div>
 </div><!-- fragment --><p>TODO: handle user specified functions </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="aa41d08bd9b0d8b204c3ad8d04ce0ca9e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Interpreting\Evaluator::__construct </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$variables</em> = <code>null</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<p>Create an <a class="el" href="classMathParser_1_1Interpreting_1_1Evaluator.html" title="Evalutate a parsed mathematical expression. ">Evaluator</a> with given variable values.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">mixed</td><td class="paramname">$variables</td><td>key-value array of variables with corresponding values. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="ada67630eccaad9b2c496eaf320b9303c"></a>
 <div class="memitem">
 <div class="memproto">
@@ -392,7 +419,7 @@ Private Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 4 2016 16:11:23 for math-parser by
+Generated on Thu Jan 7 2016 23:29:57 for math-parser by
 <a href="http://www.doxygen.org/index.html">doxygen</a> 1.8.6
 </small></address>
 </body>

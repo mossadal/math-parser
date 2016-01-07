@@ -32,7 +32,7 @@ body {
 /* Set the fixed height of the footer here */
 #footer {
     font-size: 0.9em;
-    padding: 8px 0px;
+    padding: 8px 0;
     background-color: #f5f5f5;
 }
 
@@ -89,7 +89,7 @@ body {
 ----------------------------------- */
 
 
-a.qindex {
+.qindex {
     font-weight: bold;
 }
 
@@ -114,7 +114,7 @@ a.codeRef, a.codeRef:visited, a.lineRef, a.lineRef:visited {
 
 /* @end */
 
-dl.el {
+.el {
     margin-left: -1cm;
 }
 
@@ -125,7 +125,6 @@ pre.fragment {
     margin: 4px 8px 4px 2px;
     overflow: auto;
     word-wrap: break-word;
-    font-size:  9pt;
     line-height: 125%;
     font-family: monospace, fixed;
     font-size: 105%;
@@ -142,7 +141,7 @@ div.line {
     font-size: 13px;
     min-height: 13px;
     line-height: 1.0;
-    text-wrap: unrestricted;
+    text-wrap: normal;
     white-space: -moz-pre-wrap; /* Moz */
     white-space: -pre-wrap;     /* Opera 4-6 */
     white-space: -o-pre-wrap;   /* Opera 7 */
@@ -150,8 +149,8 @@ div.line {
     word-wrap: break-word;      /* IE 5.5+ */
     text-indent: -53px;
     padding-left: 53px;
-    padding-bottom: 0px;
-    margin: 0px;
+    padding-bottom: 0;
+    margin: 0;
     -webkit-transition-property: background-color, box-shadow;
     -webkit-transition-duration: 0.5s;
     -moz-transition-property: background-color, box-shadow;
@@ -164,7 +163,7 @@ div.line {
     transition-duration: 0.5s;
 }
 
-div.line.glow {
+.glow {
     background-color: cyan;
     box-shadow: 0 0 10px cyan;
 }
@@ -185,60 +184,60 @@ span.lineno a:hover {
     background-color: #C8C8C8;
 }
 
-div.groupHeader {
+.groupHeader {
     margin-left: 16px;
     margin-top: 12px;
     font-weight: bold;
 }
 
-div.groupText {
+.groupText {
     margin-left: 16px;
     font-style: italic;
 }
 
 /* @group Code Colorization */
 
-span.keyword {
+.keyword {
     color: #008000
 }
 
-span.keywordtype {
+.keywordtype {
     color: #604020
 }
 
-span.keywordflow {
+.keywordflow {
     color: #e08000
 }
 
-span.comment {
+.comment {
     color: #800000
 }
 
-span.preprocessor {
+.preprocessor {
     color: #806020
 }
 
-span.stringliteral {
+.stringliteral {
     color: #002080
 }
 
-span.charliteral {
+.charliteral {
     color: #008080
 }
 
-span.vhdldigit {
+.vhdldigit {
     color: #ff00ff
 }
 
-span.vhdlchar {
+.vhdlchar {
     color: #000000
 }
 
-span.vhdlkeyword {
+.vhdlkeyword {
     color: #700070
 }
 
-span.vhdllogic {
+.vhdllogic {
     color: #ff0000
 }
 
@@ -262,7 +261,7 @@ blockquote {
      }
 }
 
-li.subactive a span {
+.subactive a span {
     border-bottom: 2px solid #808080;
 }
 

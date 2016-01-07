@@ -98,7 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classMathParser_1_1Parsing_1_1Stack-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">MathParser\Parsing\Stack Class Reference</div>  </div>
@@ -122,11 +122,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad85713b07820a24a6e781b32e18271e6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Parsing_1_1Stack.html#ad85713b07820a24a6e781b32e18271e6">count</a> ()</td></tr>
 <tr class="memdesc:ad85713b07820a24a6e781b32e18271e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the current number of elements in the stack.  <a href="#ad85713b07820a24a6e781b32e18271e6">More...</a><br/></td></tr>
 <tr class="separator:ad85713b07820a24a6e781b32e18271e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4c1e959f78de3fdc65f9b8f25b607cc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Parsing_1_1Stack.html#aa4c1e959f78de3fdc65f9b8f25b607cc">isEmpty</a> ()</td></tr>
+<tr class="memdesc:aa4c1e959f78de3fdc65f9b8f25b607cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the stack is empty.  <a href="#aa4c1e959f78de3fdc65f9b8f25b607cc">More...</a><br/></td></tr>
+<tr class="separator:aa4c1e959f78de3fdc65f9b8f25b607cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:ab508efbeda55b29432f6aefbb591ca10"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab508efbeda55b29432f6aefbb591ca10"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>$data</b> = array()</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:ab508efbeda55b29432f6aefbb591ca10"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Parsing_1_1Stack.html#ab508efbeda55b29432f6aefbb591ca10">$data</a> = array()</td></tr>
+<tr class="memdesc:ab508efbeda55b29432f6aefbb591ca10"><td class="mdescLeft">&#160;</td><td class="mdescRight">mixed[] $data internal storage of data on the stack.  <a href="#ab508efbeda55b29432f6aefbb591ca10">More...</a><br/></td></tr>
 <tr class="separator:ab508efbeda55b29432f6aefbb591ca10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -149,6 +152,29 @@ Public Attributes</h2></td></tr>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
     <tr><td class="paramname">int</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aa4c1e959f78de3fdc65f9b8f25b607cc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Parsing\Stack::isEmpty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns true if the stack is empty. </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">boolean</td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -225,6 +251,29 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="ab508efbeda55b29432f6aefbb591ca10"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Parsing\Stack::$data = array()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>mixed[] $data internal storage of data on the stack. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/MathParser/Parsing/Stack.php</li>
 </ul>
@@ -232,7 +281,7 @@ Public Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 4 2016 16:11:23 for math-parser by
+Generated on Thu Jan 7 2016 23:29:57 for math-parser by
 <a href="http://www.doxygen.org/index.html">doxygen</a> 1.8.6
 </small></address>
 </body>
