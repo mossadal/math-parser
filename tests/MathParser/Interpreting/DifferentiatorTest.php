@@ -1,6 +1,7 @@
 <?php
 
 use MathParser\StdMathParser;
+use MathParser\RationalMathParser;
 use MathParser\Interpreting\Interpreter;
 use MathParser\Interpreting\PrettyPrinter;
 use MathParser\Interpreting\Differentiator;
@@ -22,7 +23,7 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->parser = new StdMathParser();
+        $this->parser = new RationalMathParser();
         $this->differentiator = new Differentiator('x');
     }
 
@@ -154,6 +155,7 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
         $this->assertResult('x^2', '2x');
         $this->assertResult('x^3', '3x^2');
         $this->assertResult('x^x', 'x^x*(log(x)+1)');
+        $this->assertResult('x^(1/2)', '(1/2)*x^(-1/2)');
     }
 
     public function testCanDifferentiateQuotient()

@@ -19,6 +19,8 @@ use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\ConstantNode;
+use MathParser\Parsing\Nodes\IntegerNode;
+use MathParser\Parsing\Nodes\RationalNode;
 
 /**
  * Visitor interface
@@ -42,6 +44,20 @@ interface Visitor
      * @param NumberNode $node Node to visit.
      **/
     function visitNumberNode(NumberNode $node);
+
+    /**
+     * Interface function for visiting IntegerNodes
+     *
+     * @param IntegerNode $node Node to visit.
+     **/
+    function visitIntegerNode(IntegerNode $node);
+
+    /**
+     * Interface function for visiting RationalNodes
+     *
+     * @param RationalNode $node Node to visit.
+     **/
+    function visitRationalNode(RationalNode $node);
 
     /**
      * Interface function for visiting VariableNodes

@@ -10,21 +10,28 @@
 namespace MathParser\Parsing\Nodes\Factories;
 
 use MathParser\Parsing\Nodes\Interfaces\ExpressionNodeFactory;
+
+use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\NumberNode;
+use MathParser\Parsing\Nodes\IntegerNode;
+use MathParser\Parsing\Nodes\RationalNode;
+
 use MathParser\Parsing\Nodes\ExpressionNode;
 use MathParser\Parsing\Nodes\Traits\Sanitize;
-use MathParser\Parsing\Nodes\Node;
+use MathParser\Parsing\Nodes\Traits\Numeric;
+
 use MathParser\Exceptions\DivisionByZeroException;
 
 /**
- * Factory for creating an ExpressionNode representing '/'.
- *
- * Some basic simplification is applied to the resulting Node.
- *
- */
+* Factory for creating an ExpressionNode representing '/'.
+*
+* Some basic simplification is applied to the resulting Node.
+*
+*/
 class DivisionNodeFactory implements ExpressionNodeFactory
 {
     use Sanitize;
+    use Numeric;
 
 
     /**
@@ -57,34 +64,47 @@ class DivisionNodeFactory implements ExpressionNodeFactory
         if ($node) return $node;
 
         if ($leftOperand->compareTo($rightOperand)) {
-            return new NumberNode(1);
+            return new IntegerNode(1);
         }
 
         return new ExpressionNode($leftOperand, '/', $rightOperand);
     }
 
     /** Simplify division nodes when factors are numeric
-     * @param Node $leftOperand
-     * @param Node $rightOperand
-     * @retval Node|null
-     **/
+    * @param Node $leftOperand
+    * @param Node $rightOperand
+    * @retval Node|null
+    **/
     protected function numericFactors($leftOperand, $rightOperand)
     {
-        if ($rightOperand instanceof NumberNode) {
-            if ($rightOperand->getValue() == 0) {
-                throw new DivisionByZeroException();
-            }
-
-            if ($rightOperand->getValue() == 1) {
-                return $leftOperand;
-            }
+        if ($this->isNumeric($rightOperand) && $rightOperand->getValue() == 0) {
+            throw new DivisionByZeroException();
+        }
+        if ($this->isNumeric($rightOperand) && $rightOperand->getValue() == 1)
+        {
+            return $leftOperand;
+        }
+        if ($this->isNumeric($leftOperand) && $leftOperand->getValue() == 0)
+        {
+            return new IntegerNode(0);
         }
 
-        if ($leftOperand instanceof NumberNode) {
-            if ($leftOperand->getValue() == 0) {
-                return new NumberNode(0);
-            }
+        if (!$this->isNumeric($leftOperand) || !$this->isNumeric($rightOperand)) {
+            return null;
         }
+        $type = $this->resultingType($leftOperand, $rightOperand);
+
+        switch($type) {
+            case Node::NumericFloat:
+            return new NumberNode($leftOperand->getValue() / $rightOperand->getValue());
+
+            case Node::NumericRational:
+            case Node::NumericInteger:
+            $p = $leftOperand->getNumerator() * $rightOperand->getDenominator();
+            $q = $leftOperand->getDenominator() * $rightOperand->getNumerator();
+            return new RationalNode($p, $q);
+        }
+
         return null;
     }
 }

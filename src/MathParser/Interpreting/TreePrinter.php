@@ -13,6 +13,8 @@ use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\ConstantNode;
+use MathParser\Parsing\Nodes\IntegerNode;
+use MathParser\Parsing\Nodes\RationalNode;
 
 
 /**
@@ -66,7 +68,18 @@ class TreePrinter implements Visitor
     public function visitNumberNode(NumberNode $node)
     {
         $val = $node->getValue();
-        return "$val";
+        return "$val:float";
+    }
+    public function visitIntegerNode(IntegerNode $node)
+    {
+        $val = $node->getValue();
+        return "$val:int";
+    }
+    public function visitRationalNode(RationalNode $node)
+    {
+        $p = $node->getNumerator();
+        $q = $node->getDenominator();
+        return "$p/$q:rational";
     }
 
     /**
@@ -93,7 +106,7 @@ class TreePrinter implements Visitor
     }
 
     /**
-     * Print a ConstantNode. 
+     * Print a ConstantNode.
      *
      * @param ConstantNode $node
      */

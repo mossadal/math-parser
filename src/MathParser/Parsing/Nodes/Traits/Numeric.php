@@ -13,6 +13,7 @@
  */
 namespace MathParser\Parsing\Nodes\Traits;
 
+use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\IntegerNode;
 use MathParser\Parsing\Nodes\RationalNode;
@@ -23,18 +24,23 @@ use MathParser\Parsing\Nodes\RationalNode;
  * with numbers, making the code cleaner.
  *
  */
-trait Sanitize {
-    /**
-    * Convert ints and floats to NumberNodes
-    *
-    * @param Node|int|float $operand
-    * @retval Node
-    **/
-    protected function sanitize($operand)
+trait Numeric {
+    protected function isNumeric($operand)
     {
-        if (is_int($operand)) return new IntegerNode($operand);
-        if (is_float($operand)) return new NumberNode($operand);
+        return ($operand instanceof NumberNode || $operand instanceof IntegerNode || $operand instanceof RationalNode);
 
-        return $operand;
+    }
+
+    protected function orderType($node)
+    {
+        if ($node instanceof IntegerNode) return Node::NumericInteger;
+        if ($node instanceof RationalNode) return Node::NumericRational;
+        if ($node instanceof NumberNode) return Node::NumericFloat;
+
+        return 0;
+    }
+    protected function resultingType($node, $other)
+    {
+        return max($this->orderType($node), $this->orderType($other));
     }
 }

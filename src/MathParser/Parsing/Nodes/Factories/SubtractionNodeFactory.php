@@ -10,10 +10,15 @@
 namespace MathParser\Parsing\Nodes\Factories;
 
 use MathParser\Parsing\Nodes\Interfaces\ExpressionNodeFactory;
+
+use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\NumberNode;
+use MathParser\Parsing\Nodes\IntegerNode;
+use MathParser\Parsing\Nodes\RationalNode;
+
 use MathParser\Parsing\Nodes\ExpressionNode;
 use MathParser\Parsing\Nodes\Traits\Sanitize;
-use MathParser\Parsing\Nodes\Node;
+use MathParser\Parsing\Nodes\Traits\Numeric;
 
 /**
  * Factory for creating an ExpressionNode representing '-'.
@@ -24,6 +29,7 @@ use MathParser\Parsing\Nodes\Node;
 class SubtractionNodeFactory implements ExpressionNodeFactory
 {
     use Sanitize;
+    use Numeric;
 
     /**
     * Create a Node representing 'leftOperand - rightOperand'
@@ -54,7 +60,7 @@ class SubtractionNodeFactory implements ExpressionNodeFactory
         if ($node) return $node;
 
         if ($leftOperand->compareTo($rightOperand)) {
-            return new NumberNode(0);
+            return new IntegerNode(0);
         }
 
         return new ExpressionNode($leftOperand, '-', $rightOperand);
@@ -67,12 +73,25 @@ class SubtractionNodeFactory implements ExpressionNodeFactory
      */
     protected function numericTerms($leftOperand, $rightOperand)
     {
-        if ($leftOperand instanceof NumberNode && $rightOperand instanceof NumberNode) {
-            return new NumberNode($leftOperand->getValue() - $rightOperand->getValue());
+        if ($this->isNumeric($rightOperand) && $rightOperand->getValue() == 0) return $leftOperand;
+
+        if (!$this->isNumeric($leftOperand) || !$this->isNumeric($rightOperand)) {
+            return null;
         }
 
-        if ($rightOperand instanceof NumberNode && $rightOperand->getValue() == 0) {
-            return $leftOperand;
+        $type = $this->resultingType($leftOperand, $rightOperand);
+
+        switch($type) {
+            case Node::NumericFloat:
+            return new NumberNode($leftOperand->getValue() - $rightOperand->getValue());
+
+            case Node::NumericRational:
+            $p = $leftOperand->getNumerator() * $rightOperand->getDenominator() - $leftOperand->getDenominator() * $rightOperand->getNumerator();
+            $q = $leftOperand->getDenominator() * $rightOperand->getDenominator();
+            return new RationalNode($p, $q);
+
+            case Node::NumericInteger:
+            return new IntegerNode($leftOperand->getValue() - $rightOperand->getValue());
         }
 
         return null;
@@ -99,6 +118,12 @@ class SubtractionNodeFactory implements ExpressionNodeFactory
 
         if ($operand instanceof NumberNode) {
             return new NumberNode(-$operand->getValue());
+        }
+        if ($operand instanceof IntegerNode) {
+            return new IntegerNode(-$operand->getValue());
+        }
+        if ($operand instanceof RationalNode) {
+            return new RationalNode(-$operand->getNumerator(), $operand->getDenominator());
         }
         // --x => x
         if ($operand instanceof ExpressionNode && $operand->getOperator() == '-' && $operand->getRight() === null) {

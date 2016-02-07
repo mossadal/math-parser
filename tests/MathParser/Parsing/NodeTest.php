@@ -4,21 +4,26 @@ use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\ConstantNode;
 use MathParser\Parsing\Nodes\ExpressionNode;
 use MathParser\Parsing\Nodes\FunctionNode;
-use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\SubExpressionNode;
 use MathParser\Parsing\Nodes\VariableNode;
 
-use MathParser\Interpreting\TreePrinter;
-use MathParser\StdMathParser;
+use MathParser\Parsing\Nodes\IntegerNode;
+use MathParser\Parsing\Nodes\RationalNode;
+use MathParser\Parsing\Nodes\NumberNode;
 
+use MathParser\Interpreting\TreePrinter;
+use MathParser\RationalMathParser;
+use MathParser\Parsing\Nodes\Factories\NodeFactory;
 
 class NodeTest extends PHPUnit_Framework_TestCase
 {
     private $parser;
+    private $factory;
 
     public function setUp()
     {
-        $this->parser = new StdMathParser();
+        $this->parser = new RationalMathParser();
+        $this->factory = new NodeFactory();
     }
 
     public function testCanCompareSubExpressionNodes()
@@ -69,11 +74,31 @@ class NodeTest extends PHPUnit_Framework_TestCase
     {
         $node = new NumberNode(3);
         $other = new VariableNode('x');
+        $inode = new IntegerNode(2);
+        $rnode = new RationalNode(4,2);
 
         $this->assertFalse($node->compareTo(null));
         $this->assertFalse($node->compareTo($other));
         $this->assertTrue($node->compareTo($node));
-        $this->assertFalse($node->compareTo(new NumberNode(7)));
+        $this->assertFalse($node->compareTo(new IntegerNode(7)));
+
+        $this->assertTrue($inode->compareTo($rnode));
+        $this->assertTrue($rnode->compareTo($inode));
+        $this->assertTrue($inode->compareTo($inode));
+        $this->assertTrue($rnode->compareTo($rnode));
+        $this->assertFalse($inode->compareTo(new Integernode(3)));
+
+        $this->assertFalse($node->compareTo(null));
+        $this->assertFalse($other->compareTo(null));
+        $this->assertFalse($inode->compareTo(null));
+        $this->assertFalse($rnode->compareTo(null));
+
+        $this->assertFalse($rnode->compareTo(new IntegerNode(3)));
+        $this->assertFalse($rnode->compareTo($other));
+
+        $this->assertFalse($inode->compareTo(new RationalNode(3,5)));
+        $this->assertFalse($inode->compareTo($other));
+
     }
 
     public function testCanCompareExpressionNodes()
@@ -104,7 +129,13 @@ class NodeTest extends PHPUnit_Framework_TestCase
     public function testCanComputeComplexity()
     {
         $node = new NumberNode(1);
+        $this->assertEquals($node->complexity(), 2);
+
+        $node = new IntegerNode(1);
         $this->assertEquals($node->complexity(), 1);
+
+        $node = new RationalNode(1,2);
+        $this->assertEquals($node->complexity(), 2);
 
         $node = new VariableNode('x');
         $this->assertEquals($node->complexity(), 1);
@@ -143,6 +174,42 @@ class NodeTest extends PHPUnit_Framework_TestCase
         $node = new SubExpressionNode('%');
         $this->assertEquals($node->getValue(), '%');
         $this->assertNull($node->accept(new TreePrinter()));
+    }
+
+    public function testCanCreateIntegerNode()
+    {
+        $node = new IntegerNode(1);
+        $this->assertEquals($node->getValue(), 1);
+
+        $node = new IntegerNode(-1);
+        $this->assertEquals($node->getValue(), -1);
+
+        $this->setExpectedException(\UnexpectedValueException::class);
+        $node = new IntegerNode(1.2);
+    }
+
+    public function testCanCreateRationalNode()
+    {
+        $node = new RationalNode(1,2);
+        $this->assertEquals($node->getNumerator(), 1);
+        $this->assertEquals($node->getDenominator(), 2);
+
+        $this->assertEquals($node->getValue(), 0.5);
+
+        $node = new RationalNode(4,8);
+        $this->assertEquals($node->getNumerator(), 1);
+        $this->assertEquals($node->getDenominator(), 2);
+
+        $node = new RationalNode(-1,2);
+        $this->assertEquals($node->getNumerator(), -1);
+        $this->assertEquals($node->getDenominator(), 2);
+
+        $node = new RationalNode(1,-2);
+        $this->assertEquals($node->getNumerator(), -1);
+        $this->assertEquals($node->getDenominator(), 2);
+
+        $this->setExpectedException(\UnexpectedValueException::class);
+        $node = new RationalNode(1.2, 2);
     }
 
 

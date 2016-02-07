@@ -19,6 +19,8 @@ use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\ConstantNode;
+use MathParser\Parsing\Nodes\IntegerNode;
+use MathParser\Parsing\Nodes\RationalNode;
 
 use MathParser\Parsing\Nodes\Factories\NodeFactory;
 
@@ -132,7 +134,7 @@ class Differentiator implements Visitor
                 $term1 = $this->nodeFactory->multiplication($leftValue, $node->getRight());
                 $term2 = $this->nodeFactory->multiplication($node->getLeft(), $rightValue);
                 $numerator = $this->nodeFactory->subtraction($term1, $term2);
-                $denominator = $this->nodeFactory->exponentiation($node->getRight(), new NumberNode(2));
+                $denominator = $this->nodeFactory->exponentiation($node->getRight(), new IntegerNode(2));
                 return $this->nodeFactory->division($numerator, $denominator);
 
             // f^g = exp(g log(f)), so (f^g)' = f^g (g'log(f) + g/f)
@@ -140,10 +142,14 @@ class Differentiator implements Visitor
                 $base = $node->getLeft();
                 $exponent = $node->getRight();
 
-                if ($exponent instanceof NumberNode) {
-                    $power = $exponent->getValue();
-                    $fpow = $this->nodeFactory->exponentiation($base, $power-1);
-                    return $this->nodeFactory->multiplication($power, $this->nodeFactory->multiplication($fpow, $leftValue));
+                if ($exponent instanceof IntegerNode || $exponent instanceof NumberNode) {
+                        $power = $exponent->getValue();
+                        $fpow = $this->nodeFactory->exponentiation($base, $power-1);
+                        return $this->nodeFactory->multiplication($power, $this->nodeFactory->multiplication($fpow, $leftValue));
+                } elseif ($exponent instanceof RationalNode) {
+                    $newPower = new RationalNode($exponent->getNumerator()-$exponent->getDenominator() , $exponent->getDenominator());
+                    $fpow = $this->nodeFactory->exponentiation($base, $newPower);
+                    return $this->nodeFactory->multiplication($exponent, $this->nodeFactory->multiplication($fpow, $leftValue));
                 } else {
                     $term1 = $this->nodeFactory->multiplication($rightValue, new FunctionNode('log', $node->getLeft()));
                     $term2 = $this->nodeFactory->division($node->getRight(), $node->getLeft());
@@ -168,9 +174,18 @@ class Differentiator implements Visitor
      */
     public function visitNumberNode(NumberNode $node)
     {
-        return new NumberNode(0);
+        return new IntegerNode(0);
     }
 
+    public function visitIntegerNode(IntegerNode $node)
+    {
+        return new IntegerNode(0);
+    }
+
+    public function visitRationalNode(RationalNode $node)
+    {
+        return new IntegerNode(0);
+    }
     /**
      * Differentiate a VariableNode
      *
@@ -183,10 +198,10 @@ class Differentiator implements Visitor
     public function visitVariableNode(VariableNode $node)
     {
         if ($node->getName() == $this->variable) {
-            return new NumberNode(1);
+            return new IntegerNode(1);
         }
 
-        return new NumberNode(0);
+        return new IntegerNode(0);
     }
 
     /**
@@ -272,7 +287,7 @@ class Differentiator implements Visitor
             case 'log':
                 return $this->nodeFactory->division($inner, $arg);
             case 'lg':
-                $denominator = $this->nodeFactory->multiplication(new FunctionNode('log', new NumberNode(10)), $arg);
+                $denominator = $this->nodeFactory->multiplication(new FunctionNode('log', new IntegerNode(10)), $arg);
                 return $this->nodeFactory->division($inner, $denominator);
 
             case 'sqrt':
@@ -328,6 +343,6 @@ class Differentiator implements Visitor
      */
     public function visitConstantNode(ConstantNode $node)
     {
-        return new NumberNode(0);
+        return new IntegerNode(0);
     }
 }

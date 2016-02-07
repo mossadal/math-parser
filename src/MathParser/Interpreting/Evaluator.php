@@ -15,6 +15,8 @@ use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\ConstantNode;
+use MathParser\Parsing\Nodes\IntegerNode;
+use MathParser\Parsing\Nodes\RationalNode;
 
 use MathParser\Exceptions\UnknownVariableException;
 use MathParser\Exceptions\UnknownConstantException;
@@ -130,6 +132,15 @@ class Evaluator implements Visitor
         return $node->getValue();
     }
 
+    public function visitIntegerNode(IntegerNode $node)
+    {
+        return $node->getValue();
+    }
+
+    public function visitRationalNode(RationalNode $node)
+    {
+        return $node->getValue();
+    }
     /**
     * Evaluate a VariableNode
     *

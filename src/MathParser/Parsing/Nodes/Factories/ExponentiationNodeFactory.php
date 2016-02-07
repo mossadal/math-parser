@@ -10,20 +10,28 @@
 namespace MathParser\Parsing\Nodes\Factories;
 
 use MathParser\Parsing\Nodes\Interfaces\ExpressionNodeFactory;
+
+use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\NumberNode;
+use MathParser\Parsing\Nodes\IntegerNode;
+use MathParser\Parsing\Nodes\RationalNode;
+
 use MathParser\Parsing\Nodes\ExpressionNode;
 use MathParser\Parsing\Nodes\Traits\Sanitize;
-use MathParser\Parsing\Nodes\Node;
+use MathParser\Parsing\Nodes\Traits\Numeric;
+
+use MathParser\Exceptions\DivisionByZeroException;
 
 /**
- * Factory for creating an ExpressionNode representing '^'.
- *
- * Some basic simplification is applied to the resulting Node.
- *
- */
+* Factory for creating an ExpressionNode representing '^'.
+*
+* Some basic simplification is applied to the resulting Node.
+*
+*/
 class ExponentiationNodeFactory implements ExpressionNodeFactory
 {
     use Sanitize;
+    use Numeric;
 
     /**
     * Create a Node representing '$leftOperand^$rightOperand'
@@ -49,7 +57,7 @@ class ExponentiationNodeFactory implements ExpressionNodeFactory
         $rightOperand = $this->sanitize($rightOperand);
 
         // Simplification if the exponent is a number.
-        if ($rightOperand instanceof NumberNode) {
+        if ($this->isNumeric($rightOperand)) {
             $node = $this->numericExponent($leftOperand, $rightOperand);
             if ($node) return $node;
         }
@@ -61,20 +69,39 @@ class ExponentiationNodeFactory implements ExpressionNodeFactory
     }
 
     /** Simplify an expression x^y, when y is numeric.
-     *
-     * @param Node $leftOperand
-     * @param Node $rightOperand
-     * @retval Node|null
-     */
+    *
+    * @param Node $leftOperand
+    * @param Node $rightOperand
+    * @retval Node|null
+    */
     private function numericExponent($leftOperand, $rightOperand)
     {
+        // 0^0 throws an exception
+        if ($this->isNumeric($leftOperand) && $this->isNumeric($rightOperand)) {
+            if ($leftOperand->getValue() == 0 && $rightOperand->getValue() == 0)
+            throw new DivisionByZeroException();
+        }
+
         // x^0 = 1
-        if ($rightOperand->getValue() == 0) return new NumberNode(1);
+        if ($rightOperand->getValue() == 0) return new IntegerNode(1);
         // x^1 = x
         if ($rightOperand->getValue() == 1) return $leftOperand;
+
+        if (!$this->isNumeric($leftOperand) || !$this->isNumeric($rightOperand)) {
+            return null;
+        }
+        $type = $this->resultingType($leftOperand, $rightOperand);
+
         // Compute x^y if both are numbers.
-        if ($leftOperand instanceof NumberNode) {
+        switch($type) {
+            case Node::NumericFloat:
             return new NumberNode(pow($leftOperand->getValue(), $rightOperand->getValue()));
+
+            case Node::NumericInteger:
+            if ($rightOperand->getValue() > 0)
+            {
+                return new IntegerNode(pow($leftOperand->getValue(), $rightOperand->getValue()));
+            }
         }
 
         // No simplification found
@@ -82,17 +109,20 @@ class ExponentiationNodeFactory implements ExpressionNodeFactory
     }
 
     /** Simplify (x^a)^b when a and b are both numeric.
-     * @param Node $leftOperand
-     * @param Node $rightOperand
-     * @retval Node|null
-     */
+    * @param Node $leftOperand
+    * @param Node $rightOperand
+    * @retval Node|null
+    */
     private function doubleExponentiation($leftOperand, $rightOperand)
     {
         // (x^a)^b -> x^(ab) for a, b numbers
-        if ($leftOperand instanceof ExpressionNode && $leftOperand->getRight() instanceof NumberNode && $rightOperand instanceof NumberNode) {
-            $power = new NumberNode($leftOperand->getRight()->getValue() * $rightOperand->getValue());
+        if ($leftOperand instanceof ExpressionNode && $leftOperand->getOperator() == '^') {
+
+            $factory = new MultiplicationNodeFactory();
+            $power = $factory->makeNode($leftOperand->getRight(), $rightOperand);
+
             $base = $leftOperand->getLeft();
-            return new ExpressionNode($base, '^', $power);
+            return self::makeNode($base,  $power);
         }
 
         // No simplification found

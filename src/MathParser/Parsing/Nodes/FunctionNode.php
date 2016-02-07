@@ -56,6 +56,11 @@ class FunctionNode extends Node
         return $this->operand = $operand;
     }
 
+    public function getOperator()
+    {
+        return $this->name;
+    }
+
     /**
      * Implementing the Visitable interface.
      */

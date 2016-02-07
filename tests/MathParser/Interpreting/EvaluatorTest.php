@@ -1,6 +1,7 @@
 <?php
 
 use MathParser\StdMathParser;
+use MathParser\RationalMathParser;
 use MathParser\Interpreting\Interpreter;
 use MathParser\Interpreting\Evaluator;
 use MathParser\Parsing\Nodes\Node;
@@ -20,12 +21,14 @@ use MathParser\Exceptions\DivisionByZeroException;
 class EvaluatorTest extends PHPUnit_Framework_TestCase
 {
     private $parser;
+    private $rparser;
     private $evaluator;
     private $variables;
 
     public function setUp()
     {
         $this->parser = new StdMathParser();
+        $this->rparser = new RationalMathParser();
 
         $this->variables = array('x' => '0.7', 'y' => '2.1');
         $this->evaluator = new Evaluator($this->variables);
@@ -47,6 +50,10 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
     {
         $this->assertResult('3', 3);
         $this->assertResult('-2', -2);
+        $this->assertResult('3.0', 3.0);
+
+        $node = $this->rparser->parse('1/2');
+        $this->assertEquals($this->evaluate($node), 0.5);
     }
 
     public function testCanEvaluateConstant()
@@ -116,8 +123,13 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
         $x = $this->variables['x'];
         $this->assertResult('x^3', pow($x,3));
         $this->assertResult('x^x^x', pow($x,pow($x,$x)));
-        $this->assertResult('0^0', 1);
         $this->assertResult('(-1)^(-1)', -1);
+    }
+
+    public function testCantRaise0To0()
+    {
+        $this->setExpectedException(DivisionByZeroException::class);
+        $this->assertResult('0^0', 1);
     }
 
     public function testExponentiationExceptions()

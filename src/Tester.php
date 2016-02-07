@@ -1,3 +1,4 @@
+
 <?php
 
 use MathParser\Lexing\Lexer;
@@ -9,8 +10,10 @@ use MathParser\Interpreting\TreePrinter;
 use MathParser\Interpreting\LaTeXPrinter;
 use MathParser\Interpreting\Differentiator;
 use MathParser\Interpreting\Evaluator;
+use MathParser\Interpreting\RationalEvaluator;
 
 use MathParser\StdMathParser;
+use MathParser\RationalMathParser;
 
 include 'vendor/autoload.php';
 
@@ -33,15 +36,14 @@ class ParserWithoutImplicitMultiplication extends Parser {
 // die();
 
 
-$parser = new StdMathParser(true);
+$parser = new RationalMathParser(true);
 
 $parser->parse($argv[1]);
 
 $tokens = $parser->getTokenList();
-print_r($tokens);
+// print_r($tokens);
 
 $tree = $parser->getTree();
-
 
 
 // var_dump($tree);
@@ -65,5 +67,8 @@ $derivative = $tree->accept($differentiator);
 var_dump($derivative->accept($treeprinter));
 var_dump($derivative->accept($printer));
 
-$evaluator = new Evaluator(['x' => 1]);
+$evaluator = new Evaluator(['x' => 1, 'y' => 1.5 ]);
+var_dump($tree->accept($evaluator));
+
+$evaluator = new RationalEvaluator(['x' => '1/3', 'y' => -2]);
 var_dump($tree->accept($evaluator));

@@ -11,10 +11,11 @@ use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\ConstantNode;
 use MathParser\Parsing\Nodes\ExpressionNode;
 use MathParser\Parsing\Nodes\FunctionNode;
-use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\SubExpressionNode;
 use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\Interpreting\TreePrinter;
+
+use MathParser\Parsing\Nodes\NumberNode;
 
 use MathParser\Exceptions\SyntaxErrorException;
 use MathParser\Exceptions\UnexpectedOperatorException;

@@ -1,6 +1,6 @@
 <?php
 
-use MathParser\StdMathParser;
+use MathParser\RationalMathParser;
 use MathParser\Interpreting\Interpreter;
 use MathParser\Interpreting\LaTeXPrinter;
 use MathParser\Interpreting\Differentiator;
@@ -8,8 +8,11 @@ use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\Parsing\Nodes\ExpressionNode;
-use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\ConstantNode;
+
+use MathParser\Parsing\Nodes\IntegerNode;
+use MathParser\Parsing\Nodes\RationalNode;
+use MathParser\Parsing\Nodes\NumberNode;
 
 use MathParser\Exceptions\UnknownFunctionException;
 use MathParser\Exceptions\UnknownOperatorException;
@@ -23,7 +26,7 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->parser = new StdMathParser();
+        $this->parser = new RationalMathParser();
         $this->printer = new LaTeXPrinter();
     }
 
@@ -40,10 +43,11 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('x', 'x');
     }
 
-    public function testCanPrintInteger()
+    public function testCanPrintNumber()
     {
         $this->assertResult('4', '4');
         $this->assertResult('-2', '-2');
+        $this->assertResult('1.5', '1.5');
     }
 
     public function testCanPrintUnaryMinus()
@@ -53,17 +57,17 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
 
     public function testCanAddBraces()
     {
-        $node = new NumberNode('4');
+        $node = new IntegerNode(4);
         $output = $this->printer->bracesNeeded($node);
 
         $this->assertEquals($output, '4');
 
-        $node = new NumberNode('-2');
+        $node = new IntegerNode(-2);
         $output = $this->printer->bracesNeeded($node);
 
         $this->assertEquals($output, '{-2}');
 
-        $node = new NumberNode('12');
+        $node = new IntegerNode(12);
         $output = $this->printer->bracesNeeded($node);
 
         $this->assertEquals($output, '{12}');
@@ -87,6 +91,7 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
     public function testCanPrintDivision()
     {
         $this->assertResult('1/2', '\frac{1}{2}');
+        $this->assertResult('x/y', '\frac{x}{y}');
     }
 
     public function testCanPrintMultiplication()

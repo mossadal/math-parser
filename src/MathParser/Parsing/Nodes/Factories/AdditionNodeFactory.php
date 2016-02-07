@@ -10,19 +10,26 @@
 namespace MathParser\Parsing\Nodes\Factories;
 
 use MathParser\Parsing\Nodes\Interfaces\ExpressionNodeFactory;
+
+use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\NumberNode;
+use MathParser\Parsing\Nodes\IntegerNode;
+use MathParser\Parsing\Nodes\RationalNode;
+
 use MathParser\Parsing\Nodes\ExpressionNode;
 use MathParser\Parsing\Nodes\Traits\Sanitize;
+use MathParser\Parsing\Nodes\Traits\Numeric;
 
 /**
- * Factory for creating an ExpressionNode representing '+'.
- *
- * Some basic simplification is applied to the resulting Node.
- *
- */
+* Factory for creating an ExpressionNode representing '+'.
+*
+* Some basic simplification is applied to the resulting Node.
+*
+*/
 class AdditionNodeFactory implements ExpressionNodeFactory
 {
     use Sanitize;
+    use Numeric;
 
     /**
     * Create a Node representing 'leftOperand + rightOperand'
@@ -52,29 +59,35 @@ class AdditionNodeFactory implements ExpressionNodeFactory
     }
 
     /** Simplify addition node when operands are numeric
-     *
-     * @param Node $leftOperand
-     * @param Node $rightOperand
-     * @retval Node|null
-     */
-     protected function numericTerms($leftOperand, $rightOperand)
-     {
-         if ($leftOperand instanceof NumberNode) {
-             if ($rightOperand instanceof NumberNode) {
-                 return new NumberNode($leftOperand->getValue() + $rightOperand->getValue());
-             }
-             if ($leftOperand->getValue() == 0) {
-                 return $rightOperand;
-             }
-         }
+    *
+    * @param Node $leftOperand
+    * @param Node $rightOperand
+    * @retval Node|null
+    */
+    protected function numericTerms($leftOperand, $rightOperand)
+    {
+        if ($this->isNumeric($leftOperand) && $leftOperand->getValue() == 0) return $rightOperand;
+        if ($this->isNumeric($rightOperand) && $rightOperand->getValue() == 0) return $leftOperand;
+
+        if (!$this->isNumeric($leftOperand) || !$this->isNumeric($rightOperand)) {
+            return null;
+        }
+        $type = $this->resultingType($leftOperand, $rightOperand);
+
+        switch($type) {
+            case Node::NumericFloat:
+            return new NumberNode($leftOperand->getValue() + $rightOperand->getValue());
+
+            case Node::NumericRational:
+            $p = $leftOperand->getNumerator() * $rightOperand->getDenominator() + $leftOperand->getDenominator() * $rightOperand->getNumerator();
+            $q = $leftOperand->getDenominator() * $rightOperand->getDenominator();
+            return new RationalNode($p, $q);
+
+            case Node::NumericInteger:
+            return new IntegerNode($leftOperand->getValue() + $rightOperand->getValue());
+        }
 
 
-         if ($rightOperand instanceof NumberNode) {
-             if ($rightOperand->getValue() == 0) {
-                 return $leftOperand;
-             }
-         }
-
-         return null;
-     }
+        return null;
+    }
 }

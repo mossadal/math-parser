@@ -28,6 +28,8 @@ use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\ConstantNode;
 use MathParser\Parsing\Nodes\SubExpressionNode;
 use MathParser\Parsing\Nodes\Factories\NodeFactory;
+use MathParser\Parsing\Nodes\IntegerNode;
+use MathParser\Parsing\Nodes\RationalNode;
 
 use MathParser\Parsing\Stack;
 
@@ -78,12 +80,19 @@ class Parser
      */
      protected $nodeFactory;
 
+    protected $rationalFactory = false;
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->nodeFactory = new NodeFactory();
+    }
+
+    public function setRationalFactory($flag)
+    {
+        $this->rationalFactory = true;
     }
 
     /**
@@ -132,7 +141,11 @@ class Parser
         {
             $token = $tokens[$index];
 
-            $node = Node::factory($token);
+            if ($this->rationalFactory) {
+                $node = Node::rationalFactory($token);
+            } else {
+                $node = Node::factory($token);
+            }
 
             // Handle closing parentheses
             if ($token->getType() == TokenType::CloseParenthesis) {
@@ -220,6 +233,14 @@ class Parser
 
             if ($left instanceof NumberNode) {
                 return new NumberNode(-$left->getValue());
+            }
+
+            if ($left instanceof IntegerNode) {
+                return new IntegerNode(-$left->getValue());
+            }
+
+            if ($left instanceof RationalNode) {
+                return new RationalNode(-$left->getNumerator(), $left->getDenominator());
             }
 
             $node->setOperator('-');
@@ -354,7 +375,7 @@ class Parser
 
             $node = $this->handleExpression($popped);
             $this->operandStack->push($node);
-            
+
         }
 
         // Throw an error if the parenthesis couldn't be matched

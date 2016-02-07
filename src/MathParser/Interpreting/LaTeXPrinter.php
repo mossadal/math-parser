@@ -10,10 +10,13 @@ namespace MathParser\Interpreting;
 use MathParser\Interpreting\Visitors\Visitor;
 use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\ExpressionNode;
-use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\ConstantNode;
+
+use MathParser\Parsing\Nodes\IntegerNode;
+use MathParser\Parsing\Nodes\RationalNode;
+use MathParser\Parsing\Nodes\NumberNode;
 
 use MathParser\Lexing\StdMathLexer;
 use MathParser\Lexing\TokenAssociativity;
@@ -84,7 +87,7 @@ class LaTeXPrinter implements Visitor
 
         if ($operator == '*') {
             $operator = '';
-            if ($left instanceof FunctionNode || $right instanceof NumberNode || ($right instanceof ExpressionNode && $right->getLeft() instanceof NumberNode)) {
+            if ($left instanceof FunctionNode || $right instanceof NumberNode || $right instanceof IntegerNode || $right instanceof RationalNode || ($right instanceof ExpressionNode && $right->getLeft() instanceof NumberNode)) {
                 $operator = '\cdot ';
             }
         }
@@ -123,6 +126,18 @@ class LaTeXPrinter implements Visitor
         return "$val";
     }
 
+    public function visitIntegerNode(IntegerNode $node)
+    {
+        $val = $node->getValue();
+        return "$val";
+    }
+
+    public function visitRationalNode(RationalNode $node)
+    {
+        $p = $node->getNumerator();
+        $q = $node->getDenominator();
+        return "\\frac{{$p}}{{$q}}";
+    }
     /**
      * Generate LaTeX code for a VariableNode
      *
@@ -243,7 +258,7 @@ class LaTeXPrinter implements Visitor
     {
         if ($node instanceof VariableNode || $node instanceof ConstantNode) {
             return $node->accept($this);
-        } elseif ($node instanceof NumberNode && $node->getValue() >= 0 && $node->getValue() <= 9) {
+        } elseif ($node instanceof IntegerNode && $node->getValue() >= 0 && $node->getValue() <= 9) {
             return $node->accept($this);
         } else {
             return '{'.$node->accept($this).'}';

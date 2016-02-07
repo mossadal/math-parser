@@ -30,6 +30,54 @@ use MathParser\Exceptions\UnknownOperatorException;
  */
 abstract class Node implements Visitable
 {
+    const NumericInteger = 1;
+    const NumericRational = 2;
+    const NumericFloat = 3;
+
+    /**
+     * Node factory, creating an appropriate Node from a Token.
+     *
+     * Based on the provided Token, returns a TerminalNode if the
+     * token type is PosInt, Integer, RealNumber, Identifier or Constant
+     * otherwise returns null.
+     *
+     * @param Token $token Provided token
+     * @retval Node|null
+     */
+    public static function rationalFactory(Token $token)
+    {
+        switch($token->getType()) {
+            case TokenType::PosInt:
+            case TokenType::Integer:
+                $x = intval($token->getValue());
+                return new IntegerNode($x);
+            case TokenType::RealNumber:
+                $x = floatval($token->getValue());
+                return new NumberNode($x);
+            case TokenType::Identifier:
+                return new VariableNode($token->getValue());
+            case TokenType::Constant:
+                return new ConstantNode($token->getValue());
+
+            case TokenType::FunctionName:
+                return new FunctionNode($token->getValue(), null);
+            case TokenType::OpenParenthesis:
+                return new SubExpressionNode($token->getValue());
+
+            case TokenType::AdditionOperator:
+            case TokenType::SubtractionOperator:
+            case TokenType::MultiplicationOperator:
+            case TokenType::DivisionOperator:
+            case TokenType::ExponentiationOperator:
+                return new ExpressionNode(null, $token->getValue(), null);
+
+            default:
+                // echo "Node factory returning null on $token\n";
+                return null;
+        }
+
+    }
+
     /**
      * Node factory, creating an appropriate Node from a Token.
      *
@@ -123,8 +171,10 @@ abstract class Node implements Visitable
      */
     public function complexity()
     {
-        if ($this instanceof NumberNode || $this instanceof VariableNode || $this instanceof ConstantNode) {
+        if ($this instanceof IntegerNode || $this instanceof VariableNode || $this instanceof ConstantNode) {
             return 1;
+        } elseif ($this instanceof RationalNode || $this instanceof NumberNode) {
+            return 2;
         } elseif ($this instanceof FunctionNode) {
             return 5+$this->getOperand()->complexity();
         } elseif ($this instanceof ExpressionNode) {
@@ -158,6 +208,8 @@ abstract class Node implements Visitable
     public function isTerminal()
     {
         if ($this instanceof NumberNode) return true;
+        if ($this instanceof IntegerNode) return true;
+        if ($this instanceof RationalNode) return true;
         if ($this instanceof VariableNode) return true;
         if ($this instanceof ConstantNode) return true;
 
