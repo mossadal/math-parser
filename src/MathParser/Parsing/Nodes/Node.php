@@ -216,4 +216,9 @@ abstract class Node implements Visitable
         return false;
     }
 
+    public function getOperator()
+    {
+        return '';
+    }
+
 }

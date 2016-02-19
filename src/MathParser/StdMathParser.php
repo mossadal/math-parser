@@ -55,6 +55,11 @@ class StdMathParser
         $this->parser = new Parser();
     }
 
+    public function setSimplifying($flag)
+    {
+        $this->parser->setSimplifying($flag);
+    }
+
     /**
      * Parse the given mathematical expression into an abstract syntax tree.
      *

@@ -81,6 +81,7 @@ class Parser
      protected $nodeFactory;
 
     protected $rationalFactory = false;
+    protected $simplifyingParser = true;
 
     /**
      * Constructor
@@ -92,7 +93,12 @@ class Parser
 
     public function setRationalFactory($flag)
     {
-        $this->rationalFactory = true;
+        $this->rationalFactory = $flag;
+    }
+
+    public function setSimplifying($flag)
+    {
+        $this->simplifyingParser = $flag;
     }
 
     /**
@@ -224,6 +230,8 @@ class Parser
     */
     protected function handleExpression($node)
     {
+        if (!$this->simplifyingParser) return $this->naiveHandleExpression($node);
+
         if ($node->getOperator() == '~') {
 
             $left = $this->operandStack->pop();
@@ -259,6 +267,40 @@ class Parser
         $node->setRight($right);
 
         return $this->nodeFactory->simplify($node);
+    }
+
+    /**
+    * Populate node with operands, without any simplification.
+    *
+    * @param Node $node
+    * @retval Node
+    * @throws SyntaxErrorException
+    */
+    protected function naiveHandleExpression($node)
+    {
+        if ($node->getOperator() == '~') {
+
+            $left = $this->operandStack->pop();
+            if ($left === null) {
+                throw new SyntaxErrorException();
+            }
+
+            $node->setOperator('-');
+            $node->setLeft($left);
+
+            return $node;
+        }
+
+        $right = $this->operandStack->pop();
+        $left = $this->operandStack->pop();
+        if ($right === null || $left === null) {
+            throw new SyntaxErrorException();
+        }
+
+        $node->setLeft($left);
+        $node->setRight($right);
+
+        return $node;
     }
 
     /**

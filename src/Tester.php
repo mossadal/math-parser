@@ -37,6 +37,7 @@ class ParserWithoutImplicitMultiplication extends Parser {
 
 
 $parser = new RationalMathParser(true);
+$parser->setSimplifying(false);
 
 $parser->parse($argv[1]);
 
@@ -44,11 +45,6 @@ $tokens = $parser->getTokenList();
 // print_r($tokens);
 
 $tree = $parser->getTree();
-
-
-// var_dump($tree);
-
-//die();
 
 echo "Input: ";
 $printer = new LaTeXPrinter();
