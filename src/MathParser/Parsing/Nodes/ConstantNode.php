@@ -72,7 +72,7 @@ class ConstantNode extends Node
 
     public function __toString()
     {
-        return "$this->name";
+        return "$this->value";
     }
 
 }

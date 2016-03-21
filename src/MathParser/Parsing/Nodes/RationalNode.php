@@ -105,6 +105,7 @@ class RationalNode extends Node
 
     public function __toString()
     {
+        if ($this->q == 1) return "$this->p";
         return "$this->p/$this->q";
     }
 
