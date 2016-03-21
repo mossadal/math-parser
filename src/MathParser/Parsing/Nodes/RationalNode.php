@@ -102,4 +102,10 @@ class RationalNode extends Node
             $this->p = -$this->p;
         }
     }
+
+    public function __toString()
+    {
+        return "$this->p/$this->q";
+    }
+
 }

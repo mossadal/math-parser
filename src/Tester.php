@@ -8,6 +8,7 @@ use MathParser\Lexing\TokenType;
 use MathParser\Parsing\Parser;
 use MathParser\Interpreting\TreePrinter;
 use MathParser\Interpreting\LaTeXPrinter;
+use MathParser\Interpreting\ASCIIPrinter;
 use MathParser\Interpreting\Differentiator;
 use MathParser\Interpreting\Evaluator;
 use MathParser\Interpreting\RationalEvaluator;
@@ -53,6 +54,10 @@ var_dump($tree->accept($printer));
 $treeprinter = new TreePrinter();
 var_dump($tree->accept($treeprinter));
 
+echo "String conversion: $tree\n";
+
+$ascii = new ASCIIPrinter();
+var_dump($tree->accept($ascii));
 
 echo "Derivative: ";
 
