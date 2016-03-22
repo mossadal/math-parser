@@ -107,6 +107,8 @@ class ASCIIPrinter implements Visitor
     {
         $p = $node->getNumerator();
         $q = $node->getDenominator();
+        if ($q == 1) return "$p";
+        if ($p < 1) return "($p/$q)";
         return "$p/$q";
     }
 
@@ -128,7 +130,7 @@ class ASCIIPrinter implements Visitor
     public function visitConstantNode(ConstantNode $node)
     {
         switch($node->getName()) {
-            case 'pi': return '\pi';
+            case 'pi': return 'pi';
             case 'e': return 'e';
             default: throw new UnknownConstantException($node->getName());
         }
