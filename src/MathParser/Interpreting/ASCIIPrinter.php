@@ -77,13 +77,7 @@ class ASCIIPrinter implements Visitor
         if ($right) {
             $rightValue = $this->parenthesize($right, $node);
 
-            switch($operator) {
-                case '^':
-                    return $leftValue.'^'.$this->bracesNeeded($right);
-                default:
-                    return "$leftValue$operator$rightValue";
-            }
-
+            return "$leftValue$operator$rightValue";
         }
 
         return "$operator$leftValue";
@@ -141,12 +135,20 @@ class ASCIIPrinter implements Visitor
         $text = $node->accept($this);
 
         if ($node instanceof ExpressionNode) {
-
             if ($node->lowerPrecedenceThan($cutoff)) {
                 return "($text)";
             }
         }
 
+        // Treat rational numbers as divisions on printing
+        if ($node instanceof RationalNode && $node->getDenominator() != 1) {
+            $fakeNode = new ExpressionNode($node->getNumerator(), '/', $node->getDenominator());
+
+            if ($fakeNode->lowerPrecedenceThan($cutoff)) {
+                return "($text)";
+            }
+        }
+        
         return "$prepend$text";
 
     }

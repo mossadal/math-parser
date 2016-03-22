@@ -63,11 +63,18 @@ class ASCIIPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('1+(-2)', '-1');
     }
 
+    public function testCanPrintAddition()
+    {
+        $this->assertResult('x+1', 'x+1');
+        $this->assertResult('x+y', 'x+y');
+    }
+
     public function testCanPrintDivision()
     {
         $this->assertResult('x/y', 'x/y');
         $this->assertResult('x/(y+z)', 'x/(y+z)');
         $this->assertResult('(x+y)/(y+z)', '(x+y)/(y+z)');
+        $this->assertResult('(x+sin(x))/2', '(x+sin(x))/2');
     }
 
     public function testCanPrintMultiplication()
@@ -77,9 +84,17 @@ class ASCIIPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('(x+1)(x+2)', '(x+1)*(x+2)');
     }
 
+    public function testCanPrintExponentiation()
+    {
+        $this->assertResult('x^2', 'x^2');
+        $this->assertResult('x^(2/3)', 'x^(2/3)');
+        $this->assertResult('x^(y+z)', 'x^(y+z)');
+    }
+
     public function testCanPrintFunctions()
     {
         $this->assertResult('sin(x)', 'sin(x)');
+        $this->assertResult('(2+sin(x))/(1-1/2)', '(2+sin(x))/(1/2)');
         $this->assertResult('cos(x)', 'cos(x)');
         $this->assertResult('tan(x)', 'tan(x)');
 

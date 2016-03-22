@@ -14,6 +14,11 @@ use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Interpreting\TreePrinter;
 use MathParser\RationalMathParser;
 use MathParser\Parsing\Nodes\Factories\NodeFactory;
+use MathParser\Parsing\Nodes\Factories\DivisionNodeFactory;
+use MathParser\Parsing\Nodes\Factories\AdditionNodeFactory;
+use MathParser\Parsing\Nodes\Factories\SubtractionNodeFactory;
+use MathParser\Parsing\Nodes\Factories\MultiplicationNodeFactory;
+use MathParser\Parsing\Nodes\Factories\ExponentiationNodeFactory;
 
 class NodeTest extends PHPUnit_Framework_TestCase
 {
@@ -210,6 +215,22 @@ class NodeTest extends PHPUnit_Framework_TestCase
 
         $this->setExpectedException(\UnexpectedValueException::class);
         $node = new RationalNode(1.2, 2);
+    }
+
+    public function testDivisionNodeFactory()
+    {
+        $factory = new DivisionNodeFactory();
+
+        $this->assertTrue(
+            $factory->makeNode(new IntegerNode(1), new IntegerNode(3))->compareTo(
+                new RationalNode(1,3)
+            )
+        );
+        $this->assertTrue(
+            $factory->makeNode(new RationalNode(2,3), new RationalNode(3,5))->compareTo(
+                new RationalNode(10,9)
+            )
+        );
     }
 
 
