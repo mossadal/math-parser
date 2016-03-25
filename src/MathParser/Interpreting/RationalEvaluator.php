@@ -292,6 +292,7 @@ class RationalEvaluator implements Visitor
         switch($node->getName()) {
             case 'pi':
             case 'e':
+            case 'i':
             throw new \UnexpectedValueException();
             default:
             throw new UnknownConstantException($node->getName());;

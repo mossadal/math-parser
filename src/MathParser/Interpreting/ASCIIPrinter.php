@@ -126,6 +126,7 @@ class ASCIIPrinter implements Visitor
         switch($node->getName()) {
             case 'pi': return 'pi';
             case 'e': return 'e';
+            case 'i': return 'i';
             default: throw new UnknownConstantException($node->getName());
         }
     }
@@ -148,7 +149,7 @@ class ASCIIPrinter implements Visitor
                 return "($text)";
             }
         }
-        
+
         return "$prepend$text";
 
     }
