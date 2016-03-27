@@ -59,7 +59,7 @@ namespace MathParser\Lexing;
 {
     public function __construct()
     {
-        $this->add(new TokenDefinition('/\d+\.\d+/', TokenType::RealNumber));
+        $this->add(new TokenDefinition('/\d+[,\.]\d+/', TokenType::RealNumber));
         $this->add(new TokenDefinition('/\d+/', TokenType::PosInt));
 
         $this->add(new TokenDefinition('/sqrt/', TokenType::FunctionName));

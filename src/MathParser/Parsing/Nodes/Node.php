@@ -52,7 +52,7 @@ abstract class Node implements Visitable
                 $x = intval($token->getValue());
                 return new IntegerNode($x);
             case TokenType::RealNumber:
-                $x = floatval($token->getValue());
+                $x = floatval(str_replace(',', '.', $token->getValue()));
                 return new NumberNode($x);
             case TokenType::Identifier:
                 return new VariableNode($token->getValue());
