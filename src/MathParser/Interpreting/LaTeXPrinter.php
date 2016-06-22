@@ -186,12 +186,18 @@ class LaTeXPrinter implements Visitor
             case 'sin':
             case 'cos':
             case 'tan':
-            case 'log':
             case 'arcsin':
             case 'arccos':
             case 'arctan':
                 break;
 
+            case 'log':
+                $functionName = 'ln';
+                break;
+
+            case 'abs':
+                $operand = $node->getOperand();
+                return '\lvert ' . $operand->accept($this) . '\rvert ';
             default:
                 $functionName = 'operatorname{'.$functionName.'}';
         }
@@ -215,6 +221,7 @@ class LaTeXPrinter implements Visitor
             case 'pi': return '\pi';
             case 'e': return 'e';
             case 'i': return 'i';
+            case 'NAN': return 'NAN';
             default: throw new UnknownConstantException($node->getName());
         }
     }

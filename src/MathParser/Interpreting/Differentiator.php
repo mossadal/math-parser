@@ -325,6 +325,10 @@ class Differentiator implements Visitor
                 $denominator = $this->nodeFactory->subtraction(1, $this->nodeFactory->exponentiation($arg, 2));
                 return $this->nodeFactory->division($inner, $denominator);
 
+            case 'abs':
+                $df = new FunctionNode('sgn', $arg);
+                break;
+
             default:
                 throw new UnknownFunctionException($node->getName());
         }
@@ -343,6 +347,8 @@ class Differentiator implements Visitor
      */
     public function visitConstantNode(ConstantNode $node)
     {
+        if ($node->getName() == 'NAN') return $node;
+        
         return new IntegerNode(0);
     }
 }

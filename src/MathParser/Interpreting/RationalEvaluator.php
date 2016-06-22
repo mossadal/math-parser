@@ -263,6 +263,13 @@ class RationalEvaluator implements Visitor
             case 'arcoth':
             throw new \UnexpectedValueException();
 
+            case 'abs':
+                return new RationalNode(abs($inner->getNumerator()), $inner->getDenominator());
+
+            case 'sgn':
+                if ($inner->getNumerator() >= 0) return new RationalNode(1,0);
+                else return new RationalNode(-1,0);
+
             // Powers
             case 'sqrt':
             return $this->rpow($inner, new RationalNode(1,2));
@@ -293,6 +300,7 @@ class RationalEvaluator implements Visitor
             case 'pi':
             case 'e':
             case 'i':
+            case 'NAN':
             throw new \UnexpectedValueException();
             default:
             throw new UnknownConstantException($node->getName());;

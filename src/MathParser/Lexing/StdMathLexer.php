@@ -41,6 +41,8 @@ namespace MathParser\Lexing;
  * * `/exp/` matching exponential function
  * * `/log10|lg/` matching logarithm (base 10)
  * * `/log|ln/` matching natural logarithm
+ * * `/abs/` matching absolute value
+ * * `/sgn/` matching signum function
  * * `/\(/` matching opening parenthesis (both as delimiter and function evaluation)
  * * `/\)/` matching closing parenthesisis (both as delimiter and function evaluation)
  * * `/\+/` matching + for addition (or unary +)
@@ -88,6 +90,9 @@ namespace MathParser\Lexing;
         $this->add(new TokenDefinition('/log10|lg/', TokenType::FunctionName, 'lg'));
         $this->add(new TokenDefinition('/log|ln/', TokenType::FunctionName, 'log'));
 
+        $this->add(new TokenDefinition('/abs/', TokenType::FunctionName));
+        $this->add(new TokenDefinition('/sgn/', TokenType::FunctionName));
+
         $this->add(new TokenDefinition('/\(/', TokenType::OpenParenthesis));
         $this->add(new TokenDefinition('/\)/', TokenType::CloseParenthesis));
 
@@ -100,6 +105,7 @@ namespace MathParser\Lexing;
         $this->add(new TokenDefinition('/pi/', TokenType::Constant));
         $this->add(new TokenDefinition('/e/', TokenType::Constant));
         $this->add(new TokenDefinition('/i/', TokenType::Constant));
+        $this->add(new TokenDefinition('/NAN/', TokenType::Constant));
 
         $this->add(new TokenDefinition('/[a-zA-Z]/', TokenType::Identifier));
 

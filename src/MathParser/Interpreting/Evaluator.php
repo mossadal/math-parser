@@ -253,6 +253,12 @@ class Evaluator implements Visitor
             case 'arcoth':
             return atanh(1/$inner);
 
+            case 'abs':
+            return abs($inner);
+
+            case 'sgn':
+            return $inner >= 0 ? 1 : 0;
+
             default:
             throw new UnknownFunctionException($node->getName());
 
@@ -279,6 +285,8 @@ class Evaluator implements Visitor
             return M_PI;
             case 'e':
             return exp(1);
+            case 'NAN':
+            return NAN;
             default:
             throw new UnknownConstantException($node->getName());;
         }
