@@ -199,6 +199,19 @@ class Evaluator implements Visitor
             case 'cot':
             return 1/tan($inner);
 
+            // Trigonometric functions, argument in degrees
+            case 'sind':
+            return sin(deg2rad($inner));
+
+            case 'cosd':
+            return cos(deg2rad($inner));
+
+            case 'tand':
+            return tan(deg2rad($inner));
+
+            case 'cotd':
+            return 1/tan(deg2rad($inner));
+
             // Inverse trigonometric functions
             case 'arcsin':
             return asin($inner);

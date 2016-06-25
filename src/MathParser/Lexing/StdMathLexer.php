@@ -26,6 +26,10 @@ namespace MathParser\Lexing;
  * * `/cosh/` matching hyperbolic cosine
  * * `/tanh/` matching hyperbolic tangent
  * * `/coth/` matching hyperbolic cotangent
+ * * `/sind/` matching sine (argument in degrees)
+ * * `/cosd/` matching cosine (argument in degrees)
+ * * `/tand/` matching tangent (argument in degrees)
+ * * `/cotd/` matching cotangent (argument in degrees)
  * * `/sin/` matching sine
  * * `/cos/` matching cosine
  * * `/tan/` matching tangent
@@ -70,6 +74,11 @@ namespace MathParser\Lexing;
         $this->add(new TokenDefinition('/cosh/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/tanh/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/coth/', TokenType::FunctionName));
+
+        $this->add(new TokenDefinition('/sind/', TokenType::FunctionName));
+        $this->add(new TokenDefinition('/cosd/', TokenType::FunctionName));
+        $this->add(new TokenDefinition('/tand/', TokenType::FunctionName));
+        $this->add(new TokenDefinition('/cotd/', TokenType::FunctionName));
 
         $this->add(new TokenDefinition('/sin/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/cos/', TokenType::FunctionName));
