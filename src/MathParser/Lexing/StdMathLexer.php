@@ -115,6 +115,7 @@ namespace MathParser\Lexing;
         $this->add(new TokenDefinition('/e/', TokenType::Constant));
         $this->add(new TokenDefinition('/i/', TokenType::Constant));
         $this->add(new TokenDefinition('/NAN/', TokenType::Constant));
+        $this->add(new TokenDefinition('/INF/', TokenType::Constant));
 
         $this->add(new TokenDefinition('/[a-zA-Z]/', TokenType::Identifier));
 

@@ -301,6 +301,7 @@ class RationalEvaluator implements Visitor
             case 'e':
             case 'i':
             case 'NAN':
+            case 'INF':
             throw new \UnexpectedValueException();
             default:
             throw new UnknownConstantException($node->getName());;

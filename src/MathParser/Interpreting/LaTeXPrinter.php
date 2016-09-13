@@ -218,10 +218,11 @@ class LaTeXPrinter implements Visitor
     public function visitConstantNode(ConstantNode $node)
     {
         switch($node->getName()) {
-            case 'pi': return '\pi';
+            case 'pi': return '\pi{}';
             case 'e': return 'e';
             case 'i': return 'i';
-            case 'NAN': return 'NAN';
+            case 'NAN': return '\operatorname{NAN}';
+            case 'INF': return '\infty{}';
             default: throw new UnknownConstantException($node->getName());
         }
     }

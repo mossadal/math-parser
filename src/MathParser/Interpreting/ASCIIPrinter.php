@@ -128,6 +128,8 @@ class ASCIIPrinter implements Visitor
             case 'e': return 'e';
             case 'i': return 'i';
             case 'NAN': return 'NAN';
+            case 'INF': return 'INF';
+            
             default: throw new UnknownConstantException($node->getName());
         }
     }

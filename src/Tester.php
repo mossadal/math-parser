@@ -16,7 +16,7 @@ use MathParser\Interpreting\RationalEvaluator;
 use MathParser\StdMathParser;
 use MathParser\RationalMathParser;
 
-include 'vendor/autoload.php';
+include '../vendor/autoload.php';
 
 
 class ParserWithoutImplicitMultiplication extends Parser {

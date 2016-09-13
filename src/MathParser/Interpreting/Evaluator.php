@@ -294,12 +294,10 @@ class Evaluator implements Visitor
     public function visitConstantNode(ConstantNode $node)
     {
         switch($node->getName()) {
-            case 'pi':
-            return M_PI;
-            case 'e':
-            return exp(1);
-            case 'NAN':
-            return NAN;
+            case 'pi': return M_PI;
+            case 'e': return exp(1);
+            case 'NAN': return NAN;
+            case 'INF': return INF;
             default:
             throw new UnknownConstantException($node->getName());;
         }
