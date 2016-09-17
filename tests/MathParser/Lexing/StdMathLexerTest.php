@@ -30,10 +30,25 @@ class StdMathLexerTest extends PHPUnit_Framework_TestCase
         $tokens = $this->lexer->tokenize('2.3');
         $this->assertTokenEquals('2.3', TokenType::RealNumber, $tokens[0]);
 
+        $tokens = $this->lexer->tokenize('2.3e+3');
+        $this->assertTokenEquals('2.3e+3', TokenType::RealNumber, $tokens[0]);
+
+        $tokens = $this->lexer->tokenize('2.3e4');
+        $this->assertTokenEquals('2.3e4', TokenType::RealNumber, $tokens[0]);
+
+        $tokens = $this->lexer->tokenize('2.3e-2');
+        $this->assertTokenEquals('2.3e-2', TokenType::RealNumber, $tokens[0]);
+
         $tokens = $this->lexer->tokenize('-2.3');
         $this->assertCount(2, $tokens);
         $this->assertTokenEquals('-', TokenType::SubtractionOperator, $tokens[0]);
         $this->assertTokenEquals('2.3', TokenType::RealNumber, $tokens[1]);
+
+        $tokens = $this->lexer->tokenize('-2.3e1');
+        $this->assertCount(2, $tokens);
+        $this->assertTokenEquals('-', TokenType::SubtractionOperator, $tokens[0]);
+        $this->assertTokenEquals('2.3e1', TokenType::RealNumber, $tokens[1]);
+
     }
 
     public function testCanTokenizeOperator()
@@ -88,7 +103,7 @@ class StdMathLexerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(count($tokens), 4);
         $this->assertTokenEquals('x', TokenType::Identifier, $tokens[0]);
         $this->assertTokenEquals('s', TokenType::Identifier, $tokens[1]);
-        $this->assertTokenEquals('i', TokenType::Identifier, $tokens[2]);
+        $this->assertTokenEquals('i', TokenType::Constant, $tokens[2]);
         $this->assertTokenEquals('x', TokenType::Identifier, $tokens[3]);
 
         $tokens = $this->lexer->tokenize('asin');

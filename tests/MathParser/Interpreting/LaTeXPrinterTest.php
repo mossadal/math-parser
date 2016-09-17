@@ -115,9 +115,9 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('exp(2x)', 'e^{2x}');
         $this->assertResult('exp(x^2)', '\exp(x^2)');
 
-        $this->assertResult('log(x)', '\log x');
-        $this->assertResult('log(2x)', '\log(2x)');
-        $this->assertResult('log(2+x)', '\log(2+x)');
+        $this->assertResult('log(x)', '\ln x');
+        $this->assertResult('log(2x)', '\ln(2x)');
+        $this->assertResult('log(2+x)', '\ln(2+x)');
 
         $this->assertResult('sqrt(x)', '\sqrt{x}');
         $this->assertResult('sqrt(x^2)', '\sqrt{x^2}');
