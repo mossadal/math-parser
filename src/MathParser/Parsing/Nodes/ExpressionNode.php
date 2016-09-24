@@ -67,12 +67,20 @@ class ExpressionNode extends Node
 
         switch($operator) {
             case '+':
+                $this->precedence = 10;
+                $this->associativity = self::LEFT_ASSOC;
+                break;
+
             case '-':
                 $this->precedence = 10;
                 $this->associativity = self::LEFT_ASSOC;
                 break;
 
             case '*':
+                $this->precedence = 20;
+                $this->associativity = self::LEFT_ASSOC;
+                break;
+
             case '/':
                 $this->precedence = 20;
                 $this->associativity = self::LEFT_ASSOC;
@@ -200,6 +208,16 @@ class ExpressionNode extends Node
         if ($this->getPrecedence() > $other->getPrecedence()) return false;
 
         if ($this->associativity == self::LEFT_ASSOC) return true;
+
+        return false;
+
+    }
+
+    public function strictlyLowerPrecedenceThan($other)
+    {
+        if (!($other instanceof ExpressionNode)) return false;
+
+        if ($this->getPrecedence() < $other->getPrecedence()) return true;
 
         return false;
 

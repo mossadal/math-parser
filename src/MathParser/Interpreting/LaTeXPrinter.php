@@ -80,6 +80,8 @@ class LaTeXPrinter implements Visitor
     public function visitExpressionNode(ExpressionNode $node)
     {
         $left = $node->getLeft();
+        //var_dump($left);
+
         $leftValue = $this->parenthesize($left, $node);
         $operator = $node->getOperator();
 
@@ -136,6 +138,9 @@ class LaTeXPrinter implements Visitor
     {
         $p = $node->getNumerator();
         $q = $node->getDenominator();
+
+        if ($q == 1) return "$p";
+
         return "\\frac{{$p}}{{$q}}";
     }
     /**
@@ -245,7 +250,7 @@ class LaTeXPrinter implements Visitor
 
         if ($node instanceof ExpressionNode) {
 
-            if ($node->lowerPrecedenceThan($cutoff)) {
+            if ($node->strictlyLowerPrecedenceThan($cutoff)) {
                 return "($text)";
             }
         }

@@ -88,7 +88,7 @@ class StdMathLexerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(count($tokens), 4);
         $this->assertTokenEquals('x', TokenType::Identifier, $tokens[0]);
         $this->assertTokenEquals('s', TokenType::Identifier, $tokens[1]);
-        $this->assertTokenEquals('i', TokenType::Identifier, $tokens[2]);
+        $this->assertTokenEquals('i', TokenType::Constant, $tokens[2]);
         $this->assertTokenEquals('x', TokenType::Identifier, $tokens[3]);
 
         $tokens = $this->lexer->tokenize('asin');
