@@ -277,7 +277,7 @@ class RationalEvaluator implements Visitor
 
             case '!':
             if ($inner->getDenominator() == 1 && $inner->getNumerator() >= 0)
-                return Math::Factorial($inner->getNumerator());
+                return new RationalNode(Math::Factorial($inner->getNumerator()),1);
 
             throw new \UnexpectedValueException("Expecting positive integer (factorial)");
 
