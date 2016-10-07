@@ -71,6 +71,9 @@ abstract class Node implements Visitable
             case TokenType::ExponentiationOperator:
                 return new ExpressionNode(null, $token->getValue(), null);
 
+            case TokenType::FactorialOperator:
+                return new PostfixOperatorNode($token->getValue(), null);
+
             default:
                 // echo "Node factory returning null on $token\n";
                 return null;
@@ -114,6 +117,9 @@ abstract class Node implements Visitable
             case TokenType::DivisionOperator:
             case TokenType::ExponentiationOperator:
                 return new ExpressionNode(null, $token->getValue(), null);
+
+            case TokenType::FactorialOperator:
+                return new PostfixOperator($token->getValue());
 
             default:
                 // echo "Node factory returning null on $token\n";

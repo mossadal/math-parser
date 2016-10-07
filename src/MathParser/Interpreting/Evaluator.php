@@ -17,6 +17,7 @@ use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\ConstantNode;
 use MathParser\Parsing\Nodes\IntegerNode;
 use MathParser\Parsing\Nodes\RationalNode;
+use MathParser\Extensions\Math;
 
 use MathParser\Exceptions\UnknownVariableException;
 use MathParser\Exceptions\UnknownConstantException;
@@ -271,6 +272,14 @@ class Evaluator implements Visitor
 
             case 'sgn':
             return $inner >= 0 ? 1 : 0;
+
+            case '!':
+            $logGamma = Math::logGamma(1+$inner);
+            return exp($logGamma);
+
+            case '!!':
+            if (round($inner) != $inner)throw new \UnexpectedValueException("Expecting positive integer (semifactorial)");
+            return Math::SemiFactorial($inner);
 
             default:
             throw new UnknownFunctionException($node->getName());

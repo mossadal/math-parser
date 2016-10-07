@@ -112,6 +112,10 @@ namespace MathParser\Lexing;
         $this->add(new TokenDefinition('/\//', TokenType::DivisionOperator));
         $this->add(new TokenDefinition('/\^/', TokenType::ExponentiationOperator));
 
+        // Postfix operators
+        $this->add(new TokenDefinition('/\!\!/', TokenType::SemiFactorialOperator));
+        $this->add(new TokenDefinition('/\!/', TokenType::FactorialOperator));
+
         $this->add(new TokenDefinition('/pi/', TokenType::Constant));
         $this->add(new TokenDefinition('/e/', TokenType::Constant));
         $this->add(new TokenDefinition('/i/', TokenType::Constant));

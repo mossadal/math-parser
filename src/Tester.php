@@ -38,7 +38,7 @@ class ParserWithoutImplicitMultiplication extends Parser {
 
 
 $parser = new RationalMathParser(true);
-$parser->setSimplifying(true);
+$parser->setSimplifying(false);
 
 $parser->parse($argv[1]);
 
@@ -59,17 +59,31 @@ echo "String conversion: $tree\n";
 $ascii = new ASCIIPrinter();
 var_dump($tree->accept($ascii));
 
-echo "Derivative: ";
 
-$differentiator = new Differentiator('x');
-$derivative = $tree->accept($differentiator);
+try {
+    echo "Derivative: ";
+    $differentiator = new Differentiator('x');
+    $derivative = $tree->accept($differentiator);
 
 
-var_dump($derivative->accept($treeprinter));
-var_dump($derivative->accept($printer));
+    var_dump($derivative->accept($treeprinter));
+    var_dump($derivative->accept($printer));
+} catch(\Exception $e) {
+    var_dump($e->getMessage());
+}
 
-$evaluator = new Evaluator(['x' => 1, 'y' => 1.5 ]);
-var_dump($tree->accept($evaluator));
+try {
+    echo "Evaluator: ";
+    $evaluator = new Evaluator(['x' => 1, 'y' => 1.5 ]);
+    var_dump($tree->accept($evaluator));
+} catch(\Exception $e) {
+    var_dump($e->getMessage());
+}
 
-$evaluator = new RationalEvaluator(['x' => '1/3', 'y' => -2]);
-var_dump($tree->accept($evaluator));
+try {
+    echo "RationalEvaluator: ";
+    $evaluator = new RationalEvaluator(['x' => '1/3', 'y' => -2]);
+    var_dump($tree->accept($evaluator));
+} catch(\Exception $e) {
+    var_dump($e->getMessage());
+}

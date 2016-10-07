@@ -17,6 +17,7 @@ use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\ConstantNode;
 use MathParser\Parsing\Nodes\IntegerNode;
 use MathParser\Parsing\Nodes\RationalNode;
+use MathParser\Extensions\Math;
 
 use MathParser\Exceptions\UnknownVariableException;
 use MathParser\Exceptions\UnknownConstantException;
@@ -95,7 +96,7 @@ class RationalEvaluator implements Visitor
         }
 
         if (is_nan($p) || is_nan($q)) {
-            throw new \UnexpectedValueException();
+            throw new \UnexpectedValueException("Expecting rational number");
         }
 
         return new RationalNode($p, $q);
@@ -184,7 +185,7 @@ class RationalEvaluator implements Visitor
     */
     public function visitNumberNode(NumberNode $node)
     {
-        throw new \UnexpectedValueException();
+        throw new \UnexpectedValueException("Expecting rational number");
     }
 
     public function visitIntegerNode(IntegerNode $node)
@@ -261,7 +262,7 @@ class RationalEvaluator implements Visitor
             case 'arcosh':
             case 'artanh':
             case 'arcoth':
-            throw new \UnexpectedValueException();
+            throw new \UnexpectedValueException("Expecting rational expression");
 
             case 'abs':
                 return new RationalNode(abs($inner->getNumerator()), $inner->getDenominator());
@@ -274,6 +275,17 @@ class RationalEvaluator implements Visitor
             case 'sqrt':
             return $this->rpow($inner, new RationalNode(1,2));
 
+            case '!':
+            if ($inner->getDenominator() == 1 && $inner->getNumerator() >= 0)
+                return Math::Factorial($inner->getNumerator());
+
+            throw new \UnexpectedValueException("Expecting positive integer (factorial)");
+
+            case '!!':
+            if ($inner->getDenominator() == 1 && $inner->getNumerator() >= 0)
+                return Math::SemiFactorial($inner->getNumerator());
+
+            throw new \UnexpectedValueException("Expecting positive integer (factorial)");
 
             default:
             throw new UnknownFunctionException($node->getName());
@@ -301,7 +313,7 @@ class RationalEvaluator implements Visitor
             case 'e':
             case 'i':
             case 'NAN':
-            throw new \UnexpectedValueException();
+            throw new \UnexpectedValueException("Expecting rational number");
             default:
             throw new UnknownConstantException($node->getName());;
         }
@@ -410,7 +422,8 @@ class RationalEvaluator implements Visitor
                 return new RationalNode(pow($a->getDenominator(), -$n), pow($a->getNumerator(), -$n));
             }
         }
-        if ($a->getNumerator() < 0) throw new \UnexpectedValueException();
+        if ($a->getNumerator() < 0) throw new \UnexpectedValueException("Expecting rational number");
+
 
         $p = $a->getNumerator();
         $q = $a->getDenominator();
@@ -435,6 +448,6 @@ class RationalEvaluator implements Visitor
             return new RationalNode($ppFactors['square'], $qqFactors['square']);
         }
 
-        throw new \UnexpectedValueException();
+        throw new \UnexpectedValueException("Expecting rational number");
     }
 }

@@ -348,7 +348,7 @@ class Differentiator implements Visitor
     public function visitConstantNode(ConstantNode $node)
     {
         if ($node->getName() == 'NAN') return $node;
-        
+
         return new IntegerNode(0);
     }
 }

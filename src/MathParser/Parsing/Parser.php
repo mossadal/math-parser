@@ -27,6 +27,7 @@ use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\ConstantNode;
 use MathParser\Parsing\Nodes\SubExpressionNode;
+use MathParser\Parsing\Nodes\PostfixOperatorNode;
 use MathParser\Parsing\Nodes\Factories\NodeFactory;
 use MathParser\Parsing\Nodes\IntegerNode;
 use MathParser\Parsing\Nodes\RationalNode;
@@ -147,6 +148,10 @@ class Parser
         {
             $token = $tokens[$index];
 
+            echo "current token $token\n";
+            echo("operands:" . $this->operandStack . "\n");
+            echo("operators: " . $this->operatorStack . "\n\n");
+
             if ($this->rationalFactory) {
                 $node = Node::rationalFactory($token);
             } else {
@@ -169,6 +174,10 @@ class Parser
                 $this->operatorStack->push($node);
 
                 // Handle the remaining operators.
+            } elseif ($node instanceof PostfixOperatorNode) {
+                $op = $this->operandStack->pop();
+                $this->operandStack->push(new FunctionNode($node->getOperator(), $op));
+
             } elseif ($node instanceof ExpressionNode) {
 
                 // Check for unary minus and unary plus.

@@ -62,6 +62,10 @@ final class TokenType
     const DivisionOperator = 103;
     /** Token representing '^' */
     const ExponentiationOperator = 104;
+    /** Token representing postfix factorial operator '!' */
+    const FactorialOperator = 105;
+    /** Token representing postfix subfactorial operator '!!' */
+    const SemiFactorialOperator = 105;
 
     /** Token represented a function name, e.g. 'sin' */
     const FunctionName = 200;

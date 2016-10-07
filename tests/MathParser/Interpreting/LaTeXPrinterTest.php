@@ -53,6 +53,7 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
     public function testCanPrintUnaryMinus()
     {
         $this->assertResult('-x', '-x');
+        $this->assertResult('sin(-x)', '\sin(-x)');
     }
 
     public function testCanAddBraces()

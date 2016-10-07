@@ -40,7 +40,7 @@ class SubExpressionNode extends Node
     {
         return '(';
     }
-    
+
     /**
      * Implementing the Visitable interface.
      */
@@ -62,4 +62,8 @@ class SubExpressionNode extends Node
         return $this->getValue() == $other->getValue();
     }
 
+    public function __toString()
+    {
+        return "[subExpr: (]";
+    }
 }

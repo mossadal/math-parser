@@ -127,7 +127,9 @@ class Token
             $token1->type == TokenType::Constant ||
             $token1->type == TokenType::Identifier ||
             $token1->type == TokenType::FunctionName ||
-            $token1->type == TokenType::CloseParenthesis
+            $token1->type == TokenType::CloseParenthesis ||
+            $token1->type == TokenType::FactorialOperator ||
+            $token1->type == TokenType::SemiFactorialOperator
         );
 
         if (!$check1) return false;
