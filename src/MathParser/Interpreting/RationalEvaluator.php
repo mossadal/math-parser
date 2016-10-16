@@ -283,7 +283,7 @@ class RationalEvaluator implements Visitor
 
             case '!!':
             if ($inner->getDenominator() == 1 && $inner->getNumerator() >= 0)
-                return Math::SemiFactorial($inner->getNumerator());
+                return new RationalNode(Math::SemiFactorial($inner->getNumerator()), 1);
 
             throw new \UnexpectedValueException("Expecting positive integer (factorial)");
 

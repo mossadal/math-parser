@@ -37,13 +37,13 @@ class ParserWithoutImplicitMultiplication extends Parser {
 // die();
 
 
-$parser = new RationalMathParser(true);
+$parser = new StdMathParser();
 $parser->setSimplifying(false);
 
 $parser->parse($argv[1]);
 
 $tokens = $parser->getTokenList();
-// print_r($tokens);
+print_r($tokens);
 
 $tree = $parser->getTree();
 

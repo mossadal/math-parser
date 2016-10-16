@@ -148,9 +148,9 @@ class Parser
         {
             $token = $tokens[$index];
 
-            echo "current token $token\n";
-            echo("operands:" . $this->operandStack . "\n");
-            echo("operators: " . $this->operatorStack . "\n\n");
+            // echo "current token $token\n";
+            // echo("operands:" . $this->operandStack . "\n");
+            // echo("operators: " . $this->operatorStack . "\n\n");
 
             if ($this->rationalFactory) {
                 $node = Node::rationalFactory($token);
