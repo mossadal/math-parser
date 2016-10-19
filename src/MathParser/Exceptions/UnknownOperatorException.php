@@ -21,5 +21,17 @@ class UnknownOperatorException extends MathParserException
     public function __construct($operator)
     {
         parent::__construct("Unknown operator $operator.");
+
+        $this->data = $operator;
+    }
+
+    /**
+     * Get the unkown operator that was encountered.
+     *
+     * @retval string
+     */
+    public function getOperator()
+    {
+        return $this->data;
     }
 }

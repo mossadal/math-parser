@@ -313,6 +313,7 @@ class RationalEvaluator implements Visitor
             case 'e':
             case 'i':
             case 'NAN':
+            case 'INF':
             throw new \UnexpectedValueException("Expecting rational number");
             default:
             throw new UnknownConstantException($node->getName());;

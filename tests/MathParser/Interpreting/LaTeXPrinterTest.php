@@ -54,6 +54,29 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
     {
         $this->assertResult('-x', '-x');
         $this->assertResult('sin(-x)', '\sin(-x)');
+        $this->assertResult('(-1)^k', '(-1)^k');
+        $this->assertResult('-(x-1)', '-(x-1)');
+    }
+
+    public function testCanPrintSums()
+    {
+        $this->assertResult('x+y+z', 'x+y+z');
+        $this->assertResult('x+y-z', 'x+y-z');
+        $this->assertResult('x-y-z', 'x-y-z');
+        $this->assertResult('-x-y-z', '-x-y-z');
+    }
+
+    public function testCanPrintProducts()
+    {
+        $this->assertResult('xyz', 'xyz');
+        $this->assertResult('xy/z', '\frac{xy}{z}');
+        $this->assertResult('x/yz', '\frac{x}{y}z');
+        $this->assertResult('x/y/z', '\frac{\frac{x}{y}}{z}');
+    }
+
+    public function testCanPrintExponentiation()
+    {
+        $this->assertResult('x^y^z', 'x^{y^z}');
     }
 
     public function testCanAddBraces()
@@ -81,7 +104,7 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
         $node = new ConstantNode('pi');
         $output = $this->printer->bracesNeeded($node);
 
-        $this->assertEquals($output, '\pi');
+        $this->assertEquals($output, '\pi{}');
 
         $node = $this->parser->parse('x+1');
         $output = $this->printer->bracesNeeded($node);
@@ -93,6 +116,7 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
     {
         $this->assertResult('1/2', '\frac{1}{2}');
         $this->assertResult('x/y', '\frac{x}{y}');
+        $this->assertResult('4/2', '2');
     }
 
     public function testCanPrintMultiplication()
@@ -117,7 +141,7 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('exp(x^2)', '\exp(x^2)');
 
         $this->assertResult('log(x)', '\ln x');
-        $this->assertResult('log(2x)', '\ln(2x)');
+        $this->assertResult('log(2x)', '\ln 2x');
         $this->assertResult('log(2+x)', '\ln(2+x)');
 
         $this->assertResult('sqrt(x)', '\sqrt{x}');
@@ -129,7 +153,7 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
 
     public function testCanPrintConstant()
     {
-        $this->assertResult('pi', '\pi');
+        $this->assertResult('pi', '\pi{}');
         $this->assertResult('e', 'e');
 
         $node = new ConstantNode('xcv');

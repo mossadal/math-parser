@@ -1,7 +1,7 @@
 <?php
 /*
 * @author      Frank Wikström <frank@mossadal.se>
-* @copyright   2015 Frank Wikström
+* @copyright   2016 Frank Wikström
 * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
 */
 
@@ -9,6 +9,8 @@ namespace MathParser\Interpreting;
 
 use MathParser\Lexer\StdMathLexer;
 use MathParser\Interpreting\Visitors\Visitor;
+use MathParser\Interpreting\ASCIIPrinter;
+
 use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\ExpressionNode;
 use MathParser\Parsing\Nodes\NumberNode;
@@ -17,7 +19,6 @@ use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\ConstantNode;
 use MathParser\Parsing\Nodes\IntegerNode;
 use MathParser\Parsing\Nodes\RationalNode;
-use MathParser\Extensions\Math;
 
 use MathParser\Exceptions\UnknownVariableException;
 use MathParser\Exceptions\UnknownConstantException;
@@ -25,11 +26,14 @@ use MathParser\Exceptions\UnknownFunctionException;
 use MathParser\Exceptions\UnknownOperatorException;
 use MathParser\Exceptions\DivisionByZeroException;
 
+use MathParser\Extensions\Complex;
+
+
 /**
 * Evalutate a parsed mathematical expression.
 *
-* Implementation of a Visitor, transforming an AST into a floating
-* point number, giving the *value* of the expression represented by
+* Implementation of a Visitor, transforming an AST into a rational
+* number, giving the *value* of the expression represented by
 * the AST.
 *
 * The class implements evaluation of all all arithmetic operators
@@ -40,15 +44,16 @@ use MathParser\Exceptions\DivisionByZeroException;
 * ~~~{.php}
 * $parser = new StdMathParser();
 * $f = $parser->parse('exp(2x)+xy');
-* $evaluator = new Evaluator();
-* $evaluator->setVariables([ 'x' => 1, 'y' => '-1' ]);
-* result = $f->accept($evaluator);    // Evaluate $f using x=1, y=-1
+* $evaluator = new RationalEvaluator();
+* $evaluator->setVariables([ 'x' => '1/2', 'y' => -1 ]);
+* result = $f->accept($evaluator);    // Evaluate $f using x=1/2, y=-1.
+* Note that rational variable values should be specified as a string.
 * ~~~
 *
 * TODO: handle user specified functions
 *
 */
-class Evaluator implements Visitor
+class ComplexEvaluator implements Visitor
 {
     /**
     * mixed[] $variables Key/value pair holding current values
@@ -56,14 +61,16 @@ class Evaluator implements Visitor
     **/
     private $variables;
 
+
     /** Constructor. Create an Evaluator with given variable values.
-     *
-     * @param mixed $variables key-value array of variables with corresponding values.
-     *
-     */
+    *
+    * @param mixed $variables key-value array of variables with corresponding values.
+    *
+    */
     public function __construct($variables=null)
     {
-        $this->variables = $variables;
+        $this->setVariables($variables);
+
     }
 
     /**
@@ -74,7 +81,10 @@ class Evaluator implements Visitor
     */
     public function setVariables($variables)
     {
-        $this->variables = $variables;
+        $this->variables = [];
+        foreach ($variables as $var => $value) {
+            $this->variables[$var] = Complex::parse($value);
+        }
     }
 
     /**
@@ -93,30 +103,32 @@ class Evaluator implements Visitor
     {
         $operator = $node->getOperator();
 
-        $leftValue = $node->getLeft()->accept($this);
+        $a = $node->getLeft()->accept($this);
 
         if ($node->getRight()) {
-            $rightValue = $node->getRight()->accept($this);
+            $b = $node->getRight()->accept($this);
         } else {
-            $rightValue = null;
+            $b = null;
         }
 
         // Perform the right operation based on the operator
         switch ($operator) {
             case '+':
-            return $leftValue + $rightValue;
+                return Complex::add($a, $b);
             case '-':
-            return $rightValue === null ? -$leftValue : $leftValue - $rightValue;
+                if ($b === null) {
+                    return Complex::mul($a, -1);
+                }
+                return Complex::sub($a, $b);
             case '*':
-            return $rightValue * $leftValue;
+                return Complex::mul($a, $b);
             case '/':
-            if ($rightValue == 0) throw new DivisionByZeroException();
-            return $leftValue/$rightValue;
+                return Complex::div($a, $b);
             case '^':
-            return pow($leftValue, $rightValue);
-
+            // This needs to be improved.
+                return Complex::pow($a, $b);
             default:
-            throw new UnknownOperatorException($operator);
+                throw new UnknownOperatorException($operator);
         }
     }
 
@@ -130,17 +142,17 @@ class Evaluator implements Visitor
     */
     public function visitNumberNode(NumberNode $node)
     {
-        return $node->getValue();
+        return Complex::create($node->getValue(), 0);
     }
 
     public function visitIntegerNode(IntegerNode $node)
     {
-        return $node->getValue();
+        return Complex::create($node->getValue(), 0);
     }
 
     public function visitRationalNode(RationalNode $node)
     {
-        return $node->getValue();
+        return Complex::create("$node", 0);
     }
     /**
     * Evaluate a VariableNode
@@ -183,109 +195,98 @@ class Evaluator implements Visitor
     */
     public function visitFunctionNode(FunctionNode $node)
     {
-        $inner = $node->getOperand()->accept($this);
+        $z = $node->getOperand()->accept($this);
+        $a = $z->r();
+        $b = $z->i();
 
         switch ($node->getName()) {
 
             // Trigonometric functions
             case 'sin':
-            return sin($inner);
+                return Complex::sin($z);
 
             case 'cos':
-            return cos($inner);
+                return Complex::cos($z);
 
             case 'tan':
-            return tan($inner);
+                return Complex::tan($z);
 
             case 'cot':
-            return 1/tan($inner);
-
-            // Trigonometric functions, argument in degrees
-            case 'sind':
-            return sin(deg2rad($inner));
-
-            case 'cosd':
-            return cos(deg2rad($inner));
-
-            case 'tand':
-            return tan(deg2rad($inner));
-
-            case 'cotd':
-            return 1/tan(deg2rad($inner));
+                return Complex::cot($z);
 
             // Inverse trigonometric functions
             case 'arcsin':
-            return asin($inner);
+                return Complex::arcsin($z);
 
             case 'arccos':
-            return acos($inner);
+                return Complex::arccos($z);
 
             case 'arctan':
-            return atan($inner);
+                return Complex::arctan($z);
 
             case 'arccot':
-            return pi()/2-atan($inner);
+                return Complex::arccot($z);
 
-
-            // Exponentials and logarithms
-            case 'exp':
-            return exp($inner);
-
-            case 'log':
-            return log($inner);
-
-            case 'lg':
-            return log10($inner);
-
-            // Powers
-            case 'sqrt':
-            return sqrt($inner);
-
-            // Hyperbolic functions
             case 'sinh':
-            return sinh($inner);
+                return Complex::sinh($z);
 
             case 'cosh':
-            return cosh($inner);
+                return Complex::cosh($z);
 
             case 'tanh':
-            return tanh($inner);
+                return Complex::tanh($z);
 
             case 'coth':
-            return 1/tanh($inner);
+                return Complex::div(1, Complex::tanh($z));
 
-            // Inverse hyperbolic functions
             case 'arsinh':
-            return asinh($inner);
+                return Complex::arsinh($z);
 
             case 'arcosh':
-            return acosh($inner);
+                return Complex::arcosh($z);
 
             case 'artanh':
-            return atanh($inner);
+                return Complex::artanh($z);
 
             case 'arcoth':
-            return atanh(1/$inner);
+                return Complex::div(1, Complex::artanh($z));
+
+            case 'exp':
+                return Complex::exp($z);
+
+            case 'log':
+                return Complex::log($z);
+
+            case 'lg':
+                return Complex::div(Complex::log($z), M_LN10);
+
+            case 'sqrt':
+                return Complex::sqrt($z);
 
             case 'abs':
-            return abs($inner);
+                return new Complex($z->abs(), 0);
 
-            case 'sgn':
-            return $inner >= 0 ? 1 : 0;
+            case 'arg':
+                return new Complex($z->arg(), 0);
 
-            case '!':
-            $logGamma = Math::logGamma(1+$inner);
-            return exp($logGamma);
+            case 're':
+                return new Complex($z->r(), 0);
 
-            case '!!':
-            if (round($inner) != $inner)throw new \UnexpectedValueException("Expecting positive integer (semifactorial)");
-            return Math::SemiFactorial($inner);
+            case 'im':
+                return new Complex($z->i(), 0);
+
+            case 'conj':
+                return new Complex($z->r(), -$z->i());
 
             default:
-            throw new UnknownFunctionException($node->getName());
+                throw new UnknownFunctionException($node->getName());
 
         }
+
+        return new FunctionNode($node->getName(), $inner);
     }
+
+
 
     /**
     * Evaluate a ConstantNode
@@ -303,13 +304,16 @@ class Evaluator implements Visitor
     public function visitConstantNode(ConstantNode $node)
     {
         switch($node->getName()) {
-            case 'pi': return M_PI;
-            case 'e': return exp(1);
-            case 'NAN': return NAN;
-            case 'INF': return INF;
+            case 'pi':
+                return new Complex(M_PI, 0);
+            case 'e':
+                return new Complex(M_E, 0);
+            case 'i':
+                return new Complex(0,1);
             default:
-            throw new UnknownConstantException($node->getName());;
+                throw new UnknownConstantException($node->getName());;
         }
 
     }
+
 }

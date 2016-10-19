@@ -119,7 +119,7 @@ abstract class Node implements Visitable
                 return new ExpressionNode(null, $token->getValue(), null);
 
             case TokenType::FactorialOperator:
-                return new PostfixOperator($token->getValue());
+                return new PostfixOperatorNode($token->getValue());
 
             default:
                 // echo "Node factory returning null on $token\n";

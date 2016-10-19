@@ -1,19 +1,19 @@
 <?php
 /*
- * Short description
- *
- * Long description
- *
  * @package     Lexical analysis
  * @author      Frank Wikström <frank@mossadal.se>
- * @copyright   2015 Frank Wikström
+ * @copyright   2016 Frank Wikström
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  *
  */
 
 namespace MathParser\Lexing;
 
-/** Lexer capable of recognizing all standard mathematical expressions.
+use MathParser\Lexing\Lexer;
+use MathParser\Lexing\TokenDefinition;
+use MathParser\Lexing\TokenType;
+
+/** Lexer capable of recognizing all standard complex mathematical expressions.
  *
  * Subclass of the generic Lexer, with TokenDefinition patterns for
  * numbers, elementary functions, arithmetic operations and variables.
@@ -26,10 +26,6 @@ namespace MathParser\Lexing;
  * * `/cosh/` matching hyperbolic cosine
  * * `/tanh/` matching hyperbolic tangent
  * * `/coth/` matching hyperbolic cotangent
- * * `/sind/` matching sine (argument in degrees)
- * * `/cosd/` matching cosine (argument in degrees)
- * * `/tand/` matching tangent (argument in degrees)
- * * `/cotd/` matching cotangent (argument in degrees)
  * * `/sin/` matching sine
  * * `/cos/` matching cosine
  * * `/tan/` matching tangent
@@ -45,8 +41,11 @@ namespace MathParser\Lexing;
  * * `/exp/` matching exponential function
  * * `/log10|lg/` matching logarithm (base 10)
  * * `/log|ln/` matching natural logarithm
- * * `/abs/` matching absolute value
- * * `/sgn/` matching signum function
+ * * '/abs/' matching modulus (absolute value)
+ * * '/arg/' matching (principal) argument
+ * * '/conj/' matching conjugate
+ * * '/re/' matching real part
+ * * '/im/' matching imaginary part
  * * `/\(/` matching opening parenthesis (both as delimiter and function evaluation)
  * * `/\)/` matching closing parenthesisis (both as delimiter and function evaluation)
  * * `/\+/` matching + for addition (or unary +)
@@ -56,17 +55,17 @@ namespace MathParser\Lexing;
  * * `/\^/` matching ^ for exponentiation
  * * `/pi/` matching constant pi
  * * `/e/` matching constant e
+ * * `/i/` matching imaginary unit i
  * * `/[a-zA-Z]/` matching variables (note that we only allow single letter identifiers,
     this improves parsing of implicit multiplication)
  * * `/\n/` matching newline
  * * `/\s+/` matching whitespace
  */
- class StdMathLexer extends Lexer
+ class ComplexLexer extends Lexer
 {
     public function __construct()
     {
-        $this->add(new TokenDefinition('/\d+[,\.]\d+(e[+-]?\d+)?/', TokenType::RealNumber));
-
+        $this->add(new TokenDefinition('/\d+[,\.]\d+/', TokenType::RealNumber));
         $this->add(new TokenDefinition('/\d+/', TokenType::PosInt));
 
         $this->add(new TokenDefinition('/sqrt/', TokenType::FunctionName));
@@ -75,11 +74,6 @@ namespace MathParser\Lexing;
         $this->add(new TokenDefinition('/cosh/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/tanh/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/coth/', TokenType::FunctionName));
-
-        $this->add(new TokenDefinition('/sind/', TokenType::FunctionName));
-        $this->add(new TokenDefinition('/cosd/', TokenType::FunctionName));
-        $this->add(new TokenDefinition('/tand/', TokenType::FunctionName));
-        $this->add(new TokenDefinition('/cotd/', TokenType::FunctionName));
 
         $this->add(new TokenDefinition('/sin/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/cos/', TokenType::FunctionName));
@@ -101,7 +95,10 @@ namespace MathParser\Lexing;
         $this->add(new TokenDefinition('/log|ln/', TokenType::FunctionName, 'log'));
 
         $this->add(new TokenDefinition('/abs/', TokenType::FunctionName));
-        $this->add(new TokenDefinition('/sgn/', TokenType::FunctionName));
+        $this->add(new TokenDefinition('/arg/', TokenType::FunctionName));
+        $this->add(new TokenDefinition('/conj/', TokenType::FunctionName));
+        $this->add(new TokenDefinition('/re/', TokenType::FunctionName));
+        $this->add(new TokenDefinition('/im/', TokenType::FunctionName));
 
         $this->add(new TokenDefinition('/\(/', TokenType::OpenParenthesis));
         $this->add(new TokenDefinition('/\)/', TokenType::CloseParenthesis));
@@ -112,15 +109,9 @@ namespace MathParser\Lexing;
         $this->add(new TokenDefinition('/\//', TokenType::DivisionOperator));
         $this->add(new TokenDefinition('/\^/', TokenType::ExponentiationOperator));
 
-        // Postfix operators
-        $this->add(new TokenDefinition('/\!\!/', TokenType::SemiFactorialOperator));
-        $this->add(new TokenDefinition('/\!/', TokenType::FactorialOperator));
-
         $this->add(new TokenDefinition('/pi/', TokenType::Constant));
         $this->add(new TokenDefinition('/e/', TokenType::Constant));
         $this->add(new TokenDefinition('/i/', TokenType::Constant));
-        $this->add(new TokenDefinition('/NAN/', TokenType::Constant));
-        $this->add(new TokenDefinition('/INF/', TokenType::Constant));
 
         $this->add(new TokenDefinition('/[a-zA-Z]/', TokenType::Identifier));
 

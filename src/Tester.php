@@ -16,7 +16,7 @@ use MathParser\Interpreting\RationalEvaluator;
 use MathParser\StdMathParser;
 use MathParser\RationalMathParser;
 
-include 'vendor/autoload.php';
+include '../vendor/autoload.php';
 
 
 class ParserWithoutImplicitMultiplication extends Parser {
@@ -38,7 +38,7 @@ class ParserWithoutImplicitMultiplication extends Parser {
 
 
 $parser = new StdMathParser();
-$parser->setSimplifying(false);
+//$parser->setSimplifying(false);
 
 $parser->parse($argv[1]);
 

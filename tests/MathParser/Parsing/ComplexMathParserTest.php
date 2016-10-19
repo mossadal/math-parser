@@ -3,10 +3,10 @@
 use MathParser\Lexing\Token;
 use MathParser\Lexing\TokenType;
 use MathParser\Lexing\TokenPrecedence;
-use MathParser\StdMathParser;
-use MathParser\Lexing\StdMathLexer;
+use MathParser\Lexing\ComplexMathLexer;
 
 use MathParser\Parsing\Parser;
+use MathParser\ComplexMathParser;
 use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\ConstantNode;
 use MathParser\Parsing\Nodes\ExpressionNode;
@@ -16,25 +16,21 @@ use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\Interpreting\TreePrinter;
 
 use MathParser\Parsing\Nodes\NumberNode;
+use MathParser\Parsing\Nodes\IntegerNode;
 
 use MathParser\Exceptions\SyntaxErrorException;
 use MathParser\Exceptions\UnexpectedOperatorException;
 use MathParser\Exceptions\ParenthesisMismatchException;
 use MathParser\Exceptions\UnknownNodeException;
 
-class ParserWithoutImplicitMultiplication extends Parser {
-    protected static function allowImplicitMultiplication() {
-        return false;
-    }
-}
 
-class StdMathParserTest extends PHPUnit_Framework_TestCase
+class ComplexMathParserTest extends PHPUnit_Framework_TestCase
 {
     private $parser;
 
     public function setUp()
     {
-        $this->parser = new StdMathParser();
+        $this->parser = new ComplexMathParser();
     }
 
     private function assertNodesEqual($node1, $node2)
@@ -103,7 +99,7 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
     public function testCanParseSingleNumberExpression()
     {
         $node = $this->parser->parse("3");
-        $shouldBe = new NumberNode(3);
+        $shouldBe = new IntegerNode(3);
         $this->assertNodesEqual($node, $shouldBe);
 
         $node = $this->parser->parse("3.5");
@@ -128,19 +124,8 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
 
     public function testCanParseSingleConstant()
     {
-        $node = $this->parser->parse('pi');
-        $shouldBe = new ConstantNode('pi');
-
-        $this->assertNodesEqual($node, $shouldBe);
-
-        $node = $this->parser->parse('(pi)');
-        $this->assertNodesEqual($node, $shouldBe);
-
-        $node = $this->parser->parse('((pi))');
-        $this->assertNodesEqual($node, $shouldBe);
-
-        $node = $this->parser->parse('e');
-        $shouldBe = new ConstantNode('e');
+        $node = $this->parser->parse('i');
+        $shouldBe = new ConstantNode('i');
 
         $this->assertNodesEqual($node, $shouldBe);
     }
@@ -357,38 +342,6 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
     }
 
 
-    public function testCanEvaluateNode()
-    {
-        $f = $this->parser->parse('x+y');
-        $this->assertEquals($f->evaluate([ 'x' => 1, 'y' => 2 ]), 3);
-    }
-
-    public function testParserWithoutImplicitMultiplication()
-    {
-        $lexer = new StdMathLexer();
-        $tokens = $lexer->tokenize('2x');
-        $parser = new ParserWithoutImplicitMultiplication();
-        $this->setExpectedException(SyntaxErrorException::class);
-        $node = $parser->parse($tokens);
-    }
-
-    public function testNonSimplifyingParser()
-    {
-        $this->parser->setSimplifying(false);
-
-        $node = $this->parser->parse("3+5");
-        $shouldBe = new ExpressionNode(new NumberNode(3), '+', new NumberNode(5));
-        $this->assertNodesEqual($node, $shouldBe);
-
-        $node = $this->parser->parse("3-5");
-        $shouldBe = new ExpressionNode(new NumberNode(3), '-', new NumberNode(5));
-        $this->assertNodesEqual($node, $shouldBe);
-
-        $node = $this->parser->parse("-3");
-        $shouldBe = new ExpressionNode(new VariableNode('3'), '-', null);
-        $this->assertNodesEqual($node, $shouldBe);
-
-    }
 
 
 }

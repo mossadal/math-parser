@@ -19,5 +19,17 @@ class UnknownVariableException extends MathParserException
     public function __construct($variable)
     {
         parent::__construct("Unknown variable $variable.");
+
+        $this->data = $variable;
+    }
+
+    /**
+     * Get the unkown variable.
+     *
+     * @retval string
+     */
+    public function getVariable()
+    {
+        return $this->data;
     }
 }

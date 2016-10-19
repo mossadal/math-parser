@@ -80,6 +80,8 @@ class LaTeXPrinter implements Visitor
     public function visitExpressionNode(ExpressionNode $node)
     {
         $left = $node->getLeft();
+        //var_dump($left);
+
         $leftValue = $this->parenthesize($left, $node);
         $operator = $node->getOperator();
 
@@ -90,6 +92,11 @@ class LaTeXPrinter implements Visitor
             if ($left instanceof FunctionNode || $right instanceof NumberNode || $right instanceof IntegerNode || $right instanceof RationalNode || ($right instanceof ExpressionNode && $right->getLeft() instanceof NumberNode)) {
                 $operator = '\cdot ';
             }
+        }
+
+        // Unary minus
+        if ($operator == '-' && $right === null)  {
+            if ($left instanceof ExpressionNode) return "-($leftValue)";
         }
 
         if ($right) {
@@ -136,6 +143,9 @@ class LaTeXPrinter implements Visitor
     {
         $p = $node->getNumerator();
         $q = $node->getDenominator();
+
+        if ($q == 1) return "$p";
+
         return "\\frac{{$p}}{{$q}}";
     }
     /**
@@ -218,10 +228,11 @@ class LaTeXPrinter implements Visitor
     public function visitConstantNode(ConstantNode $node)
     {
         switch($node->getName()) {
-            case 'pi': return '\pi';
+            case 'pi': return '\pi{}';
             case 'e': return 'e';
             case 'i': return 'i';
-            case 'NAN': return 'NAN';
+            case 'NAN': return '\operatorname{NAN}';
+            case 'INF': return '\infty{}';
             default: throw new UnknownConstantException($node->getName());
         }
     }
@@ -244,9 +255,14 @@ class LaTeXPrinter implements Visitor
 
         if ($node instanceof ExpressionNode) {
 
-            if ($node->lowerPrecedenceThan($cutoff)) {
+            if ($node->strictlyLowerPrecedenceThan($cutoff)) {
                 return "($text)";
             }
+        }
+
+        if ($node instanceof NumberNode && $node->getValue() < 0)
+        {
+            return "($text)";
         }
 
         return "$prepend$text";

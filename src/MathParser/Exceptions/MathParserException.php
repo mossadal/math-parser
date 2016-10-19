@@ -19,4 +19,17 @@ namespace MathParser\Exceptions;
  */
 abstract class MathParserException extends \Exception
 {
+    /** @var string Additional information about the exception. */
+    protected $data;
+
+    /**
+     * Get additional information about the exception.
+     *
+     * @retval string
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
 }

@@ -21,5 +21,17 @@ class UnknownFunctionException extends MathParserException
     public function __construct($operator)
     {
         parent::__construct("Unknown function $operator.");
+
+        $this->data = $operator;
+    }
+
+    /**
+     * Get the unkown function that was encountered.
+     *
+     * @retval string
+     */
+    public function getFunction()
+    {
+    	return $this->data;
     }
 }

@@ -128,6 +128,8 @@ class ASCIIPrinter implements Visitor
             case 'e': return 'e';
             case 'i': return 'i';
             case 'NAN': return 'NAN';
+            case 'INF': return 'INF';
+
             default: throw new UnknownConstantException($node->getName());
         }
     }
@@ -142,6 +144,11 @@ class ASCIIPrinter implements Visitor
             }
         }
 
+        if ($node instanceof NumberNode && $node->getValue() < 0)
+        {
+            return "($text)";
+        }
+        
         // Treat rational numbers as divisions on printing
         if ($node instanceof RationalNode && $node->getDenominator() != 1) {
             $fakeNode = new ExpressionNode($node->getNumerator(), '/', $node->getDenominator());
