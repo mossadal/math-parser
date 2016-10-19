@@ -10,126 +10,14 @@ namespace MathParser\Extensions;
 class Math {
 
     /**
-    * Private cache for prime sieve
-    *
-    * @var array int $sieve
-    **/
-    private static $sieve = array();
-
-    /**
-    * Integer factorization
-    *
-    * Computes an integer factorization of $n using
-    * trial division and a cached sieve of computed primes
-    *
-    * @param type var Description
-    **/
-    public static function ifactor($n) {
-
-        // max_n = 2^31-1 = 2147483647
-        $d = 2;
-        $factors = array();
-        $dmax = floor(sqrt($n));
-
-        self::$sieve = array_pad(self::$sieve, $dmax, 1);
-
-        do {
-            $r = false;
-            while ($n % $d == 0) {
-
-                if (array_key_exists($d, $factors)) $factors[$d]++;
-                else $factors[$d] = 1;
-
-                $n/=$d;
-                $r = true;
-            }
-            if ($r) {
-                $dmax = floor(sqrt($n));
-            }
-            if ($n > 1) {
-                for ($i = $d; $i <= $dmax; $i += $d){
-                    self::$sieve[$i]=0;
-                }
-                do {
-                    $d++;
-                } while ($d < $dmax && self::$sieve[$d] != 1);
-
-                if ($d > $dmax) {
-                    if (array_key_exists($n, $factors)) $factors[$n]++;
-                    else $factors[$n] = 1;
-                }
-            }
-        } while ($n > 1 && $d <= $dmax);
-
-        return $factors;
-
-    }
-
-
-    /**
-    * Compute a square free integer factorization: n = pq^2,
-    * where p is square free.
-    *
-    * The function returns an array:
-    * [
-    *    'square' => q,
-    *    'nonSquare' => p
-    * ]
-    *
-    * @param int $n input
-    **/
-    public static function squareFreeFactorization($n)
-    {
-        $factors = self::ifactor($n);
-
-        $square = 1;
-        $nonSquare = 1;
-
-        foreach ($factors as $prime => $exponent) {
-
-            if ($exponent % 2 == 1) {
-                $reducedExponent = ($exponent-1)/2;
-                $nonSquare *= $prime;
-            } else {
-                $reducedExponent = $exponent/2;
-            }
-            $square *= pow($prime, $reducedExponent);
-        }
-
-        return [ 'square' => $square, 'nonSquare' => $nonSquare ];
-    }
-
-    public static function root($n)
-    {
-        $factors = self::ifactor($n);
-        $factorCopy = $factors;
-
-        if (count($factors) == 1)  {
-            reset($factors);
-            $prime = key($factors);
-            return [ $prime, $factors[$prime] ];
-        }
-
-        $exponent1 = array_shift($factors);
-        $exponent2 = array_shift($factors);
-        $exponent = self::gcd($exponent1, $exponent2);
-
-        foreach ($factors as $prime => $n) {
-            $exponent = self::gcd($exponent, $n);
-        }
-
-        if ($exponent == 1) return [ $n, 1 ];
-
-        $x = 1;
-        foreach ($factorCopy as $prime => $n)
-        {
-            $x = $x * pow($prime, $n/$exponent);
-        }
-
-        return [$x, $exponent];
-    }
-
-
+     * Compute greates common denominator, using the Euclidean algorithm
+     *
+     * Compute and return gcd($a, $b)
+     *
+     * @param int $a
+     * @param int $b
+     * @retval int
+     */
     public static function gcd($a, $b)
     {
         $sign = 1;
@@ -146,7 +34,16 @@ class Math {
     }
 
 
-
+    /**
+     * Compute log(Gamma($a)) where $a is a positive real number
+     *
+     * For large values of $a ($a > 171), use Stirling asympotic expansion,
+     * otherwise use the Lanczos approximation
+     *
+     * @param float $a
+     * @throws InvalidArgumentException if $a < 0
+     * @retval float
+     */
 	public static function logGamma($a) {
 		if($a < 0)
 			throw new \InvalidArgumentException("Log gamma calls should be >0.");
@@ -157,6 +54,12 @@ class Math {
 			return log(self::lanczosApproximation($a));
 	}
 
+    /**
+     * Compute log(Gamma($x)) using Stirling asympotic expansion
+     *
+     * @param float $x
+     * @retval float
+     */
 	private static function logStirlingApproximation($x) {
 		$t = 0.5*log(2*pi()) - 0.5*log($x) + $x*(log($x))-$x;
 
@@ -171,6 +74,12 @@ class Math {
 		return $res;
 	}
 
+    /**
+     * Compute factorial n! for an integer $n using iteration
+     *
+     * @param int $num
+     * @retval int
+     */
 	public static function Factorial($num) {
 		if ($num < 0) throw new \InvalidArgumentException("Fatorial calls should be >0.");
 
@@ -180,6 +89,12 @@ class Math {
 		return $rval;
 	}
 
+    /**
+     * Compute semi-factorial n!! for an integer $n using iteration
+     *
+     * @param int $num
+     * @retval int
+     */
 	public static function SemiFactorial($num) {
 		if ($num < 0) throw new \InvalidArgumentException("Semifactorial calls should be >0.");
 
@@ -191,6 +106,12 @@ class Math {
 		return $rval;
 	}
 
+    /**
+     * Compute log(Gamma($x)) using Lanczos approximation
+     *
+     * @param float $x
+     * @retval float
+     */
 	private static function lanczosApproximation($x) {
 		$g = 7;
 		$p = array(0.99999999999980993, 676.5203681218851, -1259.1392167224028,
