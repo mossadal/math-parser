@@ -50,7 +50,7 @@ class ASCIIPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('1.5', '1.5');
         $this->assertResult('2/3', '2/3');
         $this->assertResult('4/6', '2/3');
-        $this->assertResult('-1/2', '(-1/2)');
+        $this->assertResult('-1/2', '-1/2');
         $this->assertResult('4/2', '2');
         $this->assertResult('1/2+1/2', '1');
         $this->assertResult('1/(-2)+1/2', '0');
@@ -61,12 +61,17 @@ class ASCIIPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('-x', '-x');
         $this->assertResult('1+(-x)', '1+(-x)');
         $this->assertResult('1+(-2)', '-1');
+        $this->assertResult('(-1)^k', '(-1)^k');
+        $this->assertResult('(-1/2)^k', '(-1/2)^k');
+        $this->assertResult('-(x-1)', '-(x-1)');
     }
 
     public function testCanPrintAddition()
     {
         $this->assertResult('x+1', 'x+1');
         $this->assertResult('x+y', 'x+y');
+        $this->assertResult('x+y+z', 'x+y+z');
+        $this->assertResult('1+2x+3x^2', '1+2*x+3*x^2');
     }
 
     public function testCanPrintDivision()
@@ -88,6 +93,7 @@ class ASCIIPrinterTest extends PHPUnit_Framework_TestCase
     {
         $this->assertResult('x^2', 'x^2');
         $this->assertResult('x^(2/3)', 'x^(2/3)');
+        $this->assertResult('(1/2)^k', '(1/2)^k');
         $this->assertResult('x^(y+z)', 'x^(y+z)');
     }
 

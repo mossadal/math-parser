@@ -37,7 +37,7 @@ class ParserWithoutImplicitMultiplication extends Parser {
 // die();
 
 
-$parser = new StdMathParser();
+$parser = new RationalMathParser();
 //$parser->setSimplifying(false);
 
 $parser->parse($argv[1]);
@@ -47,17 +47,17 @@ print_r($tokens);
 
 $tree = $parser->getTree();
 
-echo "Input: ";
+echo "LaTeXPrinter giving ";
 $printer = new LaTeXPrinter();
-var_dump($tree->accept($printer));
+echo $tree->accept($printer) . "\n";
 
 $treeprinter = new TreePrinter();
-var_dump($tree->accept($treeprinter));
+echo "TreePrinter: " . $tree->accept($treeprinter) . "\n";
 
 echo "String conversion: $tree\n";
 
 $ascii = new ASCIIPrinter();
-var_dump($tree->accept($ascii));
+echo $tree->accept($ascii) . "\n";
 
 
 try {

@@ -48,6 +48,7 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('4', '4');
         $this->assertResult('-2', '-2');
         $this->assertResult('1.5', '1.5');
+        $this->assertResult('3/4', '\frac{3}{4}');
     }
 
     public function testCanPrintUnaryMinus()
@@ -56,6 +57,7 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('sin(-x)', '\sin(-x)');
         $this->assertResult('(-1)^k', '(-1)^k');
         $this->assertResult('-(x-1)', '-(x-1)');
+        $this->assertResult('-(2/3)', '\frac{-2}{3}');
     }
 
     public function testCanPrintSums()
@@ -63,7 +65,11 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('x+y+z', 'x+y+z');
         $this->assertResult('x+y-z', 'x+y-z');
         $this->assertResult('x-y-z', 'x-y-z');
-        $this->assertResult('-x-y-z', '-x-y-z');
+        $this->assertResult('-x-y-z', '(-x)-y-z');
+        $this->assertResult('x+(-y)', 'x+(-y)');
+        $this->assertResult('x+y+z', 'x+y+z');
+        $this->assertResult('1+2x+3x^2', '1+2x+3x^2');
+
     }
 
     public function testCanPrintProducts()

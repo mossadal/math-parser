@@ -64,7 +64,7 @@ class LaTeXPrinter implements Visitor
      *
      * ### Typesetting rules:
      *
-     * - Adds parantheses around each operand, if needed. (I.e. if their precedence
+     * - Adds parentheses around each operand, if needed. (I.e. if their precedence
      *   lower than that of the current Node.) For example, the AST `(^ (+ 1 2) 3)`
      *   generates `(1+2)^3` but `(+ (^ 1 2) 3)` generates `1^2+3` as expected.
      * - Multiplications are typeset implicitly `(* x y)` returns `xy` or using
@@ -260,7 +260,7 @@ class LaTeXPrinter implements Visitor
             }
         }
 
-        if ($node instanceof NumberNode && $node->getValue() < 0)
+        if (($node instanceof NumberNode || $node instanceof IntegerNode || $node instanceof RationalNode) && $node->getValue() < 0)
         {
             return "($text)";
         }

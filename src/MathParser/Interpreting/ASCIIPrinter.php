@@ -74,6 +74,11 @@ class ASCIIPrinter implements Visitor
 
         $right = $node->getRight();
 
+        // Unary minus
+        if ($operator == '-' && $right === null)  {
+            if ($left instanceof ExpressionNode) return "-($leftValue)";
+        }
+
         if ($right) {
             $rightValue = $this->parenthesize($right, $node);
 
@@ -102,7 +107,7 @@ class ASCIIPrinter implements Visitor
         $p = $node->getNumerator();
         $q = $node->getDenominator();
         if ($q == 1) return "$p";
-        if ($p < 1) return "($p/$q)";
+        //if ($p < 1) return "($p/$q)";
         return "$p/$q";
     }
 
@@ -139,16 +144,16 @@ class ASCIIPrinter implements Visitor
         $text = $node->accept($this);
 
         if ($node instanceof ExpressionNode) {
-            if ($node->lowerPrecedenceThan($cutoff)) {
+            if ($node->strictlyLowerPrecedenceThan($cutoff)) {
                 return "($text)";
             }
         }
 
-        if ($node instanceof NumberNode && $node->getValue() < 0)
+        if (($node instanceof NumberNode || $node instanceof IntegerNode || $node instanceof RationalNode) && $node->getValue() < 0)
         {
             return "($text)";
         }
-        
+
         // Treat rational numbers as divisions on printing
         if ($node instanceof RationalNode && $node->getDenominator() != 1) {
             $fakeNode = new ExpressionNode($node->getNumerator(), '/', $node->getDenominator());
