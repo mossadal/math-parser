@@ -167,14 +167,4 @@ class ASCIIPrinter implements Visitor
 
     }
 
-    public function bracesNeeded(Node $node)
-    {
-        if ($node instanceof VariableNode || $node instanceof ConstantNode) {
-            return $node->accept($this);
-        } elseif ($node instanceof IntegerNode && $node->getValue() >= 0 && $node->getValue() <= 9) {
-            return $node->accept($this);
-        } else {
-            return '('.$node->accept($this).')';
-        }
-    }
 }
