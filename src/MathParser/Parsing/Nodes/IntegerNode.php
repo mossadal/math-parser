@@ -69,11 +69,5 @@ class IntegerNode extends Node
 
         return $this->getValue() == $other->getValue();
     }
-
-    public function __toString()
-    {
-        return "$this->value";
-    }
-
-
+    
 }

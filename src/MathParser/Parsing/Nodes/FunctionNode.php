@@ -85,9 +85,4 @@ class FunctionNode extends Node
         return $this->getName() == $other->getName() && $thisOperand->compareTo($otherOperand);
     }
 
-    public function __toString()
-    {
-        return "$this->name($this->operand)";
-    }
-
 }

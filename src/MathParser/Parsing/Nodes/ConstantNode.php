@@ -70,9 +70,4 @@ class ConstantNode extends Node
         return $this->getName() == $other->getName();
     }
 
-    public function __toString()
-    {
-        return "$this->value";
-    }
-
 }

@@ -248,9 +248,5 @@ class ExpressionNode extends Node
         return $this->getOperator() == $other->getOperator() && $thisLeft->compareTo($otherLeft) && $thisRight->compareTo($otherRight);
     }
 
-    public function __toString()
-    {
-        return "(".$this->left.")$this->operator(".$this->right.")";
-    }
 
 }

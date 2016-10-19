@@ -19,9 +19,11 @@ use MathParser\Lexing\Token;
 use MathParser\Lexing\TokenType;
 use MathParser\Lexing\TokenPrecedence;
 use MathParser\Interpreting\Evaluator;
+use MathParser\Interpreting\AscIIPrinter;
 
 use MathParser\Exceptions\UnknownNodeException;
 use MathParser\Exceptions\UnknownOperatorException;
+
 
 /**
  * Abstract base class for nodes in the abstract syntax tree
@@ -225,6 +227,12 @@ abstract class Node implements Visitable
     public function getOperator()
     {
         return '';
+    }
+
+    public function __toString()
+    {
+        $printer = new AscIIPrinter();
+        return $this->accept($printer);
     }
 
 }
