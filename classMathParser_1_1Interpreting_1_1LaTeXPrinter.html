@@ -128,6 +128,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5bbb40a11601dc347c9d4ec629723396"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Interpreting_1_1LaTeXPrinter.html#a5bbb40a11601dc347c9d4ec629723396">visitNumberNode</a> (<a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1NumberNode.html">NumberNode</a> $node)</td></tr>
 <tr class="memdesc:a5bbb40a11601dc347c9d4ec629723396"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate LaTeX code for a NumberNode.  <a href="#a5bbb40a11601dc347c9d4ec629723396">More...</a><br/></td></tr>
 <tr class="separator:a5bbb40a11601dc347c9d4ec629723396"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a713e0759b8204dfb43e50f46d86f1fc8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Interpreting_1_1LaTeXPrinter.html#a713e0759b8204dfb43e50f46d86f1fc8">visitIntegerNode</a> (<a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1IntegerNode.html">IntegerNode</a> $node)</td></tr>
+<tr class="memdesc:a713e0759b8204dfb43e50f46d86f1fc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface function for visiting IntegerNodes.  <a href="#a713e0759b8204dfb43e50f46d86f1fc8">More...</a><br/></td></tr>
+<tr class="separator:a713e0759b8204dfb43e50f46d86f1fc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6fd7426082cd0a235a974bd080b9518"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Interpreting_1_1LaTeXPrinter.html#ab6fd7426082cd0a235a974bd080b9518">visitRationalNode</a> (<a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1RationalNode.html">RationalNode</a> $node)</td></tr>
+<tr class="memdesc:ab6fd7426082cd0a235a974bd080b9518"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface function for visiting RationalNodes.  <a href="#ab6fd7426082cd0a235a974bd080b9518">More...</a><br/></td></tr>
+<tr class="separator:ab6fd7426082cd0a235a974bd080b9518"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aced38823c7de0b9ad84884028370a8d2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Interpreting_1_1LaTeXPrinter.html#aced38823c7de0b9ad84884028370a8d2">visitVariableNode</a> (<a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode.html">VariableNode</a> $node)</td></tr>
 <tr class="memdesc:aced38823c7de0b9ad84884028370a8d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate LaTeX code for a VariableNode.  <a href="#aced38823c7de0b9ad84884028370a8d2">More...</a><br/></td></tr>
 <tr class="separator:aced38823c7de0b9ad84884028370a8d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -317,7 +323,7 @@ Private Attributes</h2></td></tr>
 <p>Create a string giving LaTeX code for an ExpressionNode <code>(x op y)</code> where <code>op</code> is one of <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> or <code>^</code></p>
 <h3>Typesetting rules:</h3>
 <ul>
-<li>Adds parantheses around each operand, if needed. (I.e. if their precedence lower than that of the current Node.) For example, the AST <code>(^ (+ 1 2) 3)</code> generates <code>(1+2)^3</code> but <code>(+ (^ 1 2) 3)</code> generates <code>1^2+3</code> as expected.</li>
+<li>Adds parentheses around each operand, if needed. (I.e. if their precedence lower than that of the current Node.) For example, the AST <code>(^ (+ 1 2) 3)</code> generates <code>(1+2)^3</code> but <code>(+ (^ 1 2) 3)</code> generates <code>1^2+3</code> as expected.</li>
 <li>Multiplications are typeset implicitly <code>(* x y)</code> returns <code>xy</code> or using <code>\cdot</code> if the first factor is a FunctionNode or the (left operand) in the second factor is a NumberNode, so <code>(* x 2)</code> return <code>x \cdot 2</code> and <code>(* (sin x) x)</code> return <code>\sin x \cdot x</code> (but <code>(* x (sin x))</code> returns <code>x\sin x</code>)</li>
 <li>Divisions are typeset using <code>\frac</code></li>
 <li>Exponentiation adds braces around the power when needed.</li>
@@ -376,6 +382,32 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a713e0759b8204dfb43e50f46d86f1fc8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Interpreting\LaTeXPrinter::visitIntegerNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1IntegerNode.html">IntegerNode</a>&#160;</td>
+          <td class="paramname"><em>$node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interface function for visiting IntegerNodes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">IntegerNode</td><td class="paramname">$node</td><td>Node to visit. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor.html#a06a48767d0da46c3c1eaecef97f02833">MathParser\Interpreting\Visitors\Visitor</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a5bbb40a11601dc347c9d4ec629723396"></a>
 <div class="memitem">
 <div class="memproto">
@@ -406,6 +438,32 @@ Private Attributes</h2></td></tr>
 </dl>
 
 <p>Implements <a class="el" href="interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor.html#acbcd1cbecf76ba51c893a49746162dc1">MathParser\Interpreting\Visitors\Visitor</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab6fd7426082cd0a235a974bd080b9518"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Interpreting\LaTeXPrinter::visitRationalNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1RationalNode.html">RationalNode</a>&#160;</td>
+          <td class="paramname"><em>$node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interface function for visiting RationalNodes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">RationalNode</td><td class="paramname">$node</td><td>Node to visit. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor.html#a544885be3c104e81ff12e0a6fb48b31b">MathParser\Interpreting\Visitors\Visitor</a>.</p>
 
 </div>
 </div>
@@ -449,7 +507,7 @@ Private Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 7 2016 23:29:57 for math-parser by
+Generated on Wed Oct 19 2016 21:41:50 for math-parser by
 <a href="http://www.doxygen.org/index.html">doxygen</a> 1.8.6
 </small></address>
 </body>

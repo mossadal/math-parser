@@ -112,10 +112,13 @@ Inheritance diagram for MathParser\Interpreting\Visitors\Visitor:</div>
  <div class="center">
   <img src="interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor.png" usemap="#MathParser\Interpreting\Visitors\Visitor_map" alt=""/>
   <map id="MathParser\Interpreting\Visitors\Visitor_map" name="MathParser\Interpreting\Visitors\Visitor_map">
-<area href="classMathParser_1_1Interpreting_1_1Differentiator.html" title="Differentiate an abstract syntax tree (AST). " alt="MathParser\Interpreting\Differentiator" shape="rect" coords="0,56,232,80"/>
-<area href="classMathParser_1_1Interpreting_1_1Evaluator.html" title="Evalutate a parsed mathematical expression. " alt="MathParser\Interpreting\Evaluator" shape="rect" coords="242,56,474,80"/>
-<area href="classMathParser_1_1Interpreting_1_1LaTeXPrinter.html" title="Create LaTeX code for prettyprinting a mathematical expression (for example via MathJax) ..." alt="MathParser\Interpreting\LaTeXPrinter" shape="rect" coords="484,56,716,80"/>
-<area href="classMathParser_1_1Interpreting_1_1TreePrinter.html" title="Simple string representation of an AST. " alt="MathParser\Interpreting\TreePrinter" shape="rect" coords="726,56,958,80"/>
+<area href="classMathParser_1_1Interpreting_1_1ASCIIPrinter.html" title="Create LaTeX code for prettyprinting a mathematical expression (for example via MathJax) ..." alt="MathParser\Interpreting\ASCIIPrinter" shape="rect" coords="0,56,252,80"/>
+<area href="classMathParser_1_1Interpreting_1_1ComplexEvaluator.html" title="Evalutate a parsed mathematical expression. " alt="MathParser\Interpreting\ComplexEvaluator" shape="rect" coords="262,56,514,80"/>
+<area href="classMathParser_1_1Interpreting_1_1Differentiator.html" title="Differentiate an abstract syntax tree (AST). " alt="MathParser\Interpreting\Differentiator" shape="rect" coords="524,56,776,80"/>
+<area href="classMathParser_1_1Interpreting_1_1Evaluator.html" title="Evalutate a parsed mathematical expression. " alt="MathParser\Interpreting\Evaluator" shape="rect" coords="786,56,1038,80"/>
+<area href="classMathParser_1_1Interpreting_1_1LaTeXPrinter.html" title="Create LaTeX code for prettyprinting a mathematical expression (for example via MathJax) ..." alt="MathParser\Interpreting\LaTeXPrinter" shape="rect" coords="1048,56,1300,80"/>
+<area href="classMathParser_1_1Interpreting_1_1RationalEvaluator.html" title="Evalutate a parsed mathematical expression. " alt="MathParser\Interpreting\RationalEvaluator" shape="rect" coords="1310,56,1562,80"/>
+<area href="classMathParser_1_1Interpreting_1_1TreePrinter.html" title="Simple string representation of an AST. " alt="MathParser\Interpreting\TreePrinter" shape="rect" coords="1572,56,1824,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -127,6 +130,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acbcd1cbecf76ba51c893a49746162dc1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor.html#acbcd1cbecf76ba51c893a49746162dc1">visitNumberNode</a> (<a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1NumberNode.html">NumberNode</a> $node)</td></tr>
 <tr class="memdesc:acbcd1cbecf76ba51c893a49746162dc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface function for visiting NumberNodes.  <a href="#acbcd1cbecf76ba51c893a49746162dc1">More...</a><br/></td></tr>
 <tr class="separator:acbcd1cbecf76ba51c893a49746162dc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06a48767d0da46c3c1eaecef97f02833"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor.html#a06a48767d0da46c3c1eaecef97f02833">visitIntegerNode</a> (<a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1IntegerNode.html">IntegerNode</a> $node)</td></tr>
+<tr class="memdesc:a06a48767d0da46c3c1eaecef97f02833"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface function for visiting IntegerNodes.  <a href="#a06a48767d0da46c3c1eaecef97f02833">More...</a><br/></td></tr>
+<tr class="separator:a06a48767d0da46c3c1eaecef97f02833"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a544885be3c104e81ff12e0a6fb48b31b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor.html#a544885be3c104e81ff12e0a6fb48b31b">visitRationalNode</a> (<a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1RationalNode.html">RationalNode</a> $node)</td></tr>
+<tr class="memdesc:a544885be3c104e81ff12e0a6fb48b31b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface function for visiting RationalNodes.  <a href="#a544885be3c104e81ff12e0a6fb48b31b">More...</a><br/></td></tr>
+<tr class="separator:a544885be3c104e81ff12e0a6fb48b31b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a292630a7204dadd96877d8182f38deb0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor.html#a292630a7204dadd96877d8182f38deb0">visitVariableNode</a> (<a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode.html">VariableNode</a> $node)</td></tr>
 <tr class="memdesc:a292630a7204dadd96877d8182f38deb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface function for visiting VariableNodes.  <a href="#a292630a7204dadd96877d8182f38deb0">More...</a><br/></td></tr>
 <tr class="separator:a292630a7204dadd96877d8182f38deb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,7 +172,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classMathParser_1_1Interpreting_1_1Differentiator.html#ab89f589a9e372a15997cc08608489e1f">MathParser\Interpreting\Differentiator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1Evaluator.html#a257b2634d88050c7e51de91c5f09b7b8">MathParser\Interpreting\Evaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1LaTeXPrinter.html#aaa2c3cfcfa01461f52a8f656ef52b92c">MathParser\Interpreting\LaTeXPrinter</a>, and <a class="el" href="classMathParser_1_1Interpreting_1_1TreePrinter.html#af2b9784abe53d0fa5ddb75528d1a7e8f">MathParser\Interpreting\TreePrinter</a>.</p>
+<p>Implemented in <a class="el" href="classMathParser_1_1Interpreting_1_1Differentiator.html#ab89f589a9e372a15997cc08608489e1f">MathParser\Interpreting\Differentiator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1RationalEvaluator.html#af90b161be27fcd4a5f4ebebd7c48e5ff">MathParser\Interpreting\RationalEvaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1ComplexEvaluator.html#a32bd4cda34e80d3c18fad06899606899">MathParser\Interpreting\ComplexEvaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1Evaluator.html#a257b2634d88050c7e51de91c5f09b7b8">MathParser\Interpreting\Evaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1LaTeXPrinter.html#aaa2c3cfcfa01461f52a8f656ef52b92c">MathParser\Interpreting\LaTeXPrinter</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1ASCIIPrinter.html#a0fc162e77816060d9bdc6d330cdd914c">MathParser\Interpreting\ASCIIPrinter</a>, and <a class="el" href="classMathParser_1_1Interpreting_1_1TreePrinter.html#af2b9784abe53d0fa5ddb75528d1a7e8f">MathParser\Interpreting\TreePrinter</a>.</p>
 
 </div>
 </div>
@@ -189,7 +198,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classMathParser_1_1Interpreting_1_1Differentiator.html#afed6103538e71009c19d8dd0e37144ee">MathParser\Interpreting\Differentiator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1Evaluator.html#af8dbfe9e89ba2450ca2e070dc39e47e8">MathParser\Interpreting\Evaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1LaTeXPrinter.html#a68bcaa8f65dbebd8aadd6002b50dea49">MathParser\Interpreting\LaTeXPrinter</a>, and <a class="el" href="classMathParser_1_1Interpreting_1_1TreePrinter.html#a5d879664f70352a684d925d0225589d3">MathParser\Interpreting\TreePrinter</a>.</p>
+<p>Implemented in <a class="el" href="classMathParser_1_1Interpreting_1_1RationalEvaluator.html#a20a26469ef8e373783119a25017c1ba3">MathParser\Interpreting\RationalEvaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1Differentiator.html#afed6103538e71009c19d8dd0e37144ee">MathParser\Interpreting\Differentiator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1ComplexEvaluator.html#a1b75a0233947462b52ba514ca0cb02e5">MathParser\Interpreting\ComplexEvaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1Evaluator.html#af8dbfe9e89ba2450ca2e070dc39e47e8">MathParser\Interpreting\Evaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1LaTeXPrinter.html#a68bcaa8f65dbebd8aadd6002b50dea49">MathParser\Interpreting\LaTeXPrinter</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1ASCIIPrinter.html#a33e870f9482b8e617f3ccb796f095397">MathParser\Interpreting\ASCIIPrinter</a>, and <a class="el" href="classMathParser_1_1Interpreting_1_1TreePrinter.html#a5d879664f70352a684d925d0225589d3">MathParser\Interpreting\TreePrinter</a>.</p>
 
 </div>
 </div>
@@ -215,7 +224,33 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classMathParser_1_1Interpreting_1_1Differentiator.html#a95027e99c32f63b0689005ff148bee3e">MathParser\Interpreting\Differentiator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1Evaluator.html#a455ab6d3c963aeb2e3ad0c731c8bc081">MathParser\Interpreting\Evaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1LaTeXPrinter.html#a85eb667103f7b04abfe3c83e6c0e24a2">MathParser\Interpreting\LaTeXPrinter</a>, and <a class="el" href="classMathParser_1_1Interpreting_1_1TreePrinter.html#ae5fc098c679ae4e30030bc0a22d621d0">MathParser\Interpreting\TreePrinter</a>.</p>
+<p>Implemented in <a class="el" href="classMathParser_1_1Interpreting_1_1Differentiator.html#a95027e99c32f63b0689005ff148bee3e">MathParser\Interpreting\Differentiator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1RationalEvaluator.html#a133a3515ec7d5d920d276532a1b645bf">MathParser\Interpreting\RationalEvaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1ComplexEvaluator.html#a3e9ae069509f6809de32782122c863a1">MathParser\Interpreting\ComplexEvaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1Evaluator.html#a455ab6d3c963aeb2e3ad0c731c8bc081">MathParser\Interpreting\Evaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1LaTeXPrinter.html#a85eb667103f7b04abfe3c83e6c0e24a2">MathParser\Interpreting\LaTeXPrinter</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1ASCIIPrinter.html#a284ed6dde4655037bd65adcdd4995848">MathParser\Interpreting\ASCIIPrinter</a>, and <a class="el" href="classMathParser_1_1Interpreting_1_1TreePrinter.html#ae5fc098c679ae4e30030bc0a22d621d0">MathParser\Interpreting\TreePrinter</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a06a48767d0da46c3c1eaecef97f02833"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Interpreting\Visitors\Visitor::visitIntegerNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1IntegerNode.html">IntegerNode</a>&#160;</td>
+          <td class="paramname"><em>$node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interface function for visiting IntegerNodes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">IntegerNode</td><td class="paramname">$node</td><td>Node to visit. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classMathParser_1_1Interpreting_1_1RationalEvaluator.html#acf2f05376e604341ca7f19e86e948296">MathParser\Interpreting\RationalEvaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1Differentiator.html#ad7af6c949a945a8e2fc5dcd5b08c60f5">MathParser\Interpreting\Differentiator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1ComplexEvaluator.html#a4cfdd4e1831e755e62693a1ad85870b8">MathParser\Interpreting\ComplexEvaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1Evaluator.html#a9ea7246a2baa7c82b3fc63d4592176d0">MathParser\Interpreting\Evaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1LaTeXPrinter.html#a713e0759b8204dfb43e50f46d86f1fc8">MathParser\Interpreting\LaTeXPrinter</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1ASCIIPrinter.html#aa58141bf11238b8635c9dd42927aa59d">MathParser\Interpreting\ASCIIPrinter</a>, and <a class="el" href="classMathParser_1_1Interpreting_1_1TreePrinter.html#aa257e4863175baef6685c16c9043773d">MathParser\Interpreting\TreePrinter</a>.</p>
 
 </div>
 </div>
@@ -241,7 +276,33 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classMathParser_1_1Interpreting_1_1Differentiator.html#aa6fa0932e84b9f3d778387e48c96a9ef">MathParser\Interpreting\Differentiator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1Evaluator.html#a1ce6d1017e55901a580256a2f1edd027">MathParser\Interpreting\Evaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1LaTeXPrinter.html#a5bbb40a11601dc347c9d4ec629723396">MathParser\Interpreting\LaTeXPrinter</a>, and <a class="el" href="classMathParser_1_1Interpreting_1_1TreePrinter.html#aff9bf4ad6fc5ea711b23d39b60f0235c">MathParser\Interpreting\TreePrinter</a>.</p>
+<p>Implemented in <a class="el" href="classMathParser_1_1Interpreting_1_1RationalEvaluator.html#a2969efda623e9f0ebebcc98c4436fd55">MathParser\Interpreting\RationalEvaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1Differentiator.html#aa6fa0932e84b9f3d778387e48c96a9ef">MathParser\Interpreting\Differentiator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1ComplexEvaluator.html#aeefc7d06c1420d8ac479899654f4f9cd">MathParser\Interpreting\ComplexEvaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1Evaluator.html#a1ce6d1017e55901a580256a2f1edd027">MathParser\Interpreting\Evaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1LaTeXPrinter.html#a5bbb40a11601dc347c9d4ec629723396">MathParser\Interpreting\LaTeXPrinter</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1ASCIIPrinter.html#a072bef76b5ca4c9d7d6e53608ef7600e">MathParser\Interpreting\ASCIIPrinter</a>, and <a class="el" href="classMathParser_1_1Interpreting_1_1TreePrinter.html#aff9bf4ad6fc5ea711b23d39b60f0235c">MathParser\Interpreting\TreePrinter</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a544885be3c104e81ff12e0a6fb48b31b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Interpreting\Visitors\Visitor::visitRationalNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1RationalNode.html">RationalNode</a>&#160;</td>
+          <td class="paramname"><em>$node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interface function for visiting RationalNodes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">RationalNode</td><td class="paramname">$node</td><td>Node to visit. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classMathParser_1_1Interpreting_1_1RationalEvaluator.html#aaf067e83ce94fe1a62414265d08cd8fe">MathParser\Interpreting\RationalEvaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1Differentiator.html#a393ca1e9e332ebe42de928813ef6a37f">MathParser\Interpreting\Differentiator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1ComplexEvaluator.html#a04d84ad5fb1821a93855ce4604d10a62">MathParser\Interpreting\ComplexEvaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1LaTeXPrinter.html#ab6fd7426082cd0a235a974bd080b9518">MathParser\Interpreting\LaTeXPrinter</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1Evaluator.html#ac821be5b81de697b9fe62a9dc0c0b5e7">MathParser\Interpreting\Evaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1ASCIIPrinter.html#a6271938ce34bcec270dad7496680b5ac">MathParser\Interpreting\ASCIIPrinter</a>, and <a class="el" href="classMathParser_1_1Interpreting_1_1TreePrinter.html#a0a92cd769cfc9b7f4ab96a0cdb975037">MathParser\Interpreting\TreePrinter</a>.</p>
 
 </div>
 </div>
@@ -267,7 +328,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classMathParser_1_1Interpreting_1_1Differentiator.html#a52cc092817e78043da5e6bd86e09ff9f">MathParser\Interpreting\Differentiator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1Evaluator.html#a67cd18f0dc33f6e2755008053cd8cc0a">MathParser\Interpreting\Evaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1LaTeXPrinter.html#aced38823c7de0b9ad84884028370a8d2">MathParser\Interpreting\LaTeXPrinter</a>, and <a class="el" href="classMathParser_1_1Interpreting_1_1TreePrinter.html#a9fa160448c7e0a16e907c79c8d3e4f38">MathParser\Interpreting\TreePrinter</a>.</p>
+<p>Implemented in <a class="el" href="classMathParser_1_1Interpreting_1_1RationalEvaluator.html#a323ce49d0acac4e3b1ffdc11672e3b31">MathParser\Interpreting\RationalEvaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1Differentiator.html#a52cc092817e78043da5e6bd86e09ff9f">MathParser\Interpreting\Differentiator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1ComplexEvaluator.html#afdedeb5966cf15e15aad858388117926">MathParser\Interpreting\ComplexEvaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1LaTeXPrinter.html#aced38823c7de0b9ad84884028370a8d2">MathParser\Interpreting\LaTeXPrinter</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1Evaluator.html#a67cd18f0dc33f6e2755008053cd8cc0a">MathParser\Interpreting\Evaluator</a>, <a class="el" href="classMathParser_1_1Interpreting_1_1ASCIIPrinter.html#a7e9e8bfd8cb35eaa4225d5f0cf51b9ab">MathParser\Interpreting\ASCIIPrinter</a>, and <a class="el" href="classMathParser_1_1Interpreting_1_1TreePrinter.html#a9fa160448c7e0a16e907c79c8d3e4f38">MathParser\Interpreting\TreePrinter</a>.</p>
 
 </div>
 </div>
@@ -278,7 +339,7 @@ Public Member Functions</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 7 2016 23:29:57 for math-parser by
+Generated on Wed Oct 19 2016 21:41:50 for math-parser by
 <a href="http://www.doxygen.org/index.html">doxygen</a> 1.8.6
 </small></address>
 </body>

@@ -128,6 +128,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa6fa0932e84b9f3d778387e48c96a9ef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Interpreting_1_1Differentiator.html#aa6fa0932e84b9f3d778387e48c96a9ef">visitNumberNode</a> (<a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1NumberNode.html">NumberNode</a> $node)</td></tr>
 <tr class="memdesc:aa6fa0932e84b9f3d778387e48c96a9ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Differentiate a NumberNode.  <a href="#aa6fa0932e84b9f3d778387e48c96a9ef">More...</a><br/></td></tr>
 <tr class="separator:aa6fa0932e84b9f3d778387e48c96a9ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7af6c949a945a8e2fc5dcd5b08c60f5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Interpreting_1_1Differentiator.html#ad7af6c949a945a8e2fc5dcd5b08c60f5">visitIntegerNode</a> (<a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1IntegerNode.html">IntegerNode</a> $node)</td></tr>
+<tr class="memdesc:ad7af6c949a945a8e2fc5dcd5b08c60f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface function for visiting IntegerNodes.  <a href="#ad7af6c949a945a8e2fc5dcd5b08c60f5">More...</a><br/></td></tr>
+<tr class="separator:ad7af6c949a945a8e2fc5dcd5b08c60f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a393ca1e9e332ebe42de928813ef6a37f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Interpreting_1_1Differentiator.html#a393ca1e9e332ebe42de928813ef6a37f">visitRationalNode</a> (<a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1RationalNode.html">RationalNode</a> $node)</td></tr>
+<tr class="memdesc:a393ca1e9e332ebe42de928813ef6a37f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface function for visiting RationalNodes.  <a href="#a393ca1e9e332ebe42de928813ef6a37f">More...</a><br/></td></tr>
+<tr class="separator:a393ca1e9e332ebe42de928813ef6a37f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52cc092817e78043da5e6bd86e09ff9f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMathParser_1_1Interpreting_1_1Differentiator.html#a52cc092817e78043da5e6bd86e09ff9f">visitVariableNode</a> (<a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode.html">VariableNode</a> $node)</td></tr>
 <tr class="memdesc:a52cc092817e78043da5e6bd86e09ff9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Differentiate a VariableNode.  <a href="#a52cc092817e78043da5e6bd86e09ff9f">More...</a><br/></td></tr>
 <tr class="separator:a52cc092817e78043da5e6bd86e09ff9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -328,6 +334,32 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ad7af6c949a945a8e2fc5dcd5b08c60f5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Interpreting\Differentiator::visitIntegerNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1IntegerNode.html">IntegerNode</a>&#160;</td>
+          <td class="paramname"><em>$node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interface function for visiting IntegerNodes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">IntegerNode</td><td class="paramname">$node</td><td>Node to visit. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor.html#a06a48767d0da46c3c1eaecef97f02833">MathParser\Interpreting\Visitors\Visitor</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="aa6fa0932e84b9f3d778387e48c96a9ef"></a>
 <div class="memitem">
 <div class="memproto">
@@ -358,6 +390,32 @@ Protected Attributes</h2></td></tr>
 </dl>
 
 <p>Implements <a class="el" href="interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor.html#acbcd1cbecf76ba51c893a49746162dc1">MathParser\Interpreting\Visitors\Visitor</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a393ca1e9e332ebe42de928813ef6a37f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MathParser\Interpreting\Differentiator::visitRationalNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1RationalNode.html">RationalNode</a>&#160;</td>
+          <td class="paramname"><em>$node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interface function for visiting RationalNodes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">RationalNode</td><td class="paramname">$node</td><td>Node to visit. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="interfaceMathParser_1_1Interpreting_1_1Visitors_1_1Visitor.html#a544885be3c104e81ff12e0a6fb48b31b">MathParser\Interpreting\Visitors\Visitor</a>.</p>
 
 </div>
 </div>
@@ -424,7 +482,7 @@ Protected Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 7 2016 23:29:57 for math-parser by
+Generated on Wed Oct 19 2016 21:41:50 for math-parser by
 <a href="http://www.doxygen.org/index.html">doxygen</a> 1.8.6
 </small></address>
 </body>

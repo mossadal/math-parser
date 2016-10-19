@@ -141,7 +141,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode.html#ace203efd9b7ea8833a23378f6ab4f084">MathParser\Parsing\Nodes\ExpressionNode</a>
 </li>
 <li>$lexer
-: <a class="el" href="classMathParser_1_1Interpreting_1_1LaTeXPrinter.html#ad3c7631e73a252a1920dab0825b0be30">MathParser\Interpreting\LaTeXPrinter</a>
+: <a class="el" href="classMathParser_1_1ComplexMathParser.html#a7b9f3b8924fb9c3c311537edc2b5dd32">MathParser\ComplexMathParser</a>
+, <a class="el" href="classMathParser_1_1Interpreting_1_1ASCIIPrinter.html#a3e855ae8734dab960662fef8df2f0830">MathParser\Interpreting\ASCIIPrinter</a>
+, <a class="el" href="classMathParser_1_1Interpreting_1_1LaTeXPrinter.html#ad3c7631e73a252a1920dab0825b0be30">MathParser\Interpreting\LaTeXPrinter</a>
+, <a class="el" href="classMathParser_1_1RationalMathParser.html#a43d5633dfbf7b4aaecedde74cf5768d7">MathParser\RationalMathParser</a>
 , <a class="el" href="classMathParser_1_1StdMathParser.html#ab6946ba25d66a75b424eae04d5cb070d">MathParser\StdMathParser</a>
 </li>
 <li>$match
@@ -152,6 +155,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>$name
 : <a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1FunctionNode.html#abc812043d66ed2e415f6cb79bb596be3">MathParser\Parsing\Nodes\FunctionNode</a>
+, <a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1PostfixOperatorNode.html#ae50ba1c4801812a340bdb3b28016fe4f">MathParser\Parsing\Nodes\PostfixOperatorNode</a>
 , <a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1VariableNode.html#ac4d263a09ea751c333bb4c30f9e13a0f">MathParser\Parsing\Nodes\VariableNode</a>
 </li>
 <li>$nodeFactory
@@ -170,8 +174,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>$operatorStack
 : <a class="el" href="classMathParser_1_1Parsing_1_1Parser.html#a6a691e6b115de82b04fa5b2fc828721b">MathParser\Parsing\Parser</a>
 </li>
+<li>$p
+: <a class="el" href="classMathParser_1_1Extensions_1_1Rational.html#ab660cdd4a7655659f949244900a32abe">MathParser\Extensions\Rational</a>
+, <a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1RationalNode.html#a01738f8262ecaf1653141d78da3bdedf">MathParser\Parsing\Nodes\RationalNode</a>
+</li>
 <li>$parser
-: <a class="el" href="classMathParser_1_1StdMathParser.html#abd2f22d467ff3c59cf47907209baa6cd">MathParser\StdMathParser</a>
+: <a class="el" href="classMathParser_1_1ComplexMathParser.html#ab15b6ea0cd30073db601bc91422107e8">MathParser\ComplexMathParser</a>
+, <a class="el" href="classMathParser_1_1RationalMathParser.html#a719e793847206e3fcaee19449ecd4a93">MathParser\RationalMathParser</a>
+, <a class="el" href="classMathParser_1_1StdMathParser.html#abd2f22d467ff3c59cf47907209baa6cd">MathParser\StdMathParser</a>
 </li>
 <li>$pattern
 : <a class="el" href="classMathParser_1_1Lexing_1_1TokenDefinition.html#acfea1a6b7d04da3e5fca0ef67fa804a8">MathParser\Lexing\TokenDefinition</a>
@@ -179,8 +189,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>$precedence
 : <a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode.html#a9fb3d0c137cafcbe6e0fad1228717578">MathParser\Parsing\Nodes\ExpressionNode</a>
 </li>
+<li>$q
+: <a class="el" href="classMathParser_1_1Extensions_1_1Rational.html#a42767c0c110981060ade28265c86903d">MathParser\Extensions\Rational</a>
+, <a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1RationalNode.html#ab9476a5c6e7ed1891511b92ae1013d39">MathParser\Parsing\Nodes\RationalNode</a>
+</li>
 <li>$right
 : <a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1ExpressionNode.html#a6698fe89d391cd7b7dc84e4f1a06d2f4">MathParser\Parsing\Nodes\ExpressionNode</a>
+</li>
+<li>$sieve
+: <a class="el" href="classMathParser_1_1Interpreting_1_1RationalEvaluator.html#a6219d22b10057df46ae98fbb4cd4ce33">MathParser\Interpreting\RationalEvaluator</a>
 </li>
 <li>$subtractionFactory
 : <a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1Factories_1_1NodeFactory.html#a849f750f8574468a4d18095faf5678fd">MathParser\Parsing\Nodes\Factories\NodeFactory</a>
@@ -189,14 +206,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classMathParser_1_1Lexing_1_1Lexer.html#a3b723949c7cebb254b1c818f20e34541">MathParser\Lexing\Lexer</a>
 </li>
 <li>$tokens
-: <a class="el" href="classMathParser_1_1Parsing_1_1Parser.html#ab20fd2f0971594016b8b631d29532284">MathParser\Parsing\Parser</a>
+: <a class="el" href="classMathParser_1_1ComplexMathParser.html#ad9ecd84fcaba913dbbfafc2ae771cf4b">MathParser\ComplexMathParser</a>
+, <a class="el" href="classMathParser_1_1Parsing_1_1Parser.html#ab20fd2f0971594016b8b631d29532284">MathParser\Parsing\Parser</a>
+, <a class="el" href="classMathParser_1_1RationalMathParser.html#aaf93ef5e96a5495a7d90d53efc5ab31e">MathParser\RationalMathParser</a>
 , <a class="el" href="classMathParser_1_1StdMathParser.html#a7df1405869c2a0fdc4cbe8a47fe24b79">MathParser\StdMathParser</a>
 </li>
 <li>$tokenType
 : <a class="el" href="classMathParser_1_1Lexing_1_1TokenDefinition.html#ae5dacb8bc549085fd49a815fb2a07bc5">MathParser\Lexing\TokenDefinition</a>
 </li>
 <li>$tree
-: <a class="el" href="classMathParser_1_1StdMathParser.html#a520e08ff2d81d78f211e11ed7d9b8a23">MathParser\StdMathParser</a>
+: <a class="el" href="classMathParser_1_1ComplexMathParser.html#aacd06dcee36015a2af1f467c7ba763be">MathParser\ComplexMathParser</a>
+, <a class="el" href="classMathParser_1_1RationalMathParser.html#aadffdaf5f404c857f00e25780c581088">MathParser\RationalMathParser</a>
+, <a class="el" href="classMathParser_1_1StdMathParser.html#a520e08ff2d81d78f211e11ed7d9b8a23">MathParser\StdMathParser</a>
 </li>
 <li>$type
 : <a class="el" href="classMathParser_1_1Lexing_1_1Token.html#ac0bdf919e48920230f167b33d64d645f">MathParser\Lexing\Token</a>
@@ -205,6 +226,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classMathParser_1_1Lexing_1_1Token.html#ab38ab1ba987fcec7c3a9756ee867ee8a">MathParser\Lexing\Token</a>
 , <a class="el" href="classMathParser_1_1Lexing_1_1TokenDefinition.html#a6658afba1a8540a8a9f2c8df268ad386">MathParser\Lexing\TokenDefinition</a>
 , <a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1ConstantNode.html#ae9df99dc2bbc8480c637e4f4058f2767">MathParser\Parsing\Nodes\ConstantNode</a>
+, <a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1IntegerNode.html#a13be68d2c0986cdd913d539bb46bdff8">MathParser\Parsing\Nodes\IntegerNode</a>
 , <a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1NumberNode.html#a8aa753c37f3b8800bb0fba8087659849">MathParser\Parsing\Nodes\NumberNode</a>
 , <a class="el" href="classMathParser_1_1Parsing_1_1Nodes_1_1SubExpressionNode.html#a26ff138921e2894df5645fce8d5c0dfa">MathParser\Parsing\Nodes\SubExpressionNode</a>
 </li>
@@ -212,7 +234,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classMathParser_1_1Interpreting_1_1Differentiator.html#af3981989ecf9f68ac5fd5b78ad723910">MathParser\Interpreting\Differentiator</a>
 </li>
 <li>$variables
-: <a class="el" href="classMathParser_1_1Interpreting_1_1Evaluator.html#ac43d7a3d54117fba595e227fef653e5d">MathParser\Interpreting\Evaluator</a>
+: <a class="el" href="classMathParser_1_1Interpreting_1_1ComplexEvaluator.html#aae93c94b60412d9221ad3ef05850d4d5">MathParser\Interpreting\ComplexEvaluator</a>
+, <a class="el" href="classMathParser_1_1Interpreting_1_1Evaluator.html#ac43d7a3d54117fba595e227fef653e5d">MathParser\Interpreting\Evaluator</a>
+, <a class="el" href="classMathParser_1_1Interpreting_1_1RationalEvaluator.html#a8c6229f41e06074ba082b5571b4cd475">MathParser\Interpreting\RationalEvaluator</a>
+</li>
+<li>$x
+: <a class="el" href="classMathParser_1_1Extensions_1_1Complex.html#a39af8e40db3cd3e61e199f8565bd196b">MathParser\Extensions\Complex</a>
+</li>
+<li>$y
+: <a class="el" href="classMathParser_1_1Extensions_1_1Complex.html#a17dca0c7abf7451b7c56e1670024b662">MathParser\Extensions\Complex</a>
 </li>
 </ul>
 
@@ -249,6 +279,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <h3><a class="anchor" id="index_f"></a>- f -</h3><ul>
+<li>FactorialOperator
+: <a class="el" href="classMathParser_1_1Lexing_1_1TokenType.html#aaf05aa8eecbb1c582fb63777eae1733e">MathParser\Lexing\TokenType</a>
+</li>
 <li>FunctionName
 : <a class="el" href="classMathParser_1_1Lexing_1_1TokenType.html#aeb6530d03816a7a49bc7a4ce966b5f86">MathParser\Lexing\TokenType</a>
 </li>
@@ -304,6 +337,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
+<li>SemiFactorialOperator
+: <a class="el" href="classMathParser_1_1Lexing_1_1TokenType.html#a16bcc91085f79995dba84c62bdcc7d14">MathParser\Lexing\TokenType</a>
+</li>
 <li>Sentinel
 : <a class="el" href="classMathParser_1_1Lexing_1_1TokenType.html#a78d79415633ade3f490659424d688d2e">MathParser\Lexing\TokenType</a>
 </li>
@@ -336,7 +372,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 7 2016 23:29:58 for math-parser by
+Generated on Wed Oct 19 2016 21:41:51 for math-parser by
 <a href="http://www.doxygen.org/index.html">doxygen</a> 1.8.6
 </small></address>
 </body>

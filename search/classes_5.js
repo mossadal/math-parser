@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['latexprinter',['LaTeXPrinter',['../classMathParser_1_1Interpreting_1_1LaTeXPrinter.html',1,'MathParser::Interpreting']]],
-  ['lexer',['Lexer',['../classMathParser_1_1Lexing_1_1Lexer.html',1,'MathParser::Lexing']]]
+  ['integernode',['IntegerNode',['../classMathParser_1_1Parsing_1_1Nodes_1_1IntegerNode.html',1,'MathParser::Parsing::Nodes']]]
 ];
