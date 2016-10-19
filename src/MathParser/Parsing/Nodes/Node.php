@@ -19,7 +19,7 @@ use MathParser\Lexing\Token;
 use MathParser\Lexing\TokenType;
 use MathParser\Lexing\TokenPrecedence;
 use MathParser\Interpreting\Evaluator;
-use MathParser\Interpreting\AscIIPrinter;
+use MathParser\Interpreting\ASCIIPrinter;
 
 use MathParser\Exceptions\UnknownNodeException;
 use MathParser\Exceptions\UnknownOperatorException;
@@ -231,7 +231,7 @@ abstract class Node implements Visitable
 
     public function __toString()
     {
-        $printer = new AscIIPrinter();
+        $printer = new ASCIIPrinter();
         return $this->accept($printer);
     }
 
