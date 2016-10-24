@@ -78,7 +78,7 @@ class LaTeXPrinter implements Visitor
      * @retval string
      */
     public function visitExpressionNode(ExpressionNode $node)
-{
+    {
 
         $operator = $node->getOperator();
         $left = $node->getLeft();
@@ -123,7 +123,7 @@ class LaTeXPrinter implements Visitor
 
             case '^':
 
-                $leftValue = $this->parenthesize($left, $node);
+                $leftValue = $this->parenthesize($left, $node, '', true);
                 return $leftValue.'^'.$this->bracesNeeded($right);
 
         }
@@ -260,7 +260,7 @@ class LaTeXPrinter implements Visitor
      *                          be added at the beginning of the returned string.
      * @retval string
      */
-    public function parenthesize(Node $node, ExpressionNode $cutoff, $prepend='')
+    public function parenthesize(Node $node, ExpressionNode $cutoff, $prepend='', $conservative=false)
     {
         $text = $node->accept($this);
 
@@ -276,6 +276,17 @@ class LaTeXPrinter implements Visitor
             }
             if ($node->strictlyLowerPrecedenceThan($cutoff)) {
                 return "($text)";
+            }
+
+            if ($conservative) {
+                // Add parentheses more liberally for / and ^ operators,
+                // so that e.g. x/(y*z) is printed correctly
+                if ($cutoff->getOperator() == '/' && $node->lowerPrecedenceThan($cutoff)) {
+                    return "($text)";
+                }
+                if ($cutoff->getOperator() == '^' && $node->getOperator() == '^') {
+                    return '{'. $text . '}';
+                }
             }
 
         }

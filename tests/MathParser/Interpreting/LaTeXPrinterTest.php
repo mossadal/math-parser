@@ -83,7 +83,15 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
 
     public function testCanPrintExponentiation()
     {
+
         $this->assertResult('x^y^z', 'x^{y^z}');
+        $this->assertResult('(x^y)^z', 'x^{yz}');
+
+        $this->parser->setSimplifying(false);
+        $this->assertResult('x^y^z', 'x^{y^z}');
+        $this->assertResult('(x^y)^z', '{x^y}^z');
+        $this->parser->setSimplifying(true);
+
     }
 
     public function testCanAddBraces()

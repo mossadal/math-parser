@@ -38,7 +38,7 @@ class ParserWithoutImplicitMultiplication extends Parser {
 
 
 $parser = new RationalMathParser();
-//$parser->setSimplifying(false);
+$parser->setSimplifying(false);
 
 $parser->parse($argv[1]);
 

@@ -98,10 +98,14 @@ class ASCIIPrinter implements Visitor
 
             case '*':
             case '/':
-            case '^':
 
-                $leftValue = $this->parenthesize($left, $node);
-                $rightValue = $this->parenthesize($right, $node);
+                $leftValue = $this->parenthesize($left, $node, '', false);
+                $rightValue = $this->parenthesize($right, $node, '', true);
+                return "$leftValue$operator$rightValue";
+
+            case '^':
+                $leftValue = $this->parenthesize($left, $node, '', true);
+                $rightValue = $this->parenthesize($right, $node, '', false);
                 return "$leftValue$operator$rightValue";
 
         }
@@ -157,7 +161,7 @@ class ASCIIPrinter implements Visitor
         }
     }
 
-    public function parenthesize(Node $node, ExpressionNode $cutoff, $prepend='')
+    public function parenthesize(Node $node, ExpressionNode $cutoff, $prepend='', $conservative = false)
     {
         $text = $node->accept($this);
 
@@ -170,6 +174,18 @@ class ASCIIPrinter implements Visitor
             if ($cutoff->getOperator() == '-' && $node->lowerPrecedenceThan($cutoff)) {
                 return "($text)";
             }
+
+            if ($conservative) {
+                // Add parentheses more liberally for / and ^ operators,
+                // so that e.g. x/(y*z) is printed correctly
+                if ($cutoff->getOperator() == '/' && $node->lowerPrecedenceThan($cutoff)) {
+                    return "($text)";
+                }
+                if ($cutoff->getOperator() == '^' && $node->getOperator() == '^') {
+                    return "($text)";
+                }
+            }
+
             if ($node->strictlyLowerPrecedenceThan($cutoff)) {
                 return "($text)";
             }

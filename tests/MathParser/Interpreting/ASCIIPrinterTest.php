@@ -78,6 +78,11 @@ class ASCIIPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('x+(-y)', 'x+(-y)');
         $this->assertResult('x+y+z', 'x+y+z');
         $this->assertResult('1+2x+3x^2', '1+2*x+3*x^2');
+        $this->assertResult('1-(-1)*x', '1-(-1)*x');
+        $this->assertResult('1-(-1)*x', '1-(-1)*x');
+        $this->assertResult('x*(-1)+(-2)*(-x)', 'x*(-1)+(-2)*(-x)');
+        $this->assertResult('x*(-1)-(-2)*(-x)', 'x*(-1)-(-2)*(-x)');
+
     }
 
     public function testCanPrintDivision()
@@ -101,7 +106,28 @@ class ASCIIPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('x^(2/3)', 'x^(2/3)');
         $this->assertResult('(1/2)^k', '(1/2)^k');
         $this->assertResult('x^(y+z)', 'x^(y+z)');
+        $this->assertResult('x^(y+z)', 'x^(y+z)');
+
+        $this->assertResult('x^y^z', 'x^y^z');
+        $this->assertResult('(x^y)^z', 'x^(y*z)');
+
+        $this->parser->setSimplifying(false);
+        $this->assertResult('x^y^z', 'x^y^z');
+        $this->assertResult('(x^y)^z', '(x^y)^z');
+        $this->parser->setSimplifying(true);
     }
+
+    public function testCanPrintMultiplicationDivision()
+    {
+        $this->assertResult('x*y/z', 'x*y/z');
+        $this->assertResult('x/y*z', 'x/y*z');
+        $this->assertResult('x*y/(z*w)', 'x*y/(z*w)');
+        $this->assertResult('x*y/(z+w)', 'x*y/(z+w)');
+        $this->assertResult('x*y/(z-w)', 'x*y/(z-w)');
+        $this->assertResult('(x+y)/(z-w)', '(x+y)/(z-w)');
+        $this->assertResult('x*y/(z^w)', 'x*y/z^w');
+    }
+
 
     public function testCanPrintFunctions()
     {
