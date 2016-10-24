@@ -71,6 +71,12 @@ class ASCIIPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('x+1', 'x+1');
         $this->assertResult('x+y', 'x+y');
         $this->assertResult('x+y+z', 'x+y+z');
+        $this->assertResult('x+y-z', 'x+y-z');
+        $this->assertResult('x-y-z', 'x-y-z');
+        $this->assertResult('x-y+z', 'x-y+z');
+        $this->assertResult('-x-y-z', '-x-y-z');
+        $this->assertResult('x+(-y)', 'x+(-y)');
+        $this->assertResult('x+y+z', 'x+y+z');
         $this->assertResult('1+2x+3x^2', '1+2*x+3*x^2');
     }
 

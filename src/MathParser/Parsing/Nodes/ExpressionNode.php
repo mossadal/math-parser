@@ -168,9 +168,6 @@ class ExpressionNode extends Node
      */
     public function getPrecedence()
     {
-        // Unary minus.
-        if ($this->operator == '-' && $this->right === null) return 5;
-
         return $this->precedence;
     }
 

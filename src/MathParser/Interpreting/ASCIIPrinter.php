@@ -68,25 +68,43 @@ class ASCIIPrinter implements Visitor
      */
     public function visitExpressionNode(ExpressionNode $node)
     {
-        $left = $node->getLeft();
-        $leftValue = $this->parenthesize($left, $node);
         $operator = $node->getOperator();
-
+        $left = $node->getLeft();
         $right = $node->getRight();
 
-        // Unary minus
-        if ($operator == '-' && $right === null)  {
-            if ($left instanceof ExpressionNode) return "-($leftValue)";
+        switch ($operator)
+        {
+            case '+':
+
+                $leftValue = $left->accept($this);
+                $rightValue = $this->parenthesize($right, $node);
+                return "$leftValue+$rightValue";
+
+            case '-':
+
+                if ($right) {
+                    // Binary minus
+
+                    $leftValue = $left->accept($this);
+                    $rightValue = $this->parenthesize($right, $node);
+                    return "$leftValue-$rightValue";
+
+                } else {
+                    // Unary minus
+
+                    $leftValue = $this->parenthesize($left, $node);
+                    return "-$leftValue";
+                }
+
+            case '*':
+            case '/':
+            case '^':
+
+                $leftValue = $this->parenthesize($left, $node);
+                $rightValue = $this->parenthesize($right, $node);
+                return "$leftValue$operator$rightValue";
+
         }
-
-        if ($right) {
-            $rightValue = $this->parenthesize($right, $node);
-
-            return "$leftValue$operator$rightValue";
-        }
-
-        return "$operator$leftValue";
-
     }
 
 
@@ -144,6 +162,14 @@ class ASCIIPrinter implements Visitor
         $text = $node->accept($this);
 
         if ($node instanceof ExpressionNode) {
+            // Second term is a unary minus
+            if ($node->getOperator() == '-' && $node->getRight() == null) {
+                return "($text)";
+            }
+
+            if ($cutoff->getOperator() == '-' && $node->lowerPrecedenceThan($cutoff)) {
+                return "($text)";
+            }
             if ($node->strictlyLowerPrecedenceThan($cutoff)) {
                 return "($text)";
             }

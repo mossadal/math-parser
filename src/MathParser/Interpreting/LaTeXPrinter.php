@@ -78,44 +78,55 @@ class LaTeXPrinter implements Visitor
      * @retval string
      */
     public function visitExpressionNode(ExpressionNode $node)
-    {
-        $left = $node->getLeft();
-        //var_dump($left);
+{
 
-        $leftValue = $this->parenthesize($left, $node);
         $operator = $node->getOperator();
-
+        $left = $node->getLeft();
         $right = $node->getRight();
 
-        if ($operator == '*') {
-            $operator = '';
-            if ($left instanceof FunctionNode || $right instanceof NumberNode || $right instanceof IntegerNode || $right instanceof RationalNode || ($right instanceof ExpressionNode && $right->getLeft() instanceof NumberNode)) {
-                $operator = '\cdot ';
-            }
+        switch ($operator)
+        {
+            case '+':
+
+                $leftValue = $left->accept($this);
+                $rightValue = $this->parenthesize($right, $node);
+                return "$leftValue+$rightValue";
+
+            case '-':
+
+                if ($right) {
+                    // Binary minus
+
+                    $leftValue = $left->accept($this);
+                    $rightValue = $this->parenthesize($right, $node);
+                    return "$leftValue-$rightValue";
+
+                } else {
+                    // Unary minus
+
+                    $leftValue = $this->parenthesize($left, $node);
+                    return "-$leftValue";
+                }
+
+            case '*':
+                $operator = '';
+                if ($left instanceof FunctionNode || $right instanceof NumberNode || $right instanceof IntegerNode || $right instanceof RationalNode || ($right instanceof ExpressionNode && $right->getLeft() instanceof NumberNode)) {
+                    $operator = '\cdot ';
+                }
+                $leftValue = $this->parenthesize($left, $node);
+                $rightValue = $this->parenthesize($right, $node);
+                return "$leftValue$operator$rightValue";
+
+            case '/':
+
+                return '\frac{'.$left->accept($this).'}{'.$right->accept($this).'}';
+
+            case '^':
+
+                $leftValue = $this->parenthesize($left, $node);
+                return $leftValue.'^'.$this->bracesNeeded($right);
+
         }
-
-        // Unary minus
-        if ($operator == '-' && $right === null)  {
-            if ($left instanceof ExpressionNode) return "-($leftValue)";
-        }
-
-        if ($right) {
-            $rightValue = $this->parenthesize($right, $node);
-
-            switch($operator) {
-                case '/':
-                    // No parantheses needed
-                    return '\frac{'.$left->accept($this).'}{'.$right->accept($this).'}';
-                case '^':
-                    return $leftValue.'^'.$this->bracesNeeded($right);
-                default:
-                    return "$leftValue$operator$rightValue";
-            }
-
-        }
-
-        return "$operator$leftValue";
-
     }
 
     /**
@@ -255,9 +266,18 @@ class LaTeXPrinter implements Visitor
 
         if ($node instanceof ExpressionNode) {
 
+            // Second term is a unary minus
+            if ($node->getOperator() == '-' && $node->getRight() == null) {
+                return "($text)";
+            }
+
+            if ($cutoff->getOperator() == '-' && $node->lowerPrecedenceThan($cutoff)) {
+                return "($text)";
+            }
             if ($node->strictlyLowerPrecedenceThan($cutoff)) {
                 return "($text)";
             }
+
         }
 
         if (($node instanceof NumberNode || $node instanceof IntegerNode || $node instanceof RationalNode) && $node->getValue() < 0)
