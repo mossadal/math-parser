@@ -217,6 +217,83 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
 
     }
 
+    public function testCanParseThreeTerms()
+    {
+        $x = new VariableNode('x');
+        $y = new VariableNode('y');
+        $z = new VariableNode('z');
+        $mx = new ExpressionNode($x, '-', null);
+
+        $node = $this->parser->parse("x+y+z");
+        $shouldBe = new ExpressionNode(
+            new ExpressionNode(new VariableNode('x'), '+', new VariableNode('y')),
+            '+',
+            new VariableNode('z')
+        );
+        $this->assertNodesEqual($node, $shouldBe);
+
+        $node = $this->parser->parse("x+y-z");
+        $shouldBe = new ExpressionNode(
+            new ExpressionNode(new VariableNode('x'), '+', new VariableNode('y')),
+            '-',
+            new VariableNode('z')
+        );
+        $this->assertNodesEqual($node, $shouldBe);
+
+        $node = $this->parser->parse("x-y+z");
+        $shouldBe = new ExpressionNode(
+            new ExpressionNode(new VariableNode('x'), '-', new VariableNode('y')),
+            '+',
+            new VariableNode('z')
+        );
+        $this->assertNodesEqual($node, $shouldBe);
+
+        $node = $this->parser->parse("x-y-z");
+        $shouldBe = new ExpressionNode(
+            new ExpressionNode(new VariableNode('x'), '-', new VariableNode('y')),
+            '-',
+            new VariableNode('z')
+        );
+        $this->assertNodesEqual($node, $shouldBe);
+
+        // First term with unary minus
+
+        $node = $this->parser->parse("-x+y+z");
+        $shouldBe = new ExpressionNode(
+            new ExpressionNode($mx, '+', new VariableNode('y')),
+            '+',
+            new VariableNode('z')
+        );
+        $this->assertNodesEqual($node, $shouldBe);
+
+        $node = $this->parser->parse("-x+y-z");
+        $shouldBe = new ExpressionNode(
+            new ExpressionNode($mx, '+', new VariableNode('y')),
+            '-',
+            new VariableNode('z')
+        );
+        $this->assertNodesEqual($node, $shouldBe);
+
+        $node = $this->parser->parse("-x-y+z");
+        $shouldBe = new ExpressionNode(
+            new ExpressionNode($mx, '-', new VariableNode('y')),
+            '+',
+            new VariableNode('z')
+        );
+        $this->assertNodesEqual($node, $shouldBe);
+
+        $node = $this->parser->parse("-x-y-z");
+        $shouldBe = new ExpressionNode(
+            new ExpressionNode($mx, '-', new VariableNode('y')),
+            '-',
+            new VariableNode('z')
+        );
+        $this->assertNodesEqual($node, $shouldBe);
+
+
+
+    }
+
     public function testCanParseWithCorrectPrecedence()
     {
         $x = new VariableNode('x');
