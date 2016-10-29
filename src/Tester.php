@@ -47,12 +47,12 @@ print_r($tokens);
 
 $tree = $parser->getTree();
 
+$treeprinter = new TreePrinter();
+echo "TreePrinter: " . $tree->accept($treeprinter) . "\n";
+
 echo "LaTeXPrinter giving ";
 $printer = new LaTeXPrinter();
 echo $tree->accept($printer) . "\n";
-
-$treeprinter = new TreePrinter();
-echo "TreePrinter: " . $tree->accept($treeprinter) . "\n";
 
 echo "String conversion: $tree\n";
 

@@ -467,5 +467,32 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
 
     }
 
+    public function canParseFactorial()
+    {
+        $node =$this->parser->parse("3!4!");
+        $shouldBe = new ExpressionNode(
+            new FunctionNode('!', new NumberNode(3)),
+            '*',
+            new FunctionNode('!', new NumberNode(4)));
+        $this->assertNodesEqual($node, $shouldBe);
 
+        $node =$this->parser->parse("-3!");
+        $shouldBe = new ExpressionNode(
+            new FunctionNode('!', new NumberNode(3)),
+            '-',
+            null);
+        $this->assertNodesEqual($node, $shouldBe);
+    }
+
+    public function canParseInvalidFactorial()
+    {
+        $this->setExpectedException(SyntaxErrorException::class);
+        $this->parser->parse('!1');
+    }
+
+    public function canParseInvalidFactorial2()
+    {
+        $this->setExpectedException(SyntaxErrorException::class);
+        $this->parser->parse('1+!1');
+    }
 }

@@ -176,6 +176,7 @@ class Parser
                 // Handle the remaining operators.
             } elseif ($node instanceof PostfixOperatorNode) {
                 $op = $this->operandStack->pop();
+                if ($op == NULL) throw new SyntaxErrorException();
                 $this->operandStack->push(new FunctionNode($node->getOperator(), $op));
 
             } elseif ($node instanceof ExpressionNode) {
