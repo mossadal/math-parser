@@ -214,10 +214,10 @@ class Rational
      */
     public static function parse($value, $normalize=true)
     {
-        if ($value == '') return null;
-        if ($value == 'NAN') return new Rational(NAN, 1);
-        if ($value == 'INF') return new Rational(INF, 1);
-        if ($value == '-INF') return new Rational(-INF, 1);
+        if ($value === '') return null;
+        if ($value === 'NAN') return new Rational(NAN, 1);
+        if ($value === 'INF') return new Rational(INF, 1);
+        if ($value === '-INF') return new Rational(-INF, 1);
 
         $data = $value;
 
