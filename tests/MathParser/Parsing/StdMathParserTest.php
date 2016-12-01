@@ -462,7 +462,7 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
         $this->assertNodesEqual($node, $shouldBe);
 
         $node = $this->parser->parse("-3");
-        $shouldBe = new ExpressionNode(new VariableNode('3'), '-', null);
+        $shouldBe = new ExpressionNode(new NumberNode(3), '-', null);
         $this->assertNodesEqual($node, $shouldBe);
 
     }

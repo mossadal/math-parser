@@ -131,6 +131,17 @@ class NodeTest extends PHPUnit_Framework_TestCase
 
     }
 
+    public function testCanCompareUnaryMinus()
+    {
+        $node = new FunctionNode('sin', new ExpressionNode(new VariableNode('x'), '-', null));
+        $other = new FunctionNode('sin', new ExpressionNode(new VariableNode('a'), '-', null));
+
+        $this->assertTrue($node->compareTo($node));
+        $this->assertTrue($other->compareTo($other));
+        $this->assertFalse($node->compareTo($other));
+        $this->assertFalse($other->compareTo($node));
+    }
+
     public function testCanComputeComplexity()
     {
         $node = new NumberNode(1);

@@ -233,19 +233,22 @@ class ExpressionNode extends Node
             return false;
         }
 
+        if ($this->getOperator() != $other->getOperator()) return false;
+
         $thisLeft = $this->getLeft();
         $otherLeft = $other->getLeft();
-        if ($thisLeft === null) {
-            return ($otherLeft === null);
-        }
-
         $thisRight = $this->getRight();
         $otherRight = $other->getRight();
-        if ($thisRight === null) {
-            return ($otherRight === null);
+
+        if ($thisLeft === null) {
+            return $otherLeft === null && $thisRight->compareTo($otherRight);
         }
 
-        return $this->getOperator() == $other->getOperator() && $thisLeft->compareTo($otherLeft) && $thisRight->compareTo($otherRight);
+        if ($thisRight === null) {
+            return $otherRight=== null && $thisLeft->compareTo($otherLeft);
+        }
+
+        return $thisLeft->compareTo($otherLeft) && $thisRight->compareTo($otherRight);
     }
 
 
