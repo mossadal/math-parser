@@ -166,6 +166,27 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('arsinh(x)', '\operatorname{arsinh} x');
     }
 
+    public function testCanPrintFactorials()
+    {
+        $this->assertResult('3!', '3!');
+        $this->assertResult('x!', 'x!');
+        $this->assertResult('e!', 'e!');
+        $this->assertResult('(x+y)!', '(x+y)!');
+        $this->assertResult('(x+2)!', '(x+2)!');
+        $this->assertResult('sin(x)!', '(\sin x)!');
+        $this->assertResult('(3!)!', '(3!)!');
+    }
+
+    public function testCanPrintSemiFactorials()
+    {
+        $this->assertResult('3!!', '3!!');
+        $this->assertResult('x!!', 'x!!');
+        $this->assertResult('e!!', 'e!!');
+        $this->assertResult('(x+y)!!', '(x+y)!!');
+        $this->assertResult('(x+2)!!', '(x+2)!!');
+        $this->assertResult('sin(x)!!', '(\sin x)!!');
+    }
+
     public function testCanPrintConstant()
     {
         $this->assertResult('pi', '\pi{}');

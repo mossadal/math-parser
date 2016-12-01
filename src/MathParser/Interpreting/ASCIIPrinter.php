@@ -139,12 +139,31 @@ class ASCIIPrinter implements Visitor
     }
 
 
+    private function visitFactorialNode(FunctionNode $node)
+    {
+        $functionName = $node->getName();
+        $op = $node->getOperand();
+        $operand = $op->accept($this);
+
+        // Add parentheses most of the time.
+        if ($op instanceof NumberNode || $op instanceof IntegerNode || $op instanceof RationalNode) {
+            if ($op->getValue() < 0) $operand = "($operand)";
+        } elseif ($op instanceof VariableNode || $op instanceof ConstantNode) {
+            // Do nothing
+        } else {
+            $operand = "($operand)";
+        }
+
+        return "$operand$functionName";
+    }
+
     public function visitFunctionNode(FunctionNode $node)
     {
         $functionName = $node->getName();
 
-        $operand = $node->getOperand()->accept($this);
+        if ($functionName == '!' || $functionName == '!!') return $this->visitFactorialNode($node);
 
+        $operand = $node->getOperand()->accept($this);
         return "$functionName($operand)";
     }
 

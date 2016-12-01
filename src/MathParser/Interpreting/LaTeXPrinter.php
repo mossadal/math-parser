@@ -159,6 +159,7 @@ class LaTeXPrinter implements Visitor
 
         return "\\frac{{$p}}{{$q}}";
     }
+
     /**
      * Generate LaTeX code for a VariableNode
      *
@@ -171,6 +172,31 @@ class LaTeXPrinter implements Visitor
     public function visitVariableNode(VariableNode $node)
     {
         return $node->getName();
+    }
+
+
+    /**
+     * Generate LaTeX code for factorials
+     *
+     * @param FunctionNode $node AST to be typeset
+     * @retval string
+     */
+    private function visitFactorialNode(FunctionNode $node)
+    {
+        $functionName = $node->getName();
+        $op = $node->getOperand();
+        $operand = $op->accept($this);
+
+        // Add parentheses most of the time.
+        if ($op instanceof NumberNode || $op instanceof IntegerNode || $op instanceof RationalNode) {
+            if ($op->getValue() < 0) $operand = "($operand)";
+        } elseif ($op instanceof VariableNode || $op instanceof ConstantNode) {
+            // Do nothing
+        } else {
+            $operand = "($operand)";
+        }
+
+        return "$operand$functionName";
     }
 
     /**
@@ -219,6 +245,11 @@ class LaTeXPrinter implements Visitor
             case 'abs':
                 $operand = $node->getOperand();
                 return '\lvert ' . $operand->accept($this) . '\rvert ';
+
+            case '!':
+            case '!!':
+                return $this->visitFactorialNode($node);
+
             default:
                 $functionName = 'operatorname{'.$functionName.'}';
         }
