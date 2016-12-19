@@ -157,6 +157,7 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
         $this->assertResult('x^x', 'x^x*(log(x)+1)');
         $this->assertResult('x^(1/2)', '(1/2)*x^(-1/2)');
         $this->assertResult('e^x', 'e^x*(ln(e))');
+        $this->assertResult('sin(x)^cos(x)', 'sin(x)^cos(x)*((-sin(x))*ln(sin(x))+cos(x)*cos(x)/sin(x))');
     }
 
     public function testCanDifferentiateQuotient()
