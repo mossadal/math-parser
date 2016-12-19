@@ -271,7 +271,7 @@ class Evaluator implements Visitor
             return abs($inner);
 
             case 'sgn':
-            return $inner >= 0 ? 1 : 0;
+            return $inner >= 0 ? 1 : -1;
 
             case '!':
             $logGamma = Math::logGamma(1+$inner);
