@@ -218,7 +218,7 @@ class LaTeXPrinter implements Visitor
     {
         $functionName = $node->getName();
 
-        $operand = $this->parenthesize($node->getOperand(), new ExpressionNode(null,'*',null), ' ');
+        $operand = $node->getOperand()->accept($this);
 
         switch($functionName) {
             case 'sqrt': return "\\$functionName{".$node->getOperand()->accept($this).'}';
@@ -254,7 +254,7 @@ class LaTeXPrinter implements Visitor
                 $functionName = 'operatorname{'.$functionName.'}';
         }
 
-        return "\\$functionName$operand";
+        return "\\$functionName($operand)";
     }
 
     /**

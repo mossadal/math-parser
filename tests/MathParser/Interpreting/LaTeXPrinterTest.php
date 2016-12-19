@@ -132,6 +132,7 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('1/2', '\frac{1}{2}');
         $this->assertResult('x/y', '\frac{x}{y}');
         $this->assertResult('4/2', '2');
+        $this->assertResult('1/(sin(x)^2)', '\frac{1}{\sin(x)^2}');
     }
 
     public function testCanPrintMultiplication()
@@ -139,31 +140,31 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
         //$this->assertResult('2*3', '2\cdot 3');
         //$this->assertResult('2*x', '2x');
         //$this->assertResult('2*3^2', '2\cdot 3^2');
-        $this->assertResult('sin(x)*x', '\sin x\cdot x');
+        $this->assertResult('sin(x)*x', '\sin(x)\cdot x');
         $this->assertResult('2*(x+4)', '2(x+4)');
         $this->assertResult('(x+1)*(x+2)', '(x+1)(x+2)');
     }
 
     public function testCanPrintFunctions()
     {
-        $this->assertResult('sin(x)', '\sin x');
-        $this->assertResult('cos(x)', '\cos x');
-        $this->assertResult('tan(x)', '\tan x');
+        $this->assertResult('sin(x)', '\sin(x)');
+        $this->assertResult('cos(x)', '\cos(x)');
+        $this->assertResult('tan(x)', '\tan(x)');
 
         $this->assertResult('exp(x)', 'e^x');
         $this->assertResult('exp(2)', 'e^2');
         $this->assertResult('exp(2x)', 'e^{2x}');
         $this->assertResult('exp(x^2)', '\exp(x^2)');
 
-        $this->assertResult('log(x)', '\ln x');
-        $this->assertResult('log(2x)', '\ln 2x');
+        $this->assertResult('log(x)', '\ln(x)');
+        $this->assertResult('log(2x)', '\ln(2x)');
         $this->assertResult('log(2+x)', '\ln(2+x)');
 
         $this->assertResult('sqrt(x)', '\sqrt{x}');
         $this->assertResult('sqrt(x^2)', '\sqrt{x^2}');
 
-        $this->assertResult('asin(x)', '\arcsin x');
-        $this->assertResult('arsinh(x)', '\operatorname{arsinh} x');
+        $this->assertResult('asin(x)', '\arcsin(x)');
+        $this->assertResult('arsinh(x)', '\operatorname{arsinh}(x)');
     }
 
     public function testCanPrintFactorials()
@@ -173,7 +174,7 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('e!', 'e!');
         $this->assertResult('(x+y)!', '(x+y)!');
         $this->assertResult('(x+2)!', '(x+2)!');
-        $this->assertResult('sin(x)!', '(\sin x)!');
+        $this->assertResult('sin(x)!', '(\sin(x))!');
         $this->assertResult('(3!)!', '(3!)!');
     }
 
@@ -184,7 +185,7 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('e!!', 'e!!');
         $this->assertResult('(x+y)!!', '(x+y)!!');
         $this->assertResult('(x+2)!!', '(x+2)!!');
-        $this->assertResult('sin(x)!!', '(\sin x)!!');
+        $this->assertResult('sin(x)!!', '(\sin(x))!!');
     }
 
     public function testCanPrintConstant()
