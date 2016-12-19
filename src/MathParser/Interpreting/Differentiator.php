@@ -95,7 +95,7 @@ class Differentiator implements Visitor
      * - \\( (-f)' = -f' \\)
      * - \\( (f*g)' = f'g + f g' \\)
      * - \\( (f/g)' = (f' g - f g')/g^2 \\)
-     * - \\( (f^g)' = f^g  (g' \\log(f) + g/f) \\) with a simpler expression when g is a NumberNode
+     * - \\( (f^g)' = f^g  (g' \\log(f) + gf'/f) \\) with a simpler expression when g is a NumberNode
      *
      * @throws UnknownOperatorException if the operator is something other than
      *      `+`, `-`, `*`, `/` or `^`
@@ -152,7 +152,9 @@ class Differentiator implements Visitor
                     return $this->nodeFactory->multiplication($exponent, $this->nodeFactory->multiplication($fpow, $leftValue));
                 } else {
                     $term1 = $this->nodeFactory->multiplication($rightValue, new FunctionNode('log', $node->getLeft()));
-                    $term2 = $this->nodeFactory->division($node->getRight(), $node->getLeft());
+                    $term2 = $this->nodeFactory->division(
+                        $this->nodeFactory->multiplication($node->getRight(), $node->getLeft()->accept($this)), 
+                        $node->getLeft());
                     $factor2 = $this->nodeFactory->addition($term1, $term2);
 
                     return $this->nodeFactory->multiplication($node, $factor2);
