@@ -61,7 +61,7 @@ class Evaluator implements Visitor
      * @param mixed $variables key-value array of variables with corresponding values.
      *
      */
-    public function __construct($variables=null)
+    public function __construct($variables=[])
     {
         $this->variables = $variables;
     }
