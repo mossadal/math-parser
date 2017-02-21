@@ -241,6 +241,7 @@ class Parser
     protected function handleExpression($node)
     {
         if ($node instanceof FunctionNode) throw new ParenthesisMismatchException($node->getOperator());
+        if ($node instanceof SubExpressionNode) throw new ParenthesisMismatchException($node->getOperator());
 
         if (!$this->simplifyingParser) return $this->naiveHandleExpression($node);
 

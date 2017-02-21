@@ -433,6 +433,18 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
         $this->parser->parse('(1+1');
     }
 
+    public function testCanParseUnbalancedParentheses()
+    {
+        $this->setExpectedException(ParenthesisMismatchException::class);
+        $this->parser->parse('1(2');
+    }
+
+    public function testCanParseUnbalancedParentheses2()
+    {
+        $this->setExpectedException(ParenthesisMismatchException::class);
+        $this->parser->parse('1)2');
+    }
+
 
     public function testCanEvaluateNode()
     {
@@ -495,4 +507,6 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException(SyntaxErrorException::class);
         $this->parser->parse('1+!1');
     }
+
+
 }
