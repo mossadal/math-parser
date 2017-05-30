@@ -190,6 +190,7 @@ class Parser
                         case TokenType::AdditionOperator:
                         $node = null;
                         break;
+
                         // Unary -, replace the token.
                         case TokenType::SubtractionOperator:
                         $node->setOperator('~');

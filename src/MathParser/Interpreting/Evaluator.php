@@ -104,16 +104,18 @@ class Evaluator implements Visitor
         // Perform the right operation based on the operator
         switch ($operator) {
             case '+':
-            return $leftValue + $rightValue;
+                return $leftValue + $rightValue;
             case '-':
-            return $rightValue === null ? -$leftValue : $leftValue - $rightValue;
+                return $rightValue === null ? -$leftValue : $leftValue - $rightValue;
             case '*':
-            return $rightValue * $leftValue;
+                return $rightValue * $leftValue;
             case '/':
-            if ($rightValue == 0) throw new DivisionByZeroException();
-            return $leftValue/$rightValue;
+                if ($rightValue == 0) throw new DivisionByZeroException();
+                    return $leftValue/$rightValue;
             case '^':
-            return pow($leftValue, $rightValue);
+                return pow($leftValue, $rightValue);
+            case '=':
+                return 1;
 
             default:
             throw new UnknownOperatorException($operator);

@@ -67,6 +67,12 @@ final class TokenType
     /** Token representing postfix subfactorial operator '!!' */
     const SemiFactorialOperator = 105;
 
+    /** Token representing equal operator */
+    const EqualCompareOperator = 106;
+    const BooleanAndOperator = 107;
+    const BooleanOrOperator = 108;
+
+
     /** Token represented a function name, e.g. 'sin' */
     const FunctionName = 200;
 

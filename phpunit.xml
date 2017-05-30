@@ -26,6 +26,11 @@
         <testsuite name="AllTests">
         <directory>tests</directory>
         </testsuite>
+
+        <testsuite name="BooleanOperators">
+            <file>tests/MathParser/Interpreting/EvaluatorBooleanOperatorTest.php</file>
+
+        </testsuite>
     </testsuites>
 
     <filter>

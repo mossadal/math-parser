@@ -75,6 +75,12 @@ class NodeFactory {
      **/
     protected $exponentiationFactory;
 
+    protected $boolEqualNodeFactory;
+
+    protected $boolAndNodeFactory;
+
+    protected $boolOrNodeFactory;
+
     /**
      * Constructor
      */
@@ -85,6 +91,9 @@ class NodeFactory {
         $this->multiplicationFactory = new MultiplicationNodeFactory();
         $this->divisionFactory = new DivisionNodeFactory();
         $this->exponentiationFactory = new ExponentiationNodeFactory();
+        $this->boolEqualNodeFactory = new BoolEqualNodeFactory();
+        $this->boolAndNodeFactory = new BoolAndNodeFactory();
+        $this->boolOrNodeFactory = new BoolOrNodeFactory();
     }
 
     /**
@@ -164,6 +173,21 @@ class NodeFactory {
         return $this->subtractionFactory->createUnaryMinusNode($operand);
     }
 
+
+    public function compareEqual($leftOperand, $rightOperand) {
+        return $this->boolEqualNodeFactory->makeNode($leftOperand, $rightOperand);
+    }
+
+
+    public function boolAnd($leftOperand, $rightOperand) {
+        return $this->boolAndNodeFactory->makeNode($leftOperand, $rightOperand);
+    }
+
+    public function boolOr($leftOperand, $rightOperand) {
+        return $this->boolOrNodeFactory->makeNode($leftOperand, $rightOperand);
+    }
+
+
     /**
      * Simplify the given ExpressionNode, using the appropriate factory.
      *
@@ -178,6 +202,9 @@ class NodeFactory {
             case '*': return $this->multiplication($node->getLeft(), $node->getRight());
             case '/': return $this->division($node->getLeft(), $node->getRight());
             case '^': return $this->exponentiation($node->getLeft(), $node->getRight());
+            case '=': return $this->compareEqual($node->getLeft(), $node->getRight());
+            case '&&': return $this->boolAnd($node->getLeft(), $node->getRight());
+            case '||': return $this->boolOr($node->getLeft(), $node->getRight());
         }
     }
 
