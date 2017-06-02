@@ -83,6 +83,8 @@ class EvaluatorBooleanOperatorTest extends PHPUnit_Framework_TestCase
     public function testNotFunctionWithFloatValue() {
 
         $this->assertResult('!(0.1)', 0);
+        $this->assertResult('!x', 0);
+        $this->assertResult('!(x+y)', 0);
     }
 
 
