@@ -87,8 +87,4 @@ class EvaluatorBooleanOperatorTest extends PHPUnit_Framework_TestCase
         $this->assertResult('!(x+y)', 0);
     }
 
-
-
-
-
 }
