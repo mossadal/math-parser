@@ -11,6 +11,7 @@ use MathParser\Lexer\StdMathLexer;
 use MathParser\Interpreting\Visitors\Visitor;
 use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\ExpressionNode;
+use MathParser\Parsing\Nodes\NotBooleanNode;
 use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\Parsing\Nodes\FunctionNode;
@@ -276,8 +277,15 @@ class Evaluator implements Visitor
             return $inner >= 0 ? 1 : -1;
 
             case '!':
-            $logGamma = Math::logGamma(1+$inner);
-            return exp($logGamma);
+                if($node instanceof NotBooleanNode) {
+                    $intValue = intval(ceil($inner));
+                    $result = !$intValue;
+                }
+                else {
+                    $logGamma = Math::logGamma(1+$inner);
+                    $result = exp($logGamma);
+                }
+                return $result;
 
             case '!!':
             if (round($inner) != $inner)throw new \UnexpectedValueException("Expecting positive integer (semifactorial)");

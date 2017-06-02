@@ -5,13 +5,15 @@ use MathParser\Interpreting\Interpreter;
 use MathParser\RationalMathParser;
 use MathParser\StdMathParser;
 
-
+use MathParser\Interpreting\ASCIIPrinter;
 class EvaluatorBooleanOperatorTest extends PHPUnit_Framework_TestCase
 {
     private $parser;
     private $rparser;
+
     private $evaluator;
     private $variables;
+
 
     public function setUp()
     {
@@ -64,5 +66,27 @@ class EvaluatorBooleanOperatorTest extends PHPUnit_Framework_TestCase
         $this->assertResult('0 || 0', 0);
         $this->assertResult('2.2 || 1', 1);
     }
+
+    public function testNotFunctionIsValid() {
+        $expression = $this->parser->parse('!1');
+        $this->assertNotNull($expression);
+    }
+
+
+    public function testNotFunctionWithIntegerValue() {
+        $this->assertResult('!1', 0);
+        $this->assertResult('!0', 1);
+        $this->assertResult('!(0+1)', 0);
+        $this->assertResult('!(!0)', 0);
+    }
+
+    public function testNotFunctionWithFloatValue() {
+
+        $this->assertResult('!(0.1)', 0);
+    }
+
+
+
+
 
 }

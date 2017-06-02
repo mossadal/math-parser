@@ -9,10 +9,10 @@
 
 
 /**
-* @namespace MathParser::Parsing
-*
-* Parser related classes
-*/
+ * @namespace MathParser::Parsing
+ *
+ * Parser related classes
+ */
 namespace MathParser\Parsing;
 
 use MathParser\Lexing\Token;
@@ -22,6 +22,7 @@ use MathParser\Lexing\TokenAssociativity;
 
 use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\ExpressionNode;
+use MathParser\Parsing\Nodes\NotBooleanNode;
 use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\Parsing\Nodes\FunctionNode;
@@ -40,49 +41,50 @@ use MathParser\Exceptions\ParenthesisMismatchException;
 use MathParser\Interpreting\PrettyPrinter;
 
 /**
-* Mathematical expression parser, based on the shunting yard algorithm.
-*
-* Parse a token string into an abstract syntax tree (AST).
-*
-* As the parser loops over the individual tokens, two stacks are kept
-* up to date. One stack ($operatorStack) consists of hitherto unhandled
-* tokens corresponding to ''operators'' (unary and binary operators, function
-* applications and parenthesis) and a stack of parsed sub-expressions (the
-* $operandStack).
-*
-* If the current token is a terminal token (number, variable or constant),
-* a corresponding node is pushed onto the operandStack.
-*
-* Otherwise, the precedence of the current token is compared to the top
-* element(t) on the operatorStack, and as long as the current token has
-* lower precedence, we keep popping operators from the stack to constuct
-* more complicated subexpressions together with the top items on the operandStack.
-*
-* Once the token list is empty, we pop the remaining operators as above, and
-* if the formula was well-formed, the only thing remaining on the operandStack
-* is a completely parsed AST, which we return.
-*/
+ * Mathematical expression parser, based on the shunting yard algorithm.
+ *
+ * Parse a token string into an abstract syntax tree (AST).
+ *
+ * As the parser loops over the individual tokens, two stacks are kept
+ * up to date. One stack ($operatorStack) consists of hitherto unhandled
+ * tokens corresponding to ''operators'' (unary and binary operators, function
+ * applications and parenthesis) and a stack of parsed sub-expressions (the
+ * $operandStack).
+ *
+ * If the current token is a terminal token (number, variable or constant),
+ * a corresponding node is pushed onto the operandStack.
+ *
+ * Otherwise, the precedence of the current token is compared to the top
+ * element(t) on the operatorStack, and as long as the current token has
+ * lower precedence, we keep popping operators from the stack to constuct
+ * more complicated subexpressions together with the top items on the operandStack.
+ *
+ * Once the token list is empty, we pop the remaining operators as above, and
+ * if the formula was well-formed, the only thing remaining on the operandStack
+ * is a completely parsed AST, which we return.
+ */
 class Parser
 {
     /**
-    * Token[] list of tokens to process
-    */
+     * Token[] list of tokens to process
+     */
     protected $tokens;
     /**
-    * Stack stack of operators waiting to process
-    */
+     * Stack stack of operators waiting to process
+     */
     protected $operatorStack;
     /**
-    * Stack stack of operands waiting to process
-    */
+     * Stack stack of operands waiting to process
+     */
     protected $operandStack;
     /**
      * NodeFactory
      */
-     protected $nodeFactory;
+    protected $nodeFactory;
 
     protected $rationalFactory = false;
     protected $simplifyingParser = true;
+    protected $lastUnaryOperator = null;
 
     /**
      * Constructor
@@ -103,11 +105,11 @@ class Parser
     }
 
     /**
-    * Parse list of tokens
-    *
-    * @param array $tokens Array (Token[]) of input tokens.
-    * @retval Node AST representing the parsed expression.
-    */
+     * Parse list of tokens
+     *
+     * @param array $tokens Array (Token[]) of input tokens.
+     * @retval Node AST representing the parsed expression.
+     */
     public function parse(array $tokens)
     {
         // Filter away any whitespace
@@ -125,13 +127,13 @@ class Parser
     }
 
     /**
-    * Implementation of the shunting yard parsing algorithm
-    *
-    * @param array $tokens Token[] array of tokens to process
-    * @retval Node AST of the parsed expression
-    * @throws SyntaxErrorException
-    * @throws ParenthesisMismatchException
-    */
+     * Implementation of the shunting yard parsing algorithm
+     *
+     * @param array $tokens Token[] array of tokens to process
+     * @retval Node AST of the parsed expression
+     * @throws SyntaxErrorException
+     * @throws ParenthesisMismatchException
+     */
     private function shuntingYard(array $tokens)
     {
         // Clear the oepratorStack
@@ -144,13 +146,10 @@ class Parser
         $lastNode = null;
 
         // Loop over the tokens
+
         for ($index = 0; $index < count($tokens); $index++)
         {
             $token = $tokens[$index];
-
-            // echo "current token $token\n";
-            // echo("operands:" . $this->operandStack . "\n");
-            // echo("operators: " . $this->operatorStack . "\n\n");
 
             if ($this->rationalFactory) {
                 $node = Node::rationalFactory($token);
@@ -165,7 +164,6 @@ class Parser
             // Push terminal tokens on the operandStack
             elseif ($node->isTerminal()) {
                 $this->operandStack->push($node);
-
                 // Push function applications or open parentheses `(` onto the operatorStack
             } elseif ($node instanceof FunctionNode) {
                 $this->operatorStack->push($node);
@@ -175,9 +173,14 @@ class Parser
 
                 // Handle the remaining operators.
             } elseif ($node instanceof PostfixOperatorNode) {
+
                 $op = $this->operandStack->pop();
-                if ($op == NULL) throw new SyntaxErrorException();
-                $this->operandStack->push(new FunctionNode($node->getOperator(), $op));
+                if ($op == NULL) {
+                    $this->operatorStack->push(new NotBooleanNode($node->getOperator(), null));
+                    continue;
+                } else {
+                    $this->operandStack->push(new FunctionNode($node->getOperator(), $op));
+                }
 
             } elseif ($node instanceof ExpressionNode) {
 
@@ -188,13 +191,13 @@ class Parser
                     switch($token->getType()) {
                         // Unary +, just ignore it
                         case TokenType::AdditionOperator:
-                        $node = null;
-                        break;
+                            $node = null;
+                            break;
 
                         // Unary -, replace the token.
                         case TokenType::SubtractionOperator:
-                        $node->setOperator('~');
-                        break;
+                            $node->setOperator('~');
+                            break;
                     }
                 } else {
                     // Pop operators with higher priority
@@ -211,7 +214,9 @@ class Parser
             }
 
             // Remember the current token (if it hasn't been nulled, for example being a unary +)
-            if ($node) $lastNode = $node;
+            if ($node) {
+                $lastNode = $node;
+            }
         }
 
 
@@ -232,18 +237,26 @@ class Parser
     }
 
 
+
+
     /**
-    * Populate node with operands.
-    *
-    * @param Node $node
-    * @retval Node
-    * @throws SyntaxErrorException
-    */
+     * Populate node with operands.
+     *
+     * @param Node $node
+     * @retval Node
+     * @throws SyntaxErrorException
+     */
     protected function handleExpression($node)
     {
+
+        if ($node instanceof NotBooleanNode) {
+            $op = $this->operandStack->pop();
+            $node->setOperand($op);
+            return $node;
+        }
+
         if ($node instanceof FunctionNode) throw new ParenthesisMismatchException($node->getOperator());
         if ($node instanceof SubExpressionNode) throw new ParenthesisMismatchException($node->getOperator());
-
         if (!$this->simplifyingParser) return $this->naiveHandleExpression($node);
 
         if ($node->getOperator() == '~') {
@@ -271,6 +284,7 @@ class Parser
             return $this->nodeFactory->simplify($node);
         }
 
+
         $right = $this->operandStack->pop();
         $left = $this->operandStack->pop();
         if ($right === null || $left === null) {
@@ -280,16 +294,17 @@ class Parser
         $node->setLeft($left);
         $node->setRight($right);
 
+
         return $this->nodeFactory->simplify($node);
     }
 
     /**
-    * Populate node with operands, without any simplification.
-    *
-    * @param Node $node
-    * @retval Node
-    * @throws SyntaxErrorException
-    */
+     * Populate node with operands, without any simplification.
+     *
+     * @param Node $node
+     * @retval Node
+     * @throws SyntaxErrorException
+     */
     protected function naiveHandleExpression($node)
     {
         if ($node->getOperator() == '~') {
@@ -318,11 +333,11 @@ class Parser
     }
 
     /**
-    * Remove Whitespace from the token list.
-    *
-    * @param array $tokens Input list of tokens
-    * @retval Token[]
-    */
+     * Remove Whitespace from the token list.
+     *
+     * @param array $tokens Input list of tokens
+     * @retval Token[]
+     */
     protected function filterTokens(array $tokens)
     {
         $filteredTokens = array_filter($tokens, function (Token $t) {
@@ -334,11 +349,11 @@ class Parser
     }
 
     /**
-    * Insert multiplication tokens where needed (taking care of implicit mulitplication).
-    *
-    * @param array $tokens Input list of tokens (Token[])
-    * @retval Token[]
-    */
+     * Insert multiplication tokens where needed (taking care of implicit mulitplication).
+     *
+     * @param array $tokens Input list of tokens (Token[])
+     * @retval Token[]
+     */
     protected function parseImplicitMultiplication(array $tokens)
     {
         $result = [];
@@ -354,27 +369,27 @@ class Parser
     }
 
     /**
-    * Determine if the parser allows implicit multiplication. Create a
-    * subclass of Parser, overriding this function, returning false instead
-    * to diallow implicit multiplication.
-    *
-    * ### Example:
-    *
-    * ~~~{.php}
-    * class ParserWithoutImplicitMultiplication extends Parser {
-    *   protected static function allowImplicitMultiplication() {
-    *     return false;
-    *   }
-    * }
-    *
-    * $lexer = new StdMathLexer();
-    * $tokens = $lexer->tokenize('2x');
-    * $parser = new ParserWithoutImplicitMultiplication();
-    * $node = $parser->parse($tokens); // Throws a SyntaxErrorException
-    * ~~~
-    * @property allowImplicitMultiplication
-    * @retval boolean
-    */
+     * Determine if the parser allows implicit multiplication. Create a
+     * subclass of Parser, overriding this function, returning false instead
+     * to diallow implicit multiplication.
+     *
+     * ### Example:
+     *
+     * ~~~{.php}
+     * class ParserWithoutImplicitMultiplication extends Parser {
+     *   protected static function allowImplicitMultiplication() {
+     *     return false;
+     *   }
+     * }
+     *
+     * $lexer = new StdMathLexer();
+     * $tokens = $lexer->tokenize('2x');
+     * $parser = new ParserWithoutImplicitMultiplication();
+     * $node = $parser->parse($tokens); // Throws a SyntaxErrorException
+     * ~~~
+     * @property allowImplicitMultiplication
+     * @retval boolean
+     */
     protected static function allowImplicitMultiplication()
     {
         return true;
