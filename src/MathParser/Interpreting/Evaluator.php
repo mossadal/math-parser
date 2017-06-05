@@ -116,7 +116,12 @@ class Evaluator implements Visitor
             case '^':
                 return pow($leftValue, $rightValue);
             case '=':
-                return 1;
+                return intval(ceil($leftValue))  === intval(ceil($rightValue));
+            case '&&':
+                return intval(ceil($leftValue))  && intval(ceil($rightValue));
+            case '||':
+                return intval(ceil($leftValue))  || intval(ceil($rightValue));
+
             case '>':
                 return ($leftValue > $rightValue);
 

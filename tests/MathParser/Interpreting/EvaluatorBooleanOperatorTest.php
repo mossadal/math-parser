@@ -43,6 +43,7 @@ class EvaluatorBooleanOperatorTest extends PHPUnit_Framework_TestCase
         $this->assertResult('10+8+2=10+10', 1);
         $this->assertResult('4/3=4/3', 1);
         $this->assertResult('4=5', 0);
+        $this->assertResult('x=y', 0);
     }
 
 
@@ -52,6 +53,7 @@ class EvaluatorBooleanOperatorTest extends PHPUnit_Framework_TestCase
         $this->assertResult('1 && 0', 0);
         $this->assertResult('0 && 0', 0);
         $this->assertResult('2.2 && 1', 1);
+        $this->assertResult('x && y', 1);
     }
 
 
@@ -65,6 +67,7 @@ class EvaluatorBooleanOperatorTest extends PHPUnit_Framework_TestCase
         $this->assertResult('1 || 0', 1);
         $this->assertResult('0 || 0', 0);
         $this->assertResult('2.2 || 1', 1);
+        $this->assertResult('x || y', 1);
     }
 
     public function testNotFunctionIsValid() {
@@ -73,19 +76,18 @@ class EvaluatorBooleanOperatorTest extends PHPUnit_Framework_TestCase
     }
 
 
-    public function testNotOperatorWithIntegerValue() {
+    public function testNotOperator() {
         $this->assertResult('!1', 0);
         $this->assertResult('!0', 1);
         $this->assertResult('!(0+1)', 0);
         $this->assertResult('!(!0)', 0);
-    }
-
-    public function testNotOperatorWithFloatValue() {
 
         $this->assertResult('!(0.1)', 0);
         $this->assertResult('!x', 0);
         $this->assertResult('!(x+y)', 0);
+
     }
+
 
     public function testGreaterOperatorValidSyntax() {
         $expression = $this->parser->parse('3 > 1');

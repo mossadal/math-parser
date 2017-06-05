@@ -51,14 +51,14 @@ class BoolAndNodeFactory implements ExpressionNodeFactory
         $type = $this->resultingType($leftOperand, $rightOperand);
         switch($type) {
             case Node::NumericFloat:
-                $result = ( intval($leftOperand->getValue())  && intval($rightOperand->getValue()));
+                $result = ( intval(ceil($leftOperand->getValue()))  && intval(ceil($rightOperand->getValue())));
                 return new NumberNode($result);
 
             case Node::NumericRational:
                 $leftValue = ($leftOperand->getNumerator() / $leftOperand->getDenominator());
-                $leftValue = intval($leftValue);
+                $leftValue = intval(ceil($leftValue));
                 $rightValue =  ($rightOperand->getDenominator() / $rightOperand->getNumerator());
-                $rightValue = intval($rightValue);
+                $rightValue = intval(ceil($rightValue));
                 $result = ($leftValue && $rightValue);
                 return new IntegerNode($result);
 
