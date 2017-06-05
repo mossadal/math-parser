@@ -81,8 +81,10 @@ class Lexer
 
             // If no tokens were matched, it means that the string has invalid tokens
             // for which we did not define a token definition
-            if (!$token)
+            if (!$token) {
                 throw new UnknownTokenException(0,$currentIndex);
+            }
+
 
             // Add the matched token to our list of token
             $tokens[] = $token;

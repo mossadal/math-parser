@@ -97,6 +97,7 @@ class EvaluatorBooleanOperatorTest extends PHPUnit_Framework_TestCase
         $this->assertResult('1 > 3', 0);
         $this->assertResult('1.1 > 3', 0);
         $this->assertResult('3.1 > 3', 1);
+        $this->assertResult('x > y', 0);
     }
 
 

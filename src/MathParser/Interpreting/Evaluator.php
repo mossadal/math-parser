@@ -117,6 +117,8 @@ class Evaluator implements Visitor
                 return pow($leftValue, $rightValue);
             case '=':
                 return 1;
+            case '>':
+                return ($leftValue > $rightValue);
 
             default:
             throw new UnknownOperatorException($operator);
