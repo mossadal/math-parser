@@ -96,6 +96,41 @@ class ExpressionNode extends Node
                 $this->associativity = self::RIGHT_ASSOC;
                 break;
 
+            case '=':
+                $this->precedence = 5;
+                $this->associativity = self::LEFT_ASSOC;
+                break;
+
+            case '&&':
+                $this->precedence = 5;
+                $this->associativity = self::LEFT_ASSOC;
+                break;
+
+            case '||':
+                $this->precedence = 5;
+                $this->associativity = self::LEFT_ASSOC;
+                break;
+
+            case '>':
+                $this->precedence = 5;
+                $this->associativity = self::LEFT_ASSOC;
+                break;
+
+            case '>=':
+                $this->precedence = 5;
+                $this->associativity = self::LEFT_ASSOC;
+                break;
+
+            case '<':
+                $this->precedence = 5;
+                $this->associativity = self::LEFT_ASSOC;
+                break;
+
+            case '<=':
+                $this->precedence = 5;
+                $this->associativity = self::LEFT_ASSOC;
+                break;
+
             default:
                 throw new UnknownOperatorException($operator);
         }

@@ -109,6 +109,16 @@ use MathParser\Lexing\TokenType;
         $this->add(new TokenDefinition('/\//', TokenType::DivisionOperator));
         $this->add(new TokenDefinition('/\^/', TokenType::ExponentiationOperator));
 
+        $this->add(new TokenDefinition('/\=/', TokenType::EqualCompareOperator));
+        $this->add(new TokenDefinition('/\>=/', TokenType::GreaterOrEqualOperator));
+        $this->add(new TokenDefinition('/\>/', TokenType::GreaterOperator));
+        $this->add(new TokenDefinition('/\<=/', TokenType::SmallerOrEqualOperator));
+        $this->add(new TokenDefinition('/\</', TokenType::SmallerOperator));
+
+
+        $this->add(new TokenDefinition('/\&&/', TokenType::BooleanAndOperator));
+        $this->add(new TokenDefinition('/\|\|/', TokenType::BooleanOrOperator));
+
         $this->add(new TokenDefinition('/pi/', TokenType::Constant));
         $this->add(new TokenDefinition('/e/', TokenType::Constant));
         $this->add(new TokenDefinition('/i/', TokenType::Constant));

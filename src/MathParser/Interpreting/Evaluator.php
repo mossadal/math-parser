@@ -11,6 +11,7 @@ use MathParser\Lexer\StdMathLexer;
 use MathParser\Interpreting\Visitors\Visitor;
 use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\ExpressionNode;
+use MathParser\Parsing\Nodes\NotBooleanNode;
 use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\Parsing\Nodes\FunctionNode;
@@ -104,16 +105,32 @@ class Evaluator implements Visitor
         // Perform the right operation based on the operator
         switch ($operator) {
             case '+':
-            return $leftValue + $rightValue;
+                return $leftValue + $rightValue;
             case '-':
-            return $rightValue === null ? -$leftValue : $leftValue - $rightValue;
+                return $rightValue === null ? -$leftValue : $leftValue - $rightValue;
             case '*':
-            return $rightValue * $leftValue;
+                return $rightValue * $leftValue;
             case '/':
-            if ($rightValue == 0) throw new DivisionByZeroException();
-            return $leftValue/$rightValue;
+                if ($rightValue == 0) throw new DivisionByZeroException();
+                    return $leftValue/$rightValue;
             case '^':
-            return pow($leftValue, $rightValue);
+                return pow($leftValue, $rightValue);
+            case '=':
+                return intval(ceil($leftValue))  === intval(ceil($rightValue));
+            case '&&':
+                return intval(ceil($leftValue))  && intval(ceil($rightValue));
+            case '||':
+                return intval(ceil($leftValue))  || intval(ceil($rightValue));
+
+            case '>':
+                return ($leftValue > $rightValue);
+            case '>=':
+                return $leftValue  >= $rightValue;
+            case '<':
+                return $leftValue  < $rightValue;
+            case '<=':
+                return $leftValue  <= $rightValue;
+
 
             default:
             throw new UnknownOperatorException($operator);
@@ -274,8 +291,15 @@ class Evaluator implements Visitor
             return $inner >= 0 ? 1 : -1;
 
             case '!':
-            $logGamma = Math::logGamma(1+$inner);
-            return exp($logGamma);
+                if($node instanceof NotBooleanNode) {
+                    $intValue = intval(ceil($inner));
+                    $result = !$intValue;
+                }
+                else {
+                    $logGamma = Math::logGamma(1+$inner);
+                    $result = exp($logGamma);
+                }
+                return $result;
 
             case '!!':
             if (round($inner) != $inner)throw new \UnexpectedValueException("Expecting positive integer (semifactorial)");

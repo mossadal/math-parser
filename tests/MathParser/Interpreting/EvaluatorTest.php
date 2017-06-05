@@ -251,7 +251,7 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
         $this->assertResult('0!', 1);
         $this->assertResult('3!', 6);
         $this->assertResult('(3!)!', 720);
-        $this->assertResult('5!/(2!3!)', 10);
+        $this->assertResult('5!/(2!*3!)', 10);
         $this->assertResult('5!!', 15);
         $this->assertApproximateResult('4.12124!', 28.85455491);
     }

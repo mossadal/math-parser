@@ -146,8 +146,14 @@ class Token
 
         if (!$check2) return false;
 
-        if ($token1->type == TokenType::FunctionName && $token2->type == TokenType::OpenParenthesis)
+        if ($token1->type == TokenType::FunctionName && $token2->type == TokenType::OpenParenthesis) {
             return false;
+        }
+
+        if($token1->type == TokenType::FactorialOperator && $check2) {
+            return false;
+        }
+
 
         return true;
     }
