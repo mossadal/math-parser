@@ -72,6 +72,7 @@ final class TokenType
     const BooleanAndOperator = 107;
     const BooleanOrOperator = 108;
     const GreaterOperator = 109;
+    const GreaterOrEqualOperator = 110;
 
 
     /** Token represented a function name, e.g. 'sin' */

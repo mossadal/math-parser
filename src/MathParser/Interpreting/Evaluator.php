@@ -124,6 +124,9 @@ class Evaluator implements Visitor
 
             case '>':
                 return ($leftValue > $rightValue);
+            case '>=':
+                return $leftValue  >= $rightValue;
+
 
             default:
             throw new UnknownOperatorException($operator);

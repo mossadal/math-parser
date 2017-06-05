@@ -82,6 +82,7 @@ class NodeFactory {
     protected $boolOrNodeFactory;
 
     protected $greaterNodeFactory;
+    protected $greaterOrEqualNodeFactory;
 
     /**
      * Constructor
@@ -97,6 +98,7 @@ class NodeFactory {
         $this->boolAndNodeFactory = new BoolAndNodeFactory();
         $this->boolOrNodeFactory = new BoolOrNodeFactory();
         $this->greaterNodeFactory = new GreaterNodeFactory();
+        $this->greaterOrEqualNodeFactory = new GreaterOrEqualNodeFactory();
     }
 
     /**
@@ -194,6 +196,9 @@ class NodeFactory {
         return $this->greaterNodeFactory->makeNode($leftOperand, $rightOperand);
     }
 
+    public function greaterOrEqual($leftOperand, $rightOperand) {
+        return $this->greaterOrEqualNodeFactory->makeNode($leftOperand, $rightOperand);
+    }
     /**
      * Simplify the given ExpressionNode, using the appropriate factory.
      *
@@ -210,9 +215,10 @@ class NodeFactory {
             case '^': return $this->exponentiation($node->getLeft(), $node->getRight());
             case '=': return $this->compareEqual($node->getLeft(), $node->getRight());
             case '>': return $this->greater($node->getLeft(), $node->getRight());
-
+            case '>=': return $this->greaterOrEqual($node->getLeft(), $node->getRight());
             case '&&': return $this->boolAnd($node->getLeft(), $node->getRight());
             case '||': return $this->boolOr($node->getLeft(), $node->getRight());
+
         }
     }
 

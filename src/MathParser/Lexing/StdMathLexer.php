@@ -114,6 +114,7 @@ namespace MathParser\Lexing;
 
 
         $this->add(new TokenDefinition('/\=/', TokenType::EqualCompareOperator));
+        $this->add(new TokenDefinition('/\>=/', TokenType::GreaterOrEqualOperator));
         $this->add(new TokenDefinition('/\>/', TokenType::GreaterOperator));
         $this->add(new TokenDefinition('/\&&/', TokenType::BooleanAndOperator));
         $this->add(new TokenDefinition('/\|\|/', TokenType::BooleanOrOperator));
