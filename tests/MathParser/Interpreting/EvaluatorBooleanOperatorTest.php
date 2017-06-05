@@ -131,5 +131,9 @@ class EvaluatorBooleanOperatorTest extends PHPUnit_Framework_TestCase
 
     }
 
+    public function testSmallerOrEqualOperatorValidSyntax() {
+        $expression = $this->parser->parse('1 <= 3');
+        $this->assertNotNull($expression);
+    }
 
 }

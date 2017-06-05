@@ -128,6 +128,8 @@ class Evaluator implements Visitor
                 return $leftValue  >= $rightValue;
             case '<':
                 return $leftValue  < $rightValue;
+            case '<=':
+                return $leftValue  <= $rightValue;
 
 
             default:
