@@ -73,18 +73,31 @@ class EvaluatorBooleanOperatorTest extends PHPUnit_Framework_TestCase
     }
 
 
-    public function testNotFunctionWithIntegerValue() {
+    public function testNotOperatorWithIntegerValue() {
         $this->assertResult('!1', 0);
         $this->assertResult('!0', 1);
         $this->assertResult('!(0+1)', 0);
         $this->assertResult('!(!0)', 0);
     }
 
-    public function testNotFunctionWithFloatValue() {
+    public function testNotOperatorWithFloatValue() {
 
         $this->assertResult('!(0.1)', 0);
         $this->assertResult('!x', 0);
         $this->assertResult('!(x+y)', 0);
     }
+
+    public function testGreaterOperatorValidSyntax() {
+        $expression = $this->parser->parse('3 > 1');
+        $this->assertNotNull($expression);
+    }
+
+    public function testGreaterOperator() {
+        $this->assertResult('3 > 1', 1);
+        $this->assertResult('1 > 3', 0);
+        $this->assertResult('1.1 > 3', 0);
+        $this->assertResult('3.1 > 3', 1);
+    }
+
 
 }
