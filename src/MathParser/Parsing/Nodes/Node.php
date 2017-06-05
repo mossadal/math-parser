@@ -125,6 +125,7 @@ abstract class Node implements Visitable
             case TokenType::BooleanOrOperator:
             case TokenType::GreaterOperator:
             case TokenType::GreaterOrEqualOperator:
+            case TokenType::SmallerOperator:
                 return new ExpressionNode(null, $token->getValue(), null);
 
             case TokenType::FactorialOperator:
