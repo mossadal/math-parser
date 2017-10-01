@@ -3,25 +3,21 @@
  * @author      Frank Wikström <frank@mossadal.se>
  * @copyright   2015 Frank Wikström
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
-*/
+ */
 
 namespace MathParser\Interpreting;
 
-use MathParser\Interpreting\Visitors\Visitor;
-use MathParser\Parsing\Nodes\Node;
-use MathParser\Parsing\Nodes\ExpressionNode;
-use MathParser\Parsing\Nodes\VariableNode;
-use MathParser\Parsing\Nodes\FunctionNode;
-use MathParser\Parsing\Nodes\ConstantNode;
-
-use MathParser\Parsing\Nodes\IntegerNode;
-use MathParser\Parsing\Nodes\RationalNode;
-use MathParser\Parsing\Nodes\NumberNode;
-
-use MathParser\Lexing\StdMathLexer;
-use MathParser\Lexing\TokenAssociativity;
-
 use MathParser\Exceptions\UnknownConstantException;
+use MathParser\Interpreting\Visitors\Visitor;
+use MathParser\Lexing\StdMathLexer;
+use MathParser\Parsing\Nodes\ConstantNode;
+use MathParser\Parsing\Nodes\ExpressionNode;
+use MathParser\Parsing\Nodes\FunctionNode;
+use MathParser\Parsing\Nodes\IntegerNode;
+use MathParser\Parsing\Nodes\Node;
+use MathParser\Parsing\Nodes\NumberNode;
+use MathParser\Parsing\Nodes\RationalNode;
+use MathParser\Parsing\Nodes\VariableNode;
 
 /**
  * Create LaTeX code for prettyprinting a mathematical expression
@@ -47,10 +43,14 @@ use MathParser\Exceptions\UnknownConstantException;
  */
 class LaTeXPrinter implements Visitor
 {
-    /** StdMathLexer $lexer */
+    /**
+     * StdMathLexer $lexer
+     */
     private $lexer;
 
-    /** Constructor. Create a LaTeXPrinter. */
+    /**
+     * Constructor. Create a LaTeXPrinter.
+     */
     public function __construct()
     {
         $this->lexer = new StdMathLexer();
@@ -74,8 +74,8 @@ class LaTeXPrinter implements Visitor
      * - Divisions are typeset using `\frac`
      * - Exponentiation adds braces around the power when needed.
      *
-     * @param ExpressionNode $node AST to be typeset
      * @retval string
+     * @param ExpressionNode $node AST to be typeset
      */
     public function visitExpressionNode(ExpressionNode $node)
     {
@@ -84,49 +84,72 @@ class LaTeXPrinter implements Visitor
         $left = $node->getLeft();
         $right = $node->getRight();
 
-        switch ($operator)
-        {
+        switch ($operator) {
             case '+':
-
                 $leftValue = $left->accept($this);
                 $rightValue = $this->parenthesize($right, $node);
+
                 return "$leftValue+$rightValue";
 
             case '-':
-
                 if ($right) {
                     // Binary minus
 
                     $leftValue = $left->accept($this);
                     $rightValue = $this->parenthesize($right, $node);
-                    return "$leftValue-$rightValue";
 
+                    return "$leftValue-$rightValue";
                 } else {
                     // Unary minus
 
                     $leftValue = $this->parenthesize($left, $node);
+
                     return "-$leftValue";
                 }
 
             case '*':
                 $operator = '';
-                if ($left instanceof FunctionNode || $right instanceof NumberNode || $right instanceof IntegerNode || $right instanceof RationalNode || ($right instanceof ExpressionNode && $right->getLeft() instanceof NumberNode)) {
+                if ($this->MultiplicationNeedsCdot($left, $right)) {
                     $operator = '\cdot ';
                 }
                 $leftValue = $this->parenthesize($left, $node);
                 $rightValue = $this->parenthesize($right, $node);
+
                 return "$leftValue$operator$rightValue";
 
             case '/':
-
-                return '\frac{'.$left->accept($this).'}{'.$right->accept($this).'}';
+                return '\frac{' . $left->accept($this) . '}{' . $right->accept($this) . '}';
 
             case '^':
-
                 $leftValue = $this->parenthesize($left, $node, '', true);
-                return $leftValue.'^'.$this->bracesNeeded($right);
 
+                return $leftValue . '^' . $this->bracesNeeded($right);
         }
+    }
+
+    /**
+     * Check if a multiplication needs an inserted \cdot or if
+     * it can be safely written with implicit multiplication.
+     *
+     * @retval bool
+     * @param $left  AST of first factor
+     * @param $right AST of second factor
+     */
+    private function MultiplicationNeedsCdot($left, $right)
+    {
+        if ($left instanceof FunctionNode) {
+            return true;
+        }
+
+        if ($this->isNumeric($right)) {
+            return true;
+        }
+
+        if ($right instanceof ExpressionNode && $this->isNumeric($right->getLeft())) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -135,18 +158,20 @@ class LaTeXPrinter implements Visitor
      * Create a string giving LaTeX code for a NumberNode. Currently,
      * there is no special formatting of numbers.
      *
-     * @param NumberNode $node AST to be typeset
      * @retval string
+     * @param NumberNode $node AST to be typeset
      */
     public function visitNumberNode(NumberNode $node)
     {
         $val = $node->getValue();
+
         return "$val";
     }
 
     public function visitIntegerNode(IntegerNode $node)
     {
         $val = $node->getValue();
+
         return "$val";
     }
 
@@ -155,7 +180,9 @@ class LaTeXPrinter implements Visitor
         $p = $node->getNumerator();
         $q = $node->getDenominator();
 
-        if ($q == 1) return "$p";
+        if ($q == 1) {
+            return "$p";
+        }
 
         return "\\frac{{$p}}{{$q}}";
     }
@@ -166,20 +193,19 @@ class LaTeXPrinter implements Visitor
      * Create a string giving LaTeX code for a VariableNode. Currently,
      * there is no special formatting of variables.
      *
-     * @param VariableNode $node AST to be typeset
      * @retval string
+     * @param VariableNode $node AST to be typeset
      */
     public function visitVariableNode(VariableNode $node)
     {
         return $node->getName();
     }
 
-
     /**
      * Generate LaTeX code for factorials
      *
-     * @param FunctionNode $node AST to be typeset
      * @retval string
+     * @param FunctionNode $node AST to be typeset
      */
     private function visitFactorialNode(FunctionNode $node)
     {
@@ -188,8 +214,10 @@ class LaTeXPrinter implements Visitor
         $operand = $op->accept($this);
 
         // Add parentheses most of the time.
-        if ($op instanceof NumberNode || $op instanceof IntegerNode || $op instanceof RationalNode) {
-            if ($op->getValue() < 0) $operand = "($operand)";
+        if ($this->isNumeric($op)) {
+            if ($op->getValue() < 0) {
+                $operand = "($operand)";
+            }
         } elseif ($op instanceof VariableNode || $op instanceof ConstantNode) {
             // Do nothing
         } else {
@@ -210,8 +238,8 @@ class LaTeXPrinter implements Visitor
      * - `exp(op)` is either typeset as `e^{op}`, if `op` is a simple
      *      expression or as `\exp(op)` for more complicated operands.
      *
-     * @param FunctionNode $node AST to be typeset
      * @retval string
+     * @param FunctionNode $node AST to be typeset
      */
 
     public function visitFunctionNode(FunctionNode $node)
@@ -220,16 +248,18 @@ class LaTeXPrinter implements Visitor
 
         $operand = $node->getOperand()->accept($this);
 
-        switch($functionName) {
-            case 'sqrt': return "\\$functionName{".$node->getOperand()->accept($this).'}';
+        switch ($functionName) {
+            case 'sqrt':
+                return "\\$functionName{" . $node->getOperand()->accept($this) . '}';
             case 'exp':
                 $operand = $node->getOperand();
 
                 if ($operand->complexity() < 6) {
-                    return 'e^'.$this->bracesNeeded($operand);
+                    return 'e^' . $this->bracesNeeded($operand);
                 }
                 // Operand is complex, typset using \exp instead
-                return '\exp('.$operand->accept($this).')';
+
+                return '\exp(' . $operand->accept($this) . ')';
             case 'sin':
             case 'cos':
             case 'tan':
@@ -244,6 +274,7 @@ class LaTeXPrinter implements Visitor
 
             case 'abs':
                 $operand = $node->getOperand();
+
                 return '\lvert ' . $operand->accept($this) . '\rvert ';
 
             case '!':
@@ -251,7 +282,7 @@ class LaTeXPrinter implements Visitor
                 return $this->visitFactorialNode($node);
 
             default:
-                $functionName = 'operatorname{'.$functionName.'}';
+                $functionName = 'operatorname{' . $functionName . '}';
         }
 
         return "\\$functionName($operand)";
@@ -263,19 +294,24 @@ class LaTeXPrinter implements Visitor
      * Create a string giving LaTeX code for a ConstantNode.
      * `pi` typesets as `\pi` and `e` simply as `e`.
      *
-     * @throws UnknownConstantException for nodes representing other constants.
-     * @param ConstantNode $node AST to be typeset
      * @retval string
+     * @param  ConstantNode             $node AST to be typeset
+     * @throws UnknownConstantException for nodes representing other constants.
      */
     public function visitConstantNode(ConstantNode $node)
     {
-        switch($node->getName()) {
-            case 'pi': return '\pi{}';
-            case 'e': return 'e';
-            case 'i': return 'i';
-            case 'NAN': return '\operatorname{NAN}';
-            case 'INF': return '\infty{}';
-            default: throw new UnknownConstantException($node->getName());
+        switch ($node->getName()) {
+            case 'pi':
+                return '\pi{}';
+            case 'e':
+                return 'e';
+            case 'i':
+                return 'i';
+            case 'NAN':
+                return '\operatorname{NAN}';
+            case 'INF':
+                return '\infty{}';
+            default:throw new UnknownConstantException($node->getName());
         }
     }
 
@@ -283,20 +319,19 @@ class LaTeXPrinter implements Visitor
      *  Add parentheses to the LaTeX representation of $node if needed.
      *
      *
-     * @param Node $node        The AST to typeset
-     * @param ExpressionNode $cutoff    A token representing the precedence of the parent
      *                          node. Operands with a lower precedence have parentheses
      *                          added.
-     * @param bool $addSpace    Flag determining whether an additional space should
      *                          be added at the beginning of the returned string.
      * @retval string
+     * @param Node           $node     The AST to typeset
+     * @param ExpressionNode $cutoff   A token representing the precedence of the parent
+     * @param bool           $addSpace Flag determining whether an additional space should
      */
-    public function parenthesize(Node $node, ExpressionNode $cutoff, $prepend='', $conservative=false)
+    public function parenthesize(Node $node, ExpressionNode $cutoff, $prepend = '', $conservative = false)
     {
         $text = $node->accept($this);
 
         if ($node instanceof ExpressionNode) {
-
             // Second term is a unary minus
             if ($node->getOperator() == '-' && $node->getRight() == null) {
                 return "($text)";
@@ -316,19 +351,16 @@ class LaTeXPrinter implements Visitor
                     return "($text)";
                 }
                 if ($cutoff->getOperator() == '^' && $node->getOperator() == '^') {
-                    return '{'. $text . '}';
+                    return '{' . $text . '}';
                 }
             }
-
         }
 
-        if (($node instanceof NumberNode || $node instanceof IntegerNode || $node instanceof RationalNode) && $node->getValue() < 0)
-        {
+        if ($this->isNumeric($node) && $node->getValue() < 0) {
             return "($text)";
         }
 
         return "$prepend$text";
-
     }
 
     /**
@@ -337,8 +369,8 @@ class LaTeXPrinter implements Visitor
      * Nodes representing a single ConstantNode, VariableNode or NumberNodes (0--9)
      * are returned as-is. Other Nodes get curly braces around their LaTeX code.
      *
-     * @param Node $node    AST to parse
      * @retval string
+     * @param Node $node AST to parse
      */
     public function bracesNeeded(Node $node)
     {
@@ -347,7 +379,18 @@ class LaTeXPrinter implements Visitor
         } elseif ($node instanceof IntegerNode && $node->getValue() >= 0 && $node->getValue() <= 9) {
             return $node->accept($this);
         } else {
-            return '{'.$node->accept($this).'}';
+            return '{' . $node->accept($this) . '}';
         }
+    }
+
+    /**
+     * Check if Node is numeric, i.e. a NumberNode, IntegerNode or RationalNode
+     *
+     * @retval bool
+     * @param Node $node AST to check
+     */
+    private function isNumeric(Node $node)
+    {
+        return ($node instanceof NumberNode || $node instanceof IntegerNode || $node instanceof RationalNode);
     }
 }

@@ -1,23 +1,11 @@
 <?php
 
-use MathParser\RationalMathParser;
-use MathParser\Interpreting\Interpreter;
-use MathParser\Interpreting\LaTeXPrinter;
-use MathParser\Interpreting\Differentiator;
-use MathParser\Parsing\Nodes\Node;
-use MathParser\Parsing\Nodes\FunctionNode;
-use MathParser\Parsing\Nodes\VariableNode;
-use MathParser\Parsing\Nodes\ExpressionNode;
-use MathParser\Parsing\Nodes\ConstantNode;
-
-use MathParser\Parsing\Nodes\IntegerNode;
-use MathParser\Parsing\Nodes\RationalNode;
-use MathParser\Parsing\Nodes\NumberNode;
-
-use MathParser\Exceptions\UnknownFunctionException;
-use MathParser\Exceptions\UnknownOperatorException;
 use MathParser\Exceptions\UnknownConstantException;
-use MathParser\Exceptions\DivisionByZeroException;
+use MathParser\Interpreting\LaTeXPrinter;
+use MathParser\Parsing\Nodes\ConstantNode;
+use MathParser\Parsing\Nodes\IntegerNode;
+use MathParser\Parsing\Nodes\VariableNode;
+use MathParser\RationalMathParser;
 
 class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
 {
@@ -137,12 +125,16 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
 
     public function testCanPrintMultiplication()
     {
-        //$this->assertResult('2*3', '2\cdot 3');
-        //$this->assertResult('2*x', '2x');
-        //$this->assertResult('2*3^2', '2\cdot 3^2');
         $this->assertResult('sin(x)*x', '\sin(x)\cdot x');
         $this->assertResult('2*(x+4)', '2(x+4)');
         $this->assertResult('(x+1)*(x+2)', '(x+1)(x+2)');
+
+        $this->parser->setSimplifying(false);
+        $this->assertResult('2*3', '2\cdot 3');
+        $this->assertResult('2*x', '2x');
+        $this->assertResult('2*3^2', '2\cdot 3^2');
+        $this->assertResult('2*(1/2)^2', '2(\frac{1}{2})^2');
+        $this->parser->setSimplifying(true);
     }
 
     public function testCanPrintFunctions()
