@@ -351,4 +351,11 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->compute('exp(8)'), $this->compute('e^8'));
         $this->assertEquals($this->compute('exp(22)'), $this->compute('e^22'));
     }
+
+    public function testCanComputeSpecialValues()
+    {
+        $this->assert_NAN('cot(0)');
+        $this->assert_NAN('cotd(0)');
+        $this->assert_NAN('coth(0)');
+    }
 }

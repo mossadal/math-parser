@@ -206,7 +206,12 @@ class Evaluator implements Visitor
                 return tan($inner);
 
             case 'cot':
-                return 1 / tan($inner);
+                $tan_inner = tan($inner);
+                if ($tan_inner == 0) {
+                    return NAN;
+                }
+
+                return 1 / $tan_inner;
 
             // Trigonometric functions, argument in degrees
             case 'sind':
@@ -219,7 +224,12 @@ class Evaluator implements Visitor
                 return tan(deg2rad($inner));
 
             case 'cotd':
-                return 1 / tan(deg2rad($inner));
+                $tan_inner = tan(deg2rad($inner));
+                if ($tan_inner == 0) {
+                    return NAN;
+                }
+
+                return 1 / $tan_inner;
 
             // Inverse trigonometric functions
             case 'arcsin':
@@ -259,7 +269,12 @@ class Evaluator implements Visitor
                 return tanh($inner);
 
             case 'coth':
-                return 1 / tanh($inner);
+                $tanh_inner = tanh($inner);
+                if ($tanh_inner == 0) {
+                    return NAN;
+                }
+
+                return 1 / $tanh_inner;
 
             // Inverse hyperbolic functions
             case 'arsinh':
