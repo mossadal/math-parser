@@ -9,29 +9,42 @@
 
 namespace MathParser\Parsing\Nodes;
 
-use MathParser\Interpreting\Visitors\Visitor;
 use MathParser\Exceptions\DivisionByZeroException;
+use MathParser\Interpreting\Visitors\Visitor;
 
 /**
  * AST node representing a number (int or float)
  */
 class RationalNode extends Node
 {
-    /** int $p The numerator of the represented number. */
+    /**
+     * int $p The numerator of the represented number.
+     */
     private $p;
-    /** int $q The denominator of the represented number. */
+    /**
+     * int $q The denominator of the represented number.
+     */
     private $q;
 
-    /** Constructor. Create a RationalNode with given value. */
-    function __construct($p, $q)
+    /**
+     * Constructor. Create a RationalNode with given value.
+     */
+    public function __construct($p, $q, $normalize = true)
     {
-        if (!is_int($p) || !is_int($q)) throw new \UnexpectedValueException();
+        if (!is_int($p) || !is_int($q)) {
+            throw new \UnexpectedValueException();
+        }
 
-        if ($q == 0) throw new DivisionByZeroException();
+        if ($q == 0) {
+            throw new DivisionByZeroException();
+        }
 
         $this->p = $p;
         $this->q = $q;
-        $this->normalize();
+
+        if ($normalize) {
+            $this->normalize();
+        }
     }
 
     /**
@@ -40,7 +53,7 @@ class RationalNode extends Node
      */
     public function getValue()
     {
-        return (1.0 * $this->p)/$this->q;
+        return (1.0 * $this->p) / $this->q;
     }
 
     public function getNumerator()
@@ -61,7 +74,9 @@ class RationalNode extends Node
         return $visitor->visitRationalNode($this);
     }
 
-    /** Implementing the compareTo abstract method. */
+    /**
+     * Implementing the compareTo abstract method.
+     */
     public function compareTo($other)
     {
         if ($other === null) {
@@ -83,11 +98,14 @@ class RationalNode extends Node
         $b = $this->q;
 
         $sign = 1;
-        if ($a < 0) $sign = -$sign;
-        if ($b < 0) $sign = -$sign;
+        if ($a < 0) {
+            $sign = -$sign;
+        }
 
-        while ($b != 0)
-        {
+        if ($b < 0) {
+            $sign = -$sign;
+        }
+        while ($b != 0) {
             $m = $a % $b;
             $a = $b;
             $b = $m;
@@ -102,5 +120,4 @@ class RationalNode extends Node
             $this->p = -$this->p;
         }
     }
-
 }
