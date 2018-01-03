@@ -49,6 +49,12 @@ class LaTeXPrinter implements Visitor
     private $lexer;
 
     /**
+     * Flag to determine if division should be typeset
+     * with a solidus, e.g. x/y or a proper fraction \frac{x}{y}
+     */
+    private $solidus = false;
+
+    /**
      * Constructor. Create a LaTeXPrinter.
      */
     public function __construct()
@@ -118,12 +124,24 @@ class LaTeXPrinter implements Visitor
                 return "$leftValue$operator$rightValue";
 
             case '/':
+                if ($this->solidus) {
+                    $leftValue = $this->parenthesize($left, $node);
+                    $rightValue = $this->parenthesize($right, $node);
+
+                    return "$leftValue$operator$rightValue";
+                }
+
                 return '\frac{' . $left->accept($this) . '}{' . $right->accept($this) . '}';
 
             case '^':
                 $leftValue = $this->parenthesize($left, $node, '', true);
 
-                return $leftValue . '^' . $this->bracesNeeded($right);
+                // Typeset exponents with solidus
+                $this->solidus = true;
+                $result = $leftValue . '^' . $this->bracesNeeded($right);
+                $this->solidus = false;
+
+                return $result;
         }
     }
 
@@ -182,6 +200,10 @@ class LaTeXPrinter implements Visitor
 
         if ($q == 1) {
             return "$p";
+        }
+
+        if ($this->solidus) {
+            return "$p/$q";
         }
 
         return "\\frac{{$p}}{{$q}}";
@@ -254,7 +276,7 @@ class LaTeXPrinter implements Visitor
             case 'exp':
                 $operand = $node->getOperand();
 
-                if ($operand->complexity() < 6) {
+                if ($operand->complexity() < 10) {
                     return 'e^' . $this->bracesNeeded($operand);
                 }
                 // Operand is complex, typset using \exp instead

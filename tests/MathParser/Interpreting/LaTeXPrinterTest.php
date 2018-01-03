@@ -143,11 +143,6 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('cos(x)', '\cos(x)');
         $this->assertResult('tan(x)', '\tan(x)');
 
-        $this->assertResult('exp(x)', 'e^x');
-        $this->assertResult('exp(2)', 'e^2');
-        $this->assertResult('exp(2x)', 'e^{2x}');
-        $this->assertResult('exp(x^2)', '\exp(x^2)');
-
         $this->assertResult('log(x)', '\ln(x)');
         $this->assertResult('log(2x)', '\ln(2x)');
         $this->assertResult('log(2+x)', '\ln(2+x)');
@@ -157,6 +152,32 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
 
         $this->assertResult('asin(x)', '\arcsin(x)');
         $this->assertResult('arsinh(x)', '\operatorname{arsinh}(x)');
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_print_exponential_functions()
+    {
+        $this->assertResult('exp(x)', 'e^x');
+        $this->assertResult('exp(2)', 'e^2');
+        $this->assertResult('exp(2x)', 'e^{2x}');
+        $this->assertResult('exp(-2x)', 'e^{-2x}');
+        $this->assertResult('exp(-2x+3)', 'e^{-2x+3}');
+        $this->assertResult('exp(x+y+z)', 'e^{x+y+z}');
+        $this->assertResult('exp(x^2)', '\exp(x^2)');
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_print_powers()
+    {
+        $this->assertResult('x^y', 'x^y');
+        $this->assertResult('x^2', 'x^2');
+        $this->assertResult('x^(2y)', 'x^{2y}');
+        $this->assertResult('x^(1/2)', 'x^{1/2}');
+        $this->assertResult('x^((x+1)/2)', 'x^{(x+1)/2}');
     }
 
     public function testCanPrintFactorials()

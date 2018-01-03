@@ -1,24 +1,17 @@
 <?php
 
-use MathParser\Parsing\Nodes\Node;
+use MathParser\Interpreting\TreePrinter;
 use MathParser\Parsing\Nodes\ConstantNode;
 use MathParser\Parsing\Nodes\ExpressionNode;
+use MathParser\Parsing\Nodes\Factories\DivisionNodeFactory;
+use MathParser\Parsing\Nodes\Factories\NodeFactory;
 use MathParser\Parsing\Nodes\FunctionNode;
+use MathParser\Parsing\Nodes\IntegerNode;
+use MathParser\Parsing\Nodes\NumberNode;
+use MathParser\Parsing\Nodes\RationalNode;
 use MathParser\Parsing\Nodes\SubExpressionNode;
 use MathParser\Parsing\Nodes\VariableNode;
-
-use MathParser\Parsing\Nodes\IntegerNode;
-use MathParser\Parsing\Nodes\RationalNode;
-use MathParser\Parsing\Nodes\NumberNode;
-
-use MathParser\Interpreting\TreePrinter;
 use MathParser\RationalMathParser;
-use MathParser\Parsing\Nodes\Factories\NodeFactory;
-use MathParser\Parsing\Nodes\Factories\DivisionNodeFactory;
-use MathParser\Parsing\Nodes\Factories\AdditionNodeFactory;
-use MathParser\Parsing\Nodes\Factories\SubtractionNodeFactory;
-use MathParser\Parsing\Nodes\Factories\MultiplicationNodeFactory;
-use MathParser\Parsing\Nodes\Factories\ExponentiationNodeFactory;
 
 class NodeTest extends PHPUnit_Framework_TestCase
 {
@@ -80,7 +73,7 @@ class NodeTest extends PHPUnit_Framework_TestCase
         $node = new NumberNode(3);
         $other = new VariableNode('x');
         $inode = new IntegerNode(2);
-        $rnode = new RationalNode(4,2);
+        $rnode = new RationalNode(4, 2);
 
         $this->assertFalse($node->compareTo(null));
         $this->assertFalse($node->compareTo($other));
@@ -101,7 +94,7 @@ class NodeTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($rnode->compareTo(new IntegerNode(3)));
         $this->assertFalse($rnode->compareTo($other));
 
-        $this->assertFalse($inode->compareTo(new RationalNode(3,5)));
+        $this->assertFalse($inode->compareTo(new RationalNode(3, 5)));
         $this->assertFalse($inode->compareTo($other));
 
     }
@@ -150,7 +143,7 @@ class NodeTest extends PHPUnit_Framework_TestCase
         $node = new IntegerNode(1);
         $this->assertEquals($node->complexity(), 1);
 
-        $node = new RationalNode(1,2);
+        $node = new RationalNode(1, 2);
         $this->assertEquals($node->complexity(), 2);
 
         $node = new VariableNode('x');
@@ -160,16 +153,16 @@ class NodeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($node->complexity(), 1);
 
         $f = $this->parser->parse('x+y');
-        $this->assertEquals($f->complexity(), 4);
+        $this->assertEquals($f->complexity(), 3);
 
         $f = $this->parser->parse('x-y');
-        $this->assertEquals($f->complexity(), 4);
+        $this->assertEquals($f->complexity(), 3);
 
         $f = $this->parser->parse('x*y');
-        $this->assertEquals($f->complexity(), 4);
+        $this->assertEquals($f->complexity(), 3);
 
         $f = $this->parser->parse('x/y');
-        $this->assertEquals($f->complexity(), 6);
+        $this->assertEquals($f->complexity(), 5);
 
         $f = $this->parser->parse('x^y');
         $this->assertEquals($f->complexity(), 10);
@@ -178,12 +171,11 @@ class NodeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($f->complexity(), 6);
 
         $f = $this->parser->parse('x + sin(x^2)');
-        $this->assertEquals($f->complexity(), 18);
+        $this->assertEquals($f->complexity(), 17);
 
         $node = new SubExpressionNode('(');
         $this->assertEquals($node->complexity(), 1000);
     }
-
 
     public function testCanCreateSubExpressionNode()
     {
@@ -206,21 +198,21 @@ class NodeTest extends PHPUnit_Framework_TestCase
 
     public function testCanCreateRationalNode()
     {
-        $node = new RationalNode(1,2);
+        $node = new RationalNode(1, 2);
         $this->assertEquals($node->getNumerator(), 1);
         $this->assertEquals($node->getDenominator(), 2);
 
         $this->assertEquals($node->getValue(), 0.5);
 
-        $node = new RationalNode(4,8);
+        $node = new RationalNode(4, 8);
         $this->assertEquals($node->getNumerator(), 1);
         $this->assertEquals($node->getDenominator(), 2);
 
-        $node = new RationalNode(-1,2);
+        $node = new RationalNode(-1, 2);
         $this->assertEquals($node->getNumerator(), -1);
         $this->assertEquals($node->getDenominator(), 2);
 
-        $node = new RationalNode(1,-2);
+        $node = new RationalNode(1, -2);
         $this->assertEquals($node->getNumerator(), -1);
         $this->assertEquals($node->getDenominator(), 2);
 
@@ -234,15 +226,14 @@ class NodeTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue(
             $factory->makeNode(new IntegerNode(1), new IntegerNode(3))->compareTo(
-                new RationalNode(1,3)
+                new RationalNode(1, 3)
             )
         );
         $this->assertTrue(
-            $factory->makeNode(new RationalNode(2,3), new RationalNode(3,5))->compareTo(
-                new RationalNode(10,9)
+            $factory->makeNode(new RationalNode(2, 3), new RationalNode(3, 5))->compareTo(
+                new RationalNode(10, 9)
             )
         );
     }
-
 
 }
