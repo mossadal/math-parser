@@ -166,6 +166,8 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('exp(-2x+3)', 'e^{-2x+3}');
         $this->assertResult('exp(x+y+z)', 'e^{x+y+z}');
         $this->assertResult('exp(x^2)', '\exp(x^2)');
+        $this->assertResult('exp(sin(x))', 'e^{\sin(x)}');
+        $this->assertResult('exp(sin(x)cos(x))', '\exp(\sin(x)\cdot \cos(x))');
     }
 
     /**
@@ -178,6 +180,7 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('x^(2y)', 'x^{2y}');
         $this->assertResult('x^(1/2)', 'x^{1/2}');
         $this->assertResult('x^((x+1)/2)', 'x^{(x+1)/2}');
+        $this->assertResult('x^((y+z)^2/(w+t))', 'x^{(y+z)^2/(w+t)}');
     }
 
     public function testCanPrintFactorials()
