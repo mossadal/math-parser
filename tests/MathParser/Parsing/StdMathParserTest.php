@@ -1,29 +1,23 @@
 <?php
 
+use MathParser\Exceptions\ParenthesisMismatchException;
+use MathParser\Exceptions\SyntaxErrorException;
+use MathParser\Interpreting\TreePrinter;
+use MathParser\Lexing\StdMathLexer;
 use MathParser\Lexing\Token;
 use MathParser\Lexing\TokenType;
-use MathParser\Lexing\TokenPrecedence;
-use MathParser\StdMathParser;
-use MathParser\Lexing\StdMathLexer;
-
-use MathParser\Parsing\Parser;
-use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\ConstantNode;
 use MathParser\Parsing\Nodes\ExpressionNode;
 use MathParser\Parsing\Nodes\FunctionNode;
-use MathParser\Parsing\Nodes\SubExpressionNode;
-use MathParser\Parsing\Nodes\VariableNode;
-use MathParser\Interpreting\TreePrinter;
-
 use MathParser\Parsing\Nodes\NumberNode;
+use MathParser\Parsing\Nodes\VariableNode;
+use MathParser\Parsing\Parser;
+use MathParser\StdMathParser;
 
-use MathParser\Exceptions\SyntaxErrorException;
-use MathParser\Exceptions\UnexpectedOperatorException;
-use MathParser\Exceptions\ParenthesisMismatchException;
-use MathParser\Exceptions\UnknownNodeException;
-
-class ParserWithoutImplicitMultiplication extends Parser {
-    protected static function allowImplicitMultiplication() {
+class ParserWithoutImplicitMultiplication extends Parser
+{
+    protected static function allowImplicitMultiplication()
+    {
         return false;
     }
 }
@@ -40,7 +34,7 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
     private function assertNodesEqual($node1, $node2)
     {
         $printer = new TreePrinter();
-        $message = "Node1: ".$node1->accept($printer)."\nNode 2: ".$node2->accept($printer)."\n";
+        $message = "Node1: " . $node1->accept($printer) . "\nNode 2: " . $node2->accept($printer) . "\n";
 
         $this->assertTrue($node1->compareTo($node2), $message);
     }
@@ -74,7 +68,6 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
         $this->assertCompareNodes("(x)");
         $this->assertCompareNodes("1+x+y");
     }
-
 
     private function assertTokenEquals($value, $type, Token $token)
     {
@@ -290,8 +283,6 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
         );
         $this->assertNodesEqual($node, $shouldBe);
 
-
-
     }
 
     public function testCanParseWithCorrectPrecedence()
@@ -405,7 +396,6 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
 
     }
 
-
     public function testSyntaxErrorException()
     {
         $this->setExpectedException(SyntaxErrorException::class);
@@ -422,6 +412,12 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(SyntaxErrorException::class);
         $this->parser->parse('-');
+    }
+
+    public function testSyntaxErrorException4()
+    {
+        $this->setExpectedException(SyntaxErrorException::class);
+        $this->parser->parse('e^');
     }
 
     public function testParenthesisMismatchException()
@@ -445,11 +441,10 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
         $this->parser->parse('1)2');
     }
 
-
     public function testCanEvaluateNode()
     {
         $f = $this->parser->parse('x+y');
-        $this->assertEquals($f->evaluate([ 'x' => 1, 'y' => 2 ]), 3);
+        $this->assertEquals($f->evaluate(['x' => 1, 'y' => 2]), 3);
     }
 
     public function testParserWithoutImplicitMultiplication()
@@ -481,14 +476,14 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
 
     public function canParseFactorial()
     {
-        $node =$this->parser->parse("3!4!");
+        $node = $this->parser->parse("3!4!");
         $shouldBe = new ExpressionNode(
             new FunctionNode('!', new NumberNode(3)),
             '*',
             new FunctionNode('!', new NumberNode(4)));
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node =$this->parser->parse("-3!");
+        $node = $this->parser->parse("-3!");
         $shouldBe = new ExpressionNode(
             new FunctionNode('!', new NumberNode(3)),
             '-',
@@ -507,6 +502,5 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException(SyntaxErrorException::class);
         $this->parser->parse('1+!1');
     }
-
 
 }

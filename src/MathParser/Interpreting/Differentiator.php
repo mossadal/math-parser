@@ -3,7 +3,7 @@
  * @author      Frank Wikström <frank@mossadal.se>
  * @copyright   2015 Frank Wikström
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
-*/
+ */
 
 /**
  * @namespace MathParser::Interpreting
@@ -11,22 +11,18 @@
  */
 namespace MathParser\Interpreting;
 
-use MathParser\Interpreting\Visitors\Visitor;
-
-use MathParser\Parsing\Nodes\Node;
-use MathParser\Parsing\Nodes\ExpressionNode;
-use MathParser\Parsing\Nodes\NumberNode;
-use MathParser\Parsing\Nodes\VariableNode;
-use MathParser\Parsing\Nodes\FunctionNode;
-use MathParser\Parsing\Nodes\ConstantNode;
-use MathParser\Parsing\Nodes\IntegerNode;
-use MathParser\Parsing\Nodes\RationalNode;
-
-use MathParser\Parsing\Nodes\Factories\NodeFactory;
-
 use MathParser\Exceptions\UnknownFunctionException;
 use MathParser\Exceptions\UnknownOperatorException;
-use MathParser\Exceptions\DivisionByZeroException;
+use MathParser\Interpreting\Visitors\Visitor;
+use MathParser\Parsing\Nodes\ConstantNode;
+use MathParser\Parsing\Nodes\ExpressionNode;
+use MathParser\Parsing\Nodes\Factories\NodeFactory;
+use MathParser\Parsing\Nodes\FunctionNode;
+use MathParser\Parsing\Nodes\IntegerNode;
+use MathParser\Parsing\Nodes\Node;
+use MathParser\Parsing\Nodes\NumberNode;
+use MathParser\Parsing\Nodes\RationalNode;
+use MathParser\Parsing\Nodes\VariableNode;
 
 /**
  * Differentiate an abstract syntax tree (AST).
@@ -60,12 +56,14 @@ class Differentiator implements Visitor
      * Variable that we differentiate with respect to
      *
      * @var string $variable
-     **/
+     *
+     */
     protected $variable;
 
-    /** NodeFactory $nodeFactory used for building the resulting AST. */
+    /**
+     * NodeFactory $nodeFactory used for building the resulting AST.
+     */
     protected $nodeFactory;
-
 
     /**
      * Class constructor
@@ -78,8 +76,6 @@ class Differentiator implements Visitor
 
         $this->nodeFactory = new NodeFactory();
     }
-
-
 
     /**
      * Differentiate an ExpressionNode
@@ -97,11 +93,10 @@ class Differentiator implements Visitor
      * - \\( (f/g)' = (f' g - f g')/g^2 \\)
      * - \\( (f^g)' = f^g  (g' \\log(f) + gf'/f) \\) with a simpler expression when g is a NumberNode
      *
-     * @throws UnknownOperatorException if the operator is something other than
      *      `+`, `-`, `*`, `/` or `^`
-     *
-     * @param ExpressionNode $node AST to be differentiated
      * @retval Node
+     * @param  ExpressionNode           $node AST to be differentiated
+     * @throws UnknownOperatorException if the operator is something other than
      */
     public function visitExpressionNode(ExpressionNode $node)
     {
@@ -135,6 +130,7 @@ class Differentiator implements Visitor
                 $term2 = $this->nodeFactory->multiplication($node->getLeft(), $rightValue);
                 $numerator = $this->nodeFactory->subtraction($term1, $term2);
                 $denominator = $this->nodeFactory->exponentiation($node->getRight(), new IntegerNode(2));
+
                 return $this->nodeFactory->division($numerator, $denominator);
 
             // f^g = exp(g log(f)), so (f^g)' = f^g (g'log(f) + g/f)
@@ -143,18 +139,22 @@ class Differentiator implements Visitor
                 $exponent = $node->getRight();
 
                 if ($exponent instanceof IntegerNode || $exponent instanceof NumberNode) {
-                        $power = $exponent->getValue();
-                        $fpow = $this->nodeFactory->exponentiation($base, $power-1);
-                        return $this->nodeFactory->multiplication($power, $this->nodeFactory->multiplication($fpow, $leftValue));
+                    $power = $exponent->getValue();
+                    $fpow = $this->nodeFactory->exponentiation($base, $power - 1);
+
+                    return $this->nodeFactory->multiplication($power, $this->nodeFactory->multiplication($fpow, $leftValue));
                 } elseif ($exponent instanceof RationalNode) {
-                    $newPower = new RationalNode($exponent->getNumerator()-$exponent->getDenominator() , $exponent->getDenominator());
+                    $newPower = new RationalNode($exponent->getNumerator() - $exponent->getDenominator(), $exponent->getDenominator());
                     $fpow = $this->nodeFactory->exponentiation($base, $newPower);
+
                     return $this->nodeFactory->multiplication($exponent, $this->nodeFactory->multiplication($fpow, $leftValue));
+                } elseif ($base instanceof ConstantNode && $base->getName() == 'e') {
+                    return $this->nodeFactory->multiplication($rightValue, $node);
                 } else {
-                    $term1 = $this->nodeFactory->multiplication($rightValue, new FunctionNode('log', $node->getLeft()));
+                    $term1 = $this->nodeFactory->multiplication($rightValue, new FunctionNode('log', $base));
                     $term2 = $this->nodeFactory->division(
-                        $this->nodeFactory->multiplication($node->getRight(), $node->getLeft()->accept($this)), 
-                        $node->getLeft());
+                        $this->nodeFactory->multiplication($exponent, $base->accept($this)),
+                        $base);
                     $factor2 = $this->nodeFactory->addition($term1, $term2);
 
                     return $this->nodeFactory->multiplication($node, $factor2);
@@ -171,8 +171,8 @@ class Differentiator implements Visitor
      * Create a NumberNode representing '0'. (The derivative of
      * a constant is indentically 0).
      *
-     * @param NumberNode $node AST to be differentiated
      * @retval Node
+     * @param NumberNode $node AST to be differentiated
      */
     public function visitNumberNode(NumberNode $node)
     {
@@ -188,14 +188,15 @@ class Differentiator implements Visitor
     {
         return new IntegerNode(0);
     }
+
     /**
      * Differentiate a VariableNode
      *
      * Create a NumberNode representing '0' or '1' depending on
      * the differetiation variable.
      *
-     * @param NumberNode $node AST to be differentiated
      * @retval Node
+     * @param NumberNode $node AST to be differentiated
      */
     public function visitVariableNode(VariableNode $node)
     {
@@ -214,32 +215,31 @@ class Differentiator implements Visitor
      *
      * ### Differentiation rules:
      *
-     * * \\( \\sin(f(x))' = f'(x)  \\cos(f(x)) \\)
-     * * \\( \\cos(f(x))' = -f'(x)  \\sin(f(x)) \\)
-     * * \\( \\tan(f(x))' = f'(x) (1 + \\tan(f(x))^2 \\)
-     * * \\( \\operatorname{cot}(f(x))' = f'(x) (-1 - \\operatorname{cot}(f(x))^2 \\)
-     * * \\( \\arcsin(f(x))' = f'(x) / \\sqrt{1-f(x)^2} \\)
-     * * \\( \\arccos(f(x))' = -f'(x) / \\sqrt{1-f(x)^2} \\)
-     * * \\( \\arctan(f(x))' = f'(x) / (1+f(x)^2) \\)
-     * * \\( \\operatorname{arccot}(f(x))' = -f'(x) / (1+f(x)^2) \\)
-     * * \\( \\exp(f(x))' = f'(x) \\exp(f(x)) \\)
-     * * \\( \\log(f(x))' = f'(x) / f(x) \\)
-     * * \\( \\ln(f(x))' = f'(x) / (\\log(10) * f(x)) \\)
-     * * \\( \\sqrt{f(x)}' = f'(x) / (2 \\sqrt{f(x)} \\)
-     * * \\( \\sinh(f(x))' = f'(x) \\cosh(f(x)) \\)
-     * * \\( \\cosh(f(x))' = f'(x) \\sinh(f(x)) \\)
-     * * \\( \\tanh(f(x))' = f'(x) (1-\\tanh(f(x))^2) \\)
-     * * \\( \\operatorname{coth}(f(x))' = f'(x) (1-\\operatorname{coth}(f(x))^2) \\)
-     * * \\( \\operatorname{arsinh}(f(x))' = f'(x) / \\sqrt{f(x)^2+1} \\)
-     * * \\( \\operatorname{arcosh}(f(x))' = f'(x) / \\sqrt{f(x)^2-1} \\)
-     * * \\( \\operatorname{artanh}(f(x))' = f'(x) (1-f(x)^2) \\)
-     * * \\( \\operatorname{arcoth}(f(x))' = f'(x) (1-f(x)^2) \\)
+     *  \\( \\sin(f(x))' = f'(x)  \\cos(f(x)) \\)
+     *  \\( \\cos(f(x))' = -f'(x)  \\sin(f(x)) \\)
+     *  \\( \\tan(f(x))' = f'(x) (1 + \\tan(f(x))^2 \\)
+     *  \\( \\operatorname{cot}(f(x))' = f'(x) (-1 - \\operatorname{cot}(f(x))^2 \\)
+     *  \\( \\arcsin(f(x))' = f'(x) / \\sqrt{1-f(x)^2} \\)
+     *  \\( \\arccos(f(x))' = -f'(x) / \\sqrt{1-f(x)^2} \\)
+     *  \\( \\arctan(f(x))' = f'(x) / (1+f(x)^2) \\)
+     *  \\( \\operatorname{arccot}(f(x))' = -f'(x) / (1+f(x)^2) \\)
+     *  \\( \\exp(f(x))' = f'(x) \\exp(f(x)) \\)
+     *  \\( \\log(f(x))' = f'(x) / f(x) \\)
+     *  \\( \\ln(f(x))' = f'(x) / (\\log(10) * f(x)) \\)
+     *  \\( \\sqrt{f(x)}' = f'(x) / (2 \\sqrt{f(x)} \\)
+     *  \\( \\sinh(f(x))' = f'(x) \\cosh(f(x)) \\)
+     *  \\( \\cosh(f(x))' = f'(x) \\sinh(f(x)) \\)
+     *  \\( \\tanh(f(x))' = f'(x) (1-\\tanh(f(x))^2) \\)
+     *  \\( \\operatorname{coth}(f(x))' = f'(x) (1-\\operatorname{coth}(f(x))^2) \\)
+     *  \\( \\operatorname{arsinh}(f(x))' = f'(x) / \\sqrt{f(x)^2+1} \\)
+     *  \\( \\operatorname{arcosh}(f(x))' = f'(x) / \\sqrt{f(x)^2-1} \\)
+     *  \\( \\operatorname{artanh}(f(x))' = f'(x) (1-f(x)^2) \\)
+     *  \\( \\operatorname{arcoth}(f(x))' = f'(x) (1-f(x)^2) \\)
      *
-     * @throws UnknownFunctionException if the function name doesn't match
      *          one of the above
-     *
-     * @param FunctionNode $node AST to be differentiated
      * @retval Node
+     * @param  FunctionNode             $node AST to be differentiated
+     * @throws UnknownFunctionException if the function name doesn't match
      */
     public function visitFunctionNode(FunctionNode $node)
     {
@@ -247,7 +247,6 @@ class Differentiator implements Visitor
         $arg = $node->getOperand();
 
         switch ($node->getName()) {
-
             case 'sin':
                 $df = new FunctionNode('cos', $arg);
                 break;
@@ -267,15 +266,18 @@ class Differentiator implements Visitor
             case 'arcsin':
                 $denom = new FunctionNode('sqrt',
                     $this->nodeFactory->subtraction(1, $this->nodeFactory->exponentiation($arg, 2)));
+
                 return $this->nodeFactory->division($inner, $denom);
 
             case 'arccos':
                 $denom = new FunctionNode('sqrt',
                     $this->nodeFactory->subtraction(1, $this->nodeFactory->exponentiation($arg, 2)));
-                return  $this->nodeFactory->division($this->nodeFactory->unaryMinus($inner), $denom);
+
+                return $this->nodeFactory->division($this->nodeFactory->unaryMinus($inner), $denom);
 
             case 'arctan':
                 $denom = $this->nodeFactory->addition(1, $this->nodeFactory->exponentiation($arg, 2));
+
                 return $this->nodeFactory->division($inner, $denom);
 
             case 'arccot':
@@ -290,10 +292,12 @@ class Differentiator implements Visitor
                 return $this->nodeFactory->division($inner, $arg);
             case 'lg':
                 $denominator = $this->nodeFactory->multiplication(new FunctionNode('log', new IntegerNode(10)), $arg);
+
                 return $this->nodeFactory->division($inner, $denominator);
 
             case 'sqrt':
                 $denom = $this->nodeFactory->multiplication(2, $node);
+
                 return $this->nodeFactory->division($inner, $denom);
 
             case 'sinh':
@@ -316,15 +320,18 @@ class Differentiator implements Visitor
 
             case 'arsinh':
                 $temp = $this->nodeFactory->addition($this->nodeFactory->exponentiation($arg, 2), 1);
+
                 return $this->nodeFactory->division($inner, new FunctionNode('sqrt', $temp));
 
             case 'arcosh':
                 $temp = $this->nodeFactory->subtraction($this->nodeFactory->exponentiation($arg, 2), 1);
+
                 return $this->nodeFactory->division($inner, new FunctionNode('sqrt', $temp));
 
             case 'artanh':
             case 'arcoth':
                 $denominator = $this->nodeFactory->subtraction(1, $this->nodeFactory->exponentiation($arg, 2));
+
                 return $this->nodeFactory->division($inner, $denominator);
 
             case 'abs':
@@ -344,12 +351,14 @@ class Differentiator implements Visitor
      * Create a NumberNode representing '0'. (The derivative of
      * a constant is indentically 0).
      *
-     * @param ConstantNode $node AST to be differentiated
      * @retval Node
+     * @param ConstantNode $node AST to be differentiated
      */
     public function visitConstantNode(ConstantNode $node)
     {
-        if ($node->getName() == 'NAN') return $node;
+        if ($node->getName() == 'NAN') {
+            return $node;
+        }
 
         return new IntegerNode(0);
     }

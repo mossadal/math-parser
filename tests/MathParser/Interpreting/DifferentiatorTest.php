@@ -1,20 +1,15 @@
 <?php
 
-use MathParser\StdMathParser;
-use MathParser\RationalMathParser;
-use MathParser\Interpreting\Interpreter;
-use MathParser\Interpreting\PrettyPrinter;
-use MathParser\Interpreting\Differentiator;
-use MathParser\Parsing\Nodes\Node;
-use MathParser\Parsing\Nodes\FunctionNode;
-use MathParser\Parsing\Nodes\VariableNode;
-use MathParser\Parsing\Nodes\ExpressionNode;
-use MathParser\Parsing\Nodes\NumberNode;
-use MathParser\Interpreting\TreePrinter;
-
+use MathParser\Exceptions\DivisionByZeroException;
 use MathParser\Exceptions\UnknownFunctionException;
 use MathParser\Exceptions\UnknownOperatorException;
-use MathParser\Exceptions\DivisionByZeroException;
+use MathParser\Interpreting\Differentiator;
+use MathParser\Interpreting\TreePrinter;
+use MathParser\Parsing\Nodes\ExpressionNode;
+use MathParser\Parsing\Nodes\FunctionNode;
+use MathParser\Parsing\Nodes\NumberNode;
+use MathParser\Parsing\Nodes\VariableNode;
+use MathParser\RationalMathParser;
 
 class DifferentiatorTest extends PHPUnit_Framework_TestCase
 {
@@ -37,7 +32,7 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
     private function assertNodesEqual($node1, $node2)
     {
         $printer = new TreePrinter();
-        $message = "Node1: ".$node1->accept($printer)."\nNode 2: ".$node2->accept($printer)."\n";
+        $message = "Node1: " . $node1->accept($printer) . "\nNode 2: " . $node2->accept($printer) . "\n";
 
         $this->assertTrue($node1->compareTo($node2), $message);
     }
@@ -48,6 +43,10 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
         $derivative = $this->parser->parse($df);
 
         $this->assertNodesEqual($this->diff($fnc), $derivative);
+
+        // Check that Differentior leaves the original node unchanged.
+        $newAST = $this->parser->parse($f);
+        $this->assertNodesEqual($fnc, $newAST);
     }
 
     public function testCanDifferentiateVariable()
@@ -71,8 +70,8 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
     public function testCanDifferentiateExp()
     {
         $this->assertResult('exp(x)', 'exp(x)');
+        $this->assertResult('exp(x^2)', '2*x*exp(x^2)');
     }
-
 
     public function testCanDifferentiateLog()
     {
@@ -156,7 +155,8 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
         $this->assertResult('x^3', '3x^2');
         $this->assertResult('x^x', 'x^x*(log(x)+1)');
         $this->assertResult('x^(1/2)', '(1/2)*x^(-1/2)');
-        $this->assertResult('e^x', 'e^x*(ln(e))');
+        $this->assertResult('e^x', 'e^x');
+        $this->assertResult('e^(x^2)', '2*x*e^(x^2)');
         $this->assertResult('sin(x)^cos(x)', 'sin(x)^cos(x)*((-sin(x))*ln(sin(x))+cos(x)*cos(x)/sin(x))');
     }
 
@@ -164,7 +164,6 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
     {
         $this->assertResult('x/sin(x)', '(sin(x)-x*cos(x))/sin(x)^2');
         $this->assertResult('x/1', '1');
-
 
         // The parser catches 'x/0', so create the test AST directly
         $f = new ExpressionNode(new VariableNode('x'), '/', 0);
