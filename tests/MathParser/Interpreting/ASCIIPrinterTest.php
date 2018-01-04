@@ -1,23 +1,9 @@
 <?php
 
-use MathParser\RationalMathParser;
-use MathParser\Interpreting\Interpreter;
-use MathParser\Interpreting\ASCIIPrinter;
-use MathParser\Interpreting\Differentiator;
-use MathParser\Parsing\Nodes\Node;
-use MathParser\Parsing\Nodes\FunctionNode;
-use MathParser\Parsing\Nodes\VariableNode;
-use MathParser\Parsing\Nodes\ExpressionNode;
-use MathParser\Parsing\Nodes\ConstantNode;
-
-use MathParser\Parsing\Nodes\IntegerNode;
-use MathParser\Parsing\Nodes\RationalNode;
-use MathParser\Parsing\Nodes\NumberNode;
-
-use MathParser\Exceptions\UnknownFunctionException;
-use MathParser\Exceptions\UnknownOperatorException;
 use MathParser\Exceptions\UnknownConstantException;
-use MathParser\Exceptions\DivisionByZeroException;
+use MathParser\Interpreting\ASCIIPrinter;
+use MathParser\Parsing\Nodes\ConstantNode;
+use MathParser\RationalMathParser;
 
 class ASCIIPrinterTest extends PHPUnit_Framework_TestCase
 {
@@ -128,7 +114,6 @@ class ASCIIPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('x*y/(z^w)', 'x*y/z^w');
     }
 
-
     public function testCanPrintFunctions()
     {
         $this->assertResult('sin(x)', 'sin(x)');
@@ -138,8 +123,8 @@ class ASCIIPrinterTest extends PHPUnit_Framework_TestCase
 
         $this->assertResult('exp(x)', 'exp(x)');
 
-        $this->assertResult('log(x)', 'log(x)');
-        $this->assertResult('log(2+x)', 'log(2+x)');
+        $this->assertResult('log(x)', 'ln(x)');
+        $this->assertResult('log(2+x)', 'ln(2+x)');
 
         $this->assertResult('sqrt(x)', 'sqrt(x)');
         $this->assertResult('sqrt(x^2)', 'sqrt(x^2)');

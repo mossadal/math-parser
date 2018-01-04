@@ -277,7 +277,11 @@ class LaTeXPrinter implements Visitor
                 $operand = $node->getOperand();
 
                 if ($operand->complexity() < 10) {
-                    return 'e^' . $this->bracesNeeded($operand);
+                    $this->solidus = true;
+                    $result = 'e^' . $this->bracesNeeded($operand);
+                    $this->solidus = false;
+
+                    return $result;
                 }
                 // Operand is complex, typset using \exp instead
 

@@ -162,6 +162,8 @@ class LaTeXPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('exp(x)', 'e^x');
         $this->assertResult('exp(2)', 'e^2');
         $this->assertResult('exp(2x)', 'e^{2x}');
+        $this->assertResult('exp(x/2)', 'e^{x/2}');
+        $this->assertResult('exp((x+1)/2)', 'e^{(x+1)/2}');
         $this->assertResult('exp(-2x)', 'e^{-2x}');
         $this->assertResult('exp(-2x+3)', 'e^{-2x+3}');
         $this->assertResult('exp(x+y+z)', 'e^{x+y+z}');

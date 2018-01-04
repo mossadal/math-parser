@@ -3,25 +3,21 @@
  * @author      Frank Wikström <frank@mossadal.se>
  * @copyright   2016 Frank Wikström
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
-*/
+ */
 
 namespace MathParser\Interpreting;
 
-use MathParser\Interpreting\Visitors\Visitor;
-use MathParser\Parsing\Nodes\Node;
-use MathParser\Parsing\Nodes\ExpressionNode;
-use MathParser\Parsing\Nodes\VariableNode;
-use MathParser\Parsing\Nodes\FunctionNode;
-use MathParser\Parsing\Nodes\ConstantNode;
-
-use MathParser\Parsing\Nodes\IntegerNode;
-use MathParser\Parsing\Nodes\RationalNode;
-use MathParser\Parsing\Nodes\NumberNode;
-
-use MathParser\Lexing\StdMathLexer;
-use MathParser\Lexing\TokenAssociativity;
-
 use MathParser\Exceptions\UnknownConstantException;
+use MathParser\Interpreting\Visitors\Visitor;
+use MathParser\Lexing\StdMathLexer;
+use MathParser\Parsing\Nodes\ConstantNode;
+use MathParser\Parsing\Nodes\ExpressionNode;
+use MathParser\Parsing\Nodes\FunctionNode;
+use MathParser\Parsing\Nodes\IntegerNode;
+use MathParser\Parsing\Nodes\Node;
+use MathParser\Parsing\Nodes\NumberNode;
+use MathParser\Parsing\Nodes\RationalNode;
+use MathParser\Parsing\Nodes\VariableNode;
 
 /**
  * Create LaTeX code for prettyprinting a mathematical expression
@@ -47,10 +43,14 @@ use MathParser\Exceptions\UnknownConstantException;
  */
 class ASCIIPrinter implements Visitor
 {
-    /** StdMathLexer $lexer */
+    /**
+     * StdMathLexer $lexer
+     */
     private $lexer;
 
-    /** Constructor. Create an ASCIIPrinter. */
+    /**
+     * Constructor. Create an ASCIIPrinter.
+     */
     public function __construct()
     {
         $this->lexer = new StdMathLexer();
@@ -63,8 +63,8 @@ class ASCIIPrinter implements Visitor
      * where `op` is one of `+`, `-`, `*`, `/` or `^`
      *
      *
-     * @param ExpressionNode $node AST to be typeset
      * @retval string
+     * @param ExpressionNode $node AST to be typeset
      */
     public function visitExpressionNode(ExpressionNode $node)
     {
@@ -72,27 +72,26 @@ class ASCIIPrinter implements Visitor
         $left = $node->getLeft();
         $right = $node->getRight();
 
-        switch ($operator)
-        {
+        switch ($operator) {
             case '+':
-
                 $leftValue = $left->accept($this);
                 $rightValue = $this->parenthesize($right, $node);
+
                 return "$leftValue+$rightValue";
 
             case '-':
-
                 if ($right) {
                     // Binary minus
 
                     $leftValue = $left->accept($this);
                     $rightValue = $this->parenthesize($right, $node);
-                    return "$leftValue-$rightValue";
 
+                    return "$leftValue-$rightValue";
                 } else {
                     // Unary minus
 
                     $leftValue = $this->parenthesize($left, $node);
+
                     return "-$leftValue";
                 }
 
@@ -101,26 +100,28 @@ class ASCIIPrinter implements Visitor
 
                 $leftValue = $this->parenthesize($left, $node, '', false);
                 $rightValue = $this->parenthesize($right, $node, '', true);
+
                 return "$leftValue$operator$rightValue";
 
             case '^':
                 $leftValue = $this->parenthesize($left, $node, '', true);
                 $rightValue = $this->parenthesize($right, $node, '', false);
-                return "$leftValue$operator$rightValue";
 
+                return "$leftValue$operator$rightValue";
         }
     }
-
 
     public function visitNumberNode(NumberNode $node)
     {
         $val = $node->getValue();
+
         return "$val";
     }
 
     public function visitIntegerNode(IntegerNode $node)
     {
         $val = $node->getValue();
+
         return "$val";
     }
 
@@ -128,16 +129,19 @@ class ASCIIPrinter implements Visitor
     {
         $p = $node->getNumerator();
         $q = $node->getDenominator();
-        if ($q == 1) return "$p";
+        if ($q == 1) {
+            return "$p";
+        }
+
         //if ($p < 1) return "($p/$q)";
+
         return "$p/$q";
     }
 
     public function visitVariableNode(VariableNode $node)
     {
-        return (string)($node->getName());
+        return (string) ($node->getName());
     }
-
 
     private function visitFactorialNode(FunctionNode $node)
     {
@@ -147,7 +151,9 @@ class ASCIIPrinter implements Visitor
 
         // Add parentheses most of the time.
         if ($op instanceof NumberNode || $op instanceof IntegerNode || $op instanceof RationalNode) {
-            if ($op->getValue() < 0) $operand = "($operand)";
+            if ($op->getValue() < 0) {
+                $operand = "($operand)";
+            }
         } elseif ($op instanceof VariableNode || $op instanceof ConstantNode) {
             // Do nothing
         } else {
@@ -160,27 +166,38 @@ class ASCIIPrinter implements Visitor
     public function visitFunctionNode(FunctionNode $node)
     {
         $functionName = $node->getName();
+        if ($functionName == 'log') {
+            $functionName = 'ln';
+        }
 
-        if ($functionName == '!' || $functionName == '!!') return $this->visitFactorialNode($node);
+        if ($functionName == '!' || $functionName == '!!') {
+            return $this->visitFactorialNode($node);
+        }
 
         $operand = $node->getOperand()->accept($this);
+
         return "$functionName($operand)";
     }
 
     public function visitConstantNode(ConstantNode $node)
     {
-        switch($node->getName()) {
-            case 'pi': return 'pi';
-            case 'e': return 'e';
-            case 'i': return 'i';
-            case 'NAN': return 'NAN';
-            case 'INF': return 'INF';
+        switch ($node->getName()) {
+            case 'pi':
+                return 'pi';
+            case 'e':
+                return 'e';
+            case 'i':
+                return 'i';
+            case 'NAN':
+                return 'NAN';
+            case 'INF':
+                return 'INF';
 
-            default: throw new UnknownConstantException($node->getName());
+            default:throw new UnknownConstantException($node->getName());
         }
     }
 
-    public function parenthesize(Node $node, ExpressionNode $cutoff, $prepend='', $conservative = false)
+    public function parenthesize(Node $node, ExpressionNode $cutoff, $prepend = '', $conservative = false)
     {
         $text = $node->accept($this);
 
@@ -210,8 +227,7 @@ class ASCIIPrinter implements Visitor
             }
         }
 
-        if (($node instanceof NumberNode || $node instanceof IntegerNode || $node instanceof RationalNode) && $node->getValue() < 0)
-        {
+        if (($node instanceof NumberNode || $node instanceof IntegerNode || $node instanceof RationalNode) && $node->getValue() < 0) {
             return "($text)";
         }
 
@@ -225,7 +241,5 @@ class ASCIIPrinter implements Visitor
         }
 
         return "$prepend$text";
-
     }
-
 }
