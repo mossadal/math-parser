@@ -23,6 +23,9 @@ namespace MathParser\Lexing;
  *
  *  `/\~?\d+/` matching integers matching
  *  `/sqrt/`  matching square root function
+ *  `/round/` matching rouding function
+ *  `/ceil/` matching rounding up function
+ *  `/floor/` matching rounding down function
  *  `/sinh/` matching hyperbolic sine
  *  `/cosh/` matching hyperbolic cosine
  *  `/tanh/` matching hyperbolic tangent
@@ -71,6 +74,10 @@ class StdMathLexer extends Lexer
         $this->add(new TokenDefinition('/\d+/', TokenType::PosInt));
 
         $this->add(new TokenDefinition('/sqrt/', TokenType::FunctionName));
+
+        $this->add(new TokenDefinition('/round/', TokenType::FunctionName));
+        $this->add(new TokenDefinition('/ceil/', TokenType::FunctionName));
+        $this->add(new TokenDefinition('/floor/', TokenType::FunctionName));
 
         $this->add(new TokenDefinition('/sinh/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/cosh/', TokenType::FunctionName));

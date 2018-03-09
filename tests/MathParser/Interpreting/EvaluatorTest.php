@@ -358,4 +358,13 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
         $this->assert_NAN('cotd(0)');
         $this->assert_NAN('coth(0)');
     }
+
+    public function testCanComputeRoundingFunctions()
+    {
+        $this->assertResult('ceil(1+2.3)', 3);
+        $this->assertResult('floor(2*2.3)', 4);
+        $this->assertResult('ceil(2*2.3)', 5);
+        $this->assertResult('round(2*2.3)', 5);
+    }
+
 }

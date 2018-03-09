@@ -307,6 +307,16 @@ class Evaluator implements Visitor
 
                 return Math::SemiFactorial($inner);
 
+            // Rounding functions
+            case 'round':
+                return round($inner);
+
+            case 'floor':
+                return floor($inner);
+
+            case 'ceil':
+                return ceil($inner);
+
             default:
                 throw new UnknownFunctionException($node->getName());
         }
