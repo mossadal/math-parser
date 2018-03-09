@@ -215,4 +215,37 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
         $this->assertResult('artanh(x)', '1/(1-x^2)');
         $this->assertResult('arcoth(x)', '1/(1-x^2)');
     }
+
+    public function testCantDifferentiateCeil()
+    {
+        $f = $this->parser->parse('ceil(x)');
+
+        $this->setExpectedException(UnknownFunctionException::class);
+        $this->diff($f);
+    }
+
+    public function testCantDifferentiateFloor()
+    {
+        $f = $this->parser->parse('floor(x)');
+
+        $this->setExpectedException(UnknownFunctionException::class);
+        $this->diff($f);
+    }
+
+    public function testCantDifferentiateRound()
+    {
+        $f = $this->parser->parse('round(x)');
+
+        $this->setExpectedException(UnknownFunctionException::class);
+        $this->diff($f);
+    }
+
+    public function testCantDifferentiateSgn()
+    {
+        $f = $this->parser->parse('sgn(x)');
+
+        $this->setExpectedException(UnknownFunctionException::class);
+        $this->diff($f);
+    }
+
 }
