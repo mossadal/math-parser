@@ -124,8 +124,10 @@ class ASCIIPrinterTest extends TestCase
 
         $this->assertResult('exp(x)', 'exp(x)');
 
-        $this->assertResult('log(x)', 'ln(x)');
-        $this->assertResult('log(2+x)', 'ln(2+x)');
+        $this->assertResult('log(x)', 'log(x)');
+        $this->assertResult('log(2+x)', 'log(2+x)');
+        $this->assertResult('ln(x)', 'ln(x)');
+        $this->assertResult('ln(2+x)', 'ln(2+x)');
 
         $this->assertResult('sqrt(x)', 'sqrt(x)');
         $this->assertResult('sqrt(x^2)', 'sqrt(x^2)');

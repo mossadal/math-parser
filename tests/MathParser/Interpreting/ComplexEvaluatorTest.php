@@ -196,6 +196,14 @@ class ComplexEvaluatorTest extends TestCase
         $this->assertResult('log(x)', Complex::log($this->variables['x']));
     }
 
+    public function testCanEvaluateLn()
+    {
+        $this->assertResult('ln(3)', new Complex(log(3), 0.0));
+
+        $this->expectException(\UnexpectedValueException::class);
+        $this->assertResult('ln(x)', Complex::log($this->variables['x']));
+    }
+
     public function testCanEvaluateLog10()
     {
         $this->assertResult('lg(-1)', new Complex(0, pi() / log(10)));

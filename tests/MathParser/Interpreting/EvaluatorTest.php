@@ -27,7 +27,7 @@ class EvaluatorTest extends TestCase
         $this->parser = new StdMathParser();
         $this->rparser = new RationalMathParser();
 
-        $this->variables = ['x' => '0.7', 'y' => '2.1'];
+        $this->variables = ['x' => '0.7', 'y' => '2.1', 'i' => '5'];
         $this->evaluator = new Evaluator($this->variables);
     }
 
@@ -82,6 +82,17 @@ class EvaluatorTest extends TestCase
     }
 
     public function testCanEvaluateVariable()
+    {
+        $this->assertResult('x', $this->variables['x']);
+        $this->assertResult('i^2', pow($this->variables['i'], 2));
+
+        $this->expectException(UnknownVariableException::class);
+
+        $f = $this->parser->parse("q");
+        $value = $this->evaluate($f);
+    }
+
+    public function testCanEvaluateVariableI()
     {
         $this->assertResult('x', $this->variables['x']);
 
@@ -240,7 +251,16 @@ class EvaluatorTest extends TestCase
         $value = $this->evaluate($f);
 
         $this->assertNaN($value);
+    }
 
+    public function testCanEvaluateLn()
+    {
+        $this->assertResult('ln(x)', log($this->variables['x']));
+
+        $f = $this->parser->parse('ln(-1)');
+        $value = $this->evaluate($f);
+
+        $this->assertNaN($value);
     }
 
     public function testCanEvaluateLog10()

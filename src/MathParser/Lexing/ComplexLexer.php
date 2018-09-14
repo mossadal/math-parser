@@ -13,55 +13,56 @@ use MathParser\Lexing\Lexer;
 use MathParser\Lexing\TokenDefinition;
 use MathParser\Lexing\TokenType;
 
-/** Lexer capable of recognizing all standard complex mathematical expressions.
+/**
+ * Lexer capable of recognizing all standard complex mathematical expressions.
  *
  * Subclass of the generic Lexer, with TokenDefinition patterns for
  * numbers, elementary functions, arithmetic operations and variables.
  *
  * ### Recognized tokens
  *
- * * `/\~?\d+/` matching integers matching
- * * `/sqrt/`  matching square root function
- * * `/sinh/` matching hyperbolic sine
- * * `/cosh/` matching hyperbolic cosine
- * * `/tanh/` matching hyperbolic tangent
- * * `/coth/` matching hyperbolic cotangent
- * * `/sin/` matching sine
- * * `/cos/` matching cosine
- * * `/tan/` matching tangent
- * * `/cot/` matching cotangent
- * * `/arsinh|arcsinh|asinh/` matching inverse hyperbolic sine
- * * `/arcosh|arccosh|acosh/` matching inverse hyperbolic cosine
- * * `/artanh|arctanh|atanh/` matching inverse hyperbolic tangent
- * * `/arcoth|arccoth|acoth/` matching inverse hyperbolic cotangent
- * * `/arcsin|asin/` matching inverse sine
- * * `/arccos|acos/` matching inverse cosine
- * * `/arctan|atan/` matching inverse tangent
- * * `/arccot|acot/` matching inverse cotangent
- * * `/exp/` matching exponential function
- * * `/log10|lg/` matching logarithm (base 10)
- * * `/log|ln/` matching natural logarithm
- * * '/abs/' matching modulus (absolute value)
- * * '/arg/' matching (principal) argument
- * * '/conj/' matching conjugate
- * * '/re/' matching real part
- * * '/im/' matching imaginary part
- * * `/\(/` matching opening parenthesis (both as delimiter and function evaluation)
- * * `/\)/` matching closing parenthesisis (both as delimiter and function evaluation)
- * * `/\+/` matching + for addition (or unary +)
- * * `/\-/` matching - for subtraction (or unary -)
- * * `/\* /` matching * for multiplication
- * * `/\//` matching / for division
- * * `/\^/` matching ^ for exponentiation
- * * `/pi/` matching constant pi
- * * `/e/` matching constant e
- * * `/i/` matching imaginary unit i
- * * `/[a-zA-Z]/` matching variables (note that we only allow single letter identifiers,
-    this improves parsing of implicit multiplication)
- * * `/\n/` matching newline
- * * `/\s+/` matching whitespace
+ *  `/\~?\d+/` matching integers matching
+ *  `/sqrt/`  matching square root function
+ *  `/sinh/` matching hyperbolic sine
+ *  `/cosh/` matching hyperbolic cosine
+ *  `/tanh/` matching hyperbolic tangent
+ *  `/coth/` matching hyperbolic cotangent
+ *  `/sin/` matching sine
+ *  `/cos/` matching cosine
+ *  `/tan/` matching tangent
+ *  `/cot/` matching cotangent
+ *  `/arsinh|arcsinh|asinh/` matching inverse hyperbolic sine
+ *  `/arcosh|arccosh|acosh/` matching inverse hyperbolic cosine
+ *  `/artanh|arctanh|atanh/` matching inverse hyperbolic tangent
+ *  `/arcoth|arccoth|acoth/` matching inverse hyperbolic cotangent
+ *  `/arcsin|asin/` matching inverse sine
+ *  `/arccos|acos/` matching inverse cosine
+ *  `/arctan|atan/` matching inverse tangent
+ *  `/arccot|acot/` matching inverse cotangent
+ *  `/exp/` matching exponential function
+ *  `/log10|lg/` matching logarithm (base 10)
+ *  `/log|ln/` matching natural logarithm
+ *  '/abs/' matching modulus (absolute value)
+ *  '/arg/' matching (principal) argument
+ *  '/conj/' matching conjugate
+ *  '/re/' matching real part
+ *  '/im/' matching imaginary part
+ *  `/\(/` matching opening parenthesis (both as delimiter and function evaluation)
+ *  `/\)/` matching closing parenthesisis (both as delimiter and function evaluation)
+ *  `/\+/` matching + for addition (or unary +)
+ *  `/\-/` matching - for subtraction (or unary -)
+ *  `/\* /` matching * for multiplication
+ *  `/\//` matching / for division
+ *  `/\^/` matching ^ for exponentiation
+ *  `/pi/` matching constant pi
+ *  `/e/` matching constant e
+ *  `/i/` matching imaginary unit i
+ *  `/[a-zA-Z]/` matching variables (note that we only allow single letter identifiers,
+ * this improves parsing of implicit multiplication)
+ *  `/\n/` matching newline
+ *  `/\s+/` matching whitespace
  */
- class ComplexLexer extends Lexer
+class ComplexLexer extends Lexer
 {
     public function __construct()
     {
@@ -92,7 +93,8 @@ use MathParser\Lexing\TokenType;
 
         $this->add(new TokenDefinition('/exp/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/log10|lg/', TokenType::FunctionName, 'lg'));
-        $this->add(new TokenDefinition('/log|ln/', TokenType::FunctionName, 'log'));
+        $this->add(new TokenDefinition('/log/', TokenType::FunctionName, 'log'));
+        $this->add(new TokenDefinition('/ln/', TokenType::FunctionName, 'ln'));
 
         $this->add(new TokenDefinition('/abs/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/arg/', TokenType::FunctionName));

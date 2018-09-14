@@ -286,16 +286,15 @@ class LaTeXPrinter implements Visitor
                 // Operand is complex, typset using \exp instead
 
                 return '\exp(' . $operand->accept($this) . ')';
+
+            case 'ln':
+            case 'log':
             case 'sin':
             case 'cos':
             case 'tan':
             case 'arcsin':
             case 'arccos':
             case 'arctan':
-                break;
-
-            case 'log':
-                $functionName = 'ln';
                 break;
 
             case 'abs':

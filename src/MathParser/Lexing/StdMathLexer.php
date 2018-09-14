@@ -106,7 +106,8 @@ class StdMathLexer extends Lexer
 
         $this->add(new TokenDefinition('/exp/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/log10|lg/', TokenType::FunctionName, 'lg'));
-        $this->add(new TokenDefinition('/log|ln/', TokenType::FunctionName, 'log'));
+        $this->add(new TokenDefinition('/log/', TokenType::FunctionName, 'log'));
+        $this->add(new TokenDefinition('/ln/', TokenType::FunctionName, 'ln'));
 
         $this->add(new TokenDefinition('/abs/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/sgn/', TokenType::FunctionName));
@@ -126,7 +127,6 @@ class StdMathLexer extends Lexer
 
         $this->add(new TokenDefinition('/pi/', TokenType::Constant));
         $this->add(new TokenDefinition('/e/', TokenType::Constant));
-        $this->add(new TokenDefinition('/i/', TokenType::Constant));
         $this->add(new TokenDefinition('/NAN/', TokenType::Constant));
         $this->add(new TokenDefinition('/INF/', TokenType::Constant));
 

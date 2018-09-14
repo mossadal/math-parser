@@ -166,9 +166,6 @@ class ASCIIPrinter implements Visitor
     public function visitFunctionNode(FunctionNode $node)
     {
         $functionName = $node->getName();
-        if ($functionName == 'log') {
-            $functionName = 'ln';
-        }
 
         if ($functionName == '!' || $functionName == '!!') {
             return $this->visitFactorialNode($node);

@@ -79,9 +79,14 @@ class DifferentiatorTest extends TestCase
         $this->assertResult('log(x)', '1/x');
     }
 
+    public function testCanDifferentiateLn()
+    {
+        $this->assertResult('ln(x)', '1/x');
+    }
+
     public function testCanDifferentiateLog10()
     {
-        $this->assertResult('log10(x)', '1/(log(10)x)');
+        $this->assertResult('log10(x)', '1/(ln(10)x)');
     }
 
     public function testCanDifferentiateSin()
@@ -154,7 +159,7 @@ class DifferentiatorTest extends TestCase
         $this->assertResult('x^1', '1');
         $this->assertResult('x^2', '2x');
         $this->assertResult('x^3', '3x^2');
-        $this->assertResult('x^x', 'x^x*(log(x)+1)');
+        $this->assertResult('x^x', 'x^x*(ln(x)+1)');
         $this->assertResult('x^(1/2)', '(1/2)*x^(-1/2)');
         $this->assertResult('e^x', 'e^x');
         $this->assertResult('e^(x^2)', '2*x*e^(x^2)');

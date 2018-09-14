@@ -151,7 +151,7 @@ class Differentiator implements Visitor
                 } elseif ($base instanceof ConstantNode && $base->getName() == 'e') {
                     return $this->nodeFactory->multiplication($rightValue, $node);
                 } else {
-                    $term1 = $this->nodeFactory->multiplication($rightValue, new FunctionNode('log', $base));
+                    $term1 = $this->nodeFactory->multiplication($rightValue, new FunctionNode('ln', $base));
                     $term2 = $this->nodeFactory->division(
                         $this->nodeFactory->multiplication($exponent, $base->accept($this)),
                         $base);
@@ -288,10 +288,11 @@ class Differentiator implements Visitor
             case 'exp':
                 $df = new FunctionNode('exp', $arg);
                 break;
+            case 'ln':
             case 'log':
                 return $this->nodeFactory->division($inner, $arg);
             case 'lg':
-                $denominator = $this->nodeFactory->multiplication(new FunctionNode('log', new IntegerNode(10)), $arg);
+                $denominator = $this->nodeFactory->multiplication(new FunctionNode('ln', new IntegerNode(10)), $arg);
 
                 return $this->nodeFactory->division($inner, $denominator);
 

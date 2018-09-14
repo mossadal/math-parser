@@ -249,6 +249,7 @@ class Evaluator implements Visitor
                 return exp($inner);
 
             case 'log':
+            case 'ln':
                 return log($inner);
 
             case 'lg':
