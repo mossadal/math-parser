@@ -362,7 +362,7 @@ class EvaluatorTest extends TestCase
 
     public function testCanComputeRoundingFunctions()
     {
-        $this->assertResult('ceil(1+2.3)', 3);
+        $this->assertResult('ceil(1+2.3)', 4);
         $this->assertResult('floor(2*2.3)', 4);
         $this->assertResult('ceil(2*2.3)', 5);
         $this->assertResult('round(2*2.3)', 5);
