@@ -1,23 +1,20 @@
 <?php
 
-use MathParser\Exceptions\MathParserException;
-use MathParser\Exceptions\DivisionByZeroException;
-use MathParser\Exceptions\ParenthesisMismatchException;
-use MathParser\Exceptions\SyntaxErrorException;
 use MathParser\Exceptions\UnknownConstantException;
 use MathParser\Exceptions\UnknownFunctionException;
+use MathParser\Exceptions\UnknownOperatorException;
 use MathParser\Exceptions\UnknownTokenException;
 use MathParser\Exceptions\UnknownVariableException;
-use MathParser\Exceptions\UnknownOperatorException;
+use PHPUnit\Framework\TestCase;
 
-class ExceptionTest extends PHPUnit_Framework_TestCase
+class ExceptionTest extends TestCase
 {
 
     public function testUnknownTokenException()
     {
         try {
             throw new UnknownTokenException('@');
-        } catch(UnknownTokenException $e) {
+        } catch (UnknownTokenException $e) {
             $this->assertEquals($e->getData(), '@');
             $this->assertEquals($e->getName(), '@');
         }
@@ -27,7 +24,7 @@ class ExceptionTest extends PHPUnit_Framework_TestCase
     {
         try {
             throw new UnknownConstantException('@');
-        } catch(UnknownConstantException $e) {
+        } catch (UnknownConstantException $e) {
             $this->assertEquals($e->getData(), '@');
             $this->assertEquals($e->getConstant(), '@');
         }
@@ -37,7 +34,7 @@ class ExceptionTest extends PHPUnit_Framework_TestCase
     {
         try {
             throw new UnknownFunctionException('@');
-        } catch(UnknownFunctionException $e) {
+        } catch (UnknownFunctionException $e) {
             $this->assertEquals($e->getData(), '@');
             $this->assertEquals($e->getFunction(), '@');
         }
@@ -47,7 +44,7 @@ class ExceptionTest extends PHPUnit_Framework_TestCase
     {
         try {
             throw new UnknownOperatorException('@');
-        } catch(UnknownOperatorException $e) {
+        } catch (UnknownOperatorException $e) {
             $this->assertEquals($e->getData(), '@');
             $this->assertEquals($e->getOperator(), '@');
         }
@@ -57,7 +54,7 @@ class ExceptionTest extends PHPUnit_Framework_TestCase
     {
         try {
             throw new UnknownVariableException('@');
-        } catch(UnknownVariableException $e) {
+        } catch (UnknownVariableException $e) {
             $this->assertEquals($e->getData(), '@');
             $this->assertEquals($e->getVariable(), '@');
         }

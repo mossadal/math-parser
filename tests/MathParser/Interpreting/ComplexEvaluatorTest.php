@@ -1,23 +1,21 @@
 <?php
 
 use MathParser\ComplexMathParser;
-use MathParser\Interpreting\Interpreter;
-use MathParser\Interpreting\ComplexEvaluator;
-use MathParser\Parsing\Nodes\Node;
-use MathParser\Parsing\Nodes\ConstantNode;
-use MathParser\Parsing\Nodes\NumberNode;
-use MathParser\Parsing\Nodes\VariableNode;
-use MathParser\Parsing\Nodes\FunctionNode;
-use MathParser\Parsing\Nodes\ExpressionNode;
-use MathParser\Extensions\Complex;
-
-use MathParser\Exceptions\UnknownVariableException;
+use MathParser\Exceptions\DivisionByZeroException;
 use MathParser\Exceptions\UnknownConstantException;
 use MathParser\Exceptions\UnknownFunctionException;
 use MathParser\Exceptions\UnknownOperatorException;
-use MathParser\Exceptions\DivisionByZeroException;
+use MathParser\Exceptions\UnknownVariableException;
+use MathParser\Extensions\Complex;
+use MathParser\Interpreting\ComplexEvaluator;
+use MathParser\Parsing\Nodes\ConstantNode;
+use MathParser\Parsing\Nodes\ExpressionNode;
+use MathParser\Parsing\Nodes\FunctionNode;
+use MathParser\Parsing\Nodes\NumberNode;
+use MathParser\Parsing\Nodes\VariableNode;
+use PHPUnit\Framework\TestCase;
 
-class ComplexEvaluatorTest extends PHPUnit_Framework_TestCase
+class ComplexEvaluatorTest extends TestCase
 {
     private $parser;
     private $rparser;
@@ -28,20 +26,23 @@ class ComplexEvaluatorTest extends PHPUnit_Framework_TestCase
     {
         $this->parser = new ComplexMathParser();
 
-        $this->variables = array('x' => Complex::parse('1+i'), 'y' => Complex::parse('3+2i'));
+        $this->variables = ['x' => Complex::parse('1+i'), 'y' => Complex::parse('3+2i')];
         $this->evaluator = new ComplexEvaluator($this->variables);
     }
 
     private function evaluate($f)
     {
         $this->evaluator->setVariables($this->variables);
+
         return $f->accept($this->evaluator);
     }
 
     private function assertResult($f, $x)
     {
         $value = $this->evaluate($this->parser->parse($f));
-        if (!($x instanceof Complex)) $x = Complex::parse($x);
+        if (!($x instanceof Complex)) {
+            $x = Complex::parse($x);
+        }
 
         $this->assertEquals($value->r(), $x->r());
         $this->assertEquals($value->i(), $x->i());
@@ -55,18 +56,18 @@ class ComplexEvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function testCanEvaluateNumber()
     {
-        $this->assertResult('3', new Complex(3,0));
-        $this->assertResult('-2', new Complex(-2,0));
-        $this->assertResult('1+i', new Complex(1,1));
+        $this->assertResult('3', new Complex(3, 0));
+        $this->assertResult('-2', new Complex(-2, 0));
+        $this->assertResult('1+i', new Complex(1, 1));
     }
 
     public function testCanEvaluateConstant()
     {
         $this->assertResult('pi', pi());
-        $this->assertResult('i', new Complex(0,1));
+        $this->assertResult('i', new Complex(0, 1));
 
         $f = new ConstantNode('sdf');
-        $this->setExpectedException(UnknownConstantException::class);
+        $this->expectException(UnknownConstantException::class);
         $value = $this->evaluate($f);
     }
 
@@ -74,7 +75,7 @@ class ComplexEvaluatorTest extends PHPUnit_Framework_TestCase
     {
         $this->assertResult('x', $this->variables['x']);
 
-        $this->setExpectedException(UnknownVariableException::class);
+        $this->expectException(UnknownVariableException::class);
 
         $f = $this->parser->parse("q");
         $value = $this->evaluate($f);
@@ -90,8 +91,8 @@ class ComplexEvaluatorTest extends PHPUnit_Framework_TestCase
     public function testCanEvaluateSubtraction()
     {
         $x = $this->variables['x'];
-        $this->assertResult('3-x', Complex::sub(3,$x));
-        $this->assertResult('3-x-1', Complex::sub(2,$x));
+        $this->assertResult('3-x', Complex::sub(3, $x));
+        $this->assertResult('3-x-1', Complex::sub(2, $x));
     }
 
     public function testCanEvaluateUnaryMinus()
@@ -113,18 +114,17 @@ class ComplexEvaluatorTest extends PHPUnit_Framework_TestCase
         $this->assertResult('20/x/5', Complex::div(4, $x));
     }
 
-
     public function testCanEvaluateExponentiation()
     {
         $x = $this->variables['x'];
         $this->assertResult('x^3', Complex::pow($x, 3));
-        $this->assertResult('x^x^x', Complex::pow($x, Complex::pow($x,$x)));;
+        $this->assertResult('x^x^x', Complex::pow($x, Complex::pow($x, $x)));
         $this->assertResult('(-1)^(-1)', Complex::parse(-1));
     }
 
     public function testCantRaise0To0()
     {
-        $this->setExpectedException(DivisionByZeroException::class);
+        $this->expectException(DivisionByZeroException::class);
         $this->assertResult('0^0', 1);
     }
 
@@ -160,28 +160,27 @@ class ComplexEvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function testCanEvaluateArcsin()
     {
-        $this->assertResult('arcsin(1)', pi()/2);
-        $this->assertResult('arcsin(1/2)', pi()/6);
+        $this->assertResult('arcsin(1)', pi() / 2);
+        $this->assertResult('arcsin(1/2)', pi() / 6);
         $this->assertResult('arcsin(x)', Complex::arcsin($this->variables['x']));
-
     }
 
     public function testCanEvaluateArccos()
     {
-        $this->assertResult('arccos(0)', pi()/2);
-        $this->assertResult('arccos(1/2)', pi()/3);
+        $this->assertResult('arccos(0)', pi() / 2);
+        $this->assertResult('arccos(1/2)', pi() / 3);
         $this->assertResult('arccos(x)', Complex::arccos($this->variables['x']));
     }
 
     public function testCanEvaluateArctan()
     {
-        $this->assertResult('arctan(1)', pi()/4);
+        $this->assertResult('arctan(1)', pi() / 4);
         $this->assertResult('arctan(x)', Complex::arctan($this->variables['x']));
     }
 
     public function testCanEvaluateArccot()
     {
-        $this->assertResult('arccot(1)', pi()/4);
+        $this->assertResult('arccot(1)', pi() / 4);
         $this->assertResult('arccot(x)', Complex::arccot($this->variables['x']));
     }
 
@@ -199,12 +198,12 @@ class ComplexEvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function testCanEvaluateLog10()
     {
-        $this->assertResult('lg(-1)', new Complex(0, pi()/log(10)));
+        $this->assertResult('lg(-1)', new Complex(0, pi() / log(10)));
     }
 
     public function testCanEvaluateSqrt()
     {
-        $this->assertResult('sqrt(-1)', new Complex(0,1));
+        $this->assertResult('sqrt(-1)', new Complex(0, 1));
         $this->assertResult('sqrt(x)', Complex::sqrt($this->variables['x']));
     }
 
@@ -219,10 +218,9 @@ class ComplexEvaluatorTest extends PHPUnit_Framework_TestCase
     {
         $x = $this->variables['x'];
         $this->assertResult('arg(x)', $x->arg());
-        $this->assertResult('arg(1+i)', pi()/4);
-        $this->assertResult('arg(-i)', -pi()/2);
+        $this->assertResult('arg(1+i)', pi() / 4);
+        $this->assertResult('arg(-i)', -pi() / 2);
     }
-
 
     public function testCanEvaluateConj()
     {
@@ -272,9 +270,8 @@ class ComplexEvaluatorTest extends PHPUnit_Framework_TestCase
     {
         $f = new FunctionNode('sdf', new NumberNode(1));
 
-        $this->setExpectedException(UnknownFunctionException::class);
+        $this->expectException(UnknownFunctionException::class);
         $value = $this->evaluate($f);
-
     }
 
     public function testCannotEvaluateUnknownOperator()
@@ -283,10 +280,9 @@ class ComplexEvaluatorTest extends PHPUnit_Framework_TestCase
         // We need to cheat here, since the ExpressionNode contructor already
         // throws an UnknownOperatorException when called with, say '%'
         $node->setOperator('%');
-        $this->setExpectedException(UnknownOperatorException::class);
+        $this->expectException(UnknownOperatorException::class);
 
         $this->evaluate($node);
-
     }
 
     public function testCanCreateTemporaryUnaryMinusNode()
@@ -300,7 +296,7 @@ class ComplexEvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function testUnknownException()
     {
-        $this->setExpectedException(UnknownOperatorException::class);
+        $this->expectException(UnknownOperatorException::class);
         $node = new ExpressionNode(null, '%', null);
     }
 
@@ -308,7 +304,5 @@ class ComplexEvaluatorTest extends PHPUnit_Framework_TestCase
     {
         $this->assert_NAN('log(0)');
         $this->assert_NAN('arctan(i)');
-
     }
-
 }

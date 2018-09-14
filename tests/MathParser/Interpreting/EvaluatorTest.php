@@ -13,8 +13,9 @@ use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\RationalMathParser;
 use MathParser\StdMathParser;
+use PHPUnit\Framework\TestCase;
 
-class EvaluatorTest extends PHPUnit_Framework_TestCase
+class EvaluatorTest extends TestCase
 {
     private $parser;
     private $rparser;
@@ -76,7 +77,7 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
         $this->assertResult('e', exp(1));
 
         $f = new ConstantNode('sdf');
-        $this->setExpectedException(UnknownConstantException::class);
+        $this->expectException(UnknownConstantException::class);
         $value = $this->evaluate($f);
     }
 
@@ -84,7 +85,7 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
     {
         $this->assertResult('x', $this->variables['x']);
 
-        $this->setExpectedException(UnknownVariableException::class);
+        $this->expectException(UnknownVariableException::class);
 
         $f = $this->parser->parse("q");
         $value = $this->evaluate($f);
@@ -127,7 +128,7 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
     {
         $f = new ExpressionNode(3, '/', 0);
 
-        $this->setExpectedException(DivisionByZeroException::class);
+        $this->expectException(DivisionByZeroException::class);
         $value = $this->evaluate($f);
     }
 
@@ -141,7 +142,7 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function testCantRaise0To0()
     {
-        $this->setExpectedException(DivisionByZeroException::class);
+        $this->expectException(DivisionByZeroException::class);
         $this->assertResult('0^0', 1);
     }
 
@@ -298,7 +299,7 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
     {
         $f = new FunctionNode('sdf', new NumberNode(1));
 
-        $this->setExpectedException(UnknownFunctionException::class);
+        $this->expectException(UnknownFunctionException::class);
         $value = $this->evaluate($f);
 
     }
@@ -309,7 +310,7 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
         // We need to cheat here, since the ExpressionNode contructor already
         // throws an UnknownOperatorException when called with, say '%'
         $node->setOperator('%');
-        $this->setExpectedException(UnknownOperatorException::class);
+        $this->expectException(UnknownOperatorException::class);
 
         $this->evaluate($node);
 
@@ -326,7 +327,7 @@ class EvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function testUnknownException()
     {
-        $this->setExpectedException(UnknownOperatorException::class);
+        $this->expectException(UnknownOperatorException::class);
         $node = new ExpressionNode(null, '%', null);
     }
 

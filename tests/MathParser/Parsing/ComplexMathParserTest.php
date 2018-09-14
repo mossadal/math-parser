@@ -1,30 +1,20 @@
 <?php
 
+use MathParser\ComplexMathParser;
+use MathParser\Exceptions\ParenthesisMismatchException;
+use MathParser\Exceptions\SyntaxErrorException;
+use MathParser\Interpreting\TreePrinter;
 use MathParser\Lexing\Token;
 use MathParser\Lexing\TokenType;
-use MathParser\Lexing\TokenPrecedence;
-use MathParser\Lexing\ComplexMathLexer;
-
-use MathParser\Parsing\Parser;
-use MathParser\ComplexMathParser;
-use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\ConstantNode;
 use MathParser\Parsing\Nodes\ExpressionNode;
-use MathParser\Parsing\Nodes\FunctionNode;
-use MathParser\Parsing\Nodes\SubExpressionNode;
-use MathParser\Parsing\Nodes\VariableNode;
-use MathParser\Interpreting\TreePrinter;
-
-use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\IntegerNode;
+use MathParser\Parsing\Nodes\NumberNode;
+use MathParser\Parsing\Nodes\VariableNode;
+use MathParser\Parsing\Parser;
+use PHPUnit\Framework\TestCase;
 
-use MathParser\Exceptions\SyntaxErrorException;
-use MathParser\Exceptions\UnexpectedOperatorException;
-use MathParser\Exceptions\ParenthesisMismatchException;
-use MathParser\Exceptions\UnknownNodeException;
-
-
-class ComplexMathParserTest extends PHPUnit_Framework_TestCase
+class ComplexMathParserTest extends TestCase
 {
     private $parser;
 
@@ -36,7 +26,7 @@ class ComplexMathParserTest extends PHPUnit_Framework_TestCase
     private function assertNodesEqual($node1, $node2)
     {
         $printer = new TreePrinter();
-        $message = "Node1: ".$node1->accept($printer)."\nNode 2: ".$node2->accept($printer)."\n";
+        $message = "Node1: " . $node1->accept($printer) . "\nNode 2: " . $node2->accept($printer) . "\n";
 
         $this->assertTrue($node1->compareTo($node2), $message);
     }
@@ -70,7 +60,6 @@ class ComplexMathParserTest extends PHPUnit_Framework_TestCase
         $this->assertCompareNodes("(x)");
         $this->assertCompareNodes("1+x+y");
     }
-
 
     private function assertTokenEquals($value, $type, Token $token)
     {
@@ -313,35 +302,31 @@ class ComplexMathParserTest extends PHPUnit_Framework_TestCase
 
     }
 
-
     public function testSyntaxErrorException()
     {
-        $this->setExpectedException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorException::class);
         $this->parser->parse('1+');
     }
 
     public function testSyntaxErrorException2()
     {
-        $this->setExpectedException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorException::class);
         $this->parser->parse('**3');
     }
 
     public function testSyntaxErrorException3()
     {
-        $this->setExpectedException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorException::class);
         $this->parser->parse('-');
     }
 
     public function testParenthesisMismatchException()
     {
-        $this->setExpectedException(ParenthesisMismatchException::class);
+        $this->expectException(ParenthesisMismatchException::class);
         $this->parser->parse('1+1)');
 
-        $this->setExpectedException(ParenthesisMismatchException::class);
+        $this->expectException(ParenthesisMismatchException::class);
         $this->parser->parse('(1+1');
     }
-
-
-
 
 }

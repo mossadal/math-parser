@@ -1,10 +1,11 @@
 <?php
 
-use MathParser\Extensions\Rational;
-use MathParser\Exceptions\SyntaxErrorException;
 use MathParser\Exceptions\DivisionByZeroException;
+use MathParser\Exceptions\SyntaxErrorException;
+use MathParser\Extensions\Rational;
+use PHPUnit\Framework\TestCase;
 
-class RationalTest extends PHPUnit_Framework_TestCase
+class RationalTest extends TestCase
 {
     public function testRationalFromString()
     {
@@ -36,7 +37,7 @@ class RationalTest extends PHPUnit_Framework_TestCase
 
     public function testRationalFromStingDivisionByZero()
     {
-        $this->setExpectedException(DivisionByZeroException::class);
+        $this->expectException(DivisionByZeroException::class);
         $x = Rational::parse('1/0');
     }
 
@@ -54,13 +55,13 @@ class RationalTest extends PHPUnit_Framework_TestCase
 
     public function testParseFailure()
     {
-        $this->setExpectedException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorException::class);
         $x = Rational::parse('sdf');
     }
 
     public function testNan()
     {
-        $this->setExpectedException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorException::class);
         $x = Rational::parse('1/2/3');
     }
 
@@ -76,13 +77,13 @@ class RationalTest extends PHPUnit_Framework_TestCase
 
     public function testCanDoAritmethic()
     {
-        $x = new Rational(1,2);
-        $y = new Rational(2,3);
+        $x = new Rational(1, 2);
+        $y = new Rational(2, 3);
 
-        $this->assertEquals(new Rational(7,6), Rational::add($x,$y));
-        $this->assertEquals(new Rational(-1,6), Rational::sub($x,$y));
-        $this->assertEquals(new Rational(1,3), Rational::mul($x,$y));
-        $this->assertEquals(new Rational(3,4), Rational::div($x,$y));
+        $this->assertEquals(new Rational(7, 6), Rational::add($x, $y));
+        $this->assertEquals(new Rational(-1, 6), Rational::sub($x, $y));
+        $this->assertEquals(new Rational(1, 3), Rational::mul($x, $y));
+        $this->assertEquals(new Rational(3, 4), Rational::div($x, $y));
     }
 
     public function testDivisionByZero()
@@ -90,7 +91,7 @@ class RationalTest extends PHPUnit_Framework_TestCase
         $x = Rational::parse('1/2');
         $y = Rational::parse('0');
 
-        $this->setExpectedException(DivisionByZeroException::class);
+        $this->expectException(DivisionByZeroException::class);
         $z = Rational::div($x, $y);
     }
 }

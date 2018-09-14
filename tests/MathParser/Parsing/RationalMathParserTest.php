@@ -1,33 +1,23 @@
 <?php
 
+use MathParser\Exceptions\DivisionByZeroException;
+use MathParser\Exceptions\ParenthesisMismatchException;
+use MathParser\Exceptions\SyntaxErrorException;
+use MathParser\Interpreting\TreePrinter;
 use MathParser\Lexing\Token;
 use MathParser\Lexing\TokenType;
-use MathParser\Lexing\TokenPrecedence;
-use MathParser\RationalMathParser;
-use MathParser\Lexing\StdMathLexer;
-
-use MathParser\Parsing\Parser;
-use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\ConstantNode;
 use MathParser\Parsing\Nodes\ExpressionNode;
-use MathParser\Parsing\Nodes\FunctionNode;
-use MathParser\Parsing\Nodes\SubExpressionNode;
-use MathParser\Parsing\Nodes\VariableNode;
-use MathParser\Interpreting\TreePrinter;
 use MathParser\Parsing\Nodes\Factories\NodeFactory;
-
-use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\IntegerNode;
+use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\RationalNode;
+use MathParser\Parsing\Nodes\VariableNode;
+use MathParser\Parsing\Parser;
+use MathParser\RationalMathParser;
+use PHPUnit\Framework\TestCase;
 
-use MathParser\Exceptions\SyntaxErrorException;
-use MathParser\Exceptions\UnexpectedOperatorException;
-use MathParser\Exceptions\ParenthesisMismatchException;
-use MathParser\Exceptions\UnknownNodeException;
-use MathParser\Exceptions\DivisionByZeroException;
-
-
-class RationalMathParserTest extends PHPUnit_Framework_TestCase
+class RationalMathParserTest extends TestCase
 {
     private $parser;
 
@@ -41,7 +31,7 @@ class RationalMathParserTest extends PHPUnit_Framework_TestCase
     private function assertNodesEqual($node1, $node2)
     {
         $printer = new TreePrinter();
-        $message = "Node1: ".$node1->accept($printer)."\nNode 2:".$node2->accept($printer)."\n";
+        $message = "Node1: " . $node1->accept($printer) . "\nNode 2:" . $node2->accept($printer) . "\n";
 
         $this->assertTrue($node1->compareTo($node2), $message);
     }
@@ -64,7 +54,6 @@ class RationalMathParserTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($p, $node->getNumerator());
         $this->assertEquals($q, $node->getDenominator());
     }
-
 
     private function assertVariableNode($node, $value)
     {
@@ -89,7 +78,6 @@ class RationalMathParserTest extends PHPUnit_Framework_TestCase
         $this->assertCompareNodes("(x)");
         $this->assertCompareNodes("1+x+y");
     }
-
 
     private function assertTokenEquals($value, $type, Token $token)
     {
@@ -122,7 +110,7 @@ class RationalMathParserTest extends PHPUnit_Framework_TestCase
         $this->assertNodesEqual($node, $shouldBe);
 
         $node = $this->parser->parse("2/3");
-        $shouldBe = new RationalNode(2,3);
+        $shouldBe = new RationalNode(2, 3);
         $this->assertNodesEqual($node, $shouldBe);
 
         $node = $this->parser->parse("3.5");
@@ -346,70 +334,67 @@ class RationalMathParserTest extends PHPUnit_Framework_TestCase
         $this->assertNodesEqual($node, $shouldBe);
 
         $node = $this->parser->parse("-(1/2)");
-        $shouldBe = new RationalNode(-1,2);
+        $shouldBe = new RationalNode(-1, 2);
         $this->assertNodesEqual($node, $shouldBe);
 
     }
 
-
     public function testSyntaxErrorException()
     {
-        $this->setExpectedException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorException::class);
         $this->parser->parse('1+');
     }
 
     public function testSyntaxErrorException2()
     {
-        $this->setExpectedException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorException::class);
         $this->parser->parse('**3');
     }
 
     public function testSyntaxErrorException3()
     {
-        $this->setExpectedException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorException::class);
         $this->parser->parse('-');
     }
 
     public function testParenthesisMismatchException()
     {
-        $this->setExpectedException(ParenthesisMismatchException::class);
+        $this->expectException(ParenthesisMismatchException::class);
         $this->parser->parse('1+1)');
 
-        $this->setExpectedException(ParenthesisMismatchException::class);
+        $this->expectException(ParenthesisMismatchException::class);
         $this->parser->parse('(1+1');
     }
-
 
     public function testCanEvaluateNode()
     {
         $f = $this->parser->parse('x+y');
-        $this->assertEquals($f->evaluate([ 'x' => 1, 'y' => 2 ]), 3);
+        $this->assertEquals($f->evaluate(['x' => 1, 'y' => 2]), 3);
     }
-
 
     public function testCanParseRationals()
     {
         $f = $this->parser->parse('1/2');
-        $this->assertTrue($f->compareTo(new RationalNode(1,2)));
+        $this->assertTrue($f->compareTo(new RationalNode(1, 2)));
 
         $f = $this->parser->parse('1/2+1/3');
-        $this->assertTrue($f->compareTo(new RationalNode(5,6)));
+        $this->assertTrue($f->compareTo(new RationalNode(5, 6)));
 
         $f = $this->parser->parse('1/2*2/5');
-        $this->assertTrue($f->compareTo(new RationalNode(1,5)));
+        $this->assertTrue($f->compareTo(new RationalNode(1, 5)));
 
         $f = $this->parser->parse('(1/2)/(1/3)');
-        $this->assertTrue($f->compareTo(new RationalNode(3,2)));
+        $this->assertTrue($f->compareTo(new RationalNode(3, 2)));
 
     }
 
-    function testAdditionNodeFactory()
+    public function testAdditionNodeFactory()
     {
         $node = $this->factory->addition(new VariableNode('x'), new IntegerNode(0));
         $shouldBe = new VariableNode('x');
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->factory->addition(new VariableNode('x'), new RationalNode(0,1));
+        $node = $this->factory->addition(new VariableNode('x'), new RationalNode(0, 1));
         $shouldBe = new VariableNode('x');
         $this->assertNodesEqual($node, $shouldBe);
 
@@ -421,7 +406,7 @@ class RationalMathParserTest extends PHPUnit_Framework_TestCase
         $shouldBe = new VariableNode('x');
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->factory->addition(new RationalNode(0,1), new VariableNode('x'));
+        $node = $this->factory->addition(new RationalNode(0, 1), new VariableNode('x'));
         $shouldBe = new VariableNode('x');
         $this->assertNodesEqual($node, $shouldBe);
 
@@ -437,7 +422,7 @@ class RationalMathParserTest extends PHPUnit_Framework_TestCase
         $shouldBe = new NumberNode(4.0);
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->factory->addition(new NumberNode(1.5), new RationalNode(1,2));
+        $node = $this->factory->addition(new NumberNode(1.5), new RationalNode(1, 2));
         $shouldBe = new NumberNode(2.0);
         $this->assertNodesEqual($node, $shouldBe);
 
@@ -445,12 +430,12 @@ class RationalMathParserTest extends PHPUnit_Framework_TestCase
         $shouldBe = new NumberNode(2.5);
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->factory->addition(new RationalNode(1,2), new RationalNode(1,3));
-        $shouldBe = new RationalNode(5,6);
+        $node = $this->factory->addition(new RationalNode(1, 2), new RationalNode(1, 3));
+        $shouldBe = new RationalNode(5, 6);
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->factory->addition(new RationalNode(1,2), new IntegerNode(1));
-        $shouldBe = new RationalNode(3,2);
+        $node = $this->factory->addition(new RationalNode(1, 2), new IntegerNode(1));
+        $shouldBe = new RationalNode(3, 2);
         $this->assertNodesEqual($node, $shouldBe);
 
         $node = $this->factory->addition(new IntegerNode(2), new IntegerNode(1));
@@ -458,76 +443,76 @@ class RationalMathParserTest extends PHPUnit_Framework_TestCase
         $this->assertNodesEqual($node, $shouldBe);
     }
 
-    function testDivisionNodeFactory()
+    public function testDivisionNodeFactory()
     {
-            $node = $this->factory->division(new VariableNode('x'), new IntegerNode(1));
-            $shouldBe = new VariableNode('x');
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->division(new VariableNode('x'), new IntegerNode(1));
+        $shouldBe = new VariableNode('x');
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->division(new IntegerNode(0), new VariableNode('x'));
-            $shouldBe = new IntegerNode(0);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->division(new IntegerNode(0), new VariableNode('x'));
+        $shouldBe = new IntegerNode(0);
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->division(new RationalNode(0,1), new VariableNode('x'));
-            $shouldBe = new IntegerNode(0);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->division(new RationalNode(0, 1), new VariableNode('x'));
+        $shouldBe = new IntegerNode(0);
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->division(new NumberNode(0), new VariableNode('x'));
-            $shouldBe = new IntegerNode(0);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->division(new NumberNode(0), new VariableNode('x'));
+        $shouldBe = new IntegerNode(0);
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->division(new VariableNode('x'), new VariableNode('y'));
-            $shouldBe = $this->parser->parse('x/y');
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->division(new VariableNode('x'), new VariableNode('y'));
+        $shouldBe = $this->parser->parse('x/y');
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->division(new NumberNode(3.0), new NumberNode(1.5));
-            $shouldBe = new NumberNode(2.0);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->division(new NumberNode(3.0), new NumberNode(1.5));
+        $shouldBe = new NumberNode(2.0);
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->division(new NumberNode(3.0), new RationalNode(3,2));
-            $shouldBe = new NumberNode(2.0);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->division(new NumberNode(3.0), new RationalNode(3, 2));
+        $shouldBe = new NumberNode(2.0);
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->division(new NumberNode(3.0), new IntegerNode(2));
-            $shouldBe = new NumberNode(1.5);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->division(new NumberNode(3.0), new IntegerNode(2));
+        $shouldBe = new NumberNode(1.5);
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->division(new RationalNode(1,2), new RationalNode(1,3));
-            $shouldBe = new RationalNode(3,2);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->division(new RationalNode(1, 2), new RationalNode(1, 3));
+        $shouldBe = new RationalNode(3, 2);
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->division(new RationalNode(1,2), new IntegerNode(2));
-            $shouldBe = new RationalNode(1,4);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->division(new RationalNode(1, 2), new IntegerNode(2));
+        $shouldBe = new RationalNode(1, 4);
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->division(new IntegerNode(1), new IntegerNode(2));
-            $shouldBe = new RationalNode(1,2);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->division(new IntegerNode(1), new IntegerNode(2));
+        $shouldBe = new RationalNode(1, 2);
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->division(new VariableNode('x'), new VariableNode('x'));
-            $shouldBe = new IntegerNode(1);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->division(new VariableNode('x'), new VariableNode('x'));
+        $shouldBe = new IntegerNode(1);
+        $this->assertNodesEqual($node, $shouldBe);
     }
 
-    function testDivisionNodeFactoryThrows()
+    public function testDivisionNodeFactoryThrows()
     {
-        $this->setExpectedException(DivisionByZeroException::class);
+        $this->expectException(DivisionByZeroException::class);
         $node = $this->factory->division(new VariableNode('x'), new IntegerNode(0));
     }
 
-    function testDivisionNodeFactoryThrows2()
+    public function testDivisionNodeFactoryThrows2()
     {
-        $this->setExpectedException(DivisionByZeroException::class);
-        $node = $this->factory->division(new VariableNode('x'), new RationalNode(0,2));
+        $this->expectException(DivisionByZeroException::class);
+        $node = $this->factory->division(new VariableNode('x'), new RationalNode(0, 2));
     }
 
-    function testDivisionNodeFactoryThrows3()
+    public function testDivisionNodeFactoryThrows3()
     {
-        $this->setExpectedException(DivisionByZeroException::class);
+        $this->expectException(DivisionByZeroException::class);
         $node = $this->factory->division(new VariableNode('x'), new NumberNode(0));
     }
 
-    function testExponentiationNodeFactory()
+    public function testExponentiationNodeFactory()
     {
         $node = $this->factory->exponentiation(new VariableNode('x'), new VariableNode('y'));
         $shouldBe = $this->parser->parse('x^y');
@@ -537,7 +522,7 @@ class RationalMathParserTest extends PHPUnit_Framework_TestCase
         $shouldBe = new IntegerNode(1);
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->factory->exponentiation(new VariableNode('x'), new RationalNode(0,2));
+        $node = $this->factory->exponentiation(new VariableNode('x'), new RationalNode(0, 2));
         $shouldBe = new IntegerNode(1);
         $this->assertNodesEqual($node, $shouldBe);
 
@@ -549,7 +534,7 @@ class RationalMathParserTest extends PHPUnit_Framework_TestCase
         $shouldBe = new VariableNode('x');
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->factory->exponentiation(new VariableNode('x'), new RationalNode(1,1));
+        $node = $this->factory->exponentiation(new VariableNode('x'), new RationalNode(1, 1));
         $shouldBe = new VariableNode('x');
         $this->assertNodesEqual($node, $shouldBe);
 
@@ -565,7 +550,7 @@ class RationalMathParserTest extends PHPUnit_Framework_TestCase
         $shouldBe = new IntegerNode(8);
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->factory->exponentiation(new RationalNode(1,2), new RationalNode(1,2));
+        $node = $this->factory->exponentiation(new RationalNode(1, 2), new RationalNode(1, 2));
         $shouldBe = $this->parser->parse('(1/2)^(1/2)');
         $this->assertNodesEqual($node, $shouldBe);
 
@@ -575,94 +560,93 @@ class RationalMathParserTest extends PHPUnit_Framework_TestCase
         $this->assertNodesEqual($node, $shouldBe);
     }
 
-    function testMultiplicationNodeFactory()
+    public function testMultiplicationNodeFactory()
     {
-            $node = $this->factory->multiplication(new VariableNode('x'), new IntegerNode(1));
-            $shouldBe = new VariableNode('x');
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->multiplication(new VariableNode('x'), new IntegerNode(1));
+        $shouldBe = new VariableNode('x');
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->multiplication(new VariableNode('x'), new NumberNode(1.0));
-            $shouldBe = new VariableNode('x');
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->multiplication(new VariableNode('x'), new NumberNode(1.0));
+        $shouldBe = new VariableNode('x');
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->multiplication(new VariableNode('x'), new RationalNode(1,1));
-            $shouldBe = new VariableNode('x');
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->multiplication(new VariableNode('x'), new RationalNode(1, 1));
+        $shouldBe = new VariableNode('x');
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->multiplication(new IntegerNode(1), new VariableNode('x'));
-            $shouldBe = new VariableNode('x');
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->multiplication(new IntegerNode(1), new VariableNode('x'));
+        $shouldBe = new VariableNode('x');
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->multiplication(new NumberNode(1.0), new VariableNode('x'));
-            $shouldBe = new VariableNode('x');
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->multiplication(new NumberNode(1.0), new VariableNode('x'));
+        $shouldBe = new VariableNode('x');
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->multiplication(new RationalNode(1,1), new VariableNode('x'));
-            $shouldBe = new VariableNode('x');
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->multiplication(new RationalNode(1, 1), new VariableNode('x'));
+        $shouldBe = new VariableNode('x');
+        $this->assertNodesEqual($node, $shouldBe);
 
+        $node = $this->factory->multiplication(new IntegerNode(0), new VariableNode('x'));
+        $shouldBe = new IntegerNode(0);
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->multiplication(new IntegerNode(0), new VariableNode('x'));
-            $shouldBe = new IntegerNode(0);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->multiplication(new RationalNode(0, 1), new VariableNode('x'));
+        $shouldBe = new IntegerNode(0);
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->multiplication(new RationalNode(0,1), new VariableNode('x'));
-            $shouldBe = new IntegerNode(0);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->multiplication(new NumberNode(0), new VariableNode('x'));
+        $shouldBe = new IntegerNode(0);
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->multiplication(new NumberNode(0), new VariableNode('x'));
-            $shouldBe = new IntegerNode(0);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->multiplication(new VariableNode('x'), new IntegerNode(0));
+        $shouldBe = new IntegerNode(0);
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->multiplication(new VariableNode('x'), new IntegerNode(0));
-            $shouldBe = new IntegerNode(0);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->multiplication(new VariableNode('x'), new RationalNode(0, 2));
+        $shouldBe = new IntegerNode(0);
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->multiplication(new VariableNode('x'), new RationalNode(0,2));
-            $shouldBe = new IntegerNode(0);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->multiplication(new VariableNode('x'), new NumberNode(0));
+        $shouldBe = new IntegerNode(0);
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->multiplication(new VariableNode('x'), new NumberNode(0));
-            $shouldBe = new IntegerNode(0);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->multiplication(new VariableNode('x'), new VariableNode('y'));
+        $shouldBe = $this->parser->parse('x*y');
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->multiplication(new VariableNode('x'), new VariableNode('y'));
-            $shouldBe = $this->parser->parse('x*y');
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->multiplication(new NumberNode(3.0), new NumberNode(1.5));
+        $shouldBe = new NumberNode(4.5);
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->multiplication(new NumberNode(3.0), new NumberNode(1.5));
-            $shouldBe = new NumberNode(4.5);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->multiplication(new NumberNode(3.0), new RationalNode(3, 2));
+        $shouldBe = new NumberNode(4.5);
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->multiplication(new NumberNode(3.0), new RationalNode(3,2));
-            $shouldBe = new NumberNode(4.5);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->multiplication(new NumberNode(3.0), new IntegerNode(2));
+        $shouldBe = new NumberNode(6.0);
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->multiplication(new NumberNode(3.0), new IntegerNode(2));
-            $shouldBe = new NumberNode(6.0);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->multiplication(new RationalNode(1, 2), new RationalNode(1, 3));
+        $shouldBe = new RationalNode(1, 6);
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->multiplication(new RationalNode(1,2), new RationalNode(1,3));
-            $shouldBe = new RationalNode(1,6);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->multiplication(new RationalNode(1, 2), new IntegerNode(2));
+        $shouldBe = new RationalNode(1, 1);
+        $this->assertNodesEqual($node, $shouldBe);
 
-            $node = $this->factory->multiplication(new RationalNode(1,2), new IntegerNode(2));
-            $shouldBe = new RationalNode(1,1);
-            $this->assertNodesEqual($node, $shouldBe);
-
-            $node = $this->factory->multiplication(new IntegerNode(1), new IntegerNode(2));
-            $shouldBe = new IntegerNode(2);
-            $this->assertNodesEqual($node, $shouldBe);
+        $node = $this->factory->multiplication(new IntegerNode(1), new IntegerNode(2));
+        $shouldBe = new IntegerNode(2);
+        $this->assertNodesEqual($node, $shouldBe);
 
     }
 
-    function testSubtractionNodeFactory()
+    public function testSubtractionNodeFactory()
     {
         $node = $this->factory->subtraction(new VariableNode('x'), new IntegerNode(0));
         $shouldBe = new VariableNode('x');
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->factory->subtraction(new VariableNode('x'), new RationalNode(0,1));
+        $node = $this->factory->subtraction(new VariableNode('x'), new RationalNode(0, 1));
         $shouldBe = new VariableNode('x');
         $this->assertNodesEqual($node, $shouldBe);
 
@@ -682,7 +666,7 @@ class RationalMathParserTest extends PHPUnit_Framework_TestCase
         $shouldBe = new NumberNode(-1.0);
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->factory->subtraction(new NumberNode(1.5), new RationalNode(1,2));
+        $node = $this->factory->subtraction(new NumberNode(1.5), new RationalNode(1, 2));
         $shouldBe = new NumberNode(1.0);
         $this->assertNodesEqual($node, $shouldBe);
 
@@ -690,12 +674,12 @@ class RationalMathParserTest extends PHPUnit_Framework_TestCase
         $shouldBe = new NumberNode(0.5);
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->factory->subtraction(new RationalNode(1,2), new RationalNode(1,3));
-        $shouldBe = new RationalNode(1,6);
+        $node = $this->factory->subtraction(new RationalNode(1, 2), new RationalNode(1, 3));
+        $shouldBe = new RationalNode(1, 6);
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->factory->subtraction(new RationalNode(1,2), new IntegerNode(1));
-        $shouldBe = new RationalNode(-1,2);
+        $node = $this->factory->subtraction(new RationalNode(1, 2), new IntegerNode(1));
+        $shouldBe = new RationalNode(-1, 2);
         $this->assertNodesEqual($node, $shouldBe);
 
         $node = $this->factory->subtraction(new IntegerNode(2), new IntegerNode(1));
@@ -706,8 +690,8 @@ class RationalMathParserTest extends PHPUnit_Framework_TestCase
         $shouldBe = new NumberNode(-1.5);
         $this->assertNodesEqual($node, $shouldBe);
 
-        $node = $this->factory->subtraction(new RationalNode(1,5), null);
-        $shouldBe = new RationalNode(-1,5);
+        $node = $this->factory->subtraction(new RationalNode(1, 5), null);
+        $shouldBe = new RationalNode(-1, 5);
         $this->assertNodesEqual($node, $shouldBe);
 
         $node = $this->factory->subtraction(new IntegerNode(1), null);
@@ -719,8 +703,6 @@ class RationalMathParserTest extends PHPUnit_Framework_TestCase
         $shouldBe = new VariableNode('x');
         $this->assertNodesEqual($node, $shouldBe);
 
-
     }
-
 
 }

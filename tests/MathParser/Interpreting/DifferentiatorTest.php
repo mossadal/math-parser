@@ -10,8 +10,9 @@ use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\RationalMathParser;
+use PHPUnit\Framework\TestCase;
 
-class DifferentiatorTest extends PHPUnit_Framework_TestCase
+class DifferentiatorTest extends TestCase
 {
     private $parser;
     private $differentiator;
@@ -167,7 +168,7 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
 
         // The parser catches 'x/0', so create the test AST directly
         $f = new ExpressionNode(new VariableNode('x'), '/', 0);
-        $this->setExpectedException(DivisionByZeroException::class);
+        $this->expectException(DivisionByZeroException::class);
         $this->diff($f);
     }
 
@@ -185,7 +186,7 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
     public function testCannotDifferentiateUnknownFunction()
     {
         $node = new FunctionNode('erf', new VariableNode('x'));
-        $this->setExpectedException(UnknownFunctionException::class);
+        $this->expectException(UnknownFunctionException::class);
 
         $this->diff($node);
 
@@ -197,7 +198,7 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
         // We need to cheat here, since the ExpressionNode contructor already
         // throws an UnknownOperatorException when called with, say '%'
         $node->setOperator('%');
-        $this->setExpectedException(UnknownOperatorException::class);
+        $this->expectException(UnknownOperatorException::class);
 
         $this->diff($node);
 
@@ -220,7 +221,7 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
     {
         $f = $this->parser->parse('ceil(x)');
 
-        $this->setExpectedException(UnknownFunctionException::class);
+        $this->expectException(UnknownFunctionException::class);
         $this->diff($f);
     }
 
@@ -228,7 +229,7 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
     {
         $f = $this->parser->parse('floor(x)');
 
-        $this->setExpectedException(UnknownFunctionException::class);
+        $this->expectException(UnknownFunctionException::class);
         $this->diff($f);
     }
 
@@ -236,7 +237,7 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
     {
         $f = $this->parser->parse('round(x)');
 
-        $this->setExpectedException(UnknownFunctionException::class);
+        $this->expectException(UnknownFunctionException::class);
         $this->diff($f);
     }
 
@@ -244,7 +245,7 @@ class DifferentiatorTest extends PHPUnit_Framework_TestCase
     {
         $f = $this->parser->parse('sgn(x)');
 
-        $this->setExpectedException(UnknownFunctionException::class);
+        $this->expectException(UnknownFunctionException::class);
         $this->diff($f);
     }
 

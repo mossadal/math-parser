@@ -1,13 +1,12 @@
 <?php
 
-use MathParser\Lexing\StdMathLexer;
-use MathParser\Lexing\TokenDefinition;
-use MathParser\Lexing\TokenType;
-use MathParser\Lexing\TokenPrecedence;
-use MathParser\Lexing\Token;
 use MathParser\Exceptions\UnknownTokenException;
+use MathParser\Lexing\StdMathLexer;
+use MathParser\Lexing\Token;
+use MathParser\Lexing\TokenType;
+use PHPUnit\Framework\TestCase;
 
-class StdMathLexerTest extends PHPUnit_Framework_TestCase
+class StdMathLexerTest extends TestCase
 {
     private $lexer;
 
@@ -72,7 +71,7 @@ class StdMathLexerTest extends PHPUnit_Framework_TestCase
 
     public function testExceptionIsThrownOnUnknownToken()
     {
-        $this->setExpectedException(UnknownTokenException::class);
+        $this->expectException(UnknownTokenException::class);
 
         $this->lexer->tokenize('@');
     }
@@ -129,7 +128,6 @@ class StdMathLexerTest extends PHPUnit_Framework_TestCase
         $this->assertTokenEquals('(', TokenType::OpenParenthesis, $tokens[1]);
         $this->assertTokenEquals(')', TokenType::CloseParenthesis, $tokens[2]);
 
-
         $tokens = $this->lexer->tokenize('(x+1)');
         $this->assertEquals(count($tokens), 5);
         $this->assertTokenEquals('(', TokenType::OpenParenthesis, $tokens[0]);
@@ -167,7 +165,6 @@ class StdMathLexerTest extends PHPUnit_Framework_TestCase
         $this->assertTokenEquals('(', TokenType::OpenParenthesis, $tokens[1]);
         $this->assertTokenEquals('x', TokenType::Identifier, $tokens[2]);
         $this->assertTokenEquals(')', TokenType::CloseParenthesis, $tokens[3]);
-
 
         $tokens = $this->lexer->tokenize("arcsin(x)");
         $this->assertTokenEquals('arcsin', TokenType::FunctionName, $tokens[0]);

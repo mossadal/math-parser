@@ -13,6 +13,7 @@ use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\Parsing\Parser;
 use MathParser\StdMathParser;
+use PHPUnit\Framework\TestCase;
 
 class ParserWithoutImplicitMultiplication extends Parser
 {
@@ -22,7 +23,7 @@ class ParserWithoutImplicitMultiplication extends Parser
     }
 }
 
-class StdMathParserTest extends PHPUnit_Framework_TestCase
+class StdMathParserTest extends TestCase
 {
     private $parser;
 
@@ -398,46 +399,46 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
 
     public function testSyntaxErrorException()
     {
-        $this->setExpectedException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorException::class);
         $this->parser->parse('1+');
     }
 
     public function testSyntaxErrorException2()
     {
-        $this->setExpectedException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorException::class);
         $this->parser->parse('**3');
     }
 
     public function testSyntaxErrorException3()
     {
-        $this->setExpectedException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorException::class);
         $this->parser->parse('-');
     }
 
     public function testSyntaxErrorException4()
     {
-        $this->setExpectedException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorException::class);
         $this->parser->parse('e^');
     }
 
     public function testParenthesisMismatchException()
     {
-        $this->setExpectedException(ParenthesisMismatchException::class);
+        $this->expectException(ParenthesisMismatchException::class);
         $this->parser->parse('1+1)');
 
-        $this->setExpectedException(ParenthesisMismatchException::class);
+        $this->expectException(ParenthesisMismatchException::class);
         $this->parser->parse('(1+1');
     }
 
     public function testCanParseUnbalancedParentheses()
     {
-        $this->setExpectedException(ParenthesisMismatchException::class);
+        $this->expectException(ParenthesisMismatchException::class);
         $this->parser->parse('1(2');
     }
 
     public function testCanParseUnbalancedParentheses2()
     {
-        $this->setExpectedException(ParenthesisMismatchException::class);
+        $this->expectException(ParenthesisMismatchException::class);
         $this->parser->parse('1)2');
     }
 
@@ -452,7 +453,7 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
         $lexer = new StdMathLexer();
         $tokens = $lexer->tokenize('2x');
         $parser = new ParserWithoutImplicitMultiplication();
-        $this->setExpectedException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorException::class);
         $node = $parser->parse($tokens);
     }
 
@@ -493,13 +494,13 @@ class StdMathParserTest extends PHPUnit_Framework_TestCase
 
     public function canParseInvalidFactorial()
     {
-        $this->setExpectedException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorException::class);
         $this->parser->parse('!1');
     }
 
     public function canParseInvalidFactorial2()
     {
-        $this->setExpectedException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorException::class);
         $this->parser->parse('1+!1');
     }
 

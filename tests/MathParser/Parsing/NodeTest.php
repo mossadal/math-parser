@@ -12,8 +12,9 @@ use MathParser\Parsing\Nodes\RationalNode;
 use MathParser\Parsing\Nodes\SubExpressionNode;
 use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\RationalMathParser;
+use PHPUnit\Framework\TestCase;
 
-class NodeTest extends PHPUnit_Framework_TestCase
+class NodeTest extends TestCase
 {
     private $parser;
     private $factory;
@@ -192,7 +193,7 @@ class NodeTest extends PHPUnit_Framework_TestCase
         $node = new IntegerNode(-1);
         $this->assertEquals($node->getValue(), -1);
 
-        $this->setExpectedException(\UnexpectedValueException::class);
+        $this->expectException(\UnexpectedValueException::class);
         $node = new IntegerNode(1.2);
     }
 
@@ -216,7 +217,7 @@ class NodeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($node->getNumerator(), -1);
         $this->assertEquals($node->getDenominator(), 2);
 
-        $this->setExpectedException(\UnexpectedValueException::class);
+        $this->expectException(\UnexpectedValueException::class);
         $node = new RationalNode(1.2, 2);
     }
 

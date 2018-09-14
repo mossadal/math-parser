@@ -1,21 +1,22 @@
 <?php
 
 use MathParser\Extensions\Math;
+use PHPUnit\Framework\TestCase;
 
-class MathTest extends PHPUnit_Framework_TestCase
+class MathTest extends TestCase
 {
     public function testGcd()
     {
-        $this->assertEquals(4, Math::gcd(8,12));
-        $this->assertEquals(4, Math::gcd(12,8));
-        $this->assertEquals(1, Math::gcd(12,7));
+        $this->assertEquals(4, Math::gcd(8, 12));
+        $this->assertEquals(4, Math::gcd(12, 8));
+        $this->assertEquals(1, Math::gcd(12, 7));
 
         // Edge cases
 
-        $this->assertEquals(5, Math::gcd(0,5));
-        $this->assertEquals(0, Math::gcd(0,0));
-        $this->assertEquals(-2, Math::gcd(2,-2));
-        $this->assertEquals(2, Math::gcd(-2,-2));
+        $this->assertEquals(5, Math::gcd(0, 5));
+        $this->assertEquals(0, Math::gcd(0, 0));
+        $this->assertEquals(-2, Math::gcd(2, -2));
+        $this->assertEquals(2, Math::gcd(-2, -2));
     }
 
     public function testLogGamma()

@@ -8,17 +8,15 @@
      convertNoticesToExceptions="true"
      convertWarningsToExceptions="true"
      forceCoversAnnotation="false"
-     mapTestClassNameToCoveredClassName="false"
-     printerClass="PHPUnit_TextUI_ResultPrinter"
+     printerClass="PHPUnit\TextUI\ResultPrinter"
 
      processIsolation="false"
      stopOnError="false"
      stopOnFailure="false"
      stopOnIncomplete="false"
      stopOnSkipped="false"
-     testSuiteLoaderClass="PHPUnit_Runner_StandardTestSuiteLoader"
+     testSuiteLoaderClass="PHPUnit\Runner\StandardTestSuiteLoader"
 
-     strict="false"
      verbose="false"
     >
 
@@ -39,11 +37,4 @@
       </whitelist>
     </filter>
 
-    <logging>
-        <log type="coverage-html" target="tests/log/codeCoverage" charset="UTF-8"
-            yui="true" highlight="true"
-            lowUpperBound="50" highLowerBound="80"/>
-        <log type="junit" target="tests/log/testresults.xml" logIncompleteSkipped="true"/>
-        <log type="tap" target="tests/log/testresults.txt" logIncompleteSkipped="true"/>
-    </logging>
 </phpunit>

@@ -1,13 +1,13 @@
 <?php
 
+use MathParser\Exceptions\UnknownTokenException;
 use MathParser\Lexing\Lexer;
+use MathParser\Lexing\Token;
 use MathParser\Lexing\TokenDefinition;
 use MathParser\Lexing\TokenType;
-use MathParser\Lexing\TokenPrecedence;
-use MathParser\Lexing\Token;
-use MathParser\Exceptions\UnknownTokenException;
+use PHPUnit\Framework\TestCase;
 
-class LexerTest extends PHPUnit_Framework_TestCase
+class LexerTest extends TestCase
 {
     private $lexer;
 
@@ -49,7 +49,7 @@ class LexerTest extends PHPUnit_Framework_TestCase
 
     public function testExceptionIsThrownOnUnknownToken()
     {
-        $this->setExpectedException(UnknownTokenException::class);
+        $this->expectException(UnknownTokenException::class);
 
         $this->lexer->tokenize('@');
     }

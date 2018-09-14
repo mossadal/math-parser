@@ -2,8 +2,9 @@
 
 use MathParser\Lexing\TokenDefinition;
 use MathParser\Lexing\TokenType;
+use PHPUnit\Framework\TestCase;
 
-class TokenDefinitionTest extends PHPUnit_Framework_TestCase
+class TokenDefinitionTest extends TestCase
 {
     private $tokenDefinition;
 

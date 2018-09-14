@@ -4,8 +4,9 @@ use MathParser\Exceptions\UnknownConstantException;
 use MathParser\Interpreting\ASCIIPrinter;
 use MathParser\Parsing\Nodes\ConstantNode;
 use MathParser\RationalMathParser;
+use PHPUnit\Framework\TestCase;
 
-class ASCIIPrinterTest extends PHPUnit_Framework_TestCase
+class ASCIIPrinterTest extends TestCase
 {
     private $parser;
     private $printer;
@@ -159,7 +160,7 @@ class ASCIIPrinterTest extends PHPUnit_Framework_TestCase
         $this->assertResult('e', 'e');
 
         $node = new ConstantNode('xcv');
-        $this->setExpectedException(UnknownConstantException::class);
+        $this->expectException(UnknownConstantException::class);
         $node->accept($this->printer);
     }
 }
