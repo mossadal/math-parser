@@ -92,16 +92,6 @@ class EvaluatorTest extends TestCase
         $value = $this->evaluate($f);
     }
 
-    public function testCanEvaluateVariableI()
-    {
-        $this->assertResult('x', $this->variables['x']);
-
-        $this->expectException(UnknownVariableException::class);
-
-        $f = $this->parser->parse("q");
-        $value = $this->evaluate($f);
-    }
-
     public function testCanEvaluateAdditiion()
     {
         $x = $this->variables['x'];
