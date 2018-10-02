@@ -9,7 +9,7 @@ PHP parser and evaluator library for mathematical expressions.
 
 Intended use: safe and reasonably efficient evaluation of user submitted formulas. The library supports basic arithmetic and elementary functions, as well as variables and extra functions.
 
-The lexer and parser produces an abstract syntax tree (AST) that can be traversed using a tree interepreter. The math-parser library ships with three interpreters:
+The lexer and parser produces an abstract syntax tree (AST) that can be traversed using a tree interpreter. The math-parser library ships with three interpreters:
 
 * an evaluator computing the value of the given expression.
 * a differentiator transforming the AST into a (somewhat) simplied AST representing the derivative of the supplied expression.
@@ -18,7 +18,7 @@ The lexer and parser produces an abstract syntax tree (AST) that can be traverse
 
 ## EXAMPLES
 
-It is possible to fine-tune the lexer and parser, but the library ships with a StdMathParser class, capable of tokenizing and parsing standard mathematical expressions, including aritmethical operations as well as elementary functions.
+It is possible to fine-tune the lexer and parser, but the library ships with a StdMathParser class, capable of tokenizing and parsing standard mathematical expressions, including arithmetical operations as well as elementary functions.
 
 ~~~{.php}
 use MathParser\StdMathParser;
@@ -63,7 +63,7 @@ $df->accept($evaluator);
 
 Another helpful feature is that the parser understands implicit multiplication. An expression as `2x` is parsed the same as `2*x` and `xsin(x)cos(x)^2` is parsed as `x*sin(x)*cos(x)^2`.
 
-Note that implicit multiplication has the same precedence as explicit multiplication. In particular `xy^2z` is parsed as `x*y^2*z` and **not** as `x*y^(2*z)`.
+Note that implicit multiplication has the same precedence as explicit multiplication. In particular, `xy^2z` is parsed as `x*y^2*z` and **not** as `x*y^(2*z)`.
 
 To make full use of implicit multiplication, the standard lexer only allows one-letter variables. (Otherwise, we wouldn't know if `xy` should be parsed as `x*y` or as the single variable `xy`).
 
