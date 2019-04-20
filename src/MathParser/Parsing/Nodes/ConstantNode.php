@@ -70,4 +70,21 @@ class ConstantNode extends Node
         return $this->getName() == $other->getName();
     }
 
+    /** Implementing the hasInstance abstract method. */
+    public function hasInstance($other,$consts=[],$vars=[])
+    {
+        if ($other === null) {
+            return ['result' => false];
+        }
+        if (!($other instanceof ConstantNode)) {
+            return ['result' => false];
+        }
+        $result=($this->getName() == $other->getName());
+        if ($result) {
+            return ['result' => true, 'instantiation'=> $vars];
+        }
+
+        return ['result' => false];
+    }
+
 }

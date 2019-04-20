@@ -1,6 +1,6 @@
 # math-parser
 
-[![Latest Stable Version](https://poser.pugx.org/mossadal/math-parser/v/stable)](https://packagist.org/packages/mossadal/math-parser) [![Total Downloads](https://poser.pugx.org/mossadal/math-parser/downloads)](https://packagist.org/packages/mossadal/math-parser)  [![License](https://poser.pugx.org/mossadal/math-parser/license)](https://packagist.org/packages/mossadal/math-parser)
+[![Latest Stable Version](https://poser.pugx.org/mossadal/math-parser/v/stable)](https://packagist.org/packages/mossadal/math-parser) [![Total Downloads](https://poser.pugx.org/mossadal/math-parser/downloads)](https://packagist.org/packages/mossadal/math-parser) [![License](https://poser.pugx.org/mossadal/math-parser/license)](https://packagist.org/packages/mossadal/math-parser)
 [![Code Climate](https://codeclimate.com/github/mossadal/math-parser/badges/gpa.svg)](https://codeclimate.com/github/mossadal/math-parser)
 
 ## DESCRIPTION
@@ -11,16 +11,15 @@ Intended use: safe and reasonably efficient evaluation of user submitted formula
 
 The lexer and parser produces an abstract syntax tree (AST) that can be traversed using a tree interpreter. The math-parser library ships with three interpreters:
 
-* an evaluator computing the value of the given expression.
-* a differentiator transforming the AST into a (somewhat) simplied AST representing the derivative of the supplied expression.
-* a rudimentary LaTeX output generator, useful for pretty printing expressions using MathJax
-
+- an evaluator computing the value of the given expression.
+- a differentiator transforming the AST into a (somewhat) simplied AST representing the derivative of the supplied expression.
+- a rudimentary LaTeX output generator, useful for pretty printing expressions using MathJax
 
 ## EXAMPLES
 
 It is possible to fine-tune the lexer and parser, but the library ships with a StdMathParser class, capable of tokenizing and parsing standard mathematical expressions, including arithmetical operations as well as elementary functions.
 
-~~~{.php}
+```{.php}
 use MathParser\StdMathParser;
 use MathParser\Interpreting\Evaluator;
 
@@ -34,20 +33,20 @@ $evaluator = new Evaluator();
 
 $value = $AST->accept($evaluator);
 echo $value;
-~~~
+```
 
 More interesting example, containing variables:
 
-~~~{.php}
+```{.php}
 $AST = $parser->parse('x+sqrt(y)');
 
 $evaluator->setVariables([ 'x' => 2, 'y' => 3 ]);
 $value = $AST->accept($evaluator);
-~~~
+```
 
 We can do other things with the AST. The library ships with a differentiator, computing the (symbolic) derivative with respect to a given variable.
 
-~~~{.php}
+```{.php}
 use MathParser\Interpreting\Differentiator;
 
 $differentiator = new Differentiator('x');
@@ -57,7 +56,24 @@ $df = $f->accept($differentiator);
 // $df now contains the AST of '2*exp(x)-y' and can be evaluated further
 $evaluator->setVariables([ 'x' => 1, 'y' => 2 ]);
 $df->accept($evaluator);
-~~~
+```
+
+We can test whether a term, given as AST, is an instance of another term.
+
+```{.php}
+use MathParser\StdMathParser;
+
+$parser = new StdMathParser();
+$AST = $parser->parse('x*a*x');
+$AST1 = $parser->parse('(c+d)*(u+v)*(c+d)');
+$AST->hasInstance($AST1)['result']; // true
+$AST->hasInstance($AST1)['instantiation']['x']; // AST of c+d
+$AST->hasInstance($AST1,['a'])['result']; // false as 'a' is considered now a constant and cannot be instantiated
+$AST2 = $parser->parse('(c+d)*a*(c+d)');
+$AST->hasInstance($AST2,['a'])['result']; // true
+$AST3 = $parser->parse('(c+d)*(u+v)*(c+e)');
+$AST->hasInstance($AST3)['result']; // false
+```
 
 ### Implicit multiplication
 

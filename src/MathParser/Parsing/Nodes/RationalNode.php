@@ -92,6 +92,29 @@ class RationalNode extends Node
         return $this->getNumerator() == $other->getNumerator() && $this->getDenominator() == $other->getDenominator();
     }
 
+    /**
+     * Implementing the hasInstance abstract method.
+     */
+    public function hasInstance($other,$consts,$vars)
+    {
+        if ($other === null) {
+            return ['result' => false];
+        }
+        if ($other instanceof IntegerNode) {
+            if ($this->getDenominator() == 1 && $this->getNumerator() == $other->getValue()) {
+                return ['result' => true, 'instantiation' => $vars];
+            }
+        }
+        if (!($other instanceof RationalNode)) {
+            return ['result' => false];
+        }
+
+        if ($this->getNumerator() == $other->getNumerator() && $this->getDenominator() == $other->getDenominator()) {
+            return ['result' => true, 'instantiation' => $vars];
+        }
+        return ['result' => false];
+    }
+
     private function normalize()
     {
         $a = $this->p;

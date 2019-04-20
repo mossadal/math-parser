@@ -55,4 +55,32 @@ class VariableNode extends Node
         return $this->getName() == $other->getName();
     }
 
+    /** Implementing the hasInstance abstract method. */
+    public function hasInstance($other,$consts=[],$vars=[])
+    {
+        if ($other === null) {
+            return ['result' =>false];
+        }
+        $name=$this->getName();
+        if (in_array($name,$consts)) {
+            if (! ($other instanceof VariableNode)){
+                return ['result' => false];
+            } elseif ($other->getName() == $name) {
+                return ['result' => true, 'instantiation' => $vars];
+            } else {
+                return ['result' => false];
+            }
+        }
+        if (array_key_exists($name,$vars)) {
+            if ($other->compareTo($vars[$name])) {
+                return ['result' => true, 'instantiation' =>$vars];
+            } else {
+                return ['result' => false];
+            }
+        }
+        $vars[$name]=$other;
+
+        return ['result' => true, 'instantiation' => $vars];
+    }
+
 }

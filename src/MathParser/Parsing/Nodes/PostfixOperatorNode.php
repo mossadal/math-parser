@@ -55,4 +55,19 @@ class PostfixOperatorNode extends Node
         return $this->getOperator() == $other->getOperator();
     }
 
+    /** Implementing the hasInstance abstract method. */
+    public function hasInstance($other,$consts=[],$vars=[])
+    {
+        if ($other === null) {
+            return ['result' => false];
+        }
+        if (!($other instanceof PostfixOperatorNode)) {
+            return ['result' => false];
+        }
+        if (! $this->getOperator() == $other->getOperator()) {
+            return ['result' => false];
+        }
+        return ['result' => true, 'instantiation' => $vars];
+    }
+
 }

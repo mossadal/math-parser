@@ -62,4 +62,19 @@ class SubExpressionNode extends Node
         return $this->getValue() == $other->getValue();
     }
 
+    /** Implementing the hasInstance abstract method. */
+    public function hasInstance($other,$consts=[],$vars=[])
+    {
+        if ($other === null) {
+            return ['result' => false];
+        }
+        if (!($other instanceof SubExpressionNode)) {
+            return ['result' => false];
+        }
+        if (! $this->getValue() == $other->getValue()) {
+            return ['result' => false];
+        }
+        return ['result' => true, 'instantiation' => $vars];
+    }
+
 }

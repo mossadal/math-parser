@@ -85,4 +85,27 @@ class FunctionNode extends Node
         return $this->getName() == $other->getName() && $thisOperand->compareTo($otherOperand);
     }
 
+    /** Implementing the hasInstance abstract method. */
+    public function hasInstance($other,$consts=[],$vars=[])
+    {
+        if ($other === null) {
+            return ['result' => false];
+        }
+        if (!($other instanceof FunctionNode)) {
+            return ['result' => false];
+        }
+
+        $thisOperand = $this->getOperand();
+        $otherOperand = $other->getOperand();
+
+        if (! $this->getName() == $other->getName()) {
+            return ['result' => false];
+        }
+        $instOperand=$thisOperand->hasInstance($otherOperand,$consts,$vars);
+        if (! $instOperand) {
+            return ['result' => false];
+        }
+        return ['result' => true, 'instantiation' => $instOperand['instantiation']];
+    }
+
 }

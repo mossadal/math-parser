@@ -136,6 +136,16 @@ abstract class Node implements Visitable
      */
     abstract public function compareTo($other);
 
+    /**ID
+     * Helper function, testing whether an argument AST is an instance of the given AST
+     *
+     * @retval Array ['result' => true|false|, 'instantiation' => Variable instantiation] in case of true]
+     * @param Node|null $other Compare to this tree,
+     * @param Array $consts array of names of constants. These must not be instantiated
+     * @param Array of instantiations of proper variables
+     */
+    abstract public function hasInstance($other,$consts=[],$vars=[]);
+
     /**
      * Convenience function for evaluating a tree, using
      * the Evaluator class.

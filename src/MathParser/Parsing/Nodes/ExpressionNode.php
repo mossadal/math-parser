@@ -251,5 +251,50 @@ class ExpressionNode extends Node
         return $thisLeft->compareTo($otherLeft) && $thisRight->compareTo($otherRight);
     }
 
+    /** Implementing the hasInstance abstract method. */
+    public function hasInstance($other,$consts=[],$vars=[])
+    {
+        if ($other === null) {
+            return ['result' => false];
+        }
+        if (!($other instanceof ExpressionNode)) {
+            return ['result' => false];
+        }
+
+        if ($this->getOperator() != $other->getOperator()) return ['result' => false];
+
+        $thisLeft = $this->getLeft();
+        $otherLeft = $other->getLeft();
+        $thisRight = $this->getRight();
+        $otherRight = $other->getRight();
+
+        if ($thisLeft === null) {
+            if ($otherLeft === null) {
+                return $thisRight->hasInstance($otherRight,$consts,$vars);
+            } else {
+                return ['result' => false];
+            }
+        }
+
+        if ($thisRight === null) {
+            if ($otherRight === null) {
+                return $thisLeft-> hasInstance($otherLeft,$consts,$vars);
+            } else {
+                return ['result' => false];
+            }
+        }
+        $instLeft=$thisLeft->hasInstance($otherLeft,$consts,$vars);
+        if (! $instLeft['result']) {
+            return ['result' => false];
+        } else {
+            $instRight = $thisRight->hasInstance($otherRight,$consts,$instLeft['instantiation']);
+            if (! $instRight['result']) {
+                return ['result' => false];
+            } else {
+                return ['result'=> true, 'instantiation' => $instRight['instantiation']];
+            }
+        }
+    }
+
 
 }

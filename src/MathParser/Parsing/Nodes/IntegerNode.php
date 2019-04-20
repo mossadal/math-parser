@@ -69,5 +69,13 @@ class IntegerNode extends Node
 
         return $this->getValue() == $other->getValue();
     }
-    
+
+    /** Implementing the hasInstance abstract method. */
+    public function hasInstance($other,$consts=[],$vars=[]) {
+        if ($this->compareTo($other)) {
+            return ['result'=>true, 'instantiation'=>$vars];
+        }
+        return ['result'=> false];
+    }
+
 }
