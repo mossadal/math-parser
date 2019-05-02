@@ -1,7 +1,7 @@
 <?php
 /*
  * @package     Parsing
- * @author      Frank Wikström <frank@mossadal.se>
+ * @author      Frank Wikström <frank@mossadal.se>, modified by Ingo Dahn <dahn@dahn-research.eu>
  * @copyright   2015 Frank Wikström
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  *
@@ -17,6 +17,7 @@ namespace MathParser\Parsing\Nodes;
 use MathParser\Interpreting\ASCIIPrinter;
 use MathParser\Interpreting\Evaluator;
 use MathParser\Interpreting\Visitors\Visitable;
+use MathParser\Lexing\Language;
 use MathParser\Lexing\Token;
 use MathParser\Lexing\TokenType;
 
@@ -141,10 +142,9 @@ abstract class Node implements Visitable
      *
      * @retval Array ['result' => true|false|, 'instantiation' => Variable instantiation] in case of true]
      * @param Node|null $other Compare to this tree,
-     * @param Array $consts array of names of constants. These must not be instantiated
-     * @param Array of instantiations of proper variables
+     * @param Array $inst of instantiations of proper variables
      */
-    abstract public function hasInstance($other,$consts=[],$vars=[]);
+    abstract public function hasInstance($other,$inst=[]);
 
     /**
      * Convenience function for evaluating a tree, using
@@ -254,7 +254,6 @@ abstract class Node implements Visitable
     public function __toString()
     {
         $printer = new ASCIIPrinter();
-
         return $this->accept($printer);
     }
 }

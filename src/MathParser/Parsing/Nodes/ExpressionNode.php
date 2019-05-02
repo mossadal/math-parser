@@ -1,7 +1,7 @@
 <?php
 /*
  * @package     Parsing
- * @author      Frank Wikström <frank@mossadal.se>
+ * @author      Frank Wikström <frank@mossadal.se>, modified by Ingo Dahn <dahn@dahn-research.eu>
  * @copyright   2015 Frank Wikström
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  *
@@ -252,7 +252,7 @@ class ExpressionNode extends Node
     }
 
     /** Implementing the hasInstance abstract method. */
-    public function hasInstance($other,$consts=[],$vars=[])
+    public function hasInstance($other,$inst=[])
     {
         if ($other === null) {
             return ['result' => false];
@@ -270,7 +270,7 @@ class ExpressionNode extends Node
 
         if ($thisLeft === null) {
             if ($otherLeft === null) {
-                return $thisRight->hasInstance($otherRight,$consts,$vars);
+                return $thisRight->hasInstance($otherRight,$inst);
             } else {
                 return ['result' => false];
             }
@@ -278,16 +278,16 @@ class ExpressionNode extends Node
 
         if ($thisRight === null) {
             if ($otherRight === null) {
-                return $thisLeft-> hasInstance($otherLeft,$consts,$vars);
+                return $thisLeft-> hasInstance($otherLeft,$inst);
             } else {
                 return ['result' => false];
             }
         }
-        $instLeft=$thisLeft->hasInstance($otherLeft,$consts,$vars);
+        $instLeft=$thisLeft->hasInstance($otherLeft,$inst);
         if (! $instLeft['result']) {
             return ['result' => false];
         } else {
-            $instRight = $thisRight->hasInstance($otherRight,$consts,$instLeft['instantiation']);
+            $instRight = $thisRight->hasInstance($otherRight,$instLeft['instantiation']);
             if (! $instRight['result']) {
                 return ['result' => false];
             } else {

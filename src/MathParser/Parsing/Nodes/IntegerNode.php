@@ -1,7 +1,7 @@
 <?php
 /*
  * @package     Parsing
- * @author      Frank Wikström <frank@mossadal.se>
+ * @author      Frank Wikström <frank@mossadal.se>, modified by Ingo Dahn <dahn@dahn-research.eu>
  * @copyright   2015 Frank Wikström
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  *
@@ -71,9 +71,9 @@ class IntegerNode extends Node
     }
 
     /** Implementing the hasInstance abstract method. */
-    public function hasInstance($other,$consts=[],$vars=[]) {
+    public function hasInstance($other,$inst=[]) {
         if ($this->compareTo($other)) {
-            return ['result'=>true, 'instantiation'=>$vars];
+            return ['result'=>true, 'instantiation'=>$inst];
         }
         return ['result'=> false];
     }

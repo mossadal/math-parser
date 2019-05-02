@@ -1,7 +1,7 @@
 <?php
 /*
  * @package     Parsing
- * @author      Frank Wikström <frank@mossadal.se>
+ * @author      Frank Wikström <frank@mossadal.se>, modified by Ingo Dahn <dahn@dahn-research.eu>
  * @copyright   2015 Frank Wikström
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  *
@@ -86,7 +86,7 @@ class FunctionNode extends Node
     }
 
     /** Implementing the hasInstance abstract method. */
-    public function hasInstance($other,$consts=[],$vars=[])
+    public function hasInstance($other,$inst=[])
     {
         if ($other === null) {
             return ['result' => false];
@@ -101,7 +101,7 @@ class FunctionNode extends Node
         if (! $this->getName() == $other->getName()) {
             return ['result' => false];
         }
-        $instOperand=$thisOperand->hasInstance($otherOperand,$consts,$vars);
+        $instOperand=$thisOperand->hasInstance($otherOperand,$inst);
         if (! $instOperand) {
             return ['result' => false];
         }

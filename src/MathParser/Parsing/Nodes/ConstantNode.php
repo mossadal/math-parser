@@ -1,7 +1,7 @@
 <?php
 /*
  * @package     Parsing
- * @author      Frank Wikström <frank@mossadal.se>
+ * @author      Frank Wikström <frank@mossadal.se>, modified by Ingo Dahn <dahn@dahn-research.eu>
  * @copyright   2015 Frank Wikström
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  *
@@ -9,6 +9,7 @@
 
 namespace MathParser\Parsing\Nodes;
 
+use MathParser\Lexing\Language;
 use MathParser\Interpreting\Visitors\Visitor;
 
 /**
@@ -33,8 +34,12 @@ class ConstantNode extends Node
      * ~~~
      *
      */
-    function __construct($value)
+    function __construct($value, $lang = null)
     {
+        if ($lang === null) {
+            $lang = new Language;
+        }
+        $this->language = $lang;
         $this->value = $value;
     }
 
@@ -71,7 +76,7 @@ class ConstantNode extends Node
     }
 
     /** Implementing the hasInstance abstract method. */
-    public function hasInstance($other,$consts=[],$vars=[])
+    public function hasInstance($other,$inst=[])
     {
         if ($other === null) {
             return ['result' => false];
@@ -81,7 +86,7 @@ class ConstantNode extends Node
         }
         $result=($this->getName() == $other->getName());
         if ($result) {
-            return ['result' => true, 'instantiation'=> $vars];
+            return ['result' => true, 'instantiation'=> $inst];
         }
 
         return ['result' => false];

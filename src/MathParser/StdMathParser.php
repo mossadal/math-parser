@@ -1,7 +1,8 @@
-<?php 
+<?php
 
 namespace MathParser;
 
+use MathParser\Lexing\Language;
 use MathParser\Lexing\StdMathLexer;
 use MathParser\Parsing\Parser;
 
@@ -19,7 +20,7 @@ use MathParser\Parsing\Parser;
  * use MathParser\Interpreting\Evaluator;
  * use MathParser\Interpreting\Differentiator;
  *
- * $parser = new StdMathParser();
+ * $parser = new StdMathParser($language);
  * $AST = $parser->parse('2x + 2y^2/sin(x)');
  *
  * // Do whatever you want with the parsed expression,
@@ -37,12 +38,15 @@ use MathParser\Parsing\Parser;
 class StdMathParser extends AbstractMathParser
 {
 
-    public function __construct()
+    public function __construct($lang=null)
     {
-        $this->lexer = new StdMathLexer();
+        if ($lang === null) {
+            $lang=new Language;
+        }
+        $this->lexer = new StdMathLexer($lang);
         $this->parser = new Parser();
     }
-    
+
     /**
      * Parse the given mathematical expression into an abstract syntax tree.
      *
@@ -56,5 +60,5 @@ class StdMathParser extends AbstractMathParser
 
         return $this->tree;
     }
-    
+
 }
