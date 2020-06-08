@@ -11,4 +11,4 @@ before_script:
 
 script:
     # Run tests.
-    - DOMAIN=localhost ./vendor/bin/phpunit --stop-on-failure
+    - php vendor/bin/phpunit
