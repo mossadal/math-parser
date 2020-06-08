@@ -63,7 +63,7 @@ class Token
      * @property length
      * Length of the input string matching the token.
      *
-     * @retval int length of string matching the token.
+     * @return int length of string matching the token.
      */
     public function length()
     {
@@ -75,7 +75,7 @@ class Token
      * Standarized value/name of the Token, usually the same as
      * what was matched in the the input string.
      *
-     * @retval string value of token
+     * @return string value of token
      */
     public function getValue()
     {
@@ -86,7 +86,7 @@ class Token
      * @property getType
      * Returns the type of the token, as defined in the TokenType class.
      *
-     * @retval int token type (as defined by TokenType)
+     * @return int token type (as defined by TokenType)
      */
     public function getType()
     {
@@ -96,7 +96,7 @@ class Token
     /**
      * Helper function, converting the Token to a printable string.
      *
-     * @retval string
+     * @return string
      */
     public function __toString()
     {
@@ -114,7 +114,7 @@ class Token
      * or an opening parenthesis. (Unless the first token is a a function name,
      * and the second is an opening parentheis.)
      *
-     * @retval boolean
+     * @return boolean
      */
     public static function canFactorsInImplicitMultiplication($token1, $token2)
     {

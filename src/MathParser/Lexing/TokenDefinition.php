@@ -55,7 +55,7 @@ class TokenDefinition
      * Try to match the given input to the current TokenDefinition.
      *
      * @param string $input Input string
-     * @retval Token|null Token matching the regular expression defining the TokenDefinition
+     * @return Token|null Token matching the regular expression defining the TokenDefinition
      */
     public function match($input)
     {
@@ -78,7 +78,7 @@ class TokenDefinition
      * Convert matching string to an actual Token.
      *
      * @param string $match Matching text.
-     * @retval Token Corresponding token.
+     * @return Token Corresponding token.
      */
     private function getTokenFromMatch($match)
     {

@@ -80,7 +80,7 @@ class LaTeXPrinter implements Visitor
      * - Divisions are typeset using `\frac`
      * - Exponentiation adds braces around the power when needed.
      *
-     * @retval string
+     * @return string
      * @param ExpressionNode $node AST to be typeset
      */
     public function visitExpressionNode(ExpressionNode $node)
@@ -149,7 +149,7 @@ class LaTeXPrinter implements Visitor
      * Check if a multiplication needs an inserted \cdot or if
      * it can be safely written with implicit multiplication.
      *
-     * @retval bool
+     * @return bool
      * @param $left  AST of first factor
      * @param $right AST of second factor
      */
@@ -176,7 +176,7 @@ class LaTeXPrinter implements Visitor
      * Create a string giving LaTeX code for a NumberNode. Currently,
      * there is no special formatting of numbers.
      *
-     * @retval string
+     * @return string
      * @param NumberNode $node AST to be typeset
      */
     public function visitNumberNode(NumberNode $node)
@@ -215,7 +215,7 @@ class LaTeXPrinter implements Visitor
      * Create a string giving LaTeX code for a VariableNode. Currently,
      * there is no special formatting of variables.
      *
-     * @retval string
+     * @return string
      * @param VariableNode $node AST to be typeset
      */
     public function visitVariableNode(VariableNode $node)
@@ -226,7 +226,7 @@ class LaTeXPrinter implements Visitor
     /**
      * Generate LaTeX code for factorials
      *
-     * @retval string
+     * @return string
      * @param FunctionNode $node AST to be typeset
      */
     private function visitFactorialNode(FunctionNode $node)
@@ -260,7 +260,7 @@ class LaTeXPrinter implements Visitor
      * - `exp(op)` is either typeset as `e^{op}`, if `op` is a simple
      *      expression or as `\exp(op)` for more complicated operands.
      *
-     * @retval string
+     * @return string
      * @param FunctionNode $node AST to be typeset
      */
 
@@ -319,7 +319,7 @@ class LaTeXPrinter implements Visitor
      * Create a string giving LaTeX code for a ConstantNode.
      * `pi` typesets as `\pi` and `e` simply as `e`.
      *
-     * @retval string
+     * @return string
      * @param  ConstantNode             $node AST to be typeset
      * @throws UnknownConstantException for nodes representing other constants.
      */
@@ -347,7 +347,7 @@ class LaTeXPrinter implements Visitor
      *                          node. Operands with a lower precedence have parentheses
      *                          added.
      *                          be added at the beginning of the returned string.
-     * @retval string
+     * @return string
      * @param Node           $node     The AST to typeset
      * @param ExpressionNode $cutoff   A token representing the precedence of the parent
      * @param bool           $addSpace Flag determining whether an additional space should
@@ -394,7 +394,7 @@ class LaTeXPrinter implements Visitor
      * Nodes representing a single ConstantNode, VariableNode or NumberNodes (0--9)
      * are returned as-is. Other Nodes get curly braces around their LaTeX code.
      *
-     * @retval string
+     * @return string
      * @param Node $node AST to parse
      */
     public function bracesNeeded(Node $node)
@@ -411,7 +411,7 @@ class LaTeXPrinter implements Visitor
     /**
      * Check if Node is numeric, i.e. a NumberNode, IntegerNode or RationalNode
      *
-     * @retval bool
+     * @return bool
      * @param Node $node AST to check
      */
     private function isNumeric(Node $node)

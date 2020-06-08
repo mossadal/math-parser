@@ -48,7 +48,7 @@ class RationalMathParser extends AbstractMathParser
      * Parse the given mathematical expression into an abstract syntax tree.
      *
      * @param string $text Input
-     * @retval Node
+     * @return Node
      */
     public function parse($text)
     {

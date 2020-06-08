@@ -28,7 +28,7 @@ class UnknownOperatorException extends MathParserException
     /**
      * Get the unkown operator that was encountered.
      *
-     * @retval string
+     * @return string
      */
     public function getOperator()
     {

@@ -33,7 +33,7 @@ abstract class AbstractMathParser
     
     /**
      * Return Letex
-     * @retval Lexer
+     * @return Lexer
      */
     public function getLexer()
     {
@@ -42,7 +42,7 @@ abstract class AbstractMathParser
     
     /**
      * Return Parser
-     * @retval Parser
+     * @return Parser
      */
     public function getParser()
     {
@@ -51,7 +51,7 @@ abstract class AbstractMathParser
     
     /**
      * Return the token list for the last parsed expression.
-     * @retval Token[]
+     * @return Token[]
      */
     public function getTokenList()
     {
@@ -60,7 +60,7 @@ abstract class AbstractMathParser
     
     /**
      * Return the AST of the last parsed expression.
-     * @retval Node
+     * @return Node
      */
     public function getTree()
     {

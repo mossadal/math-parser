@@ -103,7 +103,7 @@ class RationalEvaluator implements Visitor
     /**
      * Update the variables used for evaluating
      *
-     * @retval void
+     * @return void
      * @param array $variables Key/value pair holding current variable values
      */
     public function setVariables($variables)
@@ -127,7 +127,7 @@ class RationalEvaluator implements Visitor
      * where `op` is one of `+`, `-`, `*`, `/` or `^`
      *
      *      `+`, `-`, `*`, `/` or `^`
-     * @retval float
+     * @return float
      * @param  ExpressionNode           $node AST to be evaluated
      * @throws UnknownOperatorException if the operator is something other than
      */
@@ -184,7 +184,7 @@ class RationalEvaluator implements Visitor
      *
      * Retuns the value of an NumberNode
      *
-     * @retval float
+     * @return float
      * @param NumberNode $node AST to be evaluated
      */
     public function visitNumberNode(NumberNode $node)
@@ -209,7 +209,7 @@ class RationalEvaluator implements Visitor
      * either by the constructor or set using the `Evaluator::setVariables()` method.
      *
      *      VariableNode is *not* set.
-     * @retval float
+     * @return float
      * @see Evaluator::setVariables() to define the variables
      *
      * @param  VariableNode             $node AST to be evaluated
@@ -233,7 +233,7 @@ class RationalEvaluator implements Visitor
      * an elementary function recognized by StdMathLexer and StdMathParser.
      *
      *      FunctionNode is *not* recognized.
-     * @retval float
+     * @return float
      * @see \MathParser\Lexer\StdMathLexer StdMathLexer
      * @see \MathParser\StdMathParser StdMathParser
      *
@@ -307,7 +307,7 @@ class RationalEvaluator implements Visitor
      * Returns the value of a ConstantNode recognized by StdMathLexer and StdMathParser.
      *
      *      ConstantNode is *not* recognized.
-     * @retval float
+     * @return float
      * @see \MathParser\Lexer\StdMathLexer StdMathLexer
      * @see \MathParser\StdMathParser StdMathParser
      *

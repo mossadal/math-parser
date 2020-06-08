@@ -38,7 +38,7 @@ abstract class Node implements Visitable
      * token type is PosInt, Integer, RealNumber, Identifier or Constant
      * otherwise returns null.
      *
-     * @retval Node|null
+     * @return Node|null
      * @param Token $token Provided token
      */
     public static function rationalFactory(Token $token)
@@ -86,7 +86,7 @@ abstract class Node implements Visitable
      * token type is PosInt, Integer, RealNumber, Identifier or Constant
      * otherwise returns null.
      *
-     * @retval Node|null
+     * @return Node|null
      * @param Token $token Provided token
      */
     public static function factory(Token $token)
@@ -131,7 +131,7 @@ abstract class Node implements Visitable
      * Helper function, comparing two ASTs. Useful for testing
      * and also for some AST transformers.
      *
-     * @retval boolean
+     * @return boolean
      * @param Node|null $other Compare to this tree
      */
     abstract public function compareTo($other);
@@ -148,7 +148,7 @@ abstract class Node implements Visitable
      * $functionValue = $node->evaluate( array( 'x' => 1.3, 'y' => 1.4 ) );
      * ~~~
      *
-     * @retval floatval
+     * @return float
      * @param array $variables key-value array of variable values
      */
     public function evaluate($variables)
@@ -208,7 +208,7 @@ abstract class Node implements Visitable
      * Returns true if the node is a terminal node, i.e.
      * a NumerNode, VariableNode or ConstantNode.
      *
-     * @retval boolean
+     * @return boolean
      *
      */
     public function isTerminal()

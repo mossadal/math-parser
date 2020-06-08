@@ -49,7 +49,7 @@ class Lexer
      * Adds the supplied TokenDefinition at the end of the list of known
      * tokens.
      *
-     * @retval void
+     * @return void
      * @param TokenDefinition $tokenDefinition token to add to the list of known tokens.
      */
     public function add(TokenDefinition $tokenDefinition)
@@ -66,7 +66,7 @@ class Lexer
      * care should be taken to add `sinh` before `sin`, otherwise the lexer will
      * never match a `sinh`.
      *
-     * @retval Token[] sequence of recognized tokens
+     * @return Token[] sequence of recognized tokens
      *      that doesn't match any knwon token.
      * @param  string                $input  String to tokenize.
      * @throws UnknownTokenException throwns when encountering characters in the input string
@@ -104,7 +104,7 @@ class Lexer
     /**
      * Find a matching token at the begining of the provided input.
      *
-     * @retval Token|null Matched token
+     * @return Token|null Matched token
      * @param string $input
      */
     private function findMatchingToken($input)

@@ -81,7 +81,7 @@ class Rational
      *
      * @param mixed $x (Rational, or parsable to Rational)
      * @param mixed $y (Rational, or parsable to Rational)
-     * @retval Rational
+     * @return Rational
      */
     public static function add($x, $y)
     {
@@ -102,7 +102,7 @@ class Rational
      *
      * @param mixed $x (Rational, or parsable to Rational)
      * @param mixed $y (Rational, or parsable to Rational)
-     * @retval Rational
+     * @return Rational
      */
     public static function sub($x, $y)
     {
@@ -123,7 +123,7 @@ class Rational
      *
      * @param mixed $x (Rational, or parsable to Rational)
      * @param mixed $y (Rational, or parsable to Rational)
-     * @retval Rational
+     * @return Rational
      */
     public static function mul($x, $y)
     {
@@ -144,7 +144,7 @@ class Rational
      *
      * @param mixed $x (Rational, or parsable to Rational)
      * @param mixed $y (Rational, or parsable to Rational)
-     * @retval Rational
+     * @return Rational
      */
     public static function div($x, $y)
     {
@@ -162,7 +162,7 @@ class Rational
     /**
      * convert rational number to string, adding a '+' if the number is positive
      *
-     * @retval string
+     * @return string
      */
     public function signed()
     {
@@ -177,7 +177,7 @@ class Rational
     /**
      * test whether a string represents an positive integer
      *
-     * @retval bool
+     * @return bool
      */
     private static function isInteger($value)
     {
@@ -187,7 +187,7 @@ class Rational
     /**
      * test whether a string represents a signed integer
      *
-     * @retval bool
+     * @return bool
      */
     private static function isSignedInteger($value)
     {
@@ -197,7 +197,7 @@ class Rational
     /**
      * test if the rational number is NAN
      *
-     * @retval bool
+     * @return bool
      */
     public function is_nan()
     {
@@ -210,7 +210,7 @@ class Rational
      *
      * @param $value mixed
      * @throws SyntaxErrorException
-     * @retval Rational
+     * @return Rational
      */
     public static function parse($value, $normalize=true)
     {
@@ -248,7 +248,7 @@ class Rational
      *
      * @param string|float $float
      * @param float $tolerance
-     * @retval Rational
+     * @return Rational
      */
     public static function fromFloat($float, $tolerance=1e-7)
     {
@@ -289,7 +289,7 @@ class Rational
     /**
      * Convert Rational to string
      *
-     * @retval string
+     * @return string
      */
     public function __toString()
     {

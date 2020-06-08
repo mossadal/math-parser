@@ -55,7 +55,7 @@ class Complex
     /**
      * Real part
      *
-     * @retval float real part
+     * @return float real part
      */
     public function r()
     {
@@ -65,7 +65,7 @@ class Complex
     /**
      * Imaginary part
      *
-     * @retval float imaginary part
+     * @return float imaginary part
      */
     public function i()
     {
@@ -78,7 +78,7 @@ class Complex
      * Return the modulus of the complex number z=x+iy, i.e.
      * sqrt(x^2 + y^2)
      *
-     * @retval float modulus
+     * @return float modulus
      */
     public function abs()
     {
@@ -91,7 +91,7 @@ class Complex
      * Returns the prinicpal argument of the complex number,
      * i.e. a number t with -pi < t <= pi, such that z = rexp(i*t) for
      * some positive real r
-     * @retval float argument
+     * @return float argument
      */
     public function arg()
     {
@@ -102,7 +102,7 @@ class Complex
     /**
      * test if the complex number is NAN
      *
-     * @retval bool
+     * @return bool
      */
     public function is_nan()
     {
@@ -113,7 +113,7 @@ class Complex
      * check whether a string represents a signed real number
      *
      * @param string $value
-     * @retval bool true if $value is a signed real number
+     * @return bool true if $value is a signed real number
      */
     private static function isSignedReal($value)
     {
@@ -127,7 +127,7 @@ class Complex
      *
      * @param string $value
      * @throws SyntaxErrorException if the string cannot be parsed
-     * @retval float
+     * @return float
      */
     private static function parseReal($value)
     {
@@ -144,7 +144,7 @@ class Complex
      *
      * @param mixed $value (Complex, Rational, int, float and strings accepted)
      * @throws SyntaxErrorException if the string cannot be parsed
-     * @retval Complex
+     * @return Complex
      */
     public static function parse($value)
     {
@@ -224,7 +224,7 @@ class Complex
      *
      * @param mixed $value (float, int, Rational)
      * @throws SyntaxErrorException if the string cannot be parsed
-     * @retval float
+     * @return float
      */
     private static function toFloat($x)
     {
@@ -244,7 +244,7 @@ class Complex
      * @param mixed $real (float, int, Rational)
      * @param mixed $imag (float, int, Rational)
      * @throws SyntaxErrorException if the string cannot be parsed
-     * @retval float
+     * @return float
      */
     public static function create($real, $imag)
     {
@@ -263,7 +263,7 @@ class Complex
      *
      * @param mixed $z (Complex, or parsable to Complex)
      * @param mixed $w (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */
     public static function add($z, $w) {
         if (!($z instanceof Complex)) $z = static::parse($z);
@@ -280,7 +280,7 @@ class Complex
      *
      * @param mixed $z (Complex, or parsable to Complex)
      * @param mixed $w (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */
     public static function sub($z, $w) {
         if (!($z instanceof Complex)) $z = static::parse($z);
@@ -297,7 +297,7 @@ class Complex
      *
      * @param mixed $z (Complex, or parsable to Complex)
      * @param mixed $w (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */
     public static function mul($z, $w) {
         if (!($z instanceof Complex)) $z = static::parse($z);
@@ -314,7 +314,7 @@ class Complex
      *
      * @param mixed $z (Complex, or parsable to Complex)
      * @param mixed $w (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */
     public static function div($z, $w) {
         if (!($z instanceof Complex)) $z = static::parse($z);
@@ -335,7 +335,7 @@ class Complex
      *
      * @param mixed $z (Complex, or parsable to Complex)
      * @param mixed $w (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */
     public static function pow($z, $w) {
         // If exponent is an integer, compute the power using a square-and-multiply algorithm
@@ -353,7 +353,7 @@ class Complex
      *
      * @param mixed $z (Complex, or parsable to Complex)
      * @param int $n
-     * @retval Complex
+     * @return Complex
      */
     private static function powi($z, $n) {
         if ($n < 0) return static::div(1,static::powi($z, -$n));
@@ -383,7 +383,7 @@ class Complex
      *
      *
      * @param mixed $z (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */
     public static function sin($z) {
         if (!($z instanceof Complex)) $z = static::parse($z);
@@ -398,7 +398,7 @@ class Complex
      *
      *
      * @param mixed $z (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */
     public static function cos($z) {
         if (!($z instanceof Complex)) $z = static::parse($z);
@@ -413,7 +413,7 @@ class Complex
      *
      *
      * @param mixed $z (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */
     public static function tan($z) {
         if (!($z instanceof Complex)) $z = static::parse($z);
@@ -429,7 +429,7 @@ class Complex
      *
      *
      * @param mixed $z (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */
     public static function cot($z) {
         if (!($z instanceof Complex)) $z = static::parse($z);
@@ -445,7 +445,7 @@ class Complex
      *
      *
      * @param mixed $z (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */
     public static function arcsin($z) {
         if (!($z instanceof Complex)) $z = static::parse($z);
@@ -463,7 +463,7 @@ class Complex
      *
      *
      * @param mixed $z (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */
     public static function arccos($z) {
         if (!($z instanceof Complex)) $z = static::parse($z);
@@ -480,7 +480,7 @@ class Complex
      *
      *
      * @param mixed $z (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */
     public static function arctan($z) {
         if (!($z instanceof Complex)) $z = static::parse($z);
@@ -499,7 +499,7 @@ class Complex
      *
      *
      * @param mixed $z (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */
     public static function arccot($z)
     {
@@ -515,7 +515,7 @@ class Complex
      *
      *
      * @param mixed $z (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */    public static function exp($z) {
         if (!($z instanceof Complex)) $z = static::parse($z);
 
@@ -530,7 +530,7 @@ class Complex
      *
      *
      * @param mixed $z (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */    public static function log($z) {
         if (!($z instanceof Complex)) $z = static::parse($z);
 
@@ -549,7 +549,7 @@ class Complex
      *
      *
      * @param mixed $z (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */
      public static function sinh($z) {
         if (!($z instanceof Complex)) $z = static::parse($z);
@@ -564,7 +564,7 @@ class Complex
      *
      *
      * @param mixed $z (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */
     public static function cosh($z) {
         if (!($z instanceof Complex)) $z = static::parse($z);
@@ -579,7 +579,7 @@ class Complex
      *
      *
      * @param mixed $z (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */
     public static function tanh($z) {
         if (!($z instanceof Complex)) $z = static::parse($z);
@@ -595,7 +595,7 @@ class Complex
      *
      *
      * @param mixed $z (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */
     public static function arsinh($z) {
         if (!($z instanceof Complex)) $z = static::parse($z);
@@ -610,7 +610,7 @@ class Complex
      *
      *
      * @param mixed $z (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */
     public static function arcosh($z) {
         if (!($z instanceof Complex)) $z = static::parse($z);
@@ -625,7 +625,7 @@ class Complex
      *
      *
      * @param mixed $z (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */
     public static function artanh($z) {
         if (!($z instanceof Complex)) $z = static::parse($z);
@@ -640,7 +640,7 @@ class Complex
      *
      *
      * @param mixed $z (Complex, or parsable to Complex)
-     * @retval Complex
+     * @return Complex
      */
     public static function sqrt($z)
     {
@@ -657,7 +657,7 @@ class Complex
      *
      *
      * @param mixed $z (Complex, or parsable to Complex)
-     * @retval string
+     * @return string
      */
     public function __toString()
     {

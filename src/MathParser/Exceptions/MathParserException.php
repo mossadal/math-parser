@@ -25,7 +25,7 @@ abstract class MathParserException extends \Exception
     /**
      * Get additional information about the exception.
      *
-     * @retval string
+     * @return string
      */
     public function getData()
     {

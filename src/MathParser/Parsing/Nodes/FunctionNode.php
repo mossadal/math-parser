@@ -31,7 +31,7 @@ class FunctionNode extends Node
 
     /**
      * Return the name of the function
-     * @retval string
+     * @return string
      */
     public function getName()
     {
@@ -40,7 +40,7 @@ class FunctionNode extends Node
 
     /**
      * Return the operand
-     * @retval Node
+     * @return Node
      */
     public function getOperand()
     {
@@ -49,7 +49,7 @@ class FunctionNode extends Node
 
     /**
      * Set the operand
-     * @retval void
+     * @return void
      */
     public function setOperand($operand)
     {

@@ -26,7 +26,7 @@ class UnknownTokenException extends MathParserException
     /**
      * Get the unknown token that was encountered.
      *
-     * @retval string
+     * @return string
      */
     public function getName()
     {

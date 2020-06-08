@@ -46,7 +46,7 @@ class MultiplicationNodeFactory implements ExpressionNodeFactory
     *
     * @param Node|int $leftOperand First factor
     * @param Node|int $rightOperand Second factor
-    * @retval Node
+    * @return Node
     */
     public function makeNode($leftOperand, $rightOperand)
     {

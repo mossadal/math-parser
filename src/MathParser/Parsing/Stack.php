@@ -27,7 +27,7 @@ class Stack {
 
     /**
      * Return the top element (without popping it)
-     * @retval mixed
+     * @return mixed
      */
     public function peek() {
         return end($this->data);
@@ -35,7 +35,7 @@ class Stack {
 
     /**
      * Return the top element and remove it from the stack.
-     * @retval mixed
+     * @return mixed
      */
     public function pop() {
         return array_pop($this->data);
@@ -43,7 +43,7 @@ class Stack {
 
     /**
      * Return the current number of elements in the stack.
-     * @retval int
+     * @return int
      */
     public function count() {
         return count($this->data);
@@ -52,7 +52,7 @@ class Stack {
     /**
      * Returns true if the stack is empty
      *
-     * @retval boolean
+     * @return boolean
      **/
     public function isEmpty()
     {
