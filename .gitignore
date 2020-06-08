@@ -3,7 +3,6 @@
 .env.php
 .env
 vendor
-composer.lock
 tests/log
 .DS_Store
 doc
