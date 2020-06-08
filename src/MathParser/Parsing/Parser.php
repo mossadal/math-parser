@@ -23,16 +23,12 @@ use MathParser\Lexing\TokenAssociativity;
 use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\ExpressionNode;
 use MathParser\Parsing\Nodes\NumberNode;
-use MathParser\Parsing\Nodes\VariableNode;
 use MathParser\Parsing\Nodes\FunctionNode;
-use MathParser\Parsing\Nodes\ConstantNode;
 use MathParser\Parsing\Nodes\SubExpressionNode;
 use MathParser\Parsing\Nodes\PostfixOperatorNode;
 use MathParser\Parsing\Nodes\Factories\NodeFactory;
 use MathParser\Parsing\Nodes\IntegerNode;
 use MathParser\Parsing\Nodes\RationalNode;
-
-use MathParser\Parsing\Stack;
 
 use MathParser\Exceptions\SyntaxErrorException;
 use MathParser\Exceptions\ParenthesisMismatchException;

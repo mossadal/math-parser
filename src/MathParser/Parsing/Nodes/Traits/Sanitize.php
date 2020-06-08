@@ -15,7 +15,6 @@ namespace MathParser\Parsing\Nodes\Traits;
 
 use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\IntegerNode;
-use MathParser\Parsing\Nodes\RationalNode;
 
 /**
  * Trait for upgrading numbers (ints and floats) to NumberNode,

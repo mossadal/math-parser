@@ -9,10 +9,6 @@
 
 namespace MathParser\Lexing;
 
-use MathParser\Lexing\Lexer;
-use MathParser\Lexing\TokenDefinition;
-use MathParser\Lexing\TokenType;
-
 /**
  * Lexer capable of recognizing all standard complex mathematical expressions.
  *
