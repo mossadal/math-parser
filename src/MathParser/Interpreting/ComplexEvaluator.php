@@ -281,7 +281,6 @@ class ComplexEvaluator implements Visitor
                 throw new UnknownFunctionException($node->getName());
         }
 
-        return new FunctionNode($node->getName(), $inner);
     }
 
     /**
