@@ -63,7 +63,7 @@ class ASCIIPrinter implements Visitor
      * where `op` is one of `+`, `-`, `*`, `/` or `^`
      *
      *
-     * @retval string
+     * @return string
      * @param ExpressionNode $node AST to be typeset
      */
     public function visitExpressionNode(ExpressionNode $node)

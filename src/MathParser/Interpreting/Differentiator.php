@@ -94,7 +94,7 @@ class Differentiator implements Visitor
      * - \\( (f^g)' = f^g  (g' \\log(f) + gf'/f) \\) with a simpler expression when g is a NumberNode
      *
      *      `+`, `-`, `*`, `/` or `^`
-     * @retval Node
+     * @return Node
      * @param  ExpressionNode           $node AST to be differentiated
      * @throws UnknownOperatorException if the operator is something other than
      */
@@ -171,7 +171,7 @@ class Differentiator implements Visitor
      * Create a NumberNode representing '0'. (The derivative of
      * a constant is indentically 0).
      *
-     * @retval Node
+     * @return Node
      * @param NumberNode $node AST to be differentiated
      */
     public function visitNumberNode(NumberNode $node)
@@ -195,7 +195,7 @@ class Differentiator implements Visitor
      * Create a NumberNode representing '0' or '1' depending on
      * the differetiation variable.
      *
-     * @retval Node
+     * @return Node
      * @param NumberNode $node AST to be differentiated
      */
     public function visitVariableNode(VariableNode $node)
@@ -237,7 +237,7 @@ class Differentiator implements Visitor
      *  \\( \\operatorname{arcoth}(f(x))' = f'(x) (1-f(x)^2) \\)
      *
      *          one of the above
-     * @retval Node
+     * @return Node
      * @param  FunctionNode             $node AST to be differentiated
      * @throws UnknownFunctionException if the function name doesn't match
      */
@@ -352,7 +352,7 @@ class Differentiator implements Visitor
      * Create a NumberNode representing '0'. (The derivative of
      * a constant is indentically 0).
      *
-     * @retval Node
+     * @return Node
      * @param ConstantNode $node AST to be differentiated
      */
     public function visitConstantNode(ConstantNode $node)

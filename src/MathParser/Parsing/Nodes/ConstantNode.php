@@ -42,7 +42,7 @@ class ConstantNode extends Node
     * @property getName
     *
     * Returns the name of the constant
-    * @retval string
+    * @return string
     */
     public function getName()
     {

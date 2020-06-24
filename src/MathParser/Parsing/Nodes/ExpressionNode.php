@@ -104,7 +104,7 @@ class ExpressionNode extends Node
     /**
      * Return the first (left) operand.
      *
-     * @retval Node|null
+     * @return  Node|null
      */
     public function getLeft()
     {
@@ -114,7 +114,7 @@ class ExpressionNode extends Node
     /**
      * Set the left operand.
      *
-     * @retval void
+     * @return void
      */
     public function setLeft($operand)
     {
@@ -124,7 +124,7 @@ class ExpressionNode extends Node
     /**
      * Return the operator.
      *
-     * @retval string
+     * @return string
      */
     public function getOperator()
     {
@@ -134,7 +134,7 @@ class ExpressionNode extends Node
     /**
      * Set the operator.
      *
-     * @retval void
+     * @return void
      */
     public function setOperator($operator)
     {
@@ -144,7 +144,7 @@ class ExpressionNode extends Node
     /**
      * Return the second (right) operand.
      *
-     * @retval Node|null
+     * @return Node|null
      */
     public function getRight()
     {
@@ -154,7 +154,7 @@ class ExpressionNode extends Node
     /**
      * Set the right operand.
      *
-     * @retval void
+     * @return void
      */
     public function setRight($operand)
     {
@@ -164,7 +164,7 @@ class ExpressionNode extends Node
     /**
      * Return the precedence of the ExpressionNode.
      *
-     * @retval int precedence
+     * @return int precedence
      */
     public function getPrecedence()
     {
@@ -183,7 +183,7 @@ class ExpressionNode extends Node
     * Returns true if the node can represent a unary operator, i.e. if
      * the operator is '+' or '-'-
      *
-     * @retval boolean
+     * @return boolean
      */
     public function canBeUnary()
     {
@@ -198,7 +198,7 @@ class ExpressionNode extends Node
      * (Left associative operators are lower precedence in this context.)
      *
      * @param Node $other Node to compare to.
-     * @retval boolean
+     * @return boolean
      */
     public function lowerPrecedenceThan($other)
     {

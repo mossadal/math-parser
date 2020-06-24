@@ -27,7 +27,7 @@ class NumberNode extends Node
 
     /**
      * Returns the value
-     * @retval int|float
+     * @return int|float
      */
     public function getValue()
     {

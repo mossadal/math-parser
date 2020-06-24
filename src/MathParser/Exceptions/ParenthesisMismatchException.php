@@ -26,7 +26,7 @@ class ParenthesisMismatchException extends MathParserException
     /**
      * Get the incorrect data that was encountered.
      *
-     * @retval string
+     * @return string
      */
     public function getData()
     {

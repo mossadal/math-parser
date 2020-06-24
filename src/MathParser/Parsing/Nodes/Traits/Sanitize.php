@@ -28,7 +28,7 @@ trait Sanitize {
     * Convert ints and floats to NumberNodes
     *
     * @param Node|int|float $operand
-    * @retval Node
+    * @return Node
     **/
     protected function sanitize($operand)
     {

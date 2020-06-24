@@ -27,7 +27,7 @@ class VariableNode extends Node
 
     /**
      * Return the name of the variable
-     * @retval string
+     * @return string
      */
     public function getName()
     {

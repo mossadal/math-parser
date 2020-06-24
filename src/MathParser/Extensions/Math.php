@@ -16,7 +16,7 @@ class Math {
      *
      * @param int $a
      * @param int $b
-     * @retval int
+     * @return int
      */
     public static function gcd($a, $b)
     {
@@ -42,7 +42,7 @@ class Math {
      *
      * @param float $a
      * @throws InvalidArgumentException if $a < 0
-     * @retval float
+     * @return float
      */
 	public static function logGamma($a) {
 		if($a < 0)
@@ -58,7 +58,7 @@ class Math {
      * Compute log(Gamma($x)) using Stirling asympotic expansion
      *
      * @param float $x
-     * @retval float
+     * @return float
      */
 	private static function logStirlingApproximation($x) {
 		$t = 0.5*log(2*pi()) - 0.5*log($x) + $x*(log($x))-$x;
@@ -78,7 +78,7 @@ class Math {
      * Compute factorial n! for an integer $n using iteration
      *
      * @param int $num
-     * @retval int
+     * @return int
      */
 	public static function Factorial($num) {
 		if ($num < 0) throw new \InvalidArgumentException("Fatorial calls should be >0.");
@@ -93,7 +93,7 @@ class Math {
      * Compute semi-factorial n!! for an integer $n using iteration
      *
      * @param int $num
-     * @retval int
+     * @return int
      */
 	public static function SemiFactorial($num) {
 		if ($num < 0) throw new \InvalidArgumentException("Semifactorial calls should be >0.");
@@ -110,7 +110,7 @@ class Math {
      * Compute log(Gamma($x)) using Lanczos approximation
      *
      * @param float $x
-     * @retval float
+     * @return float
      */
 	private static function lanczosApproximation($x) {
 		$g = 7;

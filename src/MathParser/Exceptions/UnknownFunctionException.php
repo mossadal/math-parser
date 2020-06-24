@@ -28,7 +28,7 @@ class UnknownFunctionException extends MathParserException
     /**
      * Get the unkown function that was encountered.
      *
-     * @retval string
+     * @return string
      */
     public function getFunction()
     {

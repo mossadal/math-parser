@@ -28,7 +28,7 @@ class UnknownConstantException extends MathParserException
     /**
      * Get the unkown constant that was encountered.
      *
-     * @retval string
+     * @return string
      */
     public function getConstant()
     {
