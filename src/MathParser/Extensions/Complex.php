@@ -8,7 +8,6 @@
  */
 namespace MathParser\Extensions;
 
-use MathParser\Extensions\Math as Math;
 use MathParser\Extensions\Rational as Rational;
 
 use MathParser\Exceptions\SyntaxErrorException;

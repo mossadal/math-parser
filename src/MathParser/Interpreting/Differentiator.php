@@ -19,7 +19,6 @@ use MathParser\Parsing\Nodes\ExpressionNode;
 use MathParser\Parsing\Nodes\Factories\NodeFactory;
 use MathParser\Parsing\Nodes\FunctionNode;
 use MathParser\Parsing\Nodes\IntegerNode;
-use MathParser\Parsing\Nodes\Node;
 use MathParser\Parsing\Nodes\NumberNode;
 use MathParser\Parsing\Nodes\RationalNode;
 use MathParser\Parsing\Nodes\VariableNode;

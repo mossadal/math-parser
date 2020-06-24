@@ -14,7 +14,6 @@
  */
 namespace MathParser\Parsing\Nodes\Interfaces;
 
-use MathParser\Parsing\Nodes\NumberNode;
 
 /**
  * Interface for construction of ExpressionNode, the
