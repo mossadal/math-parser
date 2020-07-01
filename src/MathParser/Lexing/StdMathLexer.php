@@ -5,13 +5,14 @@
  * Long description
  *
  * @package     Lexical analysis
- * @author      Frank Wikström <frank@mossadal.se>
+ * @author      Frank Wikström <frank@mossadal.se>, modified by Ingo Dahn <dahn@dahn-research.eu>
  * @copyright   2015 Frank Wikström
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  *
  */
 
 namespace MathParser\Lexing;
+use MathParser\Lexing\Language;
 
 /**
  * Lexer capable of recognizing all standard mathematical expressions.
@@ -67,8 +68,11 @@ namespace MathParser\Lexing;
  */
 class StdMathLexer extends Lexer
 {
-    public function __construct()
+    public function __construct(Language $lang=null)
     {
+        if ($lang === null ) {
+            $lang=new Language;
+        }
         $this->add(new TokenDefinition('/\d+[,\.]\d+(e[+-]?\d+)?/', TokenType::RealNumber));
 
         $this->add(new TokenDefinition('/\d+/', TokenType::PosInt));
@@ -129,8 +133,15 @@ class StdMathLexer extends Lexer
         $this->add(new TokenDefinition('/e/', TokenType::Constant));
         $this->add(new TokenDefinition('/NAN/', TokenType::Constant));
         $this->add(new TokenDefinition('/INF/', TokenType::Constant));
-
-        $this->add(new TokenDefinition('/[a-zA-Z]/', TokenType::Identifier));
+        $consts=$lang->getConstants();
+        foreach ($consts as $c) {
+            $this->add(new TokenDefinition('/'.$c.'/', TokenType::Constant));
+        }
+        $vars=$lang->getVariables();
+        foreach ($vars as $v) {
+            $this->add(new TokenDefinition('/'.$v.'/', TokenType::Identifier));
+        }
+        //$this->add(new TokenDefinition('/[a-zA-Z]/', TokenType::Identifier));
 
         $this->add(new TokenDefinition('/\n/', TokenType::Terminator));
         $this->add(new TokenDefinition('/\s+/', TokenType::Whitespace));

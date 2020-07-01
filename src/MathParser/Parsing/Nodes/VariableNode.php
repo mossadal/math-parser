@@ -1,7 +1,7 @@
 <?php
 /*
  * @package     Parsing
- * @author      Frank Wikström <frank@mossadal.se>
+ * @author      Frank Wikström <frank@mossadal.se>, modified by Ingo Dahn <dahn@dahn-research.eu>
  * @copyright   2015 Frank Wikström
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  *
@@ -53,6 +53,36 @@ class VariableNode extends Node
         }
 
         return $this->getName() == $other->getName();
+    }
+
+    /** Implementing the hasInstance abstract method. */
+    public function hasInstance($other,$inst=[])
+    {
+        if ($other === null) {
+            return ['result' =>false];
+        }
+        $name=$this->getName();
+        /*
+        if (in_array($name,$consts)) {
+            if (! ($other instanceof VariableNode)){
+                return ['result' => false];
+            } elseif ($other->getName() == $name) {
+                return ['result' => true, 'instantiation' => $vars];
+            } else {
+                return ['result' => false];
+            }
+        }
+        */
+        if (array_key_exists($name,$inst)) {
+            if ($other->compareTo($inst[$name])) {
+                return ['result' => true, 'instantiation' =>$inst];
+            } else {
+                return ['result' => false];
+            }
+        }
+        $inst[$name]=$other;
+
+        return ['result' => true, 'instantiation' => $inst];
     }
 
 }

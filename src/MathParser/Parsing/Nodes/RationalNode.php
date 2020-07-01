@@ -1,7 +1,7 @@
 <?php
 /*
  * @package     Parsing
- * @author      Frank Wikström <frank@mossadal.se>
+ * @author      Frank Wikström <frank@mossadal.se>, modified by Ingo Dahn <dahn@dahn-research.eu>
  * @copyright   2015 Frank Wikström
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  *
@@ -90,6 +90,29 @@ class RationalNode extends Node
         }
 
         return $this->getNumerator() == $other->getNumerator() && $this->getDenominator() == $other->getDenominator();
+    }
+
+    /**
+     * Implementing the hasInstance abstract method.
+     */
+    public function hasInstance($other,$inst)
+    {
+        if ($other === null) {
+            return ['result' => false];
+        }
+        if ($other instanceof IntegerNode) {
+            if ($this->getDenominator() == 1 && $this->getNumerator() == $other->getValue()) {
+                return ['result' => true, 'instantiation' => $inst];
+            }
+        }
+        if (!($other instanceof RationalNode)) {
+            return ['result' => false];
+        }
+
+        if ($this->getNumerator() == $other->getNumerator() && $this->getDenominator() == $other->getDenominator()) {
+            return ['result' => true, 'instantiation' => $inst];
+        }
+        return ['result' => false];
     }
 
     private function normalize()

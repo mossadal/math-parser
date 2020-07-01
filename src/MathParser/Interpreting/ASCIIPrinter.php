@@ -1,12 +1,13 @@
 <?php
 /*
- * @author      Frank Wikström <frank@mossadal.se>
+ * @author      Frank Wikström <frank@mossadal.se>, modified by Ingo Dahn <dahn@dahn-research.eu>
  * @copyright   2016 Frank Wikström
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  */
 
 namespace MathParser\Interpreting;
 
+use MathParser\Lexing\Language;
 use MathParser\Exceptions\UnknownConstantException;
 use MathParser\Interpreting\Visitors\Visitor;
 use MathParser\Lexing\StdMathLexer;
@@ -51,9 +52,12 @@ class ASCIIPrinter implements Visitor
     /**
      * Constructor. Create an ASCIIPrinter.
      */
-    public function __construct()
+    public function __construct($lang = null)
     {
-        $this->lexer = new StdMathLexer();
+        if ($lang === null) {
+            $lang = new Language;
+        }
+        $this->lexer = new StdMathLexer($lang);
     }
 
     /**
@@ -189,8 +193,9 @@ class ASCIIPrinter implements Visitor
                 return 'NAN';
             case 'INF':
                 return 'INF';
+                default: return $node->getName();
 
-            default:throw new UnknownConstantException($node->getName());
+            //default:throw new UnknownConstantException($node->getName());
         }
     }
 
