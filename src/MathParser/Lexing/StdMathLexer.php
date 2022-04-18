@@ -83,26 +83,46 @@ class StdMathLexer extends Lexer
         $this->add(new TokenDefinition('/cosh/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/tanh/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/coth/', TokenType::FunctionName));
+        $this->add(new TokenDefinition('/csch/', TokenType::FunctionName));
+        $this->add(new TokenDefinition('/sech/', TokenType::FunctionName));
 
         $this->add(new TokenDefinition('/sind/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/cosd/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/tand/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/cotd/', TokenType::FunctionName));
+        $this->add(new TokenDefinition('/cscd/', TokenType::FunctionName));
+        $this->add(new TokenDefinition('/secd/', TokenType::FunctionName));
 
         $this->add(new TokenDefinition('/sin/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/cos/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/tan/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/cot/', TokenType::FunctionName));
+        $this->add(new TokenDefinition('/csc/', TokenType::FunctionName));
+        $this->add(new TokenDefinition('/sec/', TokenType::FunctionName));
 
         $this->add(new TokenDefinition('/arsinh|arcsinh|asinh/', TokenType::FunctionName, 'arsinh'));
         $this->add(new TokenDefinition('/arcosh|arccosh|acosh/', TokenType::FunctionName, 'arcosh'));
         $this->add(new TokenDefinition('/artanh|arctanh|atanh/', TokenType::FunctionName, 'artanh'));
         $this->add(new TokenDefinition('/arcoth|arccoth|acoth/', TokenType::FunctionName, 'arcoth'));
+        $this->add(new TokenDefinition('/arcsch|arccsch|acsch/', TokenType::FunctionName, 'arcsch'));
+        $this->add(new TokenDefinition('/arsech|arcsech|asech/', TokenType::FunctionName, 'arcsec'));
+
+        $this->add(new TokenDefinition('/arcsind|asind/', TokenType::FunctionName, 'arcsind'));
+        $this->add(new TokenDefinition('/arccosd|acosd/', TokenType::FunctionName, 'arccosd'));
+        $this->add(new TokenDefinition('/arctand|atand/', TokenType::FunctionName, 'arctand'));
+        $this->add(new TokenDefinition('/arccotd|acotd/', TokenType::FunctionName, 'arccotd'));
+        $this->add(new TokenDefinition('/arccscd|acscd/', TokenType::FunctionName, 'arccscd'));
+        $this->add(new TokenDefinition('/arcsecd|asecd/', TokenType::FunctionName, 'arcsecd'));
 
         $this->add(new TokenDefinition('/arcsin|asin/', TokenType::FunctionName, 'arcsin'));
         $this->add(new TokenDefinition('/arccos|acos/', TokenType::FunctionName, 'arccos'));
         $this->add(new TokenDefinition('/arctan|atan/', TokenType::FunctionName, 'arctan'));
         $this->add(new TokenDefinition('/arccot|acot/', TokenType::FunctionName, 'arccot'));
+        $this->add(new TokenDefinition('/arccsc|acsc/', TokenType::FunctionName, 'arccsc'));
+        $this->add(new TokenDefinition('/arcsec|asec/', TokenType::FunctionName, 'arcsec'));
+
+        $this->add(new TokenDefinition('/torad|deg2rad/', TokenType::FunctionName, 'torad'));
+        $this->add(new TokenDefinition('/todeg|rad2deg/', TokenType::FunctionName, 'todeg'));
 
         $this->add(new TokenDefinition('/exp/', TokenType::FunctionName));
         $this->add(new TokenDefinition('/log10|lg/', TokenType::FunctionName, 'lg'));
