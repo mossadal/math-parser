@@ -205,12 +205,28 @@ class Evaluator implements Visitor
                 return tan($inner);
 
             case 'cot':
-                $tan_inner = tan($inner);
-                if ($tan_inner == 0) {
+                $_inner = tan($inner);
+                if ($_inner == 0) {
                     return NAN;
                 }
 
-                return 1 / $tan_inner;
+                return 1 / $_inner;
+
+            case 'sec':
+                $_inner = cos($inner);
+                if ($_inner == 0) {
+                    return NAN;
+                }
+
+                return 1 / $_inner;
+
+            case 'csc':
+                $_inner = sin($inner);
+                if ($_inner == 0) {
+                    return NAN;
+                }
+
+                return 1 / $_inner;
 
             // Trigonometric functions, argument in degrees
             case 'sind':
@@ -223,12 +239,28 @@ class Evaluator implements Visitor
                 return tan(deg2rad($inner));
 
             case 'cotd':
-                $tan_inner = tan(deg2rad($inner));
-                if ($tan_inner == 0) {
+                $_inner = tan(deg2rad($inner));
+                if ($_inner == 0) {
                     return NAN;
                 }
 
-                return 1 / $tan_inner;
+                return 1 / $_inner;
+
+            case 'secd':
+                $_inner = cos(deg2rad($inner));
+                if ($_inner == 0) {
+                    return NAN;
+                }
+
+                return 1 / $_inner;
+
+            case 'cscd':
+                $_inner = sin(deg2rad($inner));
+                if ($_inner == 0) {
+                    return NAN;
+                }
+
+                return 1 / $_inner;
 
             // Inverse trigonometric functions
             case 'arcsin':
@@ -242,6 +274,50 @@ class Evaluator implements Visitor
 
             case 'arccot':
                 return pi() / 2 - atan($inner);
+
+            case 'arcsec':
+                if ($inner == 0) {
+                    return NAN;
+                }
+                return acos(1/$inner);
+
+            case 'arccsc':
+                if ($inner == 0) {
+                    return NAN;
+                }
+                return asin(1/$inner);
+
+            // Inverse trigonometric functions - returns answer in degrees
+            case 'arcsind':
+                return rad2deg(asin($inner));
+
+            case 'arccosd':
+                return rad2deg(acos($inner));
+
+            case 'arctand':
+                return rad2deg(atan($inner));
+
+            case 'arccotd':
+                return rad2deg(pi() / 2 - atan($inner));
+
+            case 'arcsecd':
+                if ($inner == 0) {
+                    return NAN;
+                }
+                return rad2deg(acos(1/$inner));
+
+            case 'arccscd':
+                if ($inner == 0) {
+                    return NAN;
+                }
+                return rad2deg(asin(1/$inner));
+
+            // radians to degree conversion functions
+            case 'torad':
+                return deg2rad($inner);
+
+            case 'todeg':
+                return rad2deg($inner);
 
             // Exponentials and logarithms
             case 'exp':
@@ -269,12 +345,28 @@ class Evaluator implements Visitor
                 return tanh($inner);
 
             case 'coth':
-                $tanh_inner = tanh($inner);
-                if ($tanh_inner == 0) {
+                $_inner = tanh($inner);
+                if ($_inner == 0) {
                     return NAN;
                 }
 
-                return 1 / $tanh_inner;
+                return 1 / $_inner;
+
+            case 'sech':
+                $_inner = cosh($inner);
+                if ($_inner == 0) {
+                    return NAN;
+                }
+
+                return 1 / $_inner;
+
+            case 'csch':
+                $_inner = sinh($inner);
+                if ($_inner == 0) {
+                    return NAN;
+                }
+
+                return 1 / $_inner;
 
             // Inverse hyperbolic functions
             case 'arsinh':
@@ -287,7 +379,22 @@ class Evaluator implements Visitor
                 return atanh($inner);
 
             case 'arcoth':
+                if ($inner == 0) {
+                    return NAN;
+                }
                 return atanh(1 / $inner);
+
+            case 'arcsch':
+                if ($inner == 0) {
+                    return NAN;
+                }
+                return asinh(1 / $inner);
+
+            case 'arcsech':
+                if ($inner == 0) {
+                    return NAN;
+                }
+                return acosh(1 / $inner);
 
             case 'abs':
                 return abs($inner);
